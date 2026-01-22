@@ -33,8 +33,6 @@ services:
     depends_on:
       django:
         condition: service_healthy
-      fastapi:
-        condition: service_healthy
     healthcheck:
       test: ["CMD", "wget", "-q", "--spider", "http://localhost/nginx-health"]
       interval: 30s
