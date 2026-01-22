@@ -1,107 +1,138 @@
-/* 전체 배경 */
+/* ============================================
+   Login Page - NotebookLM-inspired Design
+   ============================================ */
+
+/* Full Page Background */
 .login-page {
   position: relative;
   width: 100vw;
   height: 100vh;
   background: url('@/assets/img/login-background.png') center / cover no-repeat;
-  font-family: 'Pretendard', sans-serif;
+  font-family: var(--font-family);
   overflow: hidden;
 }
 
-/* 어두운 오버레이 */
+/* Dark Overlay */
 .login-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(10, 30, 60, 0.75);
+  background: linear-gradient(
+    135deg,
+    rgba(32, 33, 36, 0.85) 0%,
+    rgba(60, 64, 67, 0.75) 100%
+  );
 }
 
-/* 상단 로고 */
+/* Header Logo */
 .login-header {
   position: relative;
   z-index: 2;
-  top : 24px;
-  left : 40px;
-  padding: 24px 40px;
+  top: var(--space-6);
+  left: var(--space-8);
+  padding: var(--space-6) var(--space-8);
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: 12px;
-  color: #fff;
+  gap: var(--space-3);
+  color: var(--text-inverse);
 }
 
 .logo-icon {
-  font-size: 36px;
+  font-size: 2rem;
 }
 
 .logo .sub {
-  font-size: 14px;
-  margin-left: 4px;
-  opacity: 0.8;
+  font-size: var(--text-sm);
+  margin-left: var(--space-1);
+  opacity: 0.9;
+  font-weight: var(--font-medium);
 }
 
 .logo .desc {
-  font-size: 11px;
+  font-size: var(--text-xs);
   opacity: 0.7;
 }
 
-/* 중앙 카드 */
+/* Center Login Card */
 .login-container {
   position: absolute;
-  inset: 0; 
+  inset: 0;
   z-index: 1;
-
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .login-card {
-  width: 360px;
-  background: #fff;
-  padding: 32px;
-  border-radius: 12px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-
+  width: 400px;
+  background: var(--bg-card);
+  padding: var(--space-8);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-elevated);
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  animation: loginFadeIn 0.4s ease-out;
+  gap: var(--space-4);
+  animation: loginSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
-@keyframes loginFadeIn {
+
+@keyframes loginSlideIn {
   from {
     opacity: 0;
-    transform: translateY(6px);
+    transform: translateY(16px) scale(0.98);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
 .login-card h2 {
-  margin-bottom: 24px;
-  font-size: 20px;
-  font-weight: 700;
+  margin: 0 0 var(--space-6) 0;
+  font-size: var(--text-2xl);
+  font-weight: var(--font-medium);
+  color: var(--text-primary);
+  text-align: center;
 }
 
-/* 입력 필드 */
+/* Input Fields */
 .login-field {
-  margin-bottom: 14px;
+  margin-bottom: var(--space-4);
+}
+
+.login-field label {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--text-secondary);
 }
 
 .login-field input {
   width: 100%;
-  padding: 12px 14px;
-  border-radius: 6px;
-  border: 1px solid #d1d5db;
-  font-size: 14px;
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  font-family: var(--font-family);
+  font-size: var(--text-base);
+  color: var(--text-primary);
+  background: var(--bg-card);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.login-field input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.login-field input:hover {
+  border-color: var(--gray-400);
 }
 
 .login-field input:focus {
   outline: none;
-  border-color: #2563eb;
+  border-color: var(--primary);
+  box-shadow: var(--shadow-focus);
 }
 
 .login-field input,
@@ -109,42 +140,84 @@
   box-sizing: border-box;
 }
 
-/* 로그인 버튼 */
+/* Login Button */
 .login-button {
   width: 100%;
-  margin-top: 12px;
-  padding: 12px;
-  background: #1d4ed8;
-  color: #fff;
+  margin-top: var(--space-4);
+  padding: var(--space-4);
+  background: var(--primary);
+  color: var(--text-inverse);
   border: none;
-  border-radius: 6px;
-  font-size: 15px;
-  font-weight: 600;
+  border-radius: var(--radius-md);
+  font-family: var(--font-family);
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
   cursor: pointer;
+  transition: background var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .login-button:hover {
-  background: #1e40af;
+  background: var(--primary-hover);
+  box-shadow: var(--shadow-md);
 }
 
-/* 하단 링크 */
+.login-button:active {
+  transform: scale(0.99);
+}
+
+.login-button:disabled {
+  background: var(--gray-300);
+  cursor: not-allowed;
+}
+
+/* Footer Links */
 .login-footer {
-  margin-top: 16px;
+  margin-top: var(--space-5);
   text-align: center;
-  font-size: 13px;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
 }
 
 .login-footer a {
-  color: #2563eb;
+  color: var(--primary);
   text-decoration: none;
-}
-.login-footer a:hover {
-  text-decoration: underline;
+  font-weight: var(--font-medium);
+  transition: color var(--transition-fast);
 }
 
+.login-footer a:hover {
+  color: var(--primary-hover);
+}
+
+/* Logo Icon */
 .logo-icon img {
-  width: 50px;   /* 원하는 크기 */
-  height: 50px;  /* 비율 맞추기 */
-  object-fit: contain; /* 이미지 비율 유지 */
-  vertical-align: middle; /* 텍스트와 수직 정렬 */
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+/* Error Message */
+.login-error {
+  padding: var(--space-3) var(--space-4);
+  background: var(--danger-light);
+  color: var(--danger);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  text-align: center;
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+  .login-card {
+    width: 90%;
+    max-width: 360px;
+    padding: var(--space-6);
+  }
+
+  .login-header {
+    top: var(--space-4);
+    left: var(--space-4);
+    padding: var(--space-4);
+  }
 }

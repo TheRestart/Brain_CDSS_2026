@@ -1,56 +1,138 @@
 :root {
-  /* Color */
-  --primary: #5b6fd6; /* 메인 블루 */
-  --primary-color: #5b6fd6; /* 메인 블루 (alias) */
-  --primary-dark: #6a7bdc; /* 보조 블루 */
-  --accent-ai: #7c8ce3; /* 강조 */
+  /* ===========================================
+     NotebookLM-inspired Design System
+     =========================================== */
 
-  --bg-main: #f4f6f9;
-  --bg-card: #ffffff;
+  /* --- Primary Colors --- */
+  --primary: #1a73e8;              /* Google Blue - 메인 액션 */
+  --primary-hover: #1557b0;        /* Primary hover */
+  --primary-light: #e8f0fe;        /* Primary 배경 */
+  --primary-dark: #174ea6;         /* Primary dark */
 
-  --text-main: #1f2937;
-  --text-sub: #6b7280;
-  --border: #e5e7eb;
+  /* --- Accent Colors --- */
+  --accent-ai: #8b5cf6;            /* AI/ML 관련 강조 (보라) */
+  --accent-ai-light: #ede9fe;      /* AI 배경 */
 
-  /* Font */
-  --font-main: 'Pretendard', system-ui, sans-serif;
+  /* --- Neutral Colors --- */
+  --gray-50: #f8f9fa;
+  --gray-100: #f1f3f4;
+  --gray-200: #e8eaed;
+  --gray-300: #dadce0;
+  --gray-400: #bdc1c6;
+  --gray-500: #9aa0a6;
+  --gray-600: #80868b;
+  --gray-700: #5f6368;
+  --gray-800: #3c4043;
+  --gray-900: #202124;
 
-  /* Radius */
+  /* --- Background Colors --- */
+  --bg-main: #f8f9fa;              /* 메인 배경 */
+  --bg-card: #ffffff;              /* 카드 배경 */
+  --bg-elevated: #ffffff;          /* 상승된 요소 */
+  --bg-hover: #f1f3f4;             /* 호버 상태 */
+  --bg-active: #e8eaed;            /* 액티브 상태 */
+
+  /* --- Text Colors --- */
+  --text-primary: #202124;         /* 기본 텍스트 */
+  --text-secondary: #5f6368;       /* 보조 텍스트 */
+  --text-tertiary: #80868b;        /* 3차 텍스트 */
+  --text-disabled: #9aa0a6;        /* 비활성 텍스트 */
+  --text-inverse: #ffffff;         /* 역 텍스트 (어두운 배경) */
+
+  /* --- Border Colors --- */
+  --border: #dadce0;               /* 기본 보더 */
+  --border-light: #e8eaed;         /* 연한 보더 */
+  --border-focus: #1a73e8;         /* 포커스 보더 */
+
+  /* --- Status Colors --- */
+  --success: #1e8e3e;              /* 성공 */
+  --success-light: #e6f4ea;        /* 성공 배경 */
+  --warning: #f9ab00;              /* 경고 */
+  --warning-light: #fef7e0;        /* 경고 배경 */
+  --danger: #d93025;               /* 위험 */
+  --danger-light: #fce8e6;         /* 위험 배경 */
+  --info: #1a73e8;                 /* 정보 */
+  --info-light: #e8f0fe;           /* 정보 배경 */
+
+  /* --- Typography --- */
+  --font-family: 'Google Sans', 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family-mono: 'Roboto Mono', 'Consolas', monospace;
+
+  /* Font Sizes */
+  --text-xs: 0.75rem;              /* 12px */
+  --text-sm: 0.875rem;             /* 14px */
+  --text-base: 1rem;               /* 16px */
+  --text-lg: 1.125rem;             /* 18px */
+  --text-xl: 1.25rem;              /* 20px */
+  --text-2xl: 1.5rem;              /* 24px */
+  --text-3xl: 1.875rem;            /* 30px */
+
+  /* Font Weights */
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+
+  /* --- Spacing --- */
+  --space-1: 0.25rem;              /* 4px */
+  --space-2: 0.5rem;               /* 8px */
+  --space-3: 0.75rem;              /* 12px */
+  --space-4: 1rem;                 /* 16px */
+  --space-5: 1.25rem;              /* 20px */
+  --space-6: 1.5rem;               /* 24px */
+  --space-8: 2rem;                 /* 32px */
+
+  /* --- Border Radius --- */
   --radius-sm: 4px;
   --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
 
-  /* Shadow */
-  --shadow-card: 0 4px 12px rgba(0,0,0,0.08);
+  /* --- Shadows --- */
+  --shadow-sm: 0 1px 2px 0 rgba(60, 64, 67, 0.1);
+  --shadow-md: 0 1px 3px 0 rgba(60, 64, 67, 0.15), 0 1px 2px -1px rgba(60, 64, 67, 0.1);
+  --shadow-lg: 0 4px 6px -1px rgba(60, 64, 67, 0.1), 0 2px 4px -2px rgba(60, 64, 67, 0.1);
+  --shadow-card: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+  --shadow-elevated: 0 4px 8px 3px rgba(60, 64, 67, 0.15), 0 1px 3px rgba(60, 64, 67, 0.3);
+  --shadow-focus: 0 0 0 2px rgba(26, 115, 232, 0.2);
+
+  /* --- Transitions --- */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ===========================================
+     Layout Components
+     =========================================== */
 
   /* Header */
-  --header-bg: #f2f3fb;
-  --header-shadow: rgba(0, 0, 0, 0.08);
-  --header-text: #ffffff;
-
-  --app-bg: #f2f3fb;
+  --header-bg: #ffffff;
+  --header-border: var(--border);
+  --header-shadow: var(--shadow-sm);
+  --header-text: var(--text-primary);
+  --app-bg: var(--bg-main);
 
   /* Sidebar */
-  --sidebar-bg: #eef1fb;
-  --sidebar-border: #dbe0f3;
-  --sidebar-text: #2f3a66;
-  --sidebar-muted: #7b85b8;
+  --sidebar-bg: #ffffff;
+  --sidebar-border: var(--border-light);
+  --sidebar-text: var(--text-primary);
+  --sidebar-muted: var(--text-secondary);
 
   /* Menu States */
-  --menu-hover-bg: #374b6a;
-  --menu-active-bg: #1e293b;
-  --menu-active-text: #ffffff;
+  --menu-hover-bg: var(--bg-hover);
+  --menu-active-bg: var(--primary-light);
+  --menu-active-text: var(--primary);
 
-  /* Content bg */
-  --content-bg: #f6f8fd;
-  --card-bg: #ffffff;
-  --card-border: #e4e8f5;
+  /* Content */
+  --content-bg: var(--bg-main);
+  --card-bg: var(--bg-card);
+  --card-border: var(--border);
 
-  /* Alert Color */
-  --danger: #e56b6f;   /* 빨강 알림 */
-  --warning: #f2a65a;  /* 주황 */
-  --info: #5b8def;     /* 정보 */
-  --success: #5fb3a2;  /* 성공 */
-
-
-
+  /* ===========================================
+     Legacy Aliases
+     =========================================== */
+  --primary-color: var(--primary);
+  --text-main: var(--text-primary);
+  --text-sub: var(--text-secondary);
+  --font-main: var(--font-family);
 }

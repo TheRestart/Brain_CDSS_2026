@@ -1,5 +1,9 @@
+/* ============================================
+   Layout CSS - NotebookLM-inspired Design
+   ============================================ */
+
 .page {
-  animation: fadeIn 0.25s ease-out;
+  animation: fadeIn var(--transition-base);
 }
 
 @keyframes fadeIn {
@@ -13,71 +17,61 @@
   }
 }
 
-/* 전체 레이아웃 */
-/* Header(최상단 영역) */
+/* ============================================
+   Header - Clean Google Style
+   ============================================ */
 .app-header {
   position: relative;
-  height: 56px;
-
+  height: 64px;
   background-color: var(--header-bg);
-  border-bottom: 1px solid rgba(255,255,255,0.15);
-
+  border-bottom: 1px solid var(--border-light);
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
-
-  padding: 0 24px;
-
-  box-shadow:
-    inset 0 -1px 0 rgba(255,255,255,0.15),
-    0 1px 4px rgba(0,0,0,0.12);
-}
-
-.app-header::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events: none;
+  padding: 0 var(--space-6);
+  box-shadow: var(--shadow-sm);
+  z-index: 100;
 }
 
 .header-left {
-  display: flex;          /* 가로 배치 */
-  align-items: center;    /* 세로 중앙 정렬 */
-  gap: 8px;               /* 요소 사이 간격 */
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
 }
 
 .system-title {
   display: flex;
-  flex-direction: column; /* 병원명 + 시스템명은 세로로 */
+  flex-direction: column;
+  gap: 2px;
 }
+
 .system-title strong {
-  font-size: 14px;
-  font-weight: 700;
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
 }
 
 .system-title span {
-  font-size: 12px;
-  color: #64748b;
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
 }
 
-/* 로고 사이즈 조절*/
 .system-logo {
-  width: 20px;
-  height: 20px;
+  width: 28px;
+  height: 28px;
 }
 
 .divider {
-  color: #ccc;
-  margin: 0 6px;
+  color: var(--border);
+  margin: 0 var(--space-2);
 }
 
 .timer-display {
-  display: flex; 
+  display: flex;
   justify-content: flex-end;
-  align-items: center; 
-  line-height: 1;
-  padding-top: 1%;
+  align-items: center;
+  gap: var(--space-4);
 }
 
 .timer-display span {
@@ -85,172 +79,202 @@
   align-items: center;
 }
 
-.current-time {
-  margin-right: 12px;
-}
-.session-timer {
-  margin-left: 12px;
-}
 .current-time,
 .session-timer {
-  font-size: 14px;
-  color: #475569;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  font-weight: var(--font-medium);
 }
-/* Header 아래 영역 */
+/* ============================================
+   App Layout Structure
+   ============================================ */
 .app-layout {
   display: flex;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
   flex-direction: column;
+  background: var(--bg-main);
 }
 
-/* 햄버거 버튼 */
+/* Hamburger Button */
 .hamburger-btn {
-  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
   border: none;
-  font-size: 20px;   /* 아이콘 크기 */
+  border-radius: var(--radius-full);
   cursor: pointer;
-  margin-right: 12px;
-  color: #333;       /* 기본 아이콘 색상 지정 */
-
-  width: auto;
-  padding: 0;        /* 기본 패딩 제거 */
-  line-height: 1;    /* 세로 크기 줄이기 */
+  color: var(--text-secondary);
+  transition: background var(--transition-fast);
 }
 
-/* 햄버거 버튼 hover 시 스타일 */
 .hamburger-btn:hover {
-  background-color: #f1f5f9; /* 버튼 배경색 살짝 추가 */
-  border-radius: 4px;      /* 둥근 모서리 */
-  color: #333;       /* 기본 아이콘 색상 지정 */
+  background: var(--bg-hover);
+  color: var(--text-primary);
 }
 
-
-/* 좌측 AppBar (Sidebar) */
+/* ============================================
+   Sidebar - Clean Navigation
+   ============================================ */
 .sidebar {
-  width: 240px;
+  width: 256px;
   flex-shrink: 0;
-
-  display: flex;             /* 내부 아이템 정렬 가능 */
-  flex-direction: column;    /* 세로로 메뉴 배치 */
-  padding: 12px 0;           /* 위아래 여백 */
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-3) 0;
   box-sizing: border-box;
-
-  height: 100%;              /* 부모(app-body) 높이에 맞추기 */
-  overflow-y: auto;          /* 메뉴가 많으면 스크롤 */
-  
-  background-color: var(--sidebar-bg); /* 사이드바 배경색 */
+  height: 100%;
+  overflow-y: auto;
+  background-color: var(--sidebar-bg);
   border-right: 1px solid var(--sidebar-border);
-
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .sidebar-nav {
   flex: 1;
   overflow-y: auto;
+  padding: 0 var(--space-2);
+}
+
+/* Custom scrollbar for sidebar */
+.sidebar-nav::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar-nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb {
+  background: var(--gray-300);
+  border-radius: var(--radius-full);
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-400);
 }
 
 .sidebar.closed {
-  transform: translateX(-100%); /* 왼쪽으로 숨김 */
+  transform: translateX(-100%);
 }
 
-
-/* 우측 메인 영역 */
+/* ============================================
+   Main Content Area
+   ============================================ */
 .app-main {
   flex: 1;
-  min-width: 0;   /* 내용이 넘칠 때를 대비 */
+  min-width: 0;
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
 .app-body {
-  flex: 1;          
-  min-width: 0;     /* 내부 overflow 방지 */
+  flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: row;
   overflow: hidden;
-
 }
 
-/* 실제 페이지 영역 */
 .app-content {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  background: #f8fafc;
+  background: var(--bg-main);
+  padding: var(--space-6);
 }
 
-/* 세션 연장 모달 */
+/* Custom scrollbar for content */
+.app-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.app-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.app-content::-webkit-scrollbar-thumb {
+  background: var(--gray-300);
+  border-radius: var(--radius-full);
+}
+
+.app-content::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-400);
+}
+
+/* ============================================
+   Session Modal
+   ============================================ */
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.45);
+  background: rgba(32, 33, 36, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 9999;
+  animation: modalFadeIn var(--transition-fast);
 }
 
 .modal {
-  width: 360px;
-  background: #fff;
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: 0 20px 40px rgba(0,0,0,.2);
+  width: 400px;
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-elevated);
 }
 
 .modal-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 12px;
-  margin-top: 20px;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
 }
 
-
-/* Breadcrumb 컨테이너 */
+/* ============================================
+   Breadcrumb - Google Style
+   ============================================ */
 .breadcrumb {
   display: flex;
   align-items: center;
-  gap: 8px;
-
-  margin-left: 24px;
-  font-size: 15px;
-  font-weight: 500;
-  color: #1f2937; /* gray-800 */
-
+  gap: var(--space-2);
+  margin-left: var(--space-6);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--text-primary);
   white-space: nowrap;
 }
 
-/* 개별 breadcrumb 아이템 */
 .breadcrumb span {
   display: inline-flex;
   align-items: center;
 }
 
-/* 링크 (이전 경로) */
 .breadcrumb a {
-  color: #4f46e5; /* indigo-600 */
+  color: var(--primary);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: var(--font-medium);
+  transition: color var(--transition-fast);
 }
 
 .breadcrumb a:hover {
-  text-decoration: underline;
+  color: var(--primary-hover);
 }
 
-/* 구분자 */
 .breadcrumb .sep {
-  margin: 0 6px;
-  color: #9ca3af; /* gray-400 */
-  font-weight: 400;
+  margin: 0 var(--space-1);
+  color: var(--text-tertiary);
+  font-weight: var(--font-normal);
 }
 
-/* 현재 페이지 (마지막 breadcrumb) */
 .breadcrumb span:last-child span {
-  color: #111827; /* 거의 블랙 */
-  font-weight: 700;
+  color: var(--text-primary);
+  font-weight: var(--font-semibold);
 }
 
 /* ============================================
