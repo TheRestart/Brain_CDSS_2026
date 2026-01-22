@@ -176,6 +176,7 @@ const GeneBarChart: React.FC<GeneBarChartProps> = ({
                 position="right"
                 formatter={(v) => `${(Number(v) * 100).toFixed(1)}%`}
                 style={{ fontSize: 11, fill: '#666' }}
+                isAnimationActive={false}
               />
             </Bar>
           </BarChart>
