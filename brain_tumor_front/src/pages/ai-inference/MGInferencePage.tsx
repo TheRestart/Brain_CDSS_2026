@@ -721,7 +721,10 @@ export default function MGInferencePage() {
                           <div className="mg-score-bar-track">
                             <div
                               className={`mg-score-bar-fill ${info.score >= 0 ? 'positive' : 'negative'}`}
-                              style={{ width: `${Math.min(Math.abs(info.score) * 10, 100)}%` }}
+                              style={{
+                                width: `${Math.min(Math.abs(info.score) / 2 * 100, 100)}%`,
+                                marginLeft: info.score >= 0 ? '0' : 'auto'
+                              }}
                             />
                           </div>
                           <span className={info.score >= 0 ? 'positive' : 'negative'}>

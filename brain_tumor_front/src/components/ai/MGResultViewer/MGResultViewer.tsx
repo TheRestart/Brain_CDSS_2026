@@ -573,7 +573,7 @@ const MGResultViewer: React.FC<MGResultViewerProps> = ({
                           <div
                             className={`mg-score-bar-fill ${info.score >= 0 ? 'positive' : 'negative'}`}
                             style={{
-                              width: `${Math.min(Math.abs(info.score) * 10, 100)}%`,
+                              width: `${Math.min(Math.abs(info.score) / 2 * 100, 100)}%`,
                               marginLeft: info.score < 0 ? 'auto' : '0',
                             }}
                           />

@@ -469,21 +469,66 @@ export default function MGDetailPage() {
         </div>
       )}
 
-      {/* 유전자 히트맵 */}
-      {inferenceDetail.status === 'COMPLETED' &&
-        heatmapData.genes.length > 0 && (
-          <div className="section">
-            <h3 className="section-title">유전자 발현 히트맵</h3>
-            <GeneHeatmap
-              genes={heatmapData.genes}
-              samples={heatmapData.samples}
-              values={heatmapData.values}
-              cellSize={22}
-              maxGenes={20}
-              maxSamples={10}
-            />
-          </div>
-        )}
+      {/* 유전자 히트맵 & Top Genes - 가로 배치 */}
+      {inferenceDetail.status === 'COMPLETED' && (
+        <div className="gene-analysis-row">
+          {/* 유전자 히트맵 */}
+          {heatmapData.genes.length > 0 && (
+            <div className="section gene-heatmap-section">
+              <h3 className="section-title">유전자 발현 히트맵</h3>
+              <GeneHeatmap
+                genes={heatmapData.genes}
+                samples={heatmapData.samples}
+                values={heatmapData.values}
+                cellSize={22}
+                maxGenes={20}
+                maxSamples={10}
+              />
+            </div>
+          )}
+
+          {/* XAI Top Genes */}
+          {inferenceDetail.result_data?.xai?.top_genes && (
+            <div className="section top-genes-section">
+              <h3 className="section-title">주요 유전자 (Top Genes)</h3>
+              <div className="top-genes-card">
+                <table className="top-genes-table">
+                  <thead>
+                    <tr>
+                      <th>순위</th>
+                      <th>유전자</th>
+                      <th>Attention Score</th>
+                      <th>Expression Z-Score</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {inferenceDetail.result_data.xai.top_genes.slice(0, 20).map((gene) => (
+                      <tr key={gene.rank}>
+                        <td>{gene.rank}</td>
+                        <td className="gene-name">{gene.gene}</td>
+                        <td>
+                          <div className="score-bar-container">
+                            <div
+                              className="score-bar attention"
+                              style={{ width: `${gene.attention_score * 100}%` }}
+                            />
+                            <span className="score-value">{gene.attention_score.toFixed(4)}</span>
+                          </div>
+                        </td>
+                        <td>
+                          <span className={`zscore ${gene.expression_zscore > 0 ? 'positive' : 'negative'}`}>
+                            {gene.expression_zscore > 0 ? '+' : ''}{gene.expression_zscore.toFixed(2)}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Error Message */}
       {inferenceDetail.status === 'FAILED' && inferenceDetail.error_message && (
@@ -491,47 +536,6 @@ export default function MGDetailPage() {
           <h3 className="section-title">오류 정보</h3>
           <div className="error-container">
             <p className="error-message">{inferenceDetail.error_message}</p>
-          </div>
-        </div>
-      )}
-
-      {/* XAI Top Genes */}
-      {inferenceDetail.result_data?.xai?.top_genes && (
-        <div className="section">
-          <h3 className="section-title">주요 유전자 (Top Genes)</h3>
-          <div className="top-genes-card">
-            <table className="top-genes-table">
-              <thead>
-                <tr>
-                  <th>순위</th>
-                  <th>유전자</th>
-                  <th>Attention Score</th>
-                  <th>Expression Z-Score</th>
-                </tr>
-              </thead>
-              <tbody>
-                {inferenceDetail.result_data.xai.top_genes.slice(0, 20).map((gene) => (
-                  <tr key={gene.rank}>
-                    <td>{gene.rank}</td>
-                    <td className="gene-name">{gene.gene}</td>
-                    <td>
-                      <div className="score-bar-container">
-                        <div
-                          className="score-bar attention"
-                          style={{ width: `${gene.attention_score * 100}%` }}
-                        />
-                        <span className="score-value">{gene.attention_score.toFixed(4)}</span>
-                      </div>
-                    </td>
-                    <td>
-                      <span className={`zscore ${gene.expression_zscore > 0 ? 'positive' : 'negative'}`}>
-                        {gene.expression_zscore > 0 ? '+' : ''}{gene.expression_zscore.toFixed(2)}
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
           </div>
         </div>
       )}

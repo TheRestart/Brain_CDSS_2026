@@ -115,6 +115,7 @@ export default function ModalityRadarChart({
               fill="#1976d2"
               fillOpacity={0.3}
               strokeWidth={2}
+              isAnimationActive={false}
             />
             <Radar
               name="신뢰도"
@@ -123,6 +124,7 @@ export default function ModalityRadarChart({
               fill="#4caf50"
               fillOpacity={0.2}
               strokeWidth={2}
+              isAnimationActive={false}
             />
             <Legend
               wrapperStyle={{ paddingTop: 10 }}

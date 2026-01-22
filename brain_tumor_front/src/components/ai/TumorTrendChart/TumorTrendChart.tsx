@@ -241,6 +241,7 @@ const TumorTrendChart: React.FC<TumorTrendChartProps> = ({
               dot={{ fill: '#ff6b6b', strokeWidth: 2, r: 4 }}
               activeDot={{ r: 6 }}
               name="wt"
+              isAnimationActive={false}
             />
             <Line
               type="monotone"
@@ -250,6 +251,7 @@ const TumorTrendChart: React.FC<TumorTrendChartProps> = ({
               dot={{ fill: '#4ecdc4', strokeWidth: 2, r: 4 }}
               activeDot={{ r: 6 }}
               name="tc"
+              isAnimationActive={false}
             />
             <Line
               type="monotone"
@@ -259,6 +261,7 @@ const TumorTrendChart: React.FC<TumorTrendChartProps> = ({
               dot={{ fill: '#45b7d1', strokeWidth: 2, r: 4 }}
               activeDot={{ r: 6 }}
               name="et"
+              isAnimationActive={false}
             />
           </LineChart>
         </ResponsiveContainer>

@@ -197,6 +197,7 @@ const SurvivalChart: React.FC<SurvivalChartProps> = ({
               strokeWidth={patientRiskGroup === 'low' ? 3 : 2}
               dot={false}
               activeDot={{ r: 4 }}
+              isAnimationActive={false}
             />
             <Line
               type="stepAfter"
@@ -206,6 +207,7 @@ const SurvivalChart: React.FC<SurvivalChartProps> = ({
               strokeWidth={patientRiskGroup === 'medium' ? 3 : 2}
               dot={false}
               activeDot={{ r: 4 }}
+              isAnimationActive={false}
             />
             <Line
               type="stepAfter"
@@ -215,6 +217,7 @@ const SurvivalChart: React.FC<SurvivalChartProps> = ({
               strokeWidth={patientRiskGroup === 'high' ? 3 : 2}
               dot={false}
               activeDot={{ r: 4 }}
+              isAnimationActive={false}
             />
 
             {/* 환자 위치 표시 (수직선) */}

@@ -104,7 +104,7 @@ export default function AttentionMapViewer({
                   fontSize: '12px',
                 }}
               />
-              <Bar dataKey="attention" radius={[0, 4, 4, 0]}>
+              <Bar dataKey="attention" radius={[0, 4, 4, 0]} isAnimationActive={false}>
                 {chartData.map((_, index) => (
                   <Cell
                     key={`cell-${index}`}

@@ -4,7 +4,7 @@
  * 담당자 B: MG 유전자 분석 시각화
  */
 
-import React from 'react'
+import React, { useMemo, useCallback } from 'react'
 import {
   BarChart,
   Bar,
@@ -97,22 +97,26 @@ const GeneBarChart: React.FC<GeneBarChartProps> = ({
     )
   }
 
-  // 상위 N개 유전자만 표시 (중요도 순 정렬)
-  const sortedData = [...data]
-    .sort((a, b) => b.importance - a.importance)
-    .slice(0, maxGenes)
-    .reverse() // 바 차트는 아래에서 위로 표시되므로 역순
+  // 상위 N개 유전자만 표시 (중요도 순 정렬) - 메모이제이션
+  const sortedData = useMemo(() => {
+    return [...data]
+      .sort((a, b) => b.importance - a.importance)
+      .slice(0, maxGenes)
+      .reverse() // 바 차트는 아래에서 위로 표시되므로 역순
+  }, [data, maxGenes])
 
-  // 차트 높이 계산 (유전자 당 40px + 여백)
-  const chartHeight = height || Math.max(sortedData.length * 40 + 60, 200)
+  // 차트 높이 계산 (유전자 당 40px + 여백) - 메모이제이션
+  const chartHeight = useMemo(() => {
+    return height || Math.max(sortedData.length * 40 + 60, 200)
+  }, [height, sortedData.length])
 
-  // 바 색상 결정
-  const getBarColor = (entry: GeneData): string => {
+  // 바 색상 결정 - 메모이제이션
+  const getBarColor = useCallback((entry: GeneData): string => {
     if (!showDirection || !entry.direction) {
       return '#1976d2' // 기본 파란색
     }
     return entry.direction === 'up' ? '#ef5350' : '#42a5f5' // 상향: 빨강, 하향: 파랑
-  }
+  }, [showDirection])
 
   return (
     <div className="gene-bar-chart">
@@ -162,6 +166,7 @@ const GeneBarChart: React.FC<GeneBarChartProps> = ({
               dataKey="importance"
               radius={[0, 4, 4, 0]}
               maxBarSize={24}
+              isAnimationActive={false}
             >
               {sortedData.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={getBarColor(entry)} />
@@ -192,4 +197,4 @@ const GeneBarChart: React.FC<GeneBarChartProps> = ({
   )
 }
 
-export default GeneBarChart
+export default React.memo(GeneBarChart)

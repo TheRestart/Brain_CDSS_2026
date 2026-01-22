@@ -164,6 +164,59 @@
   margin: 0;
 }
 
+/* Gene Analysis Row - 히트맵과 Top Genes 가로 배치 (auto, 중앙 정렬) */
+.gene-analysis-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.gene-analysis-row .gene-heatmap-section {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem 0;
+}
+
+.gene-analysis-row .top-genes-section {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem 0;
+}
+
+.gene-analysis-row .section-title {
+  align-self: center;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.gene-analysis-row .top-genes-card {
+  width: auto;
+}
+
+.gene-analysis-row .top-genes-table {
+  width: 100%;
+}
+
+@media (max-width: 1200px) {
+  .gene-analysis-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .gene-analysis-row .gene-heatmap-section,
+  .gene-analysis-row .top-genes-section {
+    width: 100%;
+    max-width: 500px;
+  }
+}
+
 /* Status Badge */
 .status-badge {
   display: inline-block;
@@ -268,10 +321,38 @@
   font-weight: 500;
   color: var(--text-sub, #6b7280);
   text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* 앞쪽 컬럼들은 내용에 맞게 축소 */
+.top-genes-table th:nth-child(1),
+.top-genes-table td:nth-child(1),
+.top-genes-table th:nth-child(2),
+.top-genes-table td:nth-child(2),
+.top-genes-table th:nth-child(3),
+.top-genes-table td:nth-child(3) {
+  width: 1%;
+  white-space: nowrap;
+}
+
+/* 마지막 컬럼 (Expression Z-Score) - 남은 공간 채우기 + 중앙 정렬 */
+.top-genes-table th:last-child,
+.top-genes-table td:last-child {
+  text-align: center;
+  width: auto;
+}
+
+/* 헤더 하단 라인 - 테이블 전체 너비 */
+.top-genes-table thead tr {
+  border-bottom: 1px solid var(--border-color, #e5e7eb);
 }
 
 .top-genes-table tbody tr {
   border-top: 1px solid var(--border-color, #e5e7eb);
+}
+
+.top-genes-table tbody tr:first-child {
+  border-top: none;
 }
 
 .top-genes-table tbody tr:hover {
