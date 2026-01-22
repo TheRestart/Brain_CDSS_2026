@@ -181,3 +181,4 @@ brain_tumor_back/staticfiles/
 # Celery
 celerybeat-schedule
 celerybeat.pid
+modAI/model/M1_Seg_separate_best.zip
