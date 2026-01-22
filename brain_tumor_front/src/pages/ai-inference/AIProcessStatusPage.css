@@ -1,0 +1,584 @@
+/* AI Process Status Page Styles */
+
+.ai-process-status {
+  padding: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.ai-process-status.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+/* Header */
+.ai-process-status .page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.ai-process-status .page-header h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.ai-process-status .page-header .subtitle {
+  color: #666;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.ai-process-status .header-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Stats Section */
+.ai-process-status .stats-section {
+  margin-bottom: 2rem;
+}
+
+.ai-process-status .stats-section h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.ai-process-status .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 1200px) {
+  .ai-process-status .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .ai-process-status .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.ai-process-status .stat-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.ai-process-status .stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.ai-process-status .stat-card .stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.ai-process-status .stat-card .stat-label {
+  font-size: 0.875rem;
+  color: #666;
+  margin-top: 0.25rem;
+}
+
+.ai-process-status .stat-card .stat-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+
+/* Summary Section */
+.ai-process-status .summary-section {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.ai-process-status .summary-card {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.ai-process-status .summary-card:nth-child(2) {
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+}
+
+.ai-process-status .summary-card:nth-child(3) {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.ai-process-status .summary-icon {
+  font-size: 2rem;
+}
+
+.ai-process-status .summary-content .summary-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.ai-process-status .summary-content .summary-label {
+  font-size: 0.875rem;
+  opacity: 0.9;
+}
+
+/* Content Grid */
+.ai-process-status .content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 992px) {
+  .ai-process-status .content-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ai-process-status .active-requests-section,
+.ai-process-status .recent-results-section {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.ai-process-status .active-requests-section h3,
+.ai-process-status .recent-results-section h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 1rem 0;
+}
+
+.ai-process-status .request-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ai-process-status .request-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background: #f8f9fa;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.ai-process-status .request-item:hover {
+  background: #e9ecef;
+}
+
+.ai-process-status .request-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.ai-process-status .request-model {
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.ai-process-status .request-patient {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.ai-process-status .request-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ai-process-status .request-time {
+  font-size: 0.75rem;
+  color: #999;
+}
+
+.ai-process-status .empty-state {
+  text-align: center;
+  padding: 2rem;
+  color: #999;
+  font-size: 0.875rem;
+}
+
+/* Model Stats Section */
+.ai-process-status .model-stats-section {
+  margin-top: 2rem;
+}
+
+.ai-process-status .model-stats-section h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.ai-process-status .model-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.ai-process-status .model-stat-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.ai-process-status .model-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.ai-process-status .model-name {
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.ai-process-status .model-code {
+  font-size: 0.75rem;
+  color: #999;
+  font-family: monospace;
+}
+
+.ai-process-status .model-stats {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.ai-process-status .model-stat {
+  text-align: center;
+}
+
+.ai-process-status .model-stat .stat-value {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.ai-process-status .model-stat .stat-label {
+  font-size: 0.75rem;
+  color: #666;
+}
+
+.ai-process-status .model-stat.completed .stat-value {
+  color: #059669;
+}
+
+.ai-process-status .model-stat.failed .stat-value {
+  color: #dc2626;
+}
+
+.ai-process-status .model-progress {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ai-process-status .progress-bar {
+  flex: 1;
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.ai-process-status .progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981, #059669);
+  border-radius: 3px;
+  transition: width 0.3s;
+}
+
+.ai-process-status .progress-label {
+  font-size: 0.75rem;
+  color: #059669;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Status Badge */
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.status-badge.status-pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-badge.status-validating {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.status-badge.status-processing {
+  background: #d1fae5;
+  color: #065f46;
+  animation: pulse 1.5s infinite;
+}
+
+.status-badge.status-completed {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.status-badge.status-failed {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.status-badge.status-cancelled {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Error State */
+.ai-process-status .error-state {
+  text-align: center;
+  padding: 3rem;
+  color: #dc2626;
+}
+
+.ai-process-status .error-state button {
+  margin-top: 1rem;
+}
+
+/* Buttons */
+.ai-process-status .btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.ai-process-status .btn-primary {
+  background: #2563eb;
+  color: #fff;
+}
+
+.ai-process-status .btn-primary:hover {
+  background: #1d4ed8;
+}
+
+.ai-process-status .btn-secondary {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.ai-process-status .btn-secondary:hover {
+  background: #d1d5db;
+}
+
+/* ========================================
+   NEW: Time Filter Section
+   ======================================== */
+.ai-process-status .time-filter-section {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.ai-process-status .filter-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.ai-process-status .time-filter-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.ai-process-status .filter-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  background: #fff;
+  color: #374151;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.ai-process-status .filter-btn:hover {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+.ai-process-status .filter-btn.active {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #fff;
+}
+
+/* ========================================
+   NEW: Auto Refresh Toggle
+   ======================================== */
+.ai-process-status .auto-refresh-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.375rem 0.75rem;
+  border-radius: 6px;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  transition: all 0.15s;
+}
+
+.ai-process-status .auto-refresh-toggle:hover {
+  background: #e5e7eb;
+}
+
+.ai-process-status .auto-refresh-toggle input {
+  display: none;
+}
+
+.ai-process-status .toggle-switch {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  background: #d1d5db;
+  border-radius: 10px;
+  transition: background 0.2s;
+}
+
+.ai-process-status .toggle-switch::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.2s;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.ai-process-status .auto-refresh-toggle input:checked + .toggle-switch {
+  background: #10b981;
+}
+
+.ai-process-status .auto-refresh-toggle input:checked + .toggle-switch::after {
+  transform: translateX(16px);
+}
+
+.ai-process-status .toggle-label {
+  font-size: 0.8125rem;
+  color: #374151;
+  font-weight: 500;
+}
+
+/* ========================================
+   NEW: Alert Badge for Failed Status
+   ======================================== */
+.ai-process-status .stat-card.has-alert {
+  animation: alertPulse 2s infinite;
+}
+
+.ai-process-status .alert-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 20px;
+  height: 20px;
+  background: #ef4444;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  animation: badgeBounce 1s infinite;
+}
+
+@keyframes alertPulse {
+  0%, 100% {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2);
+  }
+}
+
+@keyframes badgeBounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* ========================================
+   Responsive adjustments
+   ======================================== */
+@media (max-width: 768px) {
+  .ai-process-status .time-filter-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ai-process-status .header-actions {
+    flex-wrap: wrap;
+  }
+
+  .ai-process-status .auto-refresh-toggle {
+    order: -1;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+}

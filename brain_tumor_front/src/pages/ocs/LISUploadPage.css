@@ -1,0 +1,847 @@
+/* LIS 검사 결과 업로드 페이지 스타일 */
+
+.lis-upload-page {
+  padding: 20px;
+  /* max-width: 900px; */
+}
+
+/* 비활성화 페이지 스타일 */
+.lis-upload-page.disabled-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 200px);
+}
+
+.lis-upload-page .disabled-notice {
+  text-align: center;
+  padding: 60px 40px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  max-width: 500px;
+}
+
+.lis-upload-page .disabled-notice .notice-icon {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.lis-upload-page .disabled-notice h2 {
+  margin: 0 0 16px 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.lis-upload-page .disabled-notice p {
+  margin: 0 0 12px 0;
+  font-size: 15px;
+  color: #6c757d;
+  line-height: 1.6;
+}
+
+.lis-upload-page .disabled-notice .notice-link {
+  color: #3498db;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.lis-upload-page .disabled-notice .notice-link:hover {
+  text-decoration: underline;
+}
+
+.lis-upload-page .disabled-notice .btn-go-ocs {
+  display: inline-block;
+  margin-top: 24px;
+  padding: 14px 32px;
+  background: #3498db;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 15px;
+  transition: background 0.2s;
+}
+
+.lis-upload-page .disabled-notice .btn-go-ocs:hover {
+  background: #2980b9;
+}
+
+.lis-upload-page .page-header {
+  margin-bottom: 24px;
+}
+
+.lis-upload-page .page-header h2 {
+  margin: 0 0 4px 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.lis-upload-page .page-header .subtitle {
+  color: #6c757d;
+  font-size: 14px;
+}
+
+/* 모드 선택 섹션 */
+.lis-upload-page .mode-select-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 24px;
+}
+
+.lis-upload-page .mode-select-section h3 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.lis-upload-page .mode-options {
+  display: flex;
+  gap: 16px;
+}
+
+.lis-upload-page .mode-option {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  border: 2px solid #dee2e6;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: #fff;
+}
+
+.lis-upload-page .mode-option:hover {
+  border-color: #3498db;
+  background: #f8fbfe;
+}
+
+.lis-upload-page .mode-option.selected {
+  border-color: #3498db;
+  background: #f0f7fc;
+}
+
+.lis-upload-page .mode-option input[type="radio"] {
+  margin-top: 2px;
+  width: 18px;
+  height: 18px;
+  accent-color: #3498db;
+  cursor: pointer;
+}
+
+.lis-upload-page .mode-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.lis-upload-page .mode-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #212529;
+}
+
+.lis-upload-page .mode-desc {
+  font-size: 13px;
+  color: #6c757d;
+}
+
+/* 선택 섹션 (환자/OCS 선택 공통) */
+.lis-upload-page .selection-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 24px;
+}
+
+.lis-upload-page .selection-section h3 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.lis-upload-page .selection-section .required {
+  color: #dc3545;
+}
+
+.lis-upload-page .select-container {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.lis-upload-page .search-input {
+  flex: 1;
+  max-width: 300px;
+  padding: 10px 12px;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.lis-upload-page .search-input:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+}
+
+.lis-upload-page .main-select {
+  flex: 2;
+  padding: 10px 12px;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  font-size: 14px;
+  background: #fff;
+}
+
+.lis-upload-page .main-select:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+}
+
+/* 선택된 OCS 정보 표시 */
+.lis-upload-page .selected-ocs-info {
+  margin-top: 16px;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #3498db;
+}
+
+.lis-upload-page .selected-ocs-info .info-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.lis-upload-page .selected-ocs-info .info-row:last-child {
+  margin-bottom: 0;
+}
+
+.lis-upload-page .selected-ocs-info .label {
+  font-weight: 500;
+  color: #495057;
+  min-width: 80px;
+}
+
+.lis-upload-page .selected-ocs-info .value {
+  color: #212529;
+}
+
+/* 환자 모드 선택 */
+.lis-upload-page .patient-mode-options {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.lis-upload-page .patient-mode-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px;
+  color: #495057;
+}
+
+.lis-upload-page .patient-mode-option:hover {
+  border-color: #3498db;
+  background: #f8fbfe;
+}
+
+.lis-upload-page .patient-mode-option.selected {
+  border-color: #3498db;
+  background: #f0f7fc;
+  color: #2980b9;
+}
+
+.lis-upload-page .patient-mode-option input[type="radio"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #3498db;
+  cursor: pointer;
+}
+
+/* 새 환자 등록 폼 */
+.lis-upload-page .new-patient-form {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.lis-upload-page .new-patient-form .form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.lis-upload-page .form-hint {
+  margin: 12px 0 0 0;
+  font-size: 13px;
+  color: #6c757d;
+  font-style: italic;
+}
+
+/* 환자 선택 섹션 */
+.lis-upload-page .patient-select-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 24px;
+}
+
+.lis-upload-page .patient-select-section h3 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.lis-upload-page .patient-select-section .required {
+  color: #dc3545;
+}
+
+.lis-upload-page .patient-select-container {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.lis-upload-page .patient-search-input {
+  flex: 1;
+  max-width: 300px;
+  padding: 10px 12px;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.lis-upload-page .patient-search-input:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+}
+
+.lis-upload-page .patient-select {
+  flex: 2;
+  padding: 10px 12px;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  font-size: 14px;
+  background: #fff;
+}
+
+.lis-upload-page .patient-select:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+}
+
+.lis-upload-page .job-type-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.lis-upload-page .job-type-container label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #495057;
+}
+
+.lis-upload-page .job-type-select {
+  padding: 10px 12px;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  font-size: 14px;
+  background: #fff;
+  min-width: 200px;
+}
+
+.lis-upload-page .job-type-select:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+}
+
+.lis-upload-page .upload-btn:disabled {
+  background: #adb5bd;
+  cursor: not-allowed;
+}
+
+/* 업로드 섹션 */
+.lis-upload-page .upload-section {
+  margin-bottom: 32px;
+}
+
+.lis-upload-page .upload-dropzone {
+  border: 2px dashed #dee2e6;
+  border-radius: 12px;
+  padding: 48px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: #f8f9fa;
+}
+
+.lis-upload-page .upload-dropzone:hover {
+  border-color: #3498db;
+  background: #f0f7fc;
+}
+
+.lis-upload-page .upload-dropzone.drag-active {
+  border-color: #3498db;
+  background: #e8f4fc;
+}
+
+.lis-upload-page .upload-dropzone.has-file {
+  border-style: solid;
+  background: #fff;
+}
+
+.lis-upload-page .upload-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.lis-upload-page .upload-text {
+  font-size: 16px;
+  font-weight: 500;
+  color: #495057;
+  margin: 0 0 8px 0;
+}
+
+.lis-upload-page .upload-hint {
+  font-size: 13px;
+  color: #6c757d;
+  margin: 0;
+}
+
+/* 파일 정보 */
+.lis-upload-page .file-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.lis-upload-page .file-icon {
+  font-size: 40px;
+}
+
+.lis-upload-page .file-details {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.lis-upload-page .file-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: #212529;
+}
+
+.lis-upload-page .file-size {
+  font-size: 13px;
+  color: #6c757d;
+}
+
+/* 업로드 진행률 */
+.lis-upload-page .upload-progress {
+  margin-top: 24px;
+  width: 100%;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.lis-upload-page .progress-bar {
+  height: 8px;
+  background: #e9ecef;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.lis-upload-page .progress-fill {
+  height: 100%;
+  background: #3498db;
+  transition: width 0.3s ease;
+}
+
+.lis-upload-page .progress-text {
+  font-size: 14px;
+  color: #495057;
+}
+
+/* 업로드 버튼 */
+.lis-upload-page .upload-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.lis-upload-page .upload-btn,
+.lis-upload-page .cancel-btn {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.lis-upload-page .upload-btn {
+  background: #3498db;
+  color: #fff;
+}
+
+.lis-upload-page .upload-btn:hover {
+  background: #2980b9;
+}
+
+.lis-upload-page .cancel-btn {
+  background: #6c757d;
+  color: #fff;
+}
+
+.lis-upload-page .cancel-btn:hover {
+  background: #5a6268;
+}
+
+/* 로그 섹션 */
+.lis-upload-page .log-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 24px;
+}
+
+.lis-upload-page .log-section h3 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.lis-upload-page .empty-log {
+  padding: 32px;
+  text-align: center;
+  color: #6c757d;
+  font-size: 14px;
+}
+
+.lis-upload-page .log-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.lis-upload-page .log-table th {
+  background: #f8f9fa;
+  padding: 10px 12px;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 600;
+  color: #495057;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.lis-upload-page .log-table td {
+  padding: 10px 12px;
+  font-size: 13px;
+  color: #212529;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.lis-upload-page .log-row.success {
+  background: #f8fff8;
+}
+
+.lis-upload-page .log-row.error {
+  background: #fff8f8;
+}
+
+.lis-upload-page .log-row.warning {
+  background: #fffdf8;
+}
+
+.lis-upload-page .log-time {
+  color: #6c757d;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.lis-upload-page .log-filename {
+  font-weight: 500;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lis-upload-page .log-size {
+  color: #6c757d;
+  white-space: nowrap;
+}
+
+.lis-upload-page .log-message {
+  color: #495057;
+}
+
+.lis-upload-page .status-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.lis-upload-page .status-badge.success {
+  background: #d4edda;
+  color: #155724;
+}
+
+.lis-upload-page .status-badge.error {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.lis-upload-page .status-badge.warning {
+  background: #fff3cd;
+  color: #856404;
+}
+
+/* 가이드 섹션 */
+.lis-upload-page .guide-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.lis-upload-page .guide-section h3 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.lis-upload-page .guide-content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.lis-upload-page .guide-item {
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.lis-upload-page .guide-item h4 {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #495057;
+}
+
+.lis-upload-page .guide-item p {
+  margin: 0;
+  font-size: 13px;
+  color: #6c757d;
+  line-height: 1.5;
+}
+
+/* 추가 정보 입력 섹션 */
+.lis-upload-page .additional-info-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 24px;
+}
+
+.lis-upload-page .section-header-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 4px 0;
+  user-select: none;
+}
+
+.lis-upload-page .section-header-toggle:hover {
+  opacity: 0.8;
+}
+
+.lis-upload-page .section-header-toggle h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lis-upload-page .toggle-icon {
+  font-size: 12px;
+  color: #6c757d;
+}
+
+.lis-upload-page .toggle-hint {
+  font-size: 13px;
+  color: #6c757d;
+}
+
+.lis-upload-page .additional-info-form {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #e9ecef;
+}
+
+.lis-upload-page .info-group {
+  margin-bottom: 24px;
+}
+
+.lis-upload-page .info-group:last-child {
+  margin-bottom: 0;
+}
+
+.lis-upload-page .info-group h4 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #495057;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.lis-upload-page .form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.lis-upload-page .form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.lis-upload-page .form-field.full-width {
+  grid-column: 1 / -1;
+}
+
+.lis-upload-page .form-field label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #495057;
+}
+
+.lis-upload-page .form-field input[type="text"],
+.lis-upload-page .form-field input[type="tel"],
+.lis-upload-page .form-field input[type="date"],
+.lis-upload-page .form-field select {
+  padding: 10px 12px;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #212529;
+  background: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.lis-upload-page .form-field input[type="text"]:focus,
+.lis-upload-page .form-field input[type="tel"]:focus,
+.lis-upload-page .form-field input[type="date"]:focus,
+.lis-upload-page .form-field select:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+}
+
+.lis-upload-page .form-field input::placeholder {
+  color: #adb5bd;
+}
+
+.lis-upload-page .form-field.checkbox-field {
+  flex-direction: row;
+  align-items: center;
+}
+
+.lis-upload-page .form-field.checkbox-field label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.lis-upload-page .form-field.checkbox-field input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #3498db;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .lis-upload-page .mode-options {
+    flex-direction: column;
+  }
+
+  .lis-upload-page .patient-mode-options {
+    flex-direction: column;
+  }
+
+  .lis-upload-page .select-container {
+    flex-direction: column;
+  }
+
+  .lis-upload-page .search-input {
+    max-width: 100%;
+  }
+
+  .lis-upload-page .new-patient-form .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lis-upload-page .guide-content {
+    grid-template-columns: 1fr;
+  }
+
+  .lis-upload-page .log-table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .lis-upload-page .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lis-upload-page .section-header-toggle {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}

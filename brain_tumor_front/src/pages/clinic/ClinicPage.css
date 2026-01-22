@@ -1,0 +1,747 @@
+/* ============================================================================= */
+/* Clinic Page - 3컬럼 진료 화면 스타일                                          */
+/* ============================================================================= */
+
+.clinic-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--bg-main);
+  padding: 0;
+}
+
+/* ----------------------------------------------------------------------------- */
+/* 환자 정보 헤더                                                                 */
+/* ----------------------------------------------------------------------------- */
+.patient-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* 개선된 헤더 스타일 */
+.patient-header.enhanced {
+  padding: 20px 24px;
+  background: linear-gradient(135deg, var(--card-bg) 0%, #f8f9fc 100%);
+  border-bottom: 2px solid var(--card-border);
+}
+
+.patient-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.patient-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--bg-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  border: 2px solid var(--card-border);
+}
+
+.patient-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.patient-name-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.patient-name {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-main);
+}
+
+.encounter-status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--success) 0%, #4caf50 100%);
+  color: white;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+/* 환자 미선택 상태 배지 */
+.patient-status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--warning, #ff9800);
+  color: white;
+}
+
+/* 환자 미선택 아바타 */
+.patient-avatar-empty {
+  background: #fff3e0;
+  border-color: var(--warning, #ff9800);
+}
+
+.patient-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text-sub);
+}
+
+.patient-meta .divider {
+  color: var(--border);
+}
+
+.patient-number {
+  font-family: monospace;
+  background: var(--bg-main);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+}
+
+/* 헤더 우측 영역 */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.quick-stats {
+  display: flex;
+  gap: 16px;
+  padding-right: 24px;
+  border-right: 1px solid var(--border);
+}
+
+.quick-stats .stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.quick-stats .stat-label {
+  font-size: 11px;
+  color: var(--text-sub);
+}
+
+.quick-stats .stat-value {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.btn-icon-text {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.clinic-page .btn-outline {
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-sub);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.clinic-page .btn-outline:hover {
+  border-color: var(--text-sub);
+  background: var(--bg-main);
+}
+
+.encounter-badge {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.encounter-badge.active {
+  background: #e8f5e9;
+  color: var(--success);
+}
+
+/* ----------------------------------------------------------------------------- */
+/* 탭 네비게이션                                                                   */
+/* ----------------------------------------------------------------------------- */
+.clinic-tabs {
+  display: flex;
+  gap: 4px;
+  padding: 0 24px;
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.clinic-tab {
+  padding: 12px 24px;
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-sub);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.clinic-tab:hover {
+  color: var(--text-main);
+}
+
+.clinic-tab.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+.clinic-tab-content {
+  flex: 1;
+  overflow-y: auto;
+  background: var(--bg-main);
+}
+
+/* ----------------------------------------------------------------------------- */
+/* 3컬럼 그리드 레이아웃                                                          */
+/* ----------------------------------------------------------------------------- */
+.clinic-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  padding: 16px 24px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.clinic-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.clinic-column.column-full {
+  grid-column: span 3;
+  max-width: 600px;
+}
+
+/* 반응형: 태블릿 */
+@media (max-width: 1200px) {
+  .clinic-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .clinic-column.column-3 {
+    grid-column: span 2;
+    flex-direction: row;
+  }
+
+  .clinic-column.column-3 > * {
+    flex: 1;
+  }
+
+  .patient-header.enhanced {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .header-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+/* 반응형: 모바일 */
+@media (max-width: 768px) {
+  .clinic-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .clinic-column.column-3 {
+    grid-column: span 1;
+    flex-direction: column;
+  }
+
+  .patient-header.enhanced {
+    padding: 16px;
+  }
+
+  .quick-stats {
+    display: none;
+  }
+
+  .header-right {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .header-actions {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .header-actions .btn {
+    flex: 1;
+  }
+
+  .patient-name-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .patient-meta {
+    flex-wrap: wrap;
+  }
+}
+
+/* ----------------------------------------------------------------------------- */
+/* 공통 카드 스타일                                                               */
+/* ----------------------------------------------------------------------------- */
+.clinic-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.clinic-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-main);
+}
+
+.clinic-card-header h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.clinic-card-header .card-icon {
+  font-size: 16px;
+}
+
+.clinic-card-body {
+  padding: 16px;
+}
+
+.clinic-card-footer {
+  padding: 12px 16px;
+  border-top: 1px solid var(--border);
+  background: var(--bg-main);
+}
+
+/* ----------------------------------------------------------------------------- */
+/* 환자 선택 안됨 상태                                                            */
+/* ----------------------------------------------------------------------------- */
+.no-patient {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  gap: 16px;
+  color: var(--text-sub);
+}
+
+.no-patient-icon {
+  font-size: 64px;
+  opacity: 0.5;
+}
+
+.no-patient h2 {
+  margin: 0;
+  font-size: 20px;
+  color: var(--text-main);
+}
+
+.no-patient p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* ----------------------------------------------------------------------------- */
+/* 버튼 스타일                                                                    */
+/* ----------------------------------------------------------------------------- */
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+}
+
+.btn-secondary {
+  background: var(--bg-main);
+  color: var(--text-main);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  background: var(--card-border);
+}
+
+.btn-success {
+  background: var(--success);
+  color: white;
+}
+
+.btn-success:hover {
+  background: #4caf50;
+}
+
+.btn-sm {
+  padding: 4px 8px;
+  font-size: 12px;
+}
+
+/* 버튼 비활성화 스타일 */
+.btn:disabled,
+.btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+  background: var(--text-sub);
+  color: var(--bg-main);
+  border-color: var(--text-sub);
+}
+
+.btn-primary:disabled,
+.btn-primary[disabled] {
+  background: #a0a0a0;
+}
+
+.btn-outline:disabled,
+.btn-outline[disabled] {
+  background: transparent;
+  color: var(--text-sub);
+  border-color: var(--border);
+}
+
+.btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: var(--radius-sm);
+}
+
+/* ----------------------------------------------------------------------------- */
+/* 입력 필드 스타일                                                               */
+/* ----------------------------------------------------------------------------- */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}
+
+.form-group label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-sub);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  transition: border-color 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.form-group textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* ----------------------------------------------------------------------------- */
+/* 목록 스타일                                                                    */
+/* ----------------------------------------------------------------------------- */
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+.list-item:hover {
+  background: var(--bg-main);
+}
+
+.list-item-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.list-item-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+.list-item-subtitle {
+  font-size: 12px;
+  color: var(--text-sub);
+}
+
+.list-item-meta {
+  font-size: 12px;
+  color: var(--text-sub);
+}
+
+/* ----------------------------------------------------------------------------- */
+/* 상태 배지                                                                      */
+/* ----------------------------------------------------------------------------- */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.status-badge.ordered {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.status-badge.in_progress {
+  background: #e3f2fd;
+  color: var(--info);
+}
+
+.status-badge.completed,
+.status-badge.confirmed {
+  background: #e8f5e9;
+  color: var(--success);
+}
+
+.status-badge.cancelled {
+  background: #ffebee;
+  color: var(--danger);
+}
+
+/* ----------------------------------------------------------------------------- */
+/* 빈 상태                                                                        */
+/* ----------------------------------------------------------------------------- */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+  text-align: center;
+  color: var(--text-sub);
+}
+
+.empty-state-icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+  opacity: 0.5;
+}
+
+.empty-state-text {
+  font-size: 13px;
+}
+
+/* ----------------------------------------------------------------------------- */
+/* 금일 예약 환자 목록 컨테이너                                                     */
+/* ----------------------------------------------------------------------------- */
+.appointment-list-container {
+  padding: 16px 24px;
+  background: var(--bg-main);
+  border-bottom: 1px solid var(--border);
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 500px;
+  }
+}
+
+.appointment-list-container .clinic-card {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* 예약 목록 버튼 활성 상태 */
+.clinic-page .btn-outline.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.clinic-page .btn-outline.active:hover {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+}
+
+/* 반응형: 작은 화면에서 사이드바 전체 너비 */
+@media (max-width: 480px) {
+  .appointment-sidebar {
+    width: 100%;
+  }
+}
+
+/* ----------------------------------------------------------------------------- */
+/* 진료 중 환자 변경 확인 모달                                                      */
+/* ----------------------------------------------------------------------------- */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content.confirm-modal {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.confirm-modal h3 {
+  margin: 0 0 12px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-main, #1a1a1a);
+}
+
+.confirm-modal p {
+  margin: 0 0 20px 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-sub, #666);
+}
+
+.confirm-modal .modal-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.confirm-modal .btn {
+  padding: 10px 16px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.confirm-modal .btn-secondary {
+  background: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  color: #666;
+}
+
+.confirm-modal .btn-secondary:hover {
+  background: #eee;
+}
+
+.confirm-modal .btn-outline {
+  background: white;
+  border: 1px solid var(--warning, #f57c00);
+  color: var(--warning, #f57c00);
+}
+
+.confirm-modal .btn-outline:hover {
+  background: #fff8e1;
+}
+
+.confirm-modal .btn-success {
+  background: var(--success, #4caf50);
+  border: 1px solid var(--success, #4caf50);
+  color: white;
+}
+
+.confirm-modal .btn-success:hover {
+  background: #43a047;
+}

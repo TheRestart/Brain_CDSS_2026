@@ -1,0 +1,412 @@
+/* LISWorklistPage.css */
+
+.lis-worklist {
+  padding: 20px;
+}
+
+/* 페이지 헤더 */
+.lis-worklist .page-header {
+  margin-bottom: 0px;
+}
+
+.lis-worklist .page-header h2 {
+  margin: 0 0 8px 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.lis-worklist .page-header .subtitle {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* 요약 카드 (6개 상태) */
+.lis-worklist .summary-cards {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.lis-worklist .summary-card {
+  padding: 16px;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid #e5e7eb;
+  background: white;
+}
+
+.lis-worklist .summary-card .count {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.lis-worklist .summary-card .label {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+/* 6개 상태별 카드 스타일 */
+.lis-worklist .summary-card.ordered {
+  border-left: 4px solid #e67e22;
+}
+
+.lis-worklist .summary-card.ordered .count {
+  color: #e67e22;
+}
+
+.lis-worklist .summary-card.accepted {
+  border-left: 4px solid #f39c12;
+}
+
+.lis-worklist .summary-card.accepted .count {
+  color: #f39c12;
+}
+
+.lis-worklist .summary-card.in-progress {
+  border-left: 4px solid #3498db;
+}
+
+.lis-worklist .summary-card.in-progress .count {
+  color: #3498db;
+}
+
+.lis-worklist .summary-card.result-ready {
+  border-left: 4px solid #9b59b6;
+}
+
+.lis-worklist .summary-card.result-ready .count {
+  color: #9b59b6;
+}
+
+.lis-worklist .summary-card.confirmed {
+  border-left: 4px solid #27ae60;
+}
+
+.lis-worklist .summary-card.confirmed .count {
+  color: #27ae60;
+}
+
+.lis-worklist .summary-card.cancelled {
+  border-left: 4px solid #95a5a6;
+}
+
+.lis-worklist .summary-card.cancelled .count {
+  color: #95a5a6;
+}
+
+/* 반응형 카드 */
+@media (max-width: 1400px) {
+  .lis-worklist .summary-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .lis-worklist .summary-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 필터 바 */
+.lis-worklist .filter-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background: #f9fafb;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.lis-worklist .filter-left {
+  display: flex;
+  align-items: center;
+}
+
+.lis-worklist .ocs-count {
+  font-size: 16px;
+  color: #374151;
+}
+
+.lis-worklist .ocs-count span {
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.lis-worklist .filter-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.lis-worklist .search-box {
+  display: flex;
+  gap: 8px;
+}
+
+.lis-worklist .search-box input {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 200px;
+}
+
+.lis-worklist .search-box input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.lis-worklist .filter-right select {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  background: white;
+  cursor: pointer;
+}
+
+.lis-worklist .checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #374151;
+  cursor: pointer;
+}
+
+.lis-worklist .checkbox-label input {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+/* 테이블 */
+.lis-worklist .content {
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+}
+
+.lis-worklist .worklist-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.lis-worklist .worklist-table th,
+.lis-worklist .worklist-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.lis-worklist .worklist-table th {
+  background: #f9fafb;
+  font-weight: 600;
+  font-size: 13px;
+  color: #6b7280;
+  text-transform: uppercase;
+}
+
+.lis-worklist .worklist-table td {
+  font-size: 14px;
+  color: #374151;
+}
+
+.lis-worklist .clickable-row {
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.lis-worklist .clickable-row:hover {
+  background: #f9fafb;
+}
+
+.lis-worklist .urgent-row {
+  background: #fef2f2;
+}
+
+.lis-worklist .urgent-row:hover {
+  background: #fee2e2;
+}
+
+/* 상태 뱃지 */
+.lis-worklist .status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.lis-worklist .status-ordered {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.lis-worklist .status-accepted {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.lis-worklist .status-in_progress {
+  background: #d1fae5;
+  color: #059669;
+}
+
+.lis-worklist .status-result-ready {
+  background: #e0e7ff;
+  color: #4f46e5;
+}
+
+.lis-worklist .status-confirmed {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.lis-worklist .status-cancelled {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* 우선순위 뱃지 */
+.lis-worklist .priority-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.lis-worklist .priority-urgent {
+  background: #fecaca;
+  color: #dc2626;
+}
+
+.lis-worklist .priority-normal {
+  background: #e0e7ff;
+  color: #4f46e5;
+}
+
+/* 미배정 표시 */
+.lis-worklist .unassigned {
+  color: #9ca3af;
+  font-style: italic;
+}
+
+/* 버튼 */
+.lis-worklist .btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.lis-worklist .btn-sm {
+  padding: 6px 12px;
+  font-size: 12px;
+}
+
+.lis-worklist .btn-primary {
+  background: #3b82f6;
+  color: white;
+}
+
+.lis-worklist .btn-primary:hover {
+  background: #2563eb;
+}
+
+.lis-worklist .btn-success {
+  background: #10b981;
+  color: white;
+}
+
+.lis-worklist .btn-success:hover {
+  background: #059669;
+}
+
+.lis-worklist .btn-info {
+  background: #06b6d4;
+  color: white;
+}
+
+.lis-worklist .btn-info:hover {
+  background: #0891b2;
+}
+
+.lis-worklist .btn-secondary {
+  background: #6b7280;
+  color: white;
+}
+
+.lis-worklist .btn-secondary:hover {
+  background: #4b5563;
+}
+
+.lis-worklist .btn-search {
+  background: #3b82f6;
+  color: white;
+}
+
+.lis-worklist .btn-clear {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.lis-worklist .btn-clear:hover {
+  background: #e5e7eb;
+}
+
+/* 페이지네이션 */
+.lis-worklist .pagination-bar {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+/* 반응형 */
+@media (max-width: 1024px) {
+  .lis-worklist .summary-cards {
+    flex-wrap: wrap;
+  }
+
+  .lis-worklist .summary-card {
+    min-width: calc(50% - 8px);
+  }
+
+  .lis-worklist .filter-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .lis-worklist .filter-right {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .lis-worklist .summary-card {
+    min-width: 100%;
+  }
+
+  .lis-worklist .content {
+    overflow-x: auto;
+  }
+
+  .lis-worklist .worklist-table {
+    min-width: 900px;
+  }
+}

@@ -1,0 +1,150 @@
+/* 전체 배경 */
+.login-page {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: url('@/assets/img/login-background.png') center / cover no-repeat;
+  font-family: 'Pretendard', sans-serif;
+  overflow: hidden;
+}
+
+/* 어두운 오버레이 */
+.login-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 30, 60, 0.75);
+}
+
+/* 상단 로고 */
+.login-header {
+  position: relative;
+  z-index: 2;
+  top : 24px;
+  left : 40px;
+  padding: 24px 40px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+}
+
+.logo-icon {
+  font-size: 36px;
+}
+
+.logo .sub {
+  font-size: 14px;
+  margin-left: 4px;
+  opacity: 0.8;
+}
+
+.logo .desc {
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+/* 중앙 카드 */
+.login-container {
+  position: absolute;
+  inset: 0; 
+  z-index: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-card {
+  width: 360px;
+  background: #fff;
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: loginFadeIn 0.4s ease-out;
+}
+@keyframes loginFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.login-card h2 {
+  margin-bottom: 24px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* 입력 필드 */
+.login-field {
+  margin-bottom: 14px;
+}
+
+.login-field input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+}
+
+.login-field input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+.login-field input,
+.login-button {
+  box-sizing: border-box;
+}
+
+/* 로그인 버튼 */
+.login-button {
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px;
+  background: #1d4ed8;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  background: #1e40af;
+}
+
+/* 하단 링크 */
+.login-footer {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.login-footer a {
+  color: #2563eb;
+  text-decoration: none;
+}
+.login-footer a:hover {
+  text-decoration: underline;
+}
+
+.logo-icon img {
+  width: 50px;   /* 원하는 크기 */
+  height: 50px;  /* 비율 맞추기 */
+  object-fit: contain; /* 이미지 비율 유지 */
+  vertical-align: middle; /* 텍스트와 수직 정렬 */
+}

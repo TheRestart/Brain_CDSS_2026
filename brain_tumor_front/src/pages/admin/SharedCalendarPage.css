@@ -1,0 +1,375 @@
+.shared-calendar-page {
+  padding: 20px 24px;
+}
+
+.shared-calendar-page.loading,
+.shared-calendar-page.error {
+  padding: 40px;
+  text-align: center;
+  color: var(--text-sub);
+}
+
+.shared-calendar-page .page-header {
+  margin-bottom: 24px;
+}
+
+.shared-calendar-page .page-header h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.shared-calendar-page .page-header .page-desc {
+  font-size: 14px;
+  color: var(--text-sub);
+}
+
+/* 툴바 */
+.shared-calendar-page .toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.shared-calendar-page .filters {
+  display: flex;
+  gap: 12px;
+}
+
+.shared-calendar-page .filter-select {
+  padding: 8px 12px;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  background: var(--card-bg);
+  font-size: 14px;
+  color: var(--text-main);
+}
+
+.shared-calendar-page .create-btn {
+  padding: 10px 20px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.shared-calendar-page .create-btn:hover {
+  background: var(--primary-hover);
+}
+
+/* 테이블 */
+.shared-calendar-page .schedule-list {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.shared-calendar-page .empty-state {
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--text-sub);
+}
+
+.shared-calendar-page .schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.shared-calendar-page .schedule-table th,
+.shared-calendar-page .schedule-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.shared-calendar-page .schedule-table th {
+  background: var(--bg-main);
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text-sub);
+}
+
+.shared-calendar-page .schedule-table td {
+  font-size: 14px;
+  color: var(--text-main);
+}
+
+.shared-calendar-page .schedule-table tbody tr:hover {
+  background: var(--bg-main);
+}
+
+.shared-calendar-page .color-badge {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+}
+
+.shared-calendar-page .title-cell {
+  font-weight: 500;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.shared-calendar-page .type-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  background: var(--bg-main);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+}
+
+.shared-calendar-page .visibility-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.shared-calendar-page .visibility-badge.visibility-all {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.shared-calendar-page .visibility-badge.visibility-admin {
+  background: #fce7f3;
+  color: #be185d;
+}
+
+.shared-calendar-page .visibility-badge.visibility-doctor {
+  background: #d1fae5;
+  color: #047857;
+}
+
+.shared-calendar-page .visibility-badge.visibility-nurse {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.shared-calendar-page .visibility-badge.visibility-lis {
+  background: #e0e7ff;
+  color: #4338ca;
+}
+
+.shared-calendar-page .visibility-badge.visibility-ris {
+  background: #ede9fe;
+  color: #6d28d9;
+}
+
+.shared-calendar-page .visibility-badge.visibility-patient {
+  background: #ffedd5;
+  color: #c2410c;
+}
+
+.shared-calendar-page .visibility-badge.visibility-external {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.shared-calendar-page .actions-cell {
+  display: flex;
+  gap: 8px;
+}
+
+.shared-calendar-page .action-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.shared-calendar-page .action-btn.edit {
+  background: var(--info);
+  color: white;
+}
+
+.shared-calendar-page .action-btn.edit:hover {
+  background: #2563eb;
+}
+
+.shared-calendar-page .action-btn.delete {
+  background: var(--danger);
+  color: white;
+}
+
+.shared-calendar-page .action-btn.delete:hover {
+  background: #dc2626;
+}
+
+/* 모달 */
+.shared-calendar-page .modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.shared-calendar-page .modal-content {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.shared-calendar-page .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.shared-calendar-page .modal-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.shared-calendar-page .close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--text-sub);
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.shared-calendar-page .close-btn:hover {
+  color: var(--text-main);
+}
+
+.shared-calendar-page form {
+  padding: 24px;
+}
+
+.shared-calendar-page .form-group {
+  margin-bottom: 16px;
+}
+
+.shared-calendar-page .form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-main);
+  margin-bottom: 6px;
+}
+
+.shared-calendar-page .form-group input[type="text"],
+.shared-calendar-page .form-group input[type="datetime-local"],
+.shared-calendar-page .form-group select,
+.shared-calendar-page .form-group textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  color: var(--text-main);
+  background: var(--card-bg);
+}
+
+.shared-calendar-page .form-group input:focus,
+.shared-calendar-page .form-group select:focus,
+.shared-calendar-page .form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.shared-calendar-page .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.shared-calendar-page .checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.shared-calendar-page .checkbox-group input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+}
+
+.shared-calendar-page .color-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.shared-calendar-page .color-group label {
+  margin-bottom: 0;
+}
+
+.shared-calendar-page .color-group input[type="color"] {
+  width: 40px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.shared-calendar-page .form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--card-border);
+}
+
+.shared-calendar-page .cancel-btn {
+  padding: 10px 20px;
+  background: var(--bg-main);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  color: var(--text-main);
+  cursor: pointer;
+}
+
+.shared-calendar-page .cancel-btn:hover {
+  background: var(--card-border);
+}
+
+.shared-calendar-page .submit-btn {
+  padding: 10px 24px;
+  background: var(--primary);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+  cursor: pointer;
+}
+
+.shared-calendar-page .submit-btn:hover {
+  background: var(--primary-hover);
+}
+
+.shared-calendar-page .submit-btn:disabled {
+  background: var(--text-sub);
+  cursor: not-allowed;
+}

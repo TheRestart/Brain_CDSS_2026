@@ -1,0 +1,264 @@
+.tumor-trend-chart {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.tumor-trend-chart__title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin: 0 0 16px 0;
+}
+
+/* 로딩/빈 상태 */
+.tumor-trend-chart--loading,
+.tumor-trend-chart--empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  color: #999;
+  gap: 12px;
+}
+
+.tumor-trend-chart--empty .material-icons {
+  font-size: 48px;
+  color: #ccc;
+}
+
+.tumor-trend-chart__spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e0e0e0;
+  border-top-color: #1976d2;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================
+   단일 부피 표시 (결과 1개)
+   ============================================ */
+.tumor-trend-chart__single {
+  text-align: center;
+}
+
+.tumor-trend-chart__single-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+  margin: 0 0 16px 0;
+}
+
+.tumor-trend-chart__single-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 600px) {
+  .tumor-trend-chart__single-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tumor-trend-chart__volume-card {
+  padding: 16px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tumor-trend-chart__volume-card--wt {
+  background: #ffebee;
+  border-left: 4px solid #ff6b6b;
+}
+
+.tumor-trend-chart__volume-card--tc {
+  background: #e0f7fa;
+  border-left: 4px solid #4ecdc4;
+}
+
+.tumor-trend-chart__volume-card--et {
+  background: #e3f2fd;
+  border-left: 4px solid #45b7d1;
+}
+
+.tumor-trend-chart__volume-label {
+  font-size: 12px;
+  color: #666;
+}
+
+.tumor-trend-chart__volume-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+.tumor-trend-chart__single-date {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #999;
+}
+
+/* ============================================
+   비교 카드 (결과 2개)
+   ============================================ */
+.tumor-trend-chart__compare {
+  padding: 8px 0;
+}
+
+.tumor-trend-chart__compare-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+  margin: 0 0 16px 0;
+  text-align: center;
+}
+
+.tumor-trend-chart__compare-header {
+  display: grid;
+  grid-template-columns: 50px 1fr 40px 1fr 120px;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 12px;
+  color: #999;
+  text-align: center;
+}
+
+.tumor-trend-chart__compare-date {
+  font-weight: 500;
+  color: #666;
+}
+
+.tumor-trend-chart__compare-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tumor-trend-chart__compare-row {
+  display: grid;
+  grid-template-columns: 50px 1fr 40px 1fr 120px;
+  gap: 8px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f5f5f5;
+  align-items: center;
+  text-align: center;
+}
+
+.tumor-trend-chart__compare-row:last-child {
+  border-bottom: none;
+}
+
+.tumor-trend-chart__compare-label {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.tumor-trend-chart__compare-label--wt {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.tumor-trend-chart__compare-label--tc {
+  background: #e0f7fa;
+  color: #00838f;
+}
+
+.tumor-trend-chart__compare-label--et {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.tumor-trend-chart__compare-value {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a1a2e;
+}
+
+.tumor-trend-chart__compare-arrow {
+  color: #999;
+  font-size: 14px;
+}
+
+.tumor-trend-chart__change {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: #f5f5f5;
+  color: #666;
+}
+
+.tumor-trend-chart__change.increase {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.tumor-trend-chart__change.decrease {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+/* ============================================
+   Line Chart (결과 3개+)
+   ============================================ */
+.tumor-trend-chart__chart {
+  margin-top: 8px;
+}
+
+.tumor-trend-chart__summary {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.tumor-trend-chart__summary-item {
+  font-size: 12px;
+  color: #666;
+}
+
+.tumor-trend-chart__summary-item strong {
+  color: #1a1a2e;
+}
+
+/* ============================================
+   툴팁
+   ============================================ */
+.tumor-trend-chart__tooltip {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tumor-trend-chart__tooltip-date {
+  font-size: 12px;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin: 0 0 8px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.tumor-trend-chart__tooltip-item {
+  font-size: 12px;
+  margin: 4px 0;
+}

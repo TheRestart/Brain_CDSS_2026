@@ -1,0 +1,238 @@
+/**
+ * GeneHeatmap Styles
+ * CSS Grid 기반 유전자 히트맵
+ */
+
+.gene-heatmap {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.gene-heatmap--loading,
+.gene-heatmap--empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 250px;
+  color: #666;
+  gap: 12px;
+}
+
+.gene-heatmap__spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e0e0e0;
+  border-top-color: #1976d2;
+  border-radius: 50%;
+  animation: heatmap-spin 1s linear infinite;
+}
+
+@keyframes heatmap-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.gene-heatmap__empty-icon {
+  font-size: 48px;
+  opacity: 0.5;
+}
+
+/* Header */
+.gene-heatmap__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.gene-heatmap__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.gene-heatmap__info {
+  font-size: 12px;
+  color: #888;
+}
+
+/* Wrapper */
+.gene-heatmap__wrapper {
+  overflow-x: auto;
+  overflow-y: visible;
+}
+
+/* Sample Labels (Top) */
+.gene-heatmap__sample-labels {
+  display: grid;
+  gap: 1px;
+  margin-bottom: 4px;
+}
+
+.gene-heatmap__sample-label {
+  font-size: 9px;
+  color: #666;
+  text-align: center;
+  transform: rotate(-45deg);
+  transform-origin: center center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 40px;
+  line-height: 40px;
+}
+
+/* Content (Gene Labels + Grid) */
+.gene-heatmap__content {
+  display: flex;
+}
+
+/* Gene Labels (Left) */
+.gene-heatmap__gene-labels {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-right: 4px;
+  flex-shrink: 0;
+  width: 76px;
+}
+
+.gene-heatmap__gene-label {
+  font-size: 10px;
+  color: #666;
+  text-align: right;
+  padding-right: 4px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Grid */
+.gene-heatmap__grid {
+  display: grid;
+  gap: 1px;
+  background: #e0e0e0;
+  padding: 1px;
+  border-radius: 4px;
+}
+
+.gene-heatmap__cell {
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.gene-heatmap__cell:hover {
+  transform: scale(1.3);
+  z-index: 10;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+/* Legend */
+.gene-heatmap__legend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid #eee;
+}
+
+.gene-heatmap__legend-label {
+  font-size: 11px;
+  color: #666;
+}
+
+.gene-heatmap__legend-bar {
+  width: 120px;
+  height: 12px;
+  background: linear-gradient(to right, #2196f3, #fff, #f44336);
+  border-radius: 3px;
+  border: 1px solid #ddd;
+}
+
+/* Tooltip */
+.gene-heatmap__tooltip {
+  position: fixed;
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  pointer-events: none;
+  min-width: 140px;
+}
+
+.gene-heatmap__tooltip-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin: 3px 0;
+}
+
+.gene-heatmap__tooltip-label {
+  font-size: 11px;
+  color: #888;
+}
+
+.gene-heatmap__tooltip-value {
+  font-size: 12px;
+  font-weight: 600;
+  color: #333;
+}
+
+.gene-heatmap__tooltip-value.positive {
+  color: #d32f2f;
+}
+
+.gene-heatmap__tooltip-value.negative {
+  color: #1976d2;
+}
+
+/* Truncated Notice */
+.gene-heatmap__truncated {
+  margin-top: 12px;
+  padding: 8px 12px;
+  background: #fff8e1;
+  border-radius: 4px;
+  font-size: 11px;
+  color: #f57c00;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .gene-heatmap {
+    padding: 16px;
+  }
+
+  .gene-heatmap__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .gene-heatmap__gene-labels {
+    width: 60px;
+  }
+
+  .gene-heatmap__gene-label {
+    font-size: 8px;
+  }
+
+  .gene-heatmap__sample-label {
+    font-size: 8px;
+  }
+}

@@ -1,0 +1,996 @@
+/* LIS 검사 상세 페이지 스타일 */
+
+.lis-detail-page {
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.lis-detail-page.loading,
+.lis-detail-page.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  font-size: 16px;
+  color: #7f8c8d;
+}
+
+/* 헤더 */
+.detail-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.btn-back {
+  background: none;
+  border: 1px solid #bdc3c7;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #7f8c8d;
+  transition: all 0.2s;
+}
+
+.btn-back:hover {
+  background: #f5f5f5;
+  color: #2c3e50;
+}
+
+/* AI 버튼 */
+.btn-ai {
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-ai:hover:not(:disabled) {
+  background: linear-gradient(135deg, #5a6fd6 0%, #6a4190 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.btn-ai:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.header-info {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-info h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #2c3e50;
+}
+
+.header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* 환자 정보 바 */
+.patient-info-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 16px 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.patient-info-bar .info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.patient-info-bar .info-item label {
+  font-size: 12px;
+  color: #7f8c8d;
+  font-weight: 500;
+}
+
+.patient-info-bar .info-item span {
+  font-size: 14px;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.priority {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px !important;
+}
+
+.priority-urgent {
+  background: #e74c3c;
+  color: white !important;
+}
+
+.priority-normal {
+  background: #3498db;
+  color: white !important;
+}
+
+.priority-scheduled {
+  background: #95a5a6;
+  color: white !important;
+}
+
+/* 결과 요약 */
+.result-summary {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.summary-card {
+  flex: 1;
+  max-width: 200px;
+  padding: 16px 20px;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.summary-card .count {
+  display: block;
+  font-size: 28px;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+.summary-card .label {
+  font-size: 13px;
+  color: #7f8c8d;
+}
+
+.summary-card.abnormal {
+  border-color: #f39c12;
+  background: #fef9e7;
+}
+
+.summary-card.abnormal .count {
+  color: #f39c12;
+}
+
+.summary-card.critical {
+  border-color: #e74c3c;
+  background: #fdedec;
+}
+
+.summary-card.critical .count {
+  color: #e74c3c;
+}
+
+/* 탭 네비게이션 */
+.tab-nav {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid #e0e0e0;
+  margin-bottom: 20px;
+}
+
+.tab-nav button {
+  padding: 12px 24px;
+  background: none;
+  border: none;
+  font-size: 14px;
+  color: #7f8c8d;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s;
+}
+
+.tab-nav button:hover {
+  color: #2c3e50;
+}
+
+.tab-nav button.active {
+  color: #3498db;
+  font-weight: 600;
+}
+
+.tab-nav button.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #3498db;
+}
+
+/* 탭 콘텐츠 */
+.tab-content {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 24px;
+  min-height: 400px;
+}
+
+/* 정보 탭 */
+.info-tab .info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.info-tab .info-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-tab .info-row label {
+  font-size: 12px;
+  color: #7f8c8d;
+  font-weight: 500;
+}
+
+.info-tab .info-row span {
+  font-size: 14px;
+  color: #2c3e50;
+}
+
+.doctor-request {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.doctor-request h4 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  color: #2c3e50;
+}
+
+.doctor-request pre {
+  background: #f8f9fa;
+  padding: 16px;
+  border-radius: 4px;
+  font-size: 13px;
+  overflow-x: auto;
+}
+
+/* 결과 탭 */
+/* 파일 업로드 섹션 */
+.file-upload-section {
+  margin-bottom: 24px;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px dashed #dee2e6;
+}
+
+.file-upload-section .section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.file-upload-section .section-header h4 {
+  margin: 0;
+  font-size: 14px;
+  color: #2c3e50;
+}
+
+.file-upload-section label.btn {
+  cursor: pointer;
+}
+
+.file-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.file-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+}
+
+.file-icon {
+  font-size: 20px;
+}
+
+.file-name {
+  flex: 1;
+  font-size: 14px;
+  color: #2c3e50;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-size {
+  font-size: 12px;
+  color: #7f8c8d;
+}
+
+.no-files {
+  text-align: center;
+  padding: 20px;
+  color: #95a5a6;
+  font-size: 14px;
+}
+
+.no-files p {
+  margin: 0;
+}
+
+.no-files .allowed-extensions {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #6c757d;
+}
+
+.result-tab .result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.result-tab .result-header h4 {
+  margin: 0;
+  font-size: 16px;
+  color: #2c3e50;
+}
+
+.result-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.result-table th,
+.result-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.result-table th {
+  background: #f8f9fa;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.result-table td {
+  font-size: 14px;
+}
+
+.result-table td.empty {
+  text-align: center;
+  color: #95a5a6;
+  padding: 40px;
+}
+
+.result-table input,
+.result-table select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.result-table input:focus,
+.result-table select:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+.result-table .row-abnormal {
+  background: #fef9e7;
+}
+
+.result-table .row-critical {
+  background: #fdedec;
+}
+
+/* Flag 표시 */
+.flag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.flag-normal {
+  background: #d4edda;
+  color: #155724;
+}
+
+.flag-abnormal {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.flag-critical {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* 해석 탭 */
+.interpretation-tab .form-group {
+  margin-bottom: 20px;
+}
+
+.interpretation-tab label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.interpretation-tab textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.interpretation-tab textarea:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+.interpretation-tab .readonly-text {
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100px;
+  white-space: pre-wrap;
+}
+
+.critical-warning {
+  padding: 16px;
+  background: #fdedec;
+  border: 1px solid #e74c3c;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.critical-warning strong {
+  color: #e74c3c;
+  font-size: 14px;
+}
+
+.critical-warning p {
+  margin: 8px 0 0 0;
+  font-size: 13px;
+  color: #721c24;
+}
+
+.disclaimer {
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 4px;
+  margin-top: 20px;
+}
+
+.disclaimer p {
+  margin: 0;
+  font-size: 12px;
+  color: #7f8c8d;
+}
+
+/* 이력 탭 */
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.history-table th,
+.history-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.history-table th {
+  background: #f8f9fa;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.history-table td {
+  font-size: 14px;
+}
+
+/* 상태 배지 */
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status-ordered {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.status-accepted {
+  background: #fff3e0;
+  color: #ef6c00;
+}
+
+.status-in_progress {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status-result_ready {
+  background: #f3e5f5;
+  color: #7b1fa2;
+}
+
+.status-confirmed {
+  background: #e0f7fa;
+  color: #00838f;
+}
+
+.status-cancelled {
+  background: #ffebee;
+  color: #c62828;
+}
+
+/* 버튼 */
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: #3498db;
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #2980b9;
+}
+
+.btn-secondary {
+  background: #95a5a6;
+  color: white;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #7f8c8d;
+}
+
+.btn-success {
+  background: #27ae60;
+  color: white;
+}
+
+.btn-success:hover:not(:disabled) {
+  background: #219a52;
+}
+
+.btn-danger {
+  background: #e74c3c;
+  color: white;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: #c0392b;
+}
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 12px;
+}
+
+/* =============================================================================
+   검사 카테고리 배지
+   ============================================================================= */
+.test-category-badge {
+  margin-bottom: 16px;
+}
+
+.category-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.category-badge.category-blood {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.category-badge.category-genetic {
+  background: #f3e5f5;
+  color: #7b1fa2;
+}
+
+.category-badge.category-protein {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.category-badge.category-other {
+  background: #fff3e0;
+  color: #ef6c00;
+}
+
+/* =============================================================================
+   유전자 검사 탭
+   ============================================================================= */
+.genetic-tab .section-card {
+  margin-bottom: 24px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.genetic-tab .section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.genetic-tab .section-header h4 {
+  margin: 0;
+  font-size: 16px;
+  color: #2c3e50;
+}
+
+.genetic-tab .form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.genetic-tab .form-grid .full-width {
+  grid-column: 1 / -1;
+}
+
+.genetic-tab .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.genetic-tab .form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.genetic-tab .form-group input,
+.genetic-tab .form-group select {
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.genetic-tab .form-group input:focus,
+.genetic-tab .form-group select:focus {
+  border-color: #7b1fa2;
+  outline: none;
+}
+
+/* 유전자 변이 테이블 */
+.genetic-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.genetic-table th,
+.genetic-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.genetic-table th {
+  background: #f8f9fa;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.genetic-table td {
+  font-size: 14px;
+}
+
+.genetic-table td.empty {
+  text-align: center;
+  color: #95a5a6;
+  padding: 40px;
+}
+
+.genetic-table input,
+.genetic-table select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.genetic-table input[type="checkbox"] {
+  width: auto;
+}
+
+.genetic-table .row-pathogenic {
+  background: #fce4ec;
+}
+
+/* 임상적 의의 배지 */
+.significance {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.significance-pathogenic {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.significance-likely_pathogenic {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.significance-uncertain {
+  background: #e2e3e5;
+  color: #383d41;
+}
+
+.significance-likely_benign {
+  background: #d4edda;
+  color: #155724;
+}
+
+.significance-benign {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
+/* =============================================================================
+   단백질 검사 탭
+   ============================================================================= */
+.protein-tab .section-card {
+  margin-bottom: 24px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.protein-tab .section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.protein-tab .section-header h4 {
+  margin: 0;
+  font-size: 16px;
+  color: #2c3e50;
+}
+
+.protein-tab .form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.protein-tab .form-group textarea:focus {
+  border-color: #2e7d32;
+  outline: none;
+}
+
+.protein-tab .readonly-text {
+  padding: 12px;
+  background: white;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 60px;
+}
+
+/* 단백질 마커 테이블 */
+.protein-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.protein-table th,
+.protein-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.protein-table th {
+  background: #f8f9fa;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.protein-table td {
+  font-size: 14px;
+}
+
+.protein-table td.empty {
+  text-align: center;
+  color: #95a5a6;
+  padding: 40px;
+}
+
+.protein-table input,
+.protein-table select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.protein-table input[type="checkbox"] {
+  width: auto;
+}
+
+.protein-table .row-abnormal {
+  background: #fff3cd;
+}
+
+/* =============================================================================
+   CSV 업로드 섹션
+   ============================================================================= */
+.csv-upload-section {
+  margin-bottom: 24px;
+  padding: 16px;
+  background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+  border-radius: 8px;
+  border: 1px solid #81c784;
+}
+
+.csv-upload-section .section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.csv-upload-section .section-header h4 {
+  margin: 0;
+  font-size: 14px;
+  color: #2e7d32;
+}
+
+.csv-upload-section label.btn {
+  cursor: pointer;
+}
+
+.csv-help {
+  margin-bottom: 12px;
+}
+
+.csv-help p {
+  margin: 0 0 4px 0;
+  font-size: 12px;
+  color: #558b2f;
+}
+
+.csv-help .csv-example {
+  font-family: 'Consolas', 'Monaco', monospace;
+  color: #33691e;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.csv-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: white;
+  border: 1px solid #a5d6a7;
+  border-radius: 6px;
+}
+
+.csv-icon {
+  font-size: 20px;
+}
+
+.csv-filename {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2e7d32;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.csv-count {
+  font-size: 13px;
+  color: #43a047;
+  font-weight: 500;
+  padding: 2px 8px;
+  background: #c8e6c9;
+  border-radius: 4px;
+}
+
+.csv-date {
+  font-size: 12px;
+  color: #7f8c8d;
+}
+
+/* result-actions */
+.result-actions {
+  display: flex;
+  gap: 8px;
+}

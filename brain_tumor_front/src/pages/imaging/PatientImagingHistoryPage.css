@@ -1,0 +1,321 @@
+.patient-imaging-history {
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.page-header h1 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.patient-info-panel {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.patient-info-panel h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #eee;
+}
+
+.patient-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.info-item label {
+  font-size: 12px;
+  color: #666;
+  font-weight: 500;
+}
+
+.info-item span {
+  font-size: 14px;
+  color: #333;
+}
+
+.info-item .highlight {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2196F3;
+}
+
+.study-timeline {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.study-timeline h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #eee;
+}
+
+.timeline-container {
+  position: relative;
+  padding-left: 30px;
+}
+
+.timeline-container::before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #e0e0e0;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+}
+
+.timeline-marker {
+  position: absolute;
+  left: -24px;
+  top: 8px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #2196F3;
+  border: 3px solid white;
+  box-shadow: 0 0 0 2px #2196F3;
+  z-index: 1;
+}
+
+.timeline-content {
+  background: #f9f9f9;
+  border-radius: 6px;
+  padding: 15px;
+  border-left: 3px solid #2196F3;
+}
+
+.study-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.study-date {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.study-badges {
+  display: flex;
+  gap: 8px;
+}
+
+.badge {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.badge-info {
+  background: #E3F2FD;
+  color: #1976D2;
+}
+
+.badge-warning {
+  background: #FFF3E0;
+  color: #F57C00;
+}
+
+.badge-primary {
+  background: #E1BEE7;
+  color: #7B1FA2;
+}
+
+.badge-success {
+  background: #C8E6C9;
+  color: #388E3C;
+}
+
+.badge-completed {
+  background: #B2DFDB;
+  color: #00796B;
+}
+
+.badge-danger {
+  background: #FFCDD2;
+  color: #C62828;
+}
+
+.badge-secondary {
+  background: #EEEEEE;
+  color: #757575;
+}
+
+.study-info {
+  margin-bottom: 15px;
+}
+
+.info-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.info-row .label {
+  color: #666;
+  font-weight: 500;
+  min-width: 80px;
+}
+
+.info-row .value {
+  color: #333;
+}
+
+.modality-badge {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.modality-ct {
+  background: #E3F2FD;
+  color: #1976D2;
+}
+
+.modality-mri {
+  background: #F3E5F5;
+  color: #7B1FA2;
+}
+
+.modality-pet {
+  background: #FFF3E0;
+  color: #F57C00;
+}
+
+.modality-x-ray {
+  background: #E0F2F1;
+  color: #00796B;
+}
+
+.report-summary {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #ddd;
+}
+
+.report-header {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.report-content {
+  font-size: 13px;
+}
+
+.report-field {
+  margin-bottom: 10px;
+}
+
+.report-field strong {
+  display: block;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.report-field p {
+  margin: 0;
+  color: #333;
+  line-height: 1.6;
+}
+
+.tumor-alert {
+  background: #FFEBEE;
+  color: #C62828;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 13px;
+  margin-top: 10px;
+  border-left: 3px solid #C62828;
+}
+
+.study-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.btn-secondary,
+.btn-primary {
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-secondary {
+  background: #fff;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.btn-secondary:hover {
+  background: #f5f5f5;
+}
+
+.btn-primary {
+  background: #2196F3;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #1976D2;
+}
+
+.empty-message,
+.error-message {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  font-size: 14px;
+}
+
+.error-message {
+  color: #C62828;
+  background: #FFEBEE;
+  border-radius: 4px;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  font-size: 16px;
+  color: #666;
+}

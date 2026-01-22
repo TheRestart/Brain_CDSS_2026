@@ -1,0 +1,362 @@
+/* DicomViewerPopup.css */
+
+.dicom-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  background: #12151a;
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+.dicom-popup-container {
+  width: 100%;
+  height: 100%;
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #12151a;
+  border: none;
+  border-radius: 0;
+
+  overflow: hidden;
+}
+
+.dicom-popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 16px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.3);
+
+  flex-shrink: 0;
+}
+
+.dicom-popup-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* 뷰어 탭 */
+.viewer-tabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.viewer-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.viewer-tab:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.viewer-tab.active {
+  background: rgba(66, 245, 141, 0.15);
+  border-color: rgba(66, 245, 141, 0.4);
+  color: #42f58d;
+}
+
+.viewer-tab .tab-close {
+  font-size: 14px;
+  line-height: 1;
+  opacity: 0.6;
+  transition: opacity 0.15s;
+}
+
+.viewer-tab .tab-close:hover {
+  opacity: 1;
+  color: #ff6b6b;
+}
+
+.viewer-tab.add-tab {
+  padding: 6px 10px;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.viewer-tab.add-tab:hover {
+  color: #42f58d;
+  background: rgba(66, 245, 141, 0.1);
+}
+
+/* All Play 버튼 */
+.all-play-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #42f58d;
+  background: rgba(66, 245, 141, 0.12);
+  border: 1px solid rgba(66, 245, 141, 0.35);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.all-play-btn:hover {
+  background: rgba(66, 245, 141, 0.2);
+  border-color: rgba(66, 245, 141, 0.5);
+}
+
+.all-play-btn.playing {
+  color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.15);
+  border-color: rgba(255, 107, 107, 0.4);
+  animation: allPlayPulse 1s ease-in-out infinite;
+}
+
+.all-play-btn.playing:hover {
+  background: rgba(255, 107, 107, 0.25);
+}
+
+@keyframes allPlayPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.75; }
+}
+
+/* Set 버튼: 모든 뷰어 인스턴스=0 */
+.all-set-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #4da6ff;
+  background: rgba(77, 166, 255, 0.12);
+  border: 1px solid rgba(77, 166, 255, 0.35);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.all-set-btn:hover {
+  background: rgba(77, 166, 255, 0.2);
+  border-color: rgba(77, 166, 255, 0.5);
+}
+
+.dicom-popup-close {
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 24px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.7);
+
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.dicom-popup-close:hover {
+  background: rgba(255, 80, 80, 0.2);
+  border-color: rgba(255, 80, 80, 0.4);
+  color: #ff6b6b;
+}
+
+.dicom-popup-body {
+  flex: 1;
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+
+  min-height: 0;
+  overflow: hidden;
+}
+
+.dicom-popup-left {
+  flex-shrink: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow-x: hidden; /* 가로 스크롤바 제거 */
+  overflow-y: auto;   /* 세로 스크롤바 유지 */
+  transition: width 0.05s ease;
+}
+
+/* 스플리터 핸들 */
+.splitter-handle {
+  width: 12px;
+  flex-shrink: 0;
+  cursor: col-resize;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+}
+
+.splitter-handle:hover .splitter-line,
+.splitter-handle.active .splitter-line {
+  background: rgba(66, 245, 141, 0.6);
+  width: 4px;
+}
+
+.splitter-line {
+  width: 2px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  transition: all 0.15s ease;
+}
+
+.dicom-popup-body.dragging {
+  cursor: col-resize;
+  user-select: none;
+}
+
+.dicom-popup-body.dragging .dicom-popup-left,
+.dicom-popup-body.dragging .dicom-popup-right {
+  pointer-events: none;
+}
+
+.dicom-popup-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-x: hidden; /* 가로 스크롤바만 제거 */
+  min-width: 0;
+  /* 컨텐츠가 부모를 초과하도록 최소 높이 설정 */
+  min-height: max-content;
+  padding-bottom: 16px;
+}
+
+.dicom-popup-right {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* 다중 뷰어 그리드 */
+.viewer-grid {
+  flex: 1;
+  display: grid;
+  gap: 8px;
+  min-height: 0;
+}
+
+.viewer-grid.grid-2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.viewer-grid.grid-3 {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.viewer-grid.grid-3 .viewer-cell:nth-child(3) {
+  grid-column: span 2;
+}
+
+.viewer-grid.grid-4 {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.viewer-cell {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.15s ease;
+}
+
+.viewer-cell.active {
+  border-color: rgba(66, 245, 141, 0.5);
+}
+
+.viewer-cell:not(.active):hover {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.viewer-cell-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.4);
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  min-width: 0; /* flex 내 ellipsis 동작을 위해 필요 */
+}
+
+.viewer-cell.active .viewer-cell-header {
+  background: rgba(66, 245, 141, 0.1);
+  color: #42f58d;
+}
+
+.viewer-cell-header .series-name {
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
+}
+
+/* 공통 말줄임 유틸리티 클래스 */
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 여러 줄 말줄임 */
+.text-ellipsis-multiline {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

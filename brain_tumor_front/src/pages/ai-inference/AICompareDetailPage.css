@@ -1,0 +1,345 @@
+.ai-compare-detail-page {
+  padding: 24px;
+  background-color: #f5f5f5;
+  min-height: 100%;
+}
+
+/* 헤더 */
+.ai-compare-detail__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.ai-compare-detail__header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ai-compare-detail__back-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.ai-compare-detail__back-icon:hover {
+  background: #f5f5f5;
+  border-color: #1976d2;
+  color: #1976d2;
+}
+
+.ai-compare-detail__title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin: 0;
+}
+
+.ai-compare-detail__subtitle {
+  font-size: 14px;
+  color: #666;
+  margin: 4px 0 0 0;
+}
+
+.ai-compare-detail__view-toggle {
+  display: flex;
+  gap: 4px;
+  background: white;
+  padding: 4px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.ai-compare-detail__toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.ai-compare-detail__toggle-btn:hover {
+  background: #f5f5f5;
+}
+
+.ai-compare-detail__toggle-btn.active {
+  background: #1976d2;
+  color: white;
+}
+
+.ai-compare-detail__toggle-btn .material-icons {
+  font-size: 18px;
+}
+
+/* 기간 정보 */
+.ai-compare-detail__period {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  background: white;
+  border-radius: 12px;
+  padding: 16px 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.ai-compare-detail__period-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.ai-compare-detail__period-label {
+  font-size: 12px;
+  color: #999;
+}
+
+.ai-compare-detail__period-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.ai-compare-detail__period-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #1976d2;
+}
+
+.ai-compare-detail__period-arrow .material-icons {
+  font-size: 24px;
+}
+
+.ai-compare-detail__period-days {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* 섹션 */
+.ai-compare-detail__section {
+  margin-bottom: 24px;
+}
+
+.ai-compare-detail__section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin: 0 0 12px 0;
+}
+
+.ai-compare-detail__chart-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* 변화 카드 그리드 */
+.ai-compare-detail__changes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .ai-compare-detail__changes-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ai-compare-detail__change-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  border-left: 4px solid;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+}
+
+.ai-compare-detail__change-label {
+  font-size: 13px;
+  color: #666;
+}
+
+.ai-compare-detail__change-values {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.ai-compare-detail__change-diff {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+.ai-compare-detail__change-diff.increase {
+  color: #c62828;
+}
+
+.ai-compare-detail__change-diff.decrease {
+  color: #2e7d32;
+}
+
+.ai-compare-detail__change-percent {
+  font-size: 14px;
+  color: #666;
+}
+
+.ai-compare-detail__change-percent.increase {
+  color: #c62828;
+}
+
+.ai-compare-detail__change-percent.decrease {
+  color: #2e7d32;
+}
+
+.ai-compare-detail__change-icon {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+.ai-compare-detail__change-icon .material-icons {
+  font-size: 28px;
+  color: #ccc;
+}
+
+.ai-compare-detail__change-icon .material-icons.increase {
+  color: #ef5350;
+}
+
+.ai-compare-detail__change-icon .material-icons.decrease {
+  color: #66bb6a;
+}
+
+/* 등급 비교 */
+.ai-compare-detail__grade-compare {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.ai-compare-detail__grade-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.ai-compare-detail__grade-label {
+  font-size: 12px;
+  color: #999;
+}
+
+.ai-compare-detail__grade-value {
+  font-size: 32px;
+  font-weight: 700;
+  padding: 8px 24px;
+  border-radius: 8px;
+}
+
+.ai-compare-detail__grade-value.grade-G2 {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.ai-compare-detail__grade-value.grade-G3 {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.ai-compare-detail__grade-value.grade-G4 {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.ai-compare-detail__grade-arrow {
+  font-size: 24px;
+  color: #999;
+}
+
+.ai-compare-detail__grade-changed {
+  position: absolute;
+  right: 24px;
+  padding: 6px 12px;
+  background: #fff3e0;
+  color: #e65100;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* 로딩/에러 */
+.ai-compare-detail__loading,
+.ai-compare-detail__error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  color: #999;
+  gap: 16px;
+}
+
+.ai-compare-detail__error .material-icons {
+  font-size: 64px;
+  color: #ccc;
+}
+
+.ai-compare-detail__spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #e0e0e0;
+  border-top-color: #1976d2;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ai-compare-detail__back-btn {
+  margin-top: 8px;
+  padding: 10px 20px;
+  background: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.ai-compare-detail__back-btn:hover {
+  background: #1565c0;
+}

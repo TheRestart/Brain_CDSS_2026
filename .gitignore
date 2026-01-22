@@ -1,0 +1,183 @@
+# ============================================
+# Brain Tumor CDSS Project - .gitignore
+# ============================================
+
+# ============================================
+# 환경 설정 파일 (민감한 정보 포함)
+# ============================================
+.env
+.env.*
+*.env
+!.env.example
+!.env.sample
+
+# ============================================
+# Python
+# ============================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# 가상환경
+venv/
+.venv/
+env/
+ENV/
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Pytest
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# ============================================
+# Node.js / React / Vite
+# ============================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# 빌드 결과물
+brain_tumor_front/dist/
+brain_tumor_front/build/
+
+# Vite
+*.local
+
+# ============================================
+# AI 모델 파일 (대용량)
+# ============================================
+*.pt
+*.pth
+*.onnx
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+*.joblib
+*.safetensors
+*.bin
+modAI/model/*.pt
+modAI/model/*.pth
+modAI/model/*.onnx
+
+# ============================================
+# 환자 데이터 (민감한 의료 데이터)
+# ============================================
+patient_data/
+
+# ============================================
+# CDSS Storage (런타임 생성 데이터)
+# ============================================
+CDSS_STORAGE/
+
+# ============================================
+# 미디어 & 업로드 파일
+# ============================================
+brain_tumor_back/media/
+modAI/temp/
+
+# ============================================
+# 데이터베이스
+# ============================================
+*.db
+*.sqlite3
+*.sqlite
+
+# ============================================
+# 로그 파일
+# ============================================
+*.log
+logs/
+*.log.*
+
+# ============================================
+# IDE & 에디터
+# ============================================
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+*.sublime-workspace
+*.sublime-project
+
+# ============================================
+# OS 생성 파일
+# ============================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# ============================================
+# Docker
+# ============================================
+docker/volumes/
+docker/data/
+
+# ============================================
+# 임시 파일
+# ============================================
+tmp/
+temp/
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# ============================================
+# Claude Code 로컬 설정
+# ============================================
+.claude/
+
+# ============================================
+# 기타
+# ============================================
+nul
+*.cache
+.cache/
+
+# 정적 파일 (collectstatic으로 생성)
+brain_tumor_back/staticfiles/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Celery
+celerybeat-schedule
+celerybeat.pid

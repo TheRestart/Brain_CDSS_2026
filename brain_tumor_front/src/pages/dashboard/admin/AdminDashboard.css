@@ -1,0 +1,496 @@
+.admin-dashboard {
+  padding: 20px 24px;
+}
+
+.admin-dashboard h2 {
+  margin-bottom: 24px;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+/* 관리 버튼 영역 */
+.admin-dashboard .admin-actions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.admin-dashboard .action-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-dashboard .action-btn:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.admin-dashboard .action-btn .btn-icon {
+  font-size: 20px;
+}
+
+.admin-dashboard .action-btn .btn-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: #000;
+}
+
+.admin-dashboard .summary-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.admin-dashboard .summary-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.admin-dashboard .summary-card.users {
+  border-left: 4px solid var(--primary);
+}
+
+.admin-dashboard .summary-card.patients {
+  border-left: 4px solid var(--success);
+}
+
+.admin-dashboard .summary-card.ocs {
+  border-left: 4px solid var(--info);
+}
+
+.admin-dashboard .card-icon {
+  font-size: 32px;
+}
+
+.admin-dashboard .card-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-dashboard .card-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.admin-dashboard .card-label {
+  font-size: 14px;
+  color: var(--text-sub);
+}
+
+.admin-dashboard .card-sub {
+  font-size: 12px;
+  color: var(--text-sub);
+  margin-top: 4px;
+}
+
+.admin-dashboard .dashboard-main-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.admin-dashboard .dashboard-section {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+  box-shadow: var(--shadow-card);
+  margin-bottom: 24px;
+}
+
+.admin-dashboard .dashboard-main-row .dashboard-section {
+  margin-bottom: 0;
+}
+
+.admin-dashboard .dashboard-section h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--text-main);
+}
+
+/* Section Header with Button */
+.admin-dashboard .section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.admin-dashboard .section-header h3 {
+  margin-bottom: 0;
+}
+
+.admin-dashboard .manage-btn {
+  padding: 6px 12px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-dashboard .manage-btn:hover {
+  background: var(--primary-dark, #2563eb);
+  transform: translateY(-1px);
+}
+
+/* 관리 도구 그리드 */
+.admin-dashboard .admin-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+}
+
+.admin-dashboard .admin-tool-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px 12px;
+  background: var(--bg-main);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-dashboard .admin-tool-btn:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.admin-dashboard .admin-tool-btn:hover .tool-icon,
+.admin-dashboard .admin-tool-btn:hover .tool-label {
+  color: white;
+}
+
+.admin-dashboard .tool-icon {
+  font-size: 24px;
+}
+
+.admin-dashboard .tool-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-main);
+  text-align: center;
+}
+
+@media (max-width: 1200px) {
+  .admin-dashboard .admin-tools-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-dashboard .admin-tools-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Role List Table */
+.admin-dashboard .role-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.admin-dashboard .role-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-dashboard .role-table th,
+.admin-dashboard .role-table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.admin-dashboard .role-table th {
+  background: var(--bg-main);
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text-sub);
+}
+
+.admin-dashboard .role-table td {
+  font-size: 14px;
+  color: var(--text-main);
+}
+
+.admin-dashboard .role-table tr.clickable {
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.admin-dashboard .role-table tr.clickable:hover {
+  background: var(--primary-light, #eff6ff);
+}
+
+/* Pagination */
+.admin-dashboard .pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.admin-dashboard .page-btn {
+  padding: 6px 12px;
+  background: var(--bg-main);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-dashboard .page-btn:hover:not(:disabled) {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.admin-dashboard .page-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.admin-dashboard .page-info {
+  font-size: 13px;
+  color: var(--text-sub);
+}
+
+.admin-dashboard .status-grid,
+.admin-dashboard .role-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.admin-dashboard .status-item,
+.admin-dashboard .role-item {
+  padding: 8px 16px;
+  background: var(--bg-main);
+  border-radius: var(--radius-md);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.admin-dashboard .status-label,
+.admin-dashboard .role-name {
+  color: var(--text-main);
+}
+
+.admin-dashboard .status-count,
+.admin-dashboard .role-count {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+/* 상태별 색상 */
+.admin-dashboard .status-item.status-ordered {
+  background: #fef9e6;
+  border-left: 3px solid #e67e22;
+}
+
+.admin-dashboard .status-item.status-ordered .status-label,
+.admin-dashboard .status-item.status-ordered .status-count {
+  color: #e67e22;
+}
+
+.admin-dashboard .status-item.status-accepted {
+  background: #fef4e6;
+  border-left: 3px solid #f39c12;
+}
+
+.admin-dashboard .status-item.status-accepted .status-label,
+.admin-dashboard .status-item.status-accepted .status-count {
+  color: #c47f10;
+}
+
+.admin-dashboard .status-item.status-in_progress {
+  background: #e8f4fc;
+  border-left: 3px solid #3498db;
+}
+
+.admin-dashboard .status-item.status-in_progress .status-label,
+.admin-dashboard .status-item.status-in_progress .status-count {
+  color: #2980b9;
+}
+
+.admin-dashboard .status-item.status-result_ready {
+  background: #f3e8fc;
+  border-left: 3px solid #9b59b6;
+}
+
+.admin-dashboard .status-item.status-result_ready .status-label,
+.admin-dashboard .status-item.status-result_ready .status-count {
+  color: #8e44ad;
+}
+
+.admin-dashboard .status-item.status-confirmed {
+  background: #e8f8f0;
+  border-left: 3px solid #27ae60;
+}
+
+.admin-dashboard .status-item.status-confirmed .status-label,
+.admin-dashboard .status-item.status-confirmed .status-count {
+  color: #1e8449;
+}
+
+.admin-dashboard .status-item.status-cancelled {
+  background: #f5f5f5;
+  border-left: 3px solid #95a5a6;
+}
+
+.admin-dashboard .status-item.status-cancelled .status-label,
+.admin-dashboard .status-item.status-cancelled .status-count {
+  color: #7f8c8d;
+}
+
+/* Clickable elements */
+.admin-dashboard .summary-card.clickable,
+.admin-dashboard .role-item.clickable,
+.admin-dashboard .status-item.clickable {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-dashboard .summary-card.clickable:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.admin-dashboard .role-item.clickable:hover,
+.admin-dashboard .role-item.clickable.active {
+  background: var(--primary);
+  color: white;
+  transform: scale(1.02);
+}
+
+.admin-dashboard .role-item.clickable:hover .role-name,
+.admin-dashboard .role-item.clickable:hover .role-count,
+.admin-dashboard .role-item.clickable.active .role-name,
+.admin-dashboard .role-item.clickable.active .role-count {
+  color: white;
+}
+
+.admin-dashboard .status-item.clickable:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* 역할별 사용자 리스트 */
+.admin-dashboard .role-user-list {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--card-border);
+}
+
+.admin-dashboard .role-user-list h4 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--text-main);
+}
+
+.admin-dashboard .user-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.admin-dashboard .user-table th,
+.admin-dashboard .user-table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.admin-dashboard .user-table th {
+  background: var(--bg-main);
+  font-weight: 600;
+  color: var(--text-sub);
+}
+
+.admin-dashboard .user-table td {
+  color: var(--text-main);
+}
+
+.admin-dashboard .user-status {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.admin-dashboard .user-status.active {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.admin-dashboard .user-status.inactive {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.admin-dashboard .loading-small,
+.admin-dashboard .empty-small {
+  padding: 20px;
+  text-align: center;
+  color: var(--text-sub);
+  font-size: 14px;
+}
+
+/* loading / error */
+.admin-dashboard .loading,
+.admin-dashboard .error {
+  padding: 40px;
+  text-align: center;
+  color: var(--text-sub);
+}
+
+@media (max-width: 1200px) {
+  .admin-dashboard .summary-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .admin-dashboard .dashboard-main-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-dashboard .summary-cards {
+    grid-template-columns: 1fr;
+  }
+}

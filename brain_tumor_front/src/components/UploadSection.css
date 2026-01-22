@@ -1,0 +1,415 @@
+/* src/components/UploadSection.css */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.uploadCard {
+  width: 100%;
+  min-width: 0;
+  min-height: 280px; /* 최소 높이 부여 - 스크롤 유도 */
+
+  /* ✅ Selection 블럭(.selCard)과 동일한 톤 */
+  background: #181b21;
+  border: 1px solid #2a2f3a;
+  border-radius: 14px;
+  padding: 14px;
+  color: #e6e6e6;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  overflow: hidden; /* 스크롤바 제거 */
+}
+
+.uploadCardHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.uploadTitle {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.uploadHint {
+  margin: 0;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.70);
+}
+
+.uploadGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  /* ✅ 중요: 스크롤바 제거 - ellipsis 처리 */
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.80);
+}
+
+.input {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.35);
+  color: rgba(255, 255, 255, 0.95);
+  outline: none;
+  /* ellipsis 처리 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.input:disabled {
+  opacity: 0.65;
+}
+
+.input.mono {
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 12px;
+  color: rgba(100, 200, 255, 0.90);
+}
+
+.file {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px dashed rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.25);
+  color: rgba(255, 255, 255, 0.90);
+}
+
+.metaRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.75);
+  min-width: 0;
+}
+
+.metaRow span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.metaRow.subtle {
+  opacity: 0.85;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: nowrap;
+}
+
+.btn {
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.10);
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.btn.ghost {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.status {
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.status.info {
+  background: rgba(100, 170, 255, 0.12);
+  border: 1px solid rgba(100, 170, 255, 0.22);
+  color: rgba(180, 220, 255, 0.95);
+}
+
+.status.success {
+  background: rgba(66, 245, 141, 0.12);
+  border: 1px solid rgba(66, 245, 141, 0.22);
+  color: rgba(66, 245, 141, 0.95);
+}
+
+.status.error {
+  background: rgba(255, 90, 90, 0.12);
+  border: 1px solid rgba(255, 90, 90, 0.22);
+  color: rgba(255, 140, 140, 0.95);
+}
+
+/* OCS 연동 정보 박스 */
+.ocsInfoBox {
+  background: rgba(100, 170, 255, 0.08);
+  border: 1px solid rgba(100, 170, 255, 0.20);
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 14px;
+}
+
+.ocsInfoRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+  font-size: 12px;
+}
+
+.ocsInfoRow:not(:last-child) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.ocsLabel {
+  color: rgba(255, 255, 255, 0.60);
+  font-weight: 600;
+}
+
+.ocsValue {
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 700;
+  text-align: right;
+}
+
+.ocsValue.mono {
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 11px;
+  color: rgba(100, 200, 255, 0.90);
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ocsInfoRow.hint {
+  border-bottom: none;
+  padding-top: 8px;
+}
+
+.ocsHint {
+  font-size: 11px;
+  color: rgba(255, 200, 100, 0.80);
+  font-style: italic;
+}
+
+/* 입력 경고 스타일 (한글 입력 시) */
+.input.input-warning {
+  border-color: rgba(255, 180, 80, 0.6);
+  background: rgba(255, 180, 80, 0.08);
+}
+
+.metaRow.warning {
+  color: rgba(255, 180, 80, 0.95);
+  font-weight: 600;
+}
+
+/* 경고 상태 (DICOM 아닌 파일 제외) */
+.status.warning {
+  background: rgba(255, 180, 80, 0.12);
+  border: 1px solid rgba(255, 180, 80, 0.25);
+  color: rgba(255, 200, 120, 0.95);
+}
+
+/* 시리즈 구성 표시 */
+.seriesBreakdown {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.seriesLabel {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.60);
+  font-weight: 600;
+}
+
+.seriesTag {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  background: rgba(100, 200, 255, 0.15);
+  border: 1px solid rgba(100, 200, 255, 0.25);
+  color: rgba(150, 220, 255, 0.95);
+}
+
+/* 기존 업로드 Study 정보 박스 */
+.existingStudyBox {
+  background: rgba(255, 150, 100, 0.08);
+  border: 1px solid rgba(255, 150, 100, 0.25);
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 14px;
+}
+
+.existingStudyHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.existingStudyTitle {
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255, 180, 120, 0.95);
+}
+
+.existingStudyContent {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.existingStudyRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+}
+
+.existingLabel {
+  color: rgba(255, 255, 255, 0.60);
+  font-weight: 600;
+}
+
+.existingValue {
+  color: rgba(255, 255, 255, 0.90);
+  font-weight: 600;
+  text-align: right;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.existingValue.mono {
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 10px;
+  color: rgba(255, 180, 120, 0.90);
+}
+
+.existingStudyHint {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 10px;
+  color: rgba(255, 150, 100, 0.80);
+  font-style: italic;
+}
+
+/* 삭제 버튼 */
+.btn.btnDelete {
+  height: 28px;
+  padding: 0 10px;
+  font-size: 11px;
+  background: rgba(255, 80, 80, 0.15);
+  border: 1px solid rgba(255, 80, 80, 0.30);
+  color: rgba(255, 120, 120, 0.95);
+}
+
+.btn.btnDelete:hover:not(:disabled) {
+  background: rgba(255, 80, 80, 0.25);
+  border-color: rgba(255, 80, 80, 0.45);
+}
+
+.btn.btnDelete:disabled {
+  opacity: 0.45;
+}
+
+/* ===== 담당자 아님 안내 ===== */
+.notMyWorkCard {
+  display: flex;
+  flex-direction: column;
+  min-height: 280px;
+}
+
+.notMyWorkContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px 16px;
+  text-align: center;
+}
+
+.notMyWorkIcon {
+  font-size: 48px;
+  opacity: 0.8;
+}
+
+.notMyWorkMessage {
+  font-size: 18px;
+  font-weight: 800;
+  color: rgba(255, 120, 120, 0.95);
+}
+
+.notMyWorkWorker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  margin-top: 4px;
+}
+
+.workerLabel {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.60);
+  font-weight: 600;
+}
+
+.workerName {
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(100, 200, 255, 0.95);
+}
+
+.notMyWorkHint {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.55);
+  margin-top: 8px;
+}

@@ -1,0 +1,932 @@
+/* RIS 영상 결과 업로드 페이지 스타일 */
+
+.ris-upload-page {
+  padding: 20px;
+  /* max-width: 900px; */
+}
+
+/* 비활성화 페이지 스타일 */
+.ris-upload-page.disabled-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 200px);
+}
+
+.ris-upload-page .disabled-notice {
+  text-align: center;
+  padding: 60px 40px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  max-width: 500px;
+}
+
+.ris-upload-page .disabled-notice .notice-icon {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.ris-upload-page .disabled-notice h2 {
+  margin: 0 0 16px 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.ris-upload-page .disabled-notice p {
+  margin: 0 0 12px 0;
+  font-size: 15px;
+  color: #6c757d;
+  line-height: 1.6;
+}
+
+.ris-upload-page .disabled-notice .notice-link {
+  color: #3498db;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.ris-upload-page .disabled-notice .notice-link:hover {
+  text-decoration: underline;
+}
+
+.ris-upload-page .disabled-notice .btn-go-ocs {
+  display: inline-block;
+  margin-top: 24px;
+  padding: 14px 32px;
+  background: #3498db;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 15px;
+  transition: background 0.2s;
+}
+
+.ris-upload-page .disabled-notice .btn-go-ocs:hover {
+  background: #2980b9;
+}
+
+/* .ris-upload-page .page-header {
+  margin-bottom: 24px;
+} */
+
+.ris-upload-page .page-header h2 {
+  margin: 0 0 4px 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.ris-upload-page .page-header .subtitle {
+  color: #6c757d;
+  font-size: 14px;
+}
+
+/* 모드 선택 섹션 */
+.ris-upload-page .mode-select-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 24px;
+}
+
+.ris-upload-page .mode-select-section h3 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.ris-upload-page .mode-options {
+  display: flex;
+  gap: 16px;
+}
+
+.ris-upload-page .mode-option {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  border: 2px solid #dee2e6;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: #fff;
+}
+
+.ris-upload-page .mode-option:hover {
+  border-color: #9b59b6;
+  background: #faf5fc;
+}
+
+.ris-upload-page .mode-option.selected {
+  border-color: #9b59b6;
+  background: #f5eef8;
+}
+
+.ris-upload-page .mode-option input[type="radio"] {
+  margin-top: 2px;
+  width: 18px;
+  height: 18px;
+  accent-color: #9b59b6;
+  cursor: pointer;
+}
+
+.ris-upload-page .mode-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ris-upload-page .mode-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #212529;
+}
+
+.ris-upload-page .mode-desc {
+  font-size: 13px;
+  color: #6c757d;
+}
+
+/* 선택 섹션 (환자/OCS 선택 공통) */
+.ris-upload-page .selection-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 24px;
+}
+
+.ris-upload-page .selection-section h3 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.ris-upload-page .selection-section .required {
+  color: #dc3545;
+}
+
+.ris-upload-page .select-container {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.ris-upload-page .search-input {
+  flex: 1;
+  max-width: 300px;
+  padding: 10px 12px;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.ris-upload-page .search-input:focus {
+  outline: none;
+  border-color: #9b59b6;
+  box-shadow: 0 0 0 3px rgba(155, 89, 182, 0.15);
+}
+
+.ris-upload-page .main-select {
+  flex: 2;
+  padding: 10px 12px;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  font-size: 14px;
+  background: #fff;
+}
+
+.ris-upload-page .main-select:focus {
+  outline: none;
+  border-color: #9b59b6;
+  box-shadow: 0 0 0 3px rgba(155, 89, 182, 0.15);
+}
+
+/* 선택된 OCS 정보 표시 */
+.ris-upload-page .selected-ocs-info {
+  margin-top: 16px;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #9b59b6;
+}
+
+.ris-upload-page .selected-ocs-info .info-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.ris-upload-page .selected-ocs-info .info-row:last-child {
+  margin-bottom: 0;
+}
+
+.ris-upload-page .selected-ocs-info .label {
+  font-weight: 500;
+  color: #495057;
+  min-width: 80px;
+}
+
+.ris-upload-page .selected-ocs-info .value {
+  color: #212529;
+}
+
+/* 환자 모드 선택 */
+.ris-upload-page .patient-mode-options {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.ris-upload-page .patient-mode-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px;
+  color: #495057;
+}
+
+.ris-upload-page .patient-mode-option:hover {
+  border-color: #9b59b6;
+  background: #faf5fc;
+}
+
+.ris-upload-page .patient-mode-option.selected {
+  border-color: #9b59b6;
+  background: #f5eef8;
+  color: #8e44ad;
+}
+
+.ris-upload-page .patient-mode-option input[type="radio"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #9b59b6;
+  cursor: pointer;
+}
+
+/* 새 환자 등록 폼 */
+.ris-upload-page .new-patient-form {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.ris-upload-page .new-patient-form .form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.ris-upload-page .form-hint {
+  margin: 12px 0 0 0;
+  font-size: 13px;
+  color: #6c757d;
+  font-style: italic;
+}
+
+/* 환자 선택 섹션 */
+.ris-upload-page .patient-select-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 24px;
+}
+
+.ris-upload-page .patient-select-section h3 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.ris-upload-page .patient-select-section .required {
+  color: #dc3545;
+}
+
+.ris-upload-page .patient-select-container {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.ris-upload-page .patient-search-input {
+  flex: 1;
+  max-width: 300px;
+  padding: 10px 12px;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.ris-upload-page .patient-search-input:focus {
+  outline: none;
+  border-color: #9b59b6;
+  box-shadow: 0 0 0 3px rgba(155, 89, 182, 0.15);
+}
+
+.ris-upload-page .patient-select {
+  flex: 2;
+  padding: 10px 12px;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  font-size: 14px;
+  background: #fff;
+}
+
+.ris-upload-page .patient-select:focus {
+  outline: none;
+  border-color: #9b59b6;
+  box-shadow: 0 0 0 3px rgba(155, 89, 182, 0.15);
+}
+
+.ris-upload-page .job-type-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ris-upload-page .job-type-container label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #495057;
+}
+
+.ris-upload-page .job-type-select {
+  padding: 10px 12px;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  font-size: 14px;
+  background: #fff;
+  min-width: 200px;
+}
+
+.ris-upload-page .job-type-select:focus {
+  outline: none;
+  border-color: #9b59b6;
+  box-shadow: 0 0 0 3px rgba(155, 89, 182, 0.15);
+}
+
+.ris-upload-page .upload-btn:disabled {
+  background: #adb5bd;
+  cursor: not-allowed;
+}
+
+/* 업로드 섹션 */
+.ris-upload-page .upload-section {
+  margin-bottom: 32px;
+}
+
+.ris-upload-page .upload-dropzone {
+  border: 2px dashed #dee2e6;
+  border-radius: 12px;
+  padding: 48px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: #f8f9fa;
+}
+
+.ris-upload-page .upload-dropzone:hover {
+  border-color: #9b59b6;
+  background: #faf5fc;
+}
+
+.ris-upload-page .upload-dropzone.drag-active {
+  border-color: #9b59b6;
+  background: #f5eef8;
+}
+
+.ris-upload-page .upload-dropzone.has-file {
+  border-style: solid;
+  background: #fff;
+}
+
+.ris-upload-page .upload-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.ris-upload-page .upload-text {
+  font-size: 16px;
+  font-weight: 500;
+  color: #495057;
+  margin: 0 0 8px 0;
+}
+
+.ris-upload-page .upload-hint {
+  font-size: 13px;
+  color: #6c757d;
+  margin: 0;
+}
+
+/* 파일 정보 */
+.ris-upload-page .file-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.ris-upload-page .file-icon {
+  font-size: 40px;
+}
+
+.ris-upload-page .file-details {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.ris-upload-page .file-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: #212529;
+}
+
+.ris-upload-page .file-size {
+  font-size: 13px;
+  color: #6c757d;
+}
+
+/* 업로드 진행률 */
+.ris-upload-page .upload-progress {
+  margin-top: 24px;
+  width: 100%;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ris-upload-page .progress-bar {
+  height: 8px;
+  background: #e9ecef;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.ris-upload-page .progress-fill {
+  height: 100%;
+  background: #9b59b6;
+  transition: width 0.3s ease;
+}
+
+.ris-upload-page .progress-text {
+  font-size: 14px;
+  color: #495057;
+}
+
+/* 업로드 버튼 */
+.ris-upload-page .upload-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.ris-upload-page .upload-btn,
+.ris-upload-page .cancel-btn {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.ris-upload-page .upload-btn {
+  background: #9b59b6;
+  color: #fff;
+}
+
+.ris-upload-page .upload-btn:hover {
+  background: #8e44ad;
+}
+
+.ris-upload-page .cancel-btn {
+  background: #6c757d;
+  color: #fff;
+}
+
+.ris-upload-page .cancel-btn:hover {
+  background: #5a6268;
+}
+
+/* 로그 섹션 */
+.ris-upload-page .log-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 24px;
+}
+
+.ris-upload-page .log-section h3 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.ris-upload-page .empty-log {
+  padding: 32px;
+  text-align: center;
+  color: #6c757d;
+  font-size: 14px;
+}
+
+.ris-upload-page .log-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ris-upload-page .log-table th {
+  background: #f8f9fa;
+  padding: 10px 12px;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 600;
+  color: #495057;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.ris-upload-page .log-table td {
+  padding: 10px 12px;
+  font-size: 13px;
+  color: #212529;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.ris-upload-page .log-row.success {
+  background: #f8fff8;
+}
+
+.ris-upload-page .log-row.error {
+  background: #fff8f8;
+}
+
+.ris-upload-page .log-row.warning {
+  background: #fffdf8;
+}
+
+.ris-upload-page .log-time {
+  color: #6c757d;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.ris-upload-page .log-filename {
+  font-weight: 500;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ris-upload-page .log-size {
+  color: #6c757d;
+  white-space: nowrap;
+}
+
+.ris-upload-page .log-message {
+  color: #495057;
+}
+
+.ris-upload-page .status-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.ris-upload-page .status-badge.success {
+  background: #d4edda;
+  color: #155724;
+}
+
+.ris-upload-page .status-badge.error {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.ris-upload-page .status-badge.warning {
+  background: #fff3cd;
+  color: #856404;
+}
+
+/* 가이드 섹션 */
+.ris-upload-page .guide-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.ris-upload-page .guide-section h3 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.ris-upload-page .guide-content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.ris-upload-page .guide-item {
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.ris-upload-page .guide-item h4 {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #495057;
+}
+
+.ris-upload-page .guide-item p {
+  margin: 0;
+  font-size: 13px;
+  color: #6c757d;
+  line-height: 1.5;
+}
+
+/* 추가 정보 입력 섹션 */
+.ris-upload-page .additional-info-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 24px;
+}
+
+.ris-upload-page .section-header-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 4px 0;
+  user-select: none;
+}
+
+.ris-upload-page .section-header-toggle:hover {
+  opacity: 0.8;
+}
+
+.ris-upload-page .section-header-toggle h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ris-upload-page .toggle-icon {
+  font-size: 12px;
+  color: #6c757d;
+}
+
+.ris-upload-page .toggle-hint {
+  font-size: 13px;
+  color: #6c757d;
+}
+
+.ris-upload-page .additional-info-form {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #e9ecef;
+}
+
+.ris-upload-page .info-group {
+  margin-bottom: 24px;
+}
+
+.ris-upload-page .info-group:last-child {
+  margin-bottom: 0;
+}
+
+.ris-upload-page .info-group h4 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #495057;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.ris-upload-page .form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.ris-upload-page .form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ris-upload-page .form-field.full-width {
+  grid-column: 1 / -1;
+}
+
+.ris-upload-page .form-field label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #495057;
+}
+
+.ris-upload-page .form-field input[type="text"],
+.ris-upload-page .form-field input[type="tel"],
+.ris-upload-page .form-field input[type="date"],
+.ris-upload-page .form-field select {
+  padding: 10px 12px;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #212529;
+  background: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.ris-upload-page .form-field input[type="text"]:focus,
+.ris-upload-page .form-field input[type="tel"]:focus,
+.ris-upload-page .form-field input[type="date"]:focus,
+.ris-upload-page .form-field select:focus {
+  outline: none;
+  border-color: #9b59b6;
+  box-shadow: 0 0 0 3px rgba(155, 89, 182, 0.15);
+}
+
+.ris-upload-page .form-field input::placeholder {
+  color: #adb5bd;
+}
+
+.ris-upload-page .form-field.checkbox-field {
+  flex-direction: row;
+  align-items: center;
+}
+
+.ris-upload-page .form-field.checkbox-field label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.ris-upload-page .form-field.checkbox-field input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #9b59b6;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .ris-upload-page .mode-options {
+    flex-direction: column;
+  }
+
+  .ris-upload-page .patient-mode-options {
+    flex-direction: column;
+  }
+
+  .ris-upload-page .select-container {
+    flex-direction: column;
+  }
+
+  .ris-upload-page .search-input {
+    max-width: 100%;
+  }
+
+  .ris-upload-page .new-patient-form .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ris-upload-page .guide-content {
+    grid-template-columns: 1fr;
+  }
+
+  .ris-upload-page .log-table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .ris-upload-page .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ris-upload-page .section-header-toggle {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}
+
+/* 외부기관 선택 모드 */
+.ris-upload-page .institution-mode-options {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.ris-upload-page .institution-mode-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px;
+  color: #495057;
+}
+
+.ris-upload-page .institution-mode-option:hover {
+  border-color: #9b59b6;
+  background: #faf5fc;
+}
+
+.ris-upload-page .institution-mode-option.selected {
+  border-color: #9b59b6;
+  background: #f5eef8;
+  color: #8e44ad;
+}
+
+.ris-upload-page .institution-mode-option input[type="radio"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #9b59b6;
+  cursor: pointer;
+}
+
+/* Orthanc 업로드 버튼 */
+.ris-upload-page .orthanc-btn {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+  background: #3498db;
+  color: #fff;
+}
+
+.ris-upload-page .orthanc-btn:hover {
+  background: #2980b9;
+}
+
+.ris-upload-page .orthanc-btn:disabled {
+  background: #adb5bd;
+  cursor: not-allowed;
+}
+
+/* Orthanc 버튼 상태별 색상 */
+.ris-upload-page .orthanc-btn.success {
+  background: #27ae60;
+}
+
+.ris-upload-page .orthanc-btn.error {
+  background: #e74c3c;
+}
+
+@media (max-width: 768px) {
+  .ris-upload-page .institution-mode-options {
+    flex-direction: column;
+  }
+
+  .ris-upload-page .upload-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ris-upload-page .upload-actions button {
+    width: 100%;
+    max-width: 280px;
+  }
+}

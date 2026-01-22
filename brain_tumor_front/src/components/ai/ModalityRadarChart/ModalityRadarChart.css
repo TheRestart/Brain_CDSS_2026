@@ -1,0 +1,136 @@
+/**
+ * Modality Radar Chart Styles
+ */
+
+.modality-radar-chart {
+  background: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.modality-radar-chart__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 12px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.modality-radar-chart__container {
+  margin-bottom: 16px;
+}
+
+/* Empty state */
+.modality-radar-chart--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  color: #666;
+}
+
+/* Single modality view */
+.modality-radar-chart--single {
+  min-height: auto;
+}
+
+.modality-radar-chart__single-item {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  background: #f5f5f5;
+  border-radius: 8px;
+}
+
+.modality-radar-chart__single-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.modality-radar-chart__single-values {
+  display: flex;
+  gap: 24px;
+}
+
+.modality-radar-chart__single-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.modality-radar-chart__single-stat .label {
+  font-size: 12px;
+  color: #666;
+}
+
+.modality-radar-chart__single-stat .value {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.modality-radar-chart__single-stat:first-child .value {
+  color: #1976d2;
+}
+
+.modality-radar-chart__single-stat:last-child .value {
+  color: #4caf50;
+}
+
+/* Table */
+.modality-radar-chart__table {
+  margin-top: 8px;
+}
+
+.modality-radar-chart__table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.modality-radar-chart__table th,
+.modality-radar-chart__table td {
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.modality-radar-chart__table th {
+  font-weight: 600;
+  color: #666;
+  font-size: 12px;
+  text-transform: uppercase;
+  background: #fafafa;
+}
+
+.modality-radar-chart__table tbody tr:hover {
+  background: #f5f9ff;
+}
+
+.modality-radar-chart__table .value-cell {
+  font-weight: 600;
+  font-family: 'Roboto Mono', monospace;
+}
+
+.modality-radar-chart__table .value-cell.weight {
+  color: #1976d2;
+}
+
+.modality-radar-chart__table .value-cell.confidence {
+  color: #4caf50;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .modality-radar-chart__container {
+    height: 250px;
+  }
+
+  .modality-radar-chart__single-values {
+    flex-direction: column;
+    gap: 12px;
+  }
+}

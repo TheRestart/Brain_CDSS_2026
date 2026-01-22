@@ -1,0 +1,211 @@
+/* AI Analysis Modal Styles */
+
+.ai-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.ai-modal-container {
+  background: #f8fafc;
+  border-radius: 12px;
+  width: 95vw;
+  max-width: 1600px;
+  height: 90vh;
+  max-height: 900px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Modal Header */
+.ai-modal-header {
+  background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
+  padding: 1rem 1.5rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.ai-modal-header-content {
+  flex: 1;
+}
+
+.ai-modal-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.025em;
+}
+
+.ai-modal-subtitle {
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0.125rem 0 0 0;
+}
+
+.ai-modal-close {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ai-modal-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Navigation Tabs */
+.ai-modal-nav {
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 0 1.5rem;
+  display: flex;
+  gap: 0;
+  flex-shrink: 0;
+  overflow-x: auto;
+}
+
+.ai-modal-tab {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.25rem;
+  border: none;
+  background: transparent;
+  color: #6b7280;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.ai-modal-tab:hover {
+  color: #374151;
+  background: #f9fafb;
+}
+
+.ai-modal-tab.active {
+  color: #1e3a5f;
+  border-bottom-color: #2563eb;
+}
+
+.ai-modal-tab.active.m1 {
+  color: #1d4ed8;
+  border-bottom-color: #3b82f6;
+}
+
+.ai-modal-tab.active.mg {
+  color: #7c3aed;
+  border-bottom-color: #8b5cf6;
+}
+
+.ai-modal-tab.active.mm {
+  color: #b45309;
+  border-bottom-color: #f59e0b;
+}
+
+.ai-modal-tab .tab-icon {
+  font-size: 1.125rem;
+}
+
+.ai-modal-tab .tab-label {
+  font-weight: 600;
+}
+
+/* Modal Main Content */
+.ai-modal-main {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+}
+
+/* Override child component styles for modal context */
+.ai-modal-main .space-y-6 > :not([hidden]) ~ :not([hidden]) {
+  margin-top: 1.25rem;
+}
+
+.ai-modal-main h2 {
+  font-size: 1.375rem;
+}
+
+.ai-modal-main h3 {
+  font-size: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .ai-modal-container {
+    width: 100%;
+    height: 100vh;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  .ai-modal-header {
+    padding: 0.75rem 1rem;
+  }
+
+  .ai-modal-title {
+    font-size: 1.25rem;
+  }
+
+  .ai-modal-nav {
+    padding: 0 0.75rem;
+  }
+
+  .ai-modal-tab {
+    padding: 0.75rem 1rem;
+    font-size: 0.8125rem;
+  }
+
+  .ai-modal-tab .tab-label {
+    display: none;
+  }
+
+  .ai-modal-tab .tab-icon {
+    font-size: 1.375rem;
+  }
+
+  .ai-modal-main {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .ai-modal-overlay {
+    padding: 0;
+  }
+
+  .ai-modal-header {
+    padding: 0.625rem 0.75rem;
+  }
+
+  .ai-modal-title {
+    font-size: 1.125rem;
+  }
+
+  .ai-modal-subtitle {
+    display: none;
+  }
+}

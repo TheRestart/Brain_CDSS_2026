@@ -1,0 +1,593 @@
+/* AI Request Detail Page Styles */
+
+.ai-request-detail {
+  padding: 1.5rem;
+}
+
+.ai-request-detail .page-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.ai-request-detail .btn-back {
+  background: transparent;
+  border: 1px solid #ddd;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #666;
+}
+
+.ai-request-detail .btn-back:hover {
+  background: #f5f5f5;
+}
+
+.ai-request-detail .header-content {
+  flex: 1;
+}
+
+.ai-request-detail .header-content h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.ai-request-detail .header-content .request-id {
+  color: #666;
+  font-size: 0.875rem;
+  font-family: monospace;
+}
+
+.ai-request-detail .header-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Status Banner */
+.status-banner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.status-banner .status-label {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.status-banner .processing-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: pulse 1.5s infinite;
+}
+
+.status-banner .error-message {
+  font-size: 0.875rem;
+  opacity: 0.9;
+}
+
+.status-banner.status-pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-banner.status-validating {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.status-banner.status-processing {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.status-banner.status-completed {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.status-banner.status-failed {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.status-banner.status-cancelled {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* Content Grid */
+.content-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Info Card */
+.info-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.info-card h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 1rem 0;
+}
+
+.info-card .card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.info-card .card-header h3 {
+  margin: 0;
+}
+
+/* Info Grid */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.info-item label {
+  font-size: 0.75rem;
+  color: #666;
+  text-transform: uppercase;
+}
+
+.info-item span {
+  font-size: 0.9375rem;
+  color: #1a1a1a;
+}
+
+/* Priority Badge */
+.priority-badge {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.priority-badge.priority-low {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.priority-badge.priority-normal {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.priority-badge.priority-high {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.priority-badge.priority-urgent {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* Data Table */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.data-table th {
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: #666;
+  text-transform: uppercase;
+}
+
+.data-table .key {
+  font-family: monospace;
+  font-size: 0.875rem;
+  color: #2563eb;
+}
+
+.data-table .value {
+  font-size: 0.875rem;
+  color: #333;
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.input-data .empty {
+  color: #9ca3af;
+  font-style: italic;
+}
+
+/* Result Card */
+.result-card .confidence-section {
+  margin-bottom: 1.5rem;
+}
+
+.result-card .confidence-section label {
+  display: block;
+  font-size: 0.75rem;
+  color: #666;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.confidence-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.confidence-bar-container .confidence-bar {
+  flex: 1;
+  height: 8px;
+  background: #10b981;
+  border-radius: 4px;
+  max-width: 200px;
+}
+
+.confidence-bar-container .confidence-value {
+  font-weight: 600;
+  color: #10b981;
+}
+
+.review-status {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: #f9fafb;
+  border-radius: 8px;
+}
+
+.review-status label {
+  font-size: 0.75rem;
+  color: #666;
+  text-transform: uppercase;
+  margin-right: 0.5rem;
+}
+
+.review-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.review-badge.review-pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.review-badge.review-approved {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.review-badge.review-rejected {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.review-status .reviewer {
+  display: block;
+  font-size: 0.875rem;
+  color: #666;
+  margin-top: 0.5rem;
+}
+
+.review-status .review-comment {
+  font-style: italic;
+  color: #4b5563;
+  margin-top: 0.5rem;
+}
+
+.result-data h4 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.json-view {
+  background: #1e293b;
+  color: #e2e8f0;
+  padding: 1rem;
+  border-radius: 8px;
+  font-family: monospace;
+  font-size: 0.875rem;
+  overflow-x: auto;
+  max-height: 300px;
+}
+
+.visualization-paths {
+  margin-top: 1.5rem;
+}
+
+.visualization-paths h4 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.visualization-paths ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.visualization-paths li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.visualization-paths a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.visualization-paths a:hover {
+  text-decoration: underline;
+}
+
+/* Logs Card */
+.logs-card .logs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.log-item {
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem;
+  background: #f9fafb;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+.log-item .log-time {
+  color: #666;
+  font-family: monospace;
+  white-space: nowrap;
+}
+
+.log-item .log-action {
+  font-weight: 500;
+  color: #2563eb;
+  white-space: nowrap;
+}
+
+.log-item .log-message {
+  color: #333;
+  flex: 1;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 400px;
+  max-width: 90vw;
+}
+
+.modal-content h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 1.5rem 0;
+}
+
+.review-options {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.review-option {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  background-color: #ffffff !important;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.review-option:hover {
+  border-color: #9ca3af;
+  background-color: #f9fafb !important;
+}
+
+.review-option.selected {
+  border-color: #2563eb;
+  background-color: #eff6ff !important;
+}
+
+.review-option .icon {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.review-option .icon-approve {
+  color: #059669;
+}
+
+.review-option .icon-reject {
+  color: #dc2626;
+}
+
+.review-option.selected .icon-approve {
+  color: #059669;
+}
+
+.review-option.selected .icon-reject {
+  color: #dc2626;
+}
+
+.review-comment-input {
+  margin-bottom: 1.5rem;
+}
+
+.review-comment-input label {
+  display: block;
+  font-size: 0.875rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.review-comment-input textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  resize: vertical;
+}
+
+.review-comment-input textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+/* Error State */
+.ai-request-detail .error-state {
+  text-align: center;
+  padding: 3rem;
+}
+
+.ai-request-detail .error-state p {
+  color: #dc2626;
+  margin-bottom: 1rem;
+}
+
+/* Buttons */
+.ai-request-detail .btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.ai-request-detail .btn-primary {
+  background: #2563eb;
+  color: #fff;
+}
+
+.ai-request-detail .btn-primary:hover {
+  background: #1d4ed8;
+}
+
+.ai-request-detail .btn-secondary {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.ai-request-detail .btn-secondary:hover {
+  background: #d1d5db;
+}
+
+.ai-request-detail .btn-danger {
+  background: #dc2626;
+  color: #fff;
+}
+
+.ai-request-detail .btn-danger:hover {
+  background: #b91c1c;
+}
+
+.ai-request-detail .btn-text {
+  background: transparent;
+  color: #2563eb;
+  padding: 0.25rem 0.5rem;
+}
+
+.ai-request-detail .btn-text:hover {
+  background: #eff6ff;
+}
+
+/* Modal Buttons - 모달은 fixed position이므로 별도 스코프 필요 */
+.modal-content .btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.modal-content .btn-primary {
+  background: #2563eb;
+  color: #fff;
+}
+
+.modal-content .btn-primary:hover {
+  background: #1d4ed8;
+}
+
+.modal-content .btn-secondary {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.modal-content .btn-secondary:hover {
+  background: #d1d5db;
+}

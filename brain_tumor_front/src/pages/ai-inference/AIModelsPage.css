@@ -1,0 +1,469 @@
+/* AI Models Page Styles */
+
+.ai-models-page {
+  padding: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.ai-models-page.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+/* Header */
+.ai-models-page .page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.ai-models-page .page-header h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.ai-models-page .page-header .subtitle {
+  color: #666;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.ai-models-page .header-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Models Section */
+.ai-models-page .models-section {
+  margin-bottom: 2rem;
+}
+
+.ai-models-page .models-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Model Card */
+.ai-models-page .model-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+}
+
+.ai-models-page .model-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.ai-models-page .model-card.selected {
+  border-color: #2563eb;
+}
+
+.ai-models-page .model-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.ai-models-page .model-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.ai-models-page .model-title {
+  flex: 1;
+}
+
+.ai-models-page .model-title h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.ai-models-page .model-code {
+  font-size: 0.75rem;
+  color: #999;
+  font-family: monospace;
+}
+
+.ai-models-page .model-category {
+  font-size: 0.75rem;
+  color: #2563eb;
+  background: #eff6ff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.ai-models-page .model-description {
+  color: #666;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.ai-models-page .model-meta {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.ai-models-page .meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.ai-models-page .meta-label {
+  font-size: 0.75rem;
+  color: #999;
+}
+
+.ai-models-page .meta-value {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.ai-models-page .meta-value.accuracy {
+  color: #059669;
+}
+
+/* Model Details (Expanded) */
+.ai-models-page .model-details {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.ai-models-page .detail-section {
+  margin-bottom: 1rem;
+}
+
+.ai-models-page .detail-section h4 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 0.5rem 0;
+}
+
+.ai-models-page .detail-section p {
+  font-size: 0.875rem;
+  color: #666;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.ai-models-page .required-keys {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.ai-models-page .key-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  background: #f3f4f6;
+  color: #374151;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-family: monospace;
+}
+
+.ai-models-page .key-badge.small {
+  padding: 0.125rem 0.375rem;
+  font-size: 0.7rem;
+}
+
+.ai-models-page .key-badge.more {
+  background: #e5e7eb;
+  color: #6b7280;
+}
+
+.ai-models-page .btn-block {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+/* Comparison Section */
+.ai-models-page .comparison-section {
+  margin-top: 3rem;
+}
+
+.ai-models-page .comparison-section h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.ai-models-page .comparison-table-wrapper {
+  overflow-x: auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.ai-models-page .comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px;
+}
+
+.ai-models-page .comparison-table th,
+.ai-models-page .comparison-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.ai-models-page .comparison-table th {
+  background: #f8f9fa;
+  font-weight: 600;
+  color: #333;
+  font-size: 0.875rem;
+}
+
+.ai-models-page .comparison-table tr:last-child td {
+  border-bottom: none;
+}
+
+.ai-models-page .model-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ai-models-page .model-icon-small {
+  font-size: 1.5rem;
+}
+
+.ai-models-page .model-name {
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.ai-models-page .required-keys.compact {
+  gap: 0.25rem;
+}
+
+.ai-models-page .accuracy-cell {
+  color: #059669;
+  font-weight: 500;
+}
+
+/* Info Section */
+.ai-models-page .info-section {
+  margin-top: 2rem;
+}
+
+.ai-models-page .info-card {
+  display: flex;
+  gap: 1rem;
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+
+.ai-models-page .info-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.ai-models-page .info-content h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0369a1;
+  margin: 0 0 0.5rem 0;
+}
+
+.ai-models-page .info-content p {
+  font-size: 0.875rem;
+  color: #0c4a6e;
+  line-height: 1.6;
+  margin: 0 0 0.5rem 0;
+}
+
+.ai-models-page .info-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* Error State */
+.ai-models-page .error-state {
+  text-align: center;
+  padding: 3rem;
+  color: #dc2626;
+}
+
+/* Buttons */
+.ai-models-page .btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.ai-models-page .btn-primary {
+  background: #2563eb;
+  color: #fff;
+}
+
+.ai-models-page .btn-primary:hover {
+  background: #1d4ed8;
+}
+
+.ai-models-page .btn-outline {
+  background: #fff;
+  color: #2563eb;
+  border: 1px solid #2563eb;
+}
+
+.ai-models-page .btn-outline:hover {
+  background: #eff6ff;
+}
+
+.ai-models-page .btn-sm {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.8125rem;
+}
+
+/* ========================================
+   NEW: Model Status Badge
+   ======================================== */
+.ai-models-page .model-status-badge {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.ai-models-page .model-status-badge.status-available {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.ai-models-page .model-status-badge.status-maintenance {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+/* ========================================
+   NEW: Maintenance State for Model Card
+   ======================================== */
+.ai-models-page .model-card.maintenance {
+  opacity: 0.8;
+  border: 2px dashed #f59e0b;
+}
+
+.ai-models-page .model-card.maintenance:hover {
+  opacity: 0.9;
+}
+
+.ai-models-page .maintenance-notice {
+  background: #fef3c7;
+  color: #92400e;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ai-models-page .maintenance-notice::before {
+  content: '🔧';
+}
+
+/* ========================================
+   NEW: Version Info
+   ======================================== */
+.ai-models-page .model-version-info {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #e5e7eb;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+/* ========================================
+   NEW: Success Rate Style
+   ======================================== */
+.ai-models-page .meta-value.success-rate {
+  color: #2563eb;
+}
+
+/* ========================================
+   NEW: Model Meta Grid (for 4 items)
+   ======================================== */
+.ai-models-page .model-meta {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem 1.5rem;
+}
+
+/* ========================================
+   NEW: Table Status Badge
+   ======================================== */
+.ai-models-page .table-status-badge {
+  font-size: 0.625rem;
+  padding: 0.125rem 0.375rem;
+  border-radius: 8px;
+  font-weight: 500;
+  margin-left: 0.5rem;
+}
+
+.ai-models-page .table-status-badge.status-available {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.ai-models-page .table-status-badge.status-maintenance {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+/* ========================================
+   NEW: Maintenance Row in Table
+   ======================================== */
+.ai-models-page .comparison-table tr.maintenance-row {
+  background: #fffbeb;
+}
+
+.ai-models-page .comparison-table tr.maintenance-row td {
+  color: #78716c;
+}
+
+/* ========================================
+   Responsive adjustments
+   ======================================== */
+@media (max-width: 768px) {
+  .ai-models-page .model-meta {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem 1rem;
+  }
+
+  .ai-models-page .model-header {
+    flex-wrap: wrap;
+  }
+
+  .ai-models-page .model-status-badge {
+    order: 3;
+    margin-top: 0.5rem;
+  }
+}

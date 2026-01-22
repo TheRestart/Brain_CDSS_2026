@@ -1,0 +1,1002 @@
+/**
+ * SegMRIViewer - Standalone Segmentation Comparison Component
+ * MRI 세그멘테이션 GT vs Prediction 비교 뷰어
+ *
+ * 이 파일과 SegMRIViewer.tsx만 복사하면 다른 프로젝트에서 사용 가능
+ */
+
+.seg-mri-viewer {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  margin-top: 16px;
+}
+
+/* Header */
+.seg-mri-viewer__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #1976d2, #42a5f5);
+  color: white;
+}
+
+.seg-mri-viewer__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.seg-mri-viewer__title-icon {
+  font-size: 14px;
+  background: rgba(255,255,255,0.2);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.seg-mri-viewer__dice-scores {
+  display: flex;
+  gap: 8px;
+}
+
+.seg-mri-viewer__dice-chip {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.seg-mri-viewer__dice-chip--wt {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.seg-mri-viewer__dice-chip--tc {
+  background: rgba(156, 39, 176, 0.3);
+  color: white;
+}
+
+.seg-mri-viewer__dice-chip--et {
+  background: rgba(244, 67, 54, 0.3);
+  color: white;
+}
+
+/* Body */
+.seg-mri-viewer__body {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 16px;
+  padding: 16px;
+}
+
+@media (max-width: 900px) {
+  .seg-mri-viewer__body {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Canvas Section */
+.seg-mri-viewer__canvas-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.seg-mri-viewer__canvas-container {
+  background: #000;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+.seg-mri-viewer__canvas {
+  display: block;
+  image-rendering: auto;
+}
+
+.seg-mri-viewer__canvas-info {
+  text-align: center;
+  font-size: 12px;
+  color: #666;
+}
+
+/* Slice Control */
+.seg-mri-viewer__slice-control {
+  padding: 0 8px;
+}
+
+.seg-mri-viewer__slice-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.seg-mri-viewer__slice-label {
+  font-size: 14px;
+  color: #333;
+}
+
+/* Play Button */
+.seg-mri-viewer__play-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: #1976d2;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.seg-mri-viewer__play-btn:hover {
+  background: #1565c0;
+  transform: scale(1.1);
+}
+
+.seg-mri-viewer__play-btn--playing {
+  background: #f44336;
+  animation: pulse 1s infinite;
+}
+
+.seg-mri-viewer__play-btn--playing:hover {
+  background: #d32f2f;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 2px 4px rgba(244, 67, 54, 0.4);
+  }
+  50% {
+    box-shadow: 0 2px 12px rgba(244, 67, 54, 0.6);
+  }
+}
+
+.seg-mri-viewer__slice-label span {
+  color: #4caf50;
+  font-weight: 600;
+  margin-left: 12px;
+}
+
+.seg-mri-viewer__slider {
+  width: 100%;
+  height: 6px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: #e0e0e0;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+}
+
+.seg-mri-viewer__slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background: #1976d2;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.seg-mri-viewer__slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.seg-mri-viewer__slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  background: #1976d2;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
+/* View Mode Buttons */
+.seg-mri-viewer__view-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+}
+
+.seg-mri-viewer__view-btn {
+  padding: 8px 20px;
+  border: 1px solid #1976d2;
+  background: white;
+  color: #1976d2;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.seg-mri-viewer__view-btn:first-child {
+  border-radius: 4px 0 0 4px;
+}
+
+.seg-mri-viewer__view-btn:last-child {
+  border-radius: 0 4px 4px 0;
+}
+
+.seg-mri-viewer__view-btn:not(:last-child) {
+  border-right: none;
+}
+
+.seg-mri-viewer__view-btn--active {
+  background: #1976d2;
+  color: white;
+}
+
+.seg-mri-viewer__view-btn:hover:not(.seg-mri-viewer__view-btn--active) {
+  background: #e3f2fd;
+}
+
+/* Controls Panel */
+.seg-mri-viewer__controls {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.seg-mri-viewer__section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 8px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* Display Mode */
+.seg-mri-viewer__mode-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4px;
+}
+
+.seg-mri-viewer__mode-btn {
+  padding: 8px 4px;
+  border: 1px solid #ddd;
+  background: white;
+  color: #666;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.seg-mri-viewer__mode-btn--active {
+  border-color: #1976d2;
+  background: #1976d2;
+  color: white;
+}
+
+.seg-mri-viewer__mode-btn:hover:not(.seg-mri-viewer__mode-btn--active) {
+  background: #f0f0f0;
+}
+
+/* Legend */
+.seg-mri-viewer__legend {
+  background: #fff;
+  border-radius: 6px;
+  padding: 12px;
+  border: 1px solid #e0e0e0;
+}
+
+.seg-mri-viewer__legend-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.seg-mri-viewer__legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-size: 12px;
+  color: #555;
+}
+
+.seg-mri-viewer__legend-item:last-child {
+  margin-bottom: 0;
+}
+
+.seg-mri-viewer__legend-color {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.seg-mri-viewer__legend-color--tp {
+  background: rgb(0, 200, 0);
+}
+
+.seg-mri-viewer__legend-color--fn {
+  background: rgb(255, 100, 100);
+}
+
+.seg-mri-viewer__legend-color--fp {
+  background: rgb(100, 100, 255);
+}
+
+/* Checkbox */
+.seg-mri-viewer__checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #333;
+  user-select: none;
+}
+
+.seg-mri-viewer__checkbox input {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: #1976d2;
+}
+
+/* Opacity Control */
+.seg-mri-viewer__opacity-control {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.seg-mri-viewer__opacity-label {
+  font-size: 12px;
+  color: #666;
+}
+
+/* Overlay Options */
+.seg-mri-viewer__overlay-options {
+  background: #fff;
+  border-radius: 6px;
+  padding: 12px;
+  border: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Labels Section */
+.seg-mri-viewer__labels {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.seg-mri-viewer__label-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.seg-mri-viewer__label-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.seg-mri-viewer__label-color--ncr {
+  background: rgb(255, 0, 0);
+}
+
+.seg-mri-viewer__label-color--ed {
+  background: rgb(0, 255, 0);
+}
+
+.seg-mri-viewer__label-color--et {
+  background: rgb(0, 0, 255);
+}
+
+.seg-mri-viewer__label-text {
+  font-size: 12px;
+  color: #555;
+}
+
+/* Divider */
+.seg-mri-viewer__divider {
+  height: 1px;
+  background: #e0e0e0;
+  margin: 4px 0;
+}
+
+/* MRI Channel Selector */
+.seg-mri-viewer__channel-selector {
+  margin-top: 8px;
+}
+
+.seg-mri-viewer__channel-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+}
+
+.seg-mri-viewer__channel-btn {
+  padding: 6px 4px;
+  border: 1px solid #4caf50;
+  background: white;
+  color: #4caf50;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.seg-mri-viewer__channel-btn--active {
+  border-color: #4caf50;
+  background: #4caf50;
+  color: white;
+}
+
+.seg-mri-viewer__channel-btn:hover:not(.seg-mri-viewer__channel-btn--active):not(.seg-mri-viewer__channel-btn--disabled) {
+  background: #e8f5e9;
+}
+
+.seg-mri-viewer__channel-btn--disabled {
+  border-color: #ccc;
+  color: #ccc;
+  cursor: not-allowed;
+  background: #f5f5f5;
+}
+
+/* Multi Viewer Grid */
+.seg-mri-viewer__multi-grid {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.seg-mri-viewer__multi-grid--1 {
+  grid-template-columns: 1fr;
+}
+
+.seg-mri-viewer__multi-grid--2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.seg-mri-viewer__multi-grid--3,
+.seg-mri-viewer__multi-grid--4 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* Viewer Item */
+.seg-mri-viewer__viewer-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.seg-mri-viewer__viewer-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.seg-mri-viewer__channel-select {
+  padding: 6px 12px;
+  border: 1px solid #4caf50;
+  border-radius: 4px;
+  background: white;
+  color: #4caf50;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+}
+
+.seg-mri-viewer__channel-select:focus {
+  border-color: #2e7d32;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.seg-mri-viewer__channel-select option:disabled {
+  color: #ccc;
+}
+
+.seg-mri-viewer__remove-btn {
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 50%;
+  background: #f44336;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.seg-mri-viewer__remove-btn:hover {
+  background: #d32f2f;
+  transform: scale(1.1);
+}
+
+/* Add Viewer Button */
+.seg-mri-viewer__add-viewer-btn {
+  width: 100%;
+  padding: 12px;
+  border: 2px dashed #1976d2;
+  border-radius: 8px;
+  background: #e3f2fd;
+  color: #1976d2;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 12px;
+}
+
+.seg-mri-viewer__add-viewer-btn:hover {
+  background: #bbdefb;
+  border-color: #1565c0;
+}
+
+/* Header Right Section */
+.seg-mri-viewer__header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Layout Tabs */
+.seg-mri-viewer__layout-tabs {
+  display: flex;
+  gap: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 2px;
+}
+
+.seg-mri-viewer__layout-tab {
+  padding: 6px 14px;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.seg-mri-viewer__layout-tab:hover:not(:disabled) {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.seg-mri-viewer__layout-tab--active {
+  background: rgba(255, 255, 255, 0.25);
+  color: white;
+}
+
+.seg-mri-viewer__layout-tab:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Compare 탭 활성화 시 강조 */
+.seg-mri-viewer__layout-tab--compare {
+  background: linear-gradient(135deg, #4caf50, #2e7d32);
+  color: white;
+}
+
+.seg-mri-viewer__layout-tab--compare:hover {
+  background: linear-gradient(135deg, #66bb6a, #43a047);
+}
+
+/* Orthogonal View */
+.seg-mri-viewer__ortho-channel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 8px 12px;
+  background: #f0f0f0;
+  border-radius: 6px;
+}
+
+.seg-mri-viewer__ortho-channel label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #555;
+}
+
+.seg-mri-viewer__ortho-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 700px) {
+  .seg-mri-viewer__ortho-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.seg-mri-viewer__ortho-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.seg-mri-viewer__ortho-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1976d2;
+  background: #e3f2fd;
+  padding: 4px 12px;
+  border-radius: 4px;
+}
+
+.seg-mri-viewer__canvas-container--ortho {
+  min-height: 200px;
+  padding: 8px;
+}
+
+.seg-mri-viewer__slider--ortho {
+  width: 180px;
+}
+
+.seg-mri-viewer__ortho-slice-num {
+  font-size: 12px;
+  color: #666;
+  font-family: monospace;
+}
+
+/* 3D Placeholder */
+.seg-mri-viewer__3d-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  border-radius: 8px;
+  color: white;
+  gap: 12px;
+}
+
+.seg-mri-viewer__3d-icon {
+  font-size: 4rem;
+  opacity: 0.5;
+}
+
+.seg-mri-viewer__3d-placeholder p {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.seg-mri-viewer__3d-placeholder span {
+  font-size: 0.9rem;
+  opacity: 0.6;
+}
+
+/* ========== Volume 3D Viewer ========== */
+
+.volume-3d-viewer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.volume-3d-viewer__canvas {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.volume-3d-viewer__canvas canvas {
+  display: block;
+}
+
+.volume-3d-viewer__controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.volume-3d-viewer__checkbox {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #333;
+  cursor: pointer;
+}
+
+.volume-3d-viewer__checkbox input {
+  width: 16px;
+  height: 16px;
+  accent-color: #1976d2;
+  cursor: pointer;
+}
+
+.volume-3d-viewer__speed,
+.volume-3d-viewer__zoom {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #555;
+}
+
+.volume-3d-viewer__speed input,
+.volume-3d-viewer__zoom input {
+  width: 80px;
+  height: 4px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: #ddd;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.volume-3d-viewer__speed input::-webkit-slider-thumb,
+.volume-3d-viewer__zoom input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  background: #1976d2;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.volume-3d-viewer__reset-btn {
+  padding: 6px 14px;
+  border: 1px solid #1976d2;
+  background: white;
+  color: #1976d2;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.volume-3d-viewer__reset-btn:hover {
+  background: #1976d2;
+  color: white;
+}
+
+.volume-3d-viewer__legend {
+  display: flex;
+  gap: 16px;
+  padding: 8px 16px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+}
+
+.volume-3d-viewer__legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #333;
+}
+
+.volume-3d-viewer__legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+.volume-3d-viewer__hint {
+  font-size: 11px;
+  color: #888;
+  text-align: center;
+}
+
+/* 3D 뷰어 로딩 상태 */
+.volume-3d-viewer__loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 12px;
+  color: #666;
+}
+
+.volume-3d-viewer__loading .spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #e0e0e0;
+  border-top-color: #1976d2;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* 3D 뷰어 wrapper in SegMRIViewer */
+.seg-mri-viewer__3d-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+}
+
+.seg-mri-viewer__3d-channel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  background: #f0f0f0;
+  border-radius: 6px;
+}
+
+.seg-mri-viewer__3d-channel label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #555;
+}
+
+.seg-mri-viewer__3d-labels {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.seg-mri-viewer__3d-label-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #333;
+  cursor: pointer;
+}
+
+.seg-mri-viewer__3d-label-toggle input {
+  width: 14px;
+  height: 14px;
+  accent-color: #1976d2;
+}
+
+.seg-mri-viewer__3d-label-color {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+/* ========== Volume 3D Viewer Fullscreen Modal ========== */
+
+.volume-3d-viewer__fullscreen-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.volume-3d-viewer__fullscreen-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+}
+
+.volume-3d-viewer__fullscreen-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+  background: #1a1a2e;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  max-width: 95vw;
+  max-height: 95vh;
+}
+
+.volume-3d-viewer__fullscreen-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.volume-3d-viewer__fullscreen-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.volume-3d-viewer__canvas--fullscreen {
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.volume-3d-viewer__fullscreen-content .volume-3d-viewer__controls {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.volume-3d-viewer__fullscreen-content .volume-3d-viewer__controls,
+.volume-3d-viewer__fullscreen-content .volume-3d-viewer__checkbox,
+.volume-3d-viewer__fullscreen-content .volume-3d-viewer__speed,
+.volume-3d-viewer__fullscreen-content .volume-3d-viewer__zoom {
+  color: #ddd;
+}
+
+.volume-3d-viewer__fullscreen-content .volume-3d-viewer__reset-btn {
+  border-color: #64b5f6;
+  color: #64b5f6;
+  background: transparent;
+}
+
+.volume-3d-viewer__fullscreen-content .volume-3d-viewer__reset-btn:hover {
+  background: #64b5f6;
+  color: #1a1a2e;
+}
+
+.volume-3d-viewer__fullscreen-content .volume-3d-viewer__legend {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.volume-3d-viewer__fullscreen-content .volume-3d-viewer__legend-item {
+  color: #ddd;
+}
+
+.volume-3d-viewer__fullscreen-content .volume-3d-viewer__hint {
+  color: rgba(255, 255, 255, 0.5);
+}

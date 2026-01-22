@@ -1,0 +1,601 @@
+.unified-calendar {
+  min-height: 400px;
+}
+
+.unified-calendar .header-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.unified-calendar .calendar-body {
+  padding: 16px;
+}
+
+.unified-calendar .calendar-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.unified-calendar .nav-btn {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--border, #e5e7eb);
+  background: var(--card-bg, white);
+  color: var(--text-main, #1f2937);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.unified-calendar .nav-btn:hover {
+  background: var(--bg-main, #f4f6f9);
+}
+
+.unified-calendar .nav-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-main, #1f2937);
+}
+
+/* Scope 필터 */
+.unified-calendar .scope-filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 8px 12px;
+  background: var(--bg-main, #f4f6f9);
+  border-radius: 6px;
+}
+
+.unified-calendar .filter-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-sub, #6b7280);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.unified-calendar .filter-item:hover {
+  background: var(--card-bg, white);
+}
+
+.unified-calendar .filter-item.active {
+  color: var(--text-main, #1f2937);
+  font-weight: 500;
+}
+
+.unified-calendar .filter-item input[type="checkbox"] {
+  display: none;
+}
+
+.unified-calendar .filter-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+
+.unified-calendar .filter-item:not(.active) .filter-color {
+  opacity: 0.4;
+}
+
+/* 요일 헤더 */
+.unified-calendar .calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.unified-calendar .weekday {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-sub, #6b7280);
+  padding: 6px;
+}
+
+.unified-calendar .weekday.sun {
+  color: var(--danger, #e56b6f);
+}
+
+.unified-calendar .weekday.sat {
+  color: var(--info, #5b8def);
+}
+
+/* 캘린더 그리드 */
+.unified-calendar .calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.unified-calendar .calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  font-size: 13px;
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+  color: var(--text-main, #1f2937);
+  min-height: 44px;
+  transition: all 0.15s ease;
+}
+
+.unified-calendar .calendar-day.empty {
+  background: transparent;
+  cursor: default;
+}
+
+.unified-calendar .calendar-day.clickable:hover {
+  background: var(--bg-main, #f4f6f9);
+}
+
+/* Tint 방식: ::before pseudo-element */
+.unified-calendar .calendar-day::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 6px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.unified-calendar .calendar-day.has-schedule::before {
+  background: color-mix(in srgb, var(--schedule-color, #5b8def) 15%, transparent);
+}
+
+.unified-calendar .calendar-day.has-schedule:hover::before {
+  background: color-mix(in srgb, var(--schedule-color, #5b8def) 22%, transparent);
+}
+
+/* 오늘 날짜 */
+.unified-calendar .calendar-day.today {
+  box-shadow: inset 0 0 0 2px rgba(91, 111, 214, 0.5);
+}
+
+.unified-calendar .calendar-day.today .day-number {
+  color: var(--primary, #5b6fd6);
+  font-weight: 600;
+}
+
+/* 선택된 날짜 */
+.unified-calendar .calendar-day.selected .day-number {
+  color: #5b8def;
+  font-weight: 700;
+}
+
+.unified-calendar .calendar-day.selected.today {
+  box-shadow: inset 0 0 0 2px rgba(91, 111, 214, 0.5), 0 4px 12px rgba(91, 141, 239, 0.25);
+}
+
+/* 날짜 숫자 */
+.unified-calendar .day-number {
+  font-weight: 400;
+  line-height: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.unified-calendar .day-number.bold {
+  font-weight: 600;
+}
+
+/* 일정 개수 Badge */
+.unified-calendar .schedule-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  min-width: 14px;
+  height: 14px;
+  padding: 0 3px;
+  color: white;
+  font-size: 9px;
+  font-weight: 600;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+/* 단일 일정 유형 표시 dot */
+.unified-calendar .schedule-type-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  margin-top: 3px;
+  position: relative;
+  z-index: 1;
+}
+
+/* 범례 */
+.unified-calendar .calendar-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border, #e5e7eb);
+}
+
+.unified-calendar .legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--text-sub, #6b7280);
+}
+
+.unified-calendar .legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Empty State */
+.unified-calendar .empty-state {
+  padding: 24px;
+  text-align: center;
+  color: var(--text-sub, #6b7280);
+  font-size: 13px;
+}
+
+/* 선택된 날짜 상세 패널 */
+.unified-calendar .selected-day-panel {
+  margin-top: 16px;
+  padding: 12px;
+  background: var(--bg-main, #f4f6f9);
+  border-radius: 8px;
+}
+
+.unified-calendar .panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.unified-calendar .panel-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main, #1f2937);
+}
+
+.unified-calendar .btn-add {
+  padding: 4px 12px;
+  background: var(--primary, #5b6fd6);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.unified-calendar .btn-add:hover {
+  background: var(--primary-dark, #4a5bc4);
+}
+
+.unified-calendar .panel-empty {
+  padding: 16px;
+  text-align: center;
+  color: var(--text-sub, #6b7280);
+  font-size: 13px;
+}
+
+.unified-calendar .schedule-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.unified-calendar .schedule-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: var(--card-bg, white);
+  border-radius: 6px;
+  margin-bottom: 6px;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.unified-calendar .schedule-item:hover {
+  transform: translateX(4px);
+}
+
+.unified-calendar .schedule-item:last-child {
+  margin-bottom: 0;
+}
+
+.unified-calendar .schedule-color {
+  width: 4px;
+  height: 32px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.unified-calendar .schedule-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.unified-calendar .schedule-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-main, #1f2937);
+}
+
+.unified-calendar .scope-tag {
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-weight: 500;
+}
+
+.unified-calendar .scope-tag.scope-shared {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.unified-calendar .scope-tag.scope-patient {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.unified-calendar .schedule-type {
+  font-size: 11px;
+  color: var(--text-sub, #6b7280);
+}
+
+.unified-calendar .loading-state,
+.unified-calendar .error-message {
+  padding: 32px;
+  text-align: center;
+  color: var(--text-sub, #6b7280);
+}
+
+.unified-calendar .error-message {
+  color: var(--danger, #e56b6f);
+  padding: 12px;
+  background: #fef2f2;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+/* =============================================================================
+   모달 스타일
+   ============================================================================= */
+.unified-calendar .modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.unified-calendar .modal-content {
+  background: var(--card-bg, white);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.unified-calendar .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border, #e5e7eb);
+}
+
+.unified-calendar .modal-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-main, #1f2937);
+}
+
+.unified-calendar .close-btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  font-size: 24px;
+  color: var(--text-sub, #6b7280);
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.unified-calendar .close-btn:hover {
+  background: var(--bg-main, #f4f6f9);
+}
+
+.unified-calendar .modal-body {
+  padding: 20px;
+}
+
+.unified-calendar .modal-body .error-message {
+  padding: 12px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  color: #dc2626;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.unified-calendar .form-group {
+  margin-bottom: 16px;
+}
+
+.unified-calendar .form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-main, #1f2937);
+  margin-bottom: 6px;
+}
+
+.unified-calendar .form-group input[type="text"],
+.unified-calendar .form-group input[type="date"],
+.unified-calendar .form-group input[type="time"],
+.unified-calendar .form-group select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: 6px;
+  font-size: 14px;
+  color: var(--text-main, #1f2937);
+}
+
+.unified-calendar .form-group input:focus,
+.unified-calendar .form-group select:focus {
+  outline: none;
+  border-color: var(--primary, #5b6fd6);
+  box-shadow: 0 0 0 3px rgba(91, 111, 214, 0.1);
+}
+
+.unified-calendar .form-group input:disabled,
+.unified-calendar .form-group select:disabled {
+  background: var(--bg-main, #f4f6f9);
+  cursor: not-allowed;
+}
+
+.unified-calendar .form-row {
+  display: flex;
+  gap: 12px;
+}
+
+.unified-calendar .form-row .form-group {
+  flex: 1;
+}
+
+.unified-calendar .checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.unified-calendar .checkbox-group input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.unified-calendar .checkbox-group input[type="checkbox"]:disabled {
+  cursor: not-allowed;
+}
+
+.unified-calendar .color-picker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.unified-calendar .color-option {
+  width: 28px;
+  height: 28px;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.unified-calendar .color-option:hover {
+  opacity: 0.8;
+}
+
+.unified-calendar .color-option.selected {
+  border-color: var(--text-main, #1f2937);
+}
+
+.unified-calendar .color-input {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+
+.unified-calendar .modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-top: 1px solid var(--border, #e5e7eb);
+}
+
+.unified-calendar .footer-right {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.unified-calendar .btn {
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+}
+
+.unified-calendar .btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.unified-calendar .btn-primary {
+  background: var(--primary, #5b6fd6);
+  color: white;
+}
+
+.unified-calendar .btn-primary:hover:not(:disabled) {
+  background: var(--primary-dark, #4a5bc4);
+}
+
+.unified-calendar .btn-secondary {
+  background: var(--bg-main, #f4f6f9);
+  color: var(--text-main, #1f2937);
+  border: 1px solid var(--border, #e5e7eb);
+}
+
+.unified-calendar .btn-secondary:hover:not(:disabled) {
+  background: var(--border, #e5e7eb);
+}
+
+.unified-calendar .btn-danger {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+.unified-calendar .btn-danger:hover:not(:disabled) {
+  background: #fecaca;
+}

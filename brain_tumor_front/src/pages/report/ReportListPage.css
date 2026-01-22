@@ -1,0 +1,293 @@
+/**
+ * 최종 보고서 목록 페이지 스타일
+ */
+
+.report-list-page {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* 헤더 */
+.report-list-page .page-header {
+  margin-bottom: 24px;
+}
+
+.report-list-page .page-header h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-primary, #1f2937);
+  margin: 0 0 4px 0;
+}
+
+.report-list-page .page-header .subtitle {
+  font-size: 14px;
+  color: var(--text-secondary, #6b7280);
+}
+
+/* 필터 바 */
+.report-list-page .filter-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 16px;
+  background: var(--bg-secondary, #f9fafb);
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.report-list-page .filter-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.report-list-page .report-count {
+  font-size: 14px;
+  color: var(--text-secondary, #6b7280);
+}
+
+.report-list-page .report-count span {
+  color: var(--primary, #3b82f6);
+  font-weight: 600;
+}
+
+.report-list-page .filter-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.report-list-page .search-input {
+  min-width: 250px;
+  padding: 8px 12px;
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.report-list-page .search-input:focus {
+  outline: none;
+  border-color: var(--primary, #3b82f6);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.report-list-page .filter-right select {
+  padding: 8px 12px;
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: 6px;
+  font-size: 14px;
+  background: white;
+  cursor: pointer;
+}
+
+/* 버튼 */
+.report-list-page .btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.report-list-page .btn-primary {
+  background: var(--primary, #3b82f6);
+  color: white;
+}
+
+.report-list-page .btn-primary:hover {
+  background: var(--primary-dark, #2563eb);
+}
+
+.report-list-page .btn-secondary {
+  background: white;
+  color: var(--text-secondary, #6b7280);
+  border: 1px solid var(--border, #e5e7eb);
+}
+
+.report-list-page .btn-secondary:hover {
+  background: var(--bg-secondary, #f9fafb);
+}
+
+/* 테이블 */
+.report-list-page .report-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.report-list-page .report-table thead {
+  background: var(--bg-secondary, #f9fafb);
+}
+
+.report-list-page .report-table th {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary, #6b7280);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--border, #e5e7eb);
+}
+
+.report-list-page .report-table td {
+  padding: 12px 16px;
+  font-size: 14px;
+  color: var(--text-primary, #1f2937);
+  border-bottom: 1px solid var(--border, #e5e7eb);
+}
+
+.report-list-page .report-table tr.clickable {
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.report-list-page .report-table tr.clickable:hover {
+  background: var(--bg-hover, #f3f4f6);
+}
+
+.report-list-page .report-id {
+  font-family: monospace;
+  font-size: 13px;
+  color: var(--primary, #3b82f6);
+}
+
+.report-list-page .patient-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.report-list-page .patient-name {
+  font-weight: 500;
+}
+
+.report-list-page .patient-number {
+  font-size: 12px;
+  color: var(--text-secondary, #6b7280);
+}
+
+.report-list-page .diagnosis {
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.report-list-page .author-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.report-list-page .author-name {
+  font-weight: 500;
+}
+
+.report-list-page .author-dept {
+  font-size: 12px;
+  color: var(--text-secondary, #6b7280);
+}
+
+/* 상태 배지 */
+.report-list-page .status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.report-list-page .status-draft {
+  background: var(--gray-100, #f3f4f6);
+  color: var(--gray-700, #374151);
+}
+
+.report-list-page .status-pending {
+  background: var(--yellow-100, #fef3c7);
+  color: var(--yellow-700, #b45309);
+}
+
+.report-list-page .status-approved {
+  background: var(--blue-100, #dbeafe);
+  color: var(--blue-700, #1d4ed8);
+}
+
+.report-list-page .status-finalized {
+  background: var(--green-100, #d1fae5);
+  color: var(--green-700, #047857);
+}
+
+.report-list-page .status-cancelled {
+  background: var(--red-100, #fee2e2);
+  color: var(--red-700, #b91c1c);
+}
+
+/* 에러/빈 상태 */
+.report-list-page .error-state,
+.report-list-page .empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.report-list-page .error-state p {
+  color: var(--error, #dc2626);
+  margin-bottom: 16px;
+}
+
+/* 페이지네이션 */
+.report-list-page .pagination-bar {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+/* 반응형 */
+@media (max-width: 1024px) {
+  .report-list-page .filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .report-list-page .filter-left,
+  .report-list-page .filter-right {
+    justify-content: flex-start;
+  }
+
+  .report-list-page .search-input {
+    min-width: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .report-list-page {
+    padding: 16px;
+  }
+
+  .report-list-page .report-table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .report-list-page .filter-right {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .report-list-page .search-input,
+  .report-list-page .filter-right select {
+    width: 100%;
+  }
+}

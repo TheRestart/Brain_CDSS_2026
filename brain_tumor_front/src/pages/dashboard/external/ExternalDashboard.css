@@ -1,0 +1,211 @@
+.external-dashboard {
+  padding: 20px 24px;
+}
+
+.external-dashboard h2 {
+  margin-bottom: 24px;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.external-dashboard .summary-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.external-dashboard .summary-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+  box-shadow: var(--shadow-card);
+}
+
+.external-dashboard .summary-card.lis {
+  border-left: 4px solid var(--info);
+}
+
+.external-dashboard .summary-card.ris {
+  border-left: 4px solid var(--accent-ai);
+}
+
+.external-dashboard .summary-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--text-main);
+}
+
+.external-dashboard .card-stats {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 12px;
+}
+
+/* 6개 상태를 위한 그리드 레이아웃 */
+.external-dashboard .card-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px 16px;
+  margin-bottom: 12px;
+}
+
+.external-dashboard .stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.external-dashboard .stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+/* 각 상태별 색상 */
+.external-dashboard .stat.ordered .stat-value {
+  color: #d68910;
+}
+
+.external-dashboard .stat.accepted .stat-value {
+  color: #2980b9;
+}
+
+.external-dashboard .stat.in-progress .stat-value {
+  color: #1565c0;
+}
+
+.external-dashboard .stat.result-ready .stat-value {
+  color: #e67e22;
+}
+
+.external-dashboard .stat.confirmed .stat-value {
+  color: #1e8449;
+}
+
+.external-dashboard .stat.cancelled .stat-value {
+  color: #7f8c8d;
+}
+
+.external-dashboard .stat.pending .stat-value {
+  color: var(--warning);
+}
+
+.external-dashboard .stat.completed .stat-value {
+  color: var(--success);
+}
+
+.external-dashboard .stat-label {
+  font-size: 13px;
+  color: var(--text-sub);
+}
+
+.external-dashboard .card-sub {
+  font-size: 12px;
+  color: var(--text-sub);
+}
+
+.external-dashboard .dashboard-main-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+.external-dashboard .dashboard-section {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+  box-shadow: var(--shadow-card);
+}
+
+.external-dashboard .dashboard-section h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--text-main);
+}
+
+.external-dashboard .upload-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.external-dashboard .upload-table th,
+.external-dashboard .upload-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-main);
+}
+
+.external-dashboard .upload-table th {
+  font-weight: 600;
+  background: var(--bg-main);
+  color: var(--text-main);
+}
+
+.external-dashboard .upload-table .empty {
+  text-align: center;
+  color: var(--text-sub);
+  padding: 24px;
+}
+
+.external-dashboard .status-badge {
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.external-dashboard .status-badge.status-result_ready {
+  background: #fff3e0;
+  color: #e67e22;
+}
+
+.external-dashboard .status-badge.status-confirmed {
+  background: #e8f5e9;
+  color: #1e8449;
+}
+
+.external-dashboard .status-badge.status-ordered {
+  background: #fef9e6;
+  color: #d68910;
+}
+
+.external-dashboard .status-badge.status-accepted {
+  background: #e8f4fc;
+  color: #2980b9;
+}
+
+.external-dashboard .status-badge.status-in_progress {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.external-dashboard .status-badge.status-cancelled {
+  background: #f5f5f5;
+  color: #7f8c8d;
+}
+
+/* loading / error */
+.external-dashboard .loading,
+.external-dashboard .error {
+  padding: 40px;
+  text-align: center;
+  color: var(--text-sub);
+}
+
+@media (max-width: 1200px) {
+  .external-dashboard .dashboard-main-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .external-dashboard .summary-cards {
+    grid-template-columns: 1fr;
+  }
+}

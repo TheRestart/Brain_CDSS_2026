@@ -1,0 +1,164 @@
+/* DoctorOrderPage.css */
+
+.doctor-order {
+  padding: 20px;
+}
+
+/* 페이지 헤더 */
+.doctor-order .page-header {
+  margin-bottom: 24px;
+}
+
+.doctor-order .page-header h2 {
+  margin: 0 0 8px 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.doctor-order .page-header .subtitle {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* 필터 바 */
+.doctor-order .filter-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background: #f9fafb;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.doctor-order .filter-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.doctor-order .ocs-count {
+  font-size: 16px;
+  color: #374151;
+}
+
+.doctor-order .ocs-count span {
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.doctor-order .filter-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.doctor-order .search-box {
+  display: flex;
+  gap: 8px;
+}
+
+.doctor-order .search-box input {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 220px;
+}
+
+.doctor-order .search-box input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.doctor-order .filter-right select {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  background: white;
+  cursor: pointer;
+}
+
+/* 버튼 */
+.doctor-order .btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.doctor-order .btn-primary {
+  background: #3b82f6;
+  color: white;
+}
+
+.doctor-order .btn-primary:hover {
+  background: #2563eb;
+}
+
+.doctor-order .btn-search {
+  background: #3b82f6;
+  color: white;
+}
+
+.doctor-order .btn-search:hover {
+  background: #2563eb;
+}
+
+.doctor-order .btn-clear {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.doctor-order .btn-clear:hover {
+  background: #e5e7eb;
+}
+
+/* 콘텐츠 영역 */
+.doctor-order .content {
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+  min-height: 400px;
+}
+
+/* 페이지네이션 */
+.doctor-order .pagination-bar {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+/* 반응형 */
+@media (max-width: 1024px) {
+  .doctor-order .filter-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .doctor-order .filter-left,
+  .doctor-order .filter-right {
+    width: 100%;
+  }
+
+  .doctor-order .filter-right {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .doctor-order .search-box input {
+    width: 150px;
+  }
+}

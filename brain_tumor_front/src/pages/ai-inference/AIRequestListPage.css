@@ -1,0 +1,433 @@
+/* AI Request List Page Styles */
+
+.ai-request-list {
+  padding: 1.5rem;
+}
+
+.ai-request-list .page-header {
+  margin-bottom: 1.5rem;
+}
+
+.ai-request-list .page-header h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.ai-request-list .page-header .subtitle {
+  color: #666;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+/* Filter Bar */
+.ai-request-list .filter-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.ai-request-list .filter-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ai-request-list .filter-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.ai-request-list .request-count {
+  font-size: 0.875rem;
+  color: #333;
+}
+
+.ai-request-list .request-count span {
+  font-weight: 600;
+  color: #2563eb;
+}
+
+.ai-request-list .checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.ai-request-list .filter-right select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  min-width: 140px;
+}
+
+/* Table */
+.ai-request-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.ai-request-table th,
+.ai-request-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.ai-request-table th {
+  background: #f8f9fa;
+  font-weight: 600;
+  color: #333;
+  font-size: 0.875rem;
+}
+
+.ai-request-table tr.clickable {
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.ai-request-table tr.clickable:hover {
+  background-color: #f8f9fa;
+}
+
+.ai-request-table .request-id {
+  font-family: monospace;
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.ai-request-table .patient-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.ai-request-table .patient-name {
+  font-weight: 500;
+}
+
+.ai-request-table .patient-number {
+  font-size: 0.75rem;
+  color: #666;
+}
+
+/* Status Badge */
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.status-badge.status-pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-badge.status-validating {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.status-badge.status-processing {
+  background: #d1fae5;
+  color: #065f46;
+  animation: pulse 1.5s infinite;
+}
+
+.status-badge.status-completed {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.status-badge.status-failed {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.status-badge.status-cancelled {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Priority Badge */
+.priority-badge {
+  display: inline-block;
+  padding: 0.125rem 0.375rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+}
+
+.priority-badge.priority-low {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.priority-badge.priority-normal {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.priority-badge.priority-high {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.priority-badge.priority-urgent {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* Result Status */
+.result-available {
+  color: #059669;
+  font-weight: 500;
+}
+
+.result-failed {
+  color: #dc2626;
+}
+
+.result-pending {
+  color: #9ca3af;
+}
+
+/* Error State */
+.ai-request-list .error-state {
+  text-align: center;
+  padding: 3rem;
+  color: #dc2626;
+}
+
+.ai-request-list .error-state button {
+  margin-top: 1rem;
+}
+
+/* Pagination */
+.ai-request-list .pagination-bar {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* Buttons */
+.ai-request-list .btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.ai-request-list .btn-primary {
+  background: #2563eb;
+  color: #fff;
+}
+
+.ai-request-list .btn-primary:hover {
+  background: #1d4ed8;
+}
+
+.ai-request-list .btn-secondary {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.ai-request-list .btn-secondary:hover {
+  background: #d1d5db;
+}
+
+/* Review Badge */
+.review-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.review-badge.review-pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.review-badge.review-approved {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.review-badge.review-rejected {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.review-badge.clickable-review {
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.review-badge.clickable-review:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+.review-none {
+  color: #9ca3af;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 12px;
+  width: 450px;
+  max-width: 90vw;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.modal-header h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0;
+  color: #1a1a1a;
+}
+
+.btn-close {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.btn-close:hover {
+  color: #1a1a1a;
+}
+
+.modal-body {
+  padding: 1.5rem;
+}
+
+.review-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.review-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.review-info-item label {
+  font-size: 0.75rem;
+  color: #6b7280;
+  text-transform: uppercase;
+}
+
+.review-info-item span {
+  font-size: 0.9375rem;
+  color: #1a1a1a;
+}
+
+.review-comment-section {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 1rem;
+}
+
+.review-comment-section label {
+  display: block;
+  font-size: 0.75rem;
+  color: #6b7280;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.review-comment-content {
+  background: #f9fafb;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  color: #374151;
+  min-height: 60px;
+  white-space: pre-wrap;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* Modal Buttons - 모달은 fixed position이므로 별도 스코프 필요 */
+.modal-content .btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.modal-content .btn-primary {
+  background: #2563eb;
+  color: #fff;
+}
+
+.modal-content .btn-primary:hover {
+  background: #1d4ed8;
+}
+
+.modal-content .btn-secondary {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.modal-content .btn-secondary:hover {
+  background: #d1d5db;
+}

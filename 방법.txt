@@ -1,0 +1,87 @@
+방법 : 
+
+1
+cd brain_tumor_front
+# npm install // # npm run build
+    # npx tsc -b && npx vite build
+
+
+2
+    # cd ..\docker\ // #cd docker
+cd ../docker/
+
+# docker 볼륨 지우기
+docker compose -f docker-compose.unified.yml down -v
+
+    # python setup.py
+python3 setup.py
+
+
+===================================================
+원격 PC가 Linux라면 Docker 서비스를 시작하는 명령어:
+# Docker 서비스 시작
+sudo systemctl start docker
+
+# Docker 상태 확인
+sudo systemctl status docker
+
+# 부팅 시 자동 시작 설정 (선택)
+sudo systemctl enable docker
+만약 Docker가 설치되지 않았다면:
+
+# Ubuntu/Debian
+sudo apt update
+sudo apt install docker.io docker-compose-plugin -y
+sudo systemctl start docker
+sudo systemctl enable docker
+
+# 현재 사용자를 docker 그룹에 추가 (sudo 없이 사용)
+sudo usermod -aG docker $USER
+===================================================
+
+
+# 2. 그 다음 docker compose 실행
+
+# 방법 A: 스크립트 파일 사용 (권장)
+    # - Windows:
+        .\start.bat
+    # - Linux:
+        #./start.sh
+sed -i 's/\r$//' start.sh
+./start.sh
+
+
+
+# 방법 B: 직접 명령어 실행 (수동으로 실행할 경우)
+# - build: 이미지만 빌드 (컨테이너 시작 안함)
+#   docker compose -f docker-compose.unified.yml build fastapi django
+#
+# - up -d: 백그라운드에서 컨테이너 시작 (기존 이미지 사용)
+#   docker compose -f docker-compose.unified.yml up -d
+#
+# - up -d --build: 이미지 다시 빌드 후 컨테이너 시작 (코드 변경 시 사용)
+#   docker compose -f docker-compose.unified.yml up -d --build
+
+===
+===
+#   
+
+
+docker exec -it nn-django python -m setup_dummy_data --reset -y
+
+===
+# docker exec -it nn-django bash
+# python -m setup_dummy_data
+# docker compose -f docker-compose.unified.yml exec django python -m setup_dummy_data
+===
+
+# docker compose -f docker-compose.unified.yml up -d --build django
+
+
+
+
+docker exec nn-django-db mysql -uroot -proot1234 -e "DROP DATABASE IF EXISTS brain_tumor;"
+docker exec nn-django-db mysql -uroot -proot1234 -e "CREATE DATABASE brain_tumor CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+
+===
+docker compose -f docker-compose.unified.yml up -d --no-deps nginx

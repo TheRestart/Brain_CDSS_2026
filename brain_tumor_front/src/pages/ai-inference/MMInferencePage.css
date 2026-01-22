@@ -1,0 +1,1349 @@
+/* MM Inference Page Styles - M1 Level Design */
+
+.mm-inference-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-height: 100%;
+  padding: 1.5rem;
+}
+
+/* ============================================
+   Page Header with Gradient
+   ============================================ */
+.mm-page-header {
+  background: linear-gradient(135deg, #d97706, #f59e0b);
+  border-radius: 1rem;
+  padding: 1.5rem 2rem;
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(217, 119, 6, 0.3);
+}
+
+.mm-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mm-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.mm-page-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.mm-page-title .title-icon {
+  font-size: 2rem;
+}
+
+.mm-page-subtitle {
+  font-size: 0.875rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+.mm-header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.mm-connection-badges {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.mm-connection-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  backdrop-filter: blur(4px);
+}
+
+.mm-status-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+}
+
+.mm-status-dot.connected {
+  background-color: #4ade80;
+  box-shadow: 0 0 6px #4ade80;
+}
+
+.mm-status-dot.disconnected {
+  background-color: #f87171;
+  box-shadow: 0 0 6px #f87171;
+}
+
+/* ============================================
+   Main Grid Layout (2 Columns)
+   ============================================ */
+.mm-main-grid {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (max-width: 1200px) {
+  .mm-main-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Left Panel */
+.mm-left-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Right Panel */
+.mm-right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* ============================================
+   Patient Selection Card
+   ============================================ */
+.mm-patient-card {
+  background: var(--bg-card, white);
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1.25rem;
+}
+
+.mm-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.mm-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-main, #1f2937);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mm-card-title .card-icon {
+  color: #d97706;
+}
+
+.mm-research-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.mm-research-toggle input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+  accent-color: #d97706;
+  cursor: pointer;
+}
+
+.mm-toggle-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-main, #1f2937);
+}
+
+.mm-toggle-hint {
+  font-size: 0.6875rem;
+  color: var(--text-sub, #6b7280);
+}
+
+.mm-patient-select {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  border: 1px solid var(--border-color, #d1d5db);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  background: white;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.mm-patient-select:focus {
+  outline: none;
+  border-color: #d97706;
+  box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15);
+}
+
+.mm-patient-select:disabled {
+  background: var(--bg-secondary, #f3f4f6);
+  cursor: not-allowed;
+}
+
+.mm-research-notice {
+  margin-top: 0.75rem;
+  padding: 0.625rem;
+  background: #fffbeb;
+  border: 1px solid #fcd34d;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  color: #92400e;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+/* ============================================
+   Modality Selection Cards
+   ============================================ */
+.mm-modality-section {
+  background: var(--bg-card, white);
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1.25rem;
+}
+
+.mm-modality-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.mm-modality-card {
+  border: 2px solid var(--border-color, #e5e7eb);
+  border-radius: 0.5rem;
+  padding: 0.875rem;
+  transition: all 0.2s;
+  background: white;
+}
+
+.mm-modality-card:hover {
+  border-color: #d1d5db;
+}
+
+.mm-modality-card.selected {
+  border-color: #d97706;
+  background: #fffbeb;
+}
+
+.mm-modality-card.mri.selected {
+  border-color: #2563eb;
+  background: #eff6ff;
+}
+
+.mm-modality-card.gene.selected {
+  border-color: #9333ea;
+  background: #faf5ff;
+}
+
+.mm-modality-card.protein.selected {
+  border-color: #d97706;
+  background: #fffbeb;
+}
+
+.mm-modality-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.mm-modality-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: var(--text-main, #1f2937);
+  margin: 0;
+  font-size: 0.9375rem;
+}
+
+.mm-modality-icon {
+  font-size: 1.25rem;
+}
+
+.mm-modality-icon.mri { color: #2563eb; }
+.mm-modality-icon.gene { color: #9333ea; }
+.mm-modality-icon.protein { color: #d97706; }
+
+.mm-selected-check {
+  color: #16a34a;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.mm-modality-select {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border-color, #d1d5db);
+  border-radius: 0.375rem;
+  font-size: 0.8125rem;
+  background: white;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.mm-modality-card.mri .mm-modality-select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+.mm-modality-card.gene .mm-modality-select:focus {
+  border-color: #9333ea;
+  box-shadow: 0 0 0 2px rgba(147, 51, 234, 0.2);
+}
+
+.mm-modality-card.protein .mm-modality-select:focus {
+  border-color: #d97706;
+  box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.2);
+}
+
+.mm-modality-count {
+  font-size: 0.6875rem;
+  color: var(--text-sub, #6b7280);
+  margin: 0.375rem 0 0 0;
+}
+
+/* ============================================
+   Inference Action Section
+   ============================================ */
+.mm-inference-section {
+  background: var(--bg-card, white);
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1.25rem;
+}
+
+.mm-modality-summary {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.mm-modality-summary .count {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #d97706;
+}
+
+.mm-modality-summary .label {
+  font-size: 0.875rem;
+  color: var(--text-sub, #6b7280);
+}
+
+.mm-modality-summary .recommendation {
+  display: block;
+  font-size: 0.75rem;
+  color: #d97706;
+  margin-top: 0.25rem;
+}
+
+.mm-btn-inference {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.875rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  color: white;
+  background: linear-gradient(135deg, #d97706, #f59e0b);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 4px rgba(217, 119, 6, 0.3);
+}
+
+.mm-btn-inference:hover:not(:disabled) {
+  background: linear-gradient(135deg, #b45309, #d97706);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(217, 119, 6, 0.4);
+}
+
+.mm-btn-inference:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ============================================
+   Processing State
+   ============================================ */
+.mm-processing-container {
+  background: linear-gradient(135deg, #fffbeb, #fef3c7);
+  border: 1px solid #fcd34d;
+  border-radius: 0.75rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+.mm-spinner {
+  width: 3rem;
+  height: 3rem;
+  border: 3px solid #fcd34d;
+  border-top-color: #d97706;
+  border-radius: 50%;
+  animation: mm-spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes mm-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.mm-processing-text {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #92400e;
+  margin: 0 0 0.25rem 0;
+}
+
+.mm-processing-subtext {
+  font-size: 0.875rem;
+  color: #b45309;
+  margin: 0;
+}
+
+.mm-job-id-display {
+  margin-top: 1rem;
+  font-size: 0.75rem;
+  color: var(--text-sub, #6b7280);
+}
+
+/* ============================================
+   Result Viewer (Integrated)
+   ============================================ */
+.mm-result-viewer {
+  background: var(--bg-card, white);
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.mm-result-header {
+  background: linear-gradient(135deg, #d97706, #f59e0b);
+  padding: 1rem 1.25rem;
+  color: white;
+}
+
+.mm-result-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mm-result-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mm-result-patient-id {
+  font-size: 0.8125rem;
+  opacity: 0.9;
+}
+
+.mm-cached-badge {
+  padding: 0.25rem 0.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 0.25rem;
+  font-size: 0.6875rem;
+  font-weight: 500;
+}
+
+/* Result Tabs */
+.mm-result-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border-color, #e5e7eb);
+  background: var(--bg-secondary, #f9fafb);
+}
+
+.mm-result-tab {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-sub, #6b7280);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.mm-result-tab:hover {
+  color: #d97706;
+  background: #fffbeb;
+}
+
+.mm-result-tab.active {
+  color: #d97706;
+  border-bottom-color: #d97706;
+  background: white;
+}
+
+.mm-result-content {
+  padding: 1.25rem;
+}
+
+/* ============================================
+   Summary Tab Styles
+   ============================================ */
+.mm-modalities-used {
+  margin-bottom: 1.25rem;
+}
+
+.mm-modalities-used h4 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-main, #1f2937);
+  margin: 0 0 0.5rem 0;
+}
+
+.mm-modality-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.mm-modality-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+.mm-modality-tag.mri {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.mm-modality-tag.gene {
+  background: #f3e8ff;
+  color: #7e22ce;
+}
+
+.mm-modality-tag.protein {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.mm-modality-tag.clinical {
+  background: #dcfce7;
+  color: #166534;
+}
+
+/* Risk Group Display */
+.mm-risk-group-section {
+  margin-bottom: 1.5rem;
+}
+
+.mm-risk-group-section h4 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-main, #1f2937);
+  margin: 0 0 0.75rem 0;
+}
+
+.mm-risk-display {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.mm-risk-badge {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: white;
+}
+
+.mm-risk-badge.low {
+  background: linear-gradient(135deg, #22c55e, #4ade80);
+}
+
+.mm-risk-badge.medium {
+  background: linear-gradient(135deg, #f59e0b, #fbbf24);
+}
+
+.mm-risk-badge.high {
+  background: linear-gradient(135deg, #ef4444, #f87171);
+}
+
+.mm-risk-probabilities {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.mm-prob-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mm-prob-label {
+  width: 60px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-sub, #6b7280);
+  text-transform: capitalize;
+}
+
+.mm-prob-bar-wrapper {
+  flex: 1;
+  height: 0.5rem;
+  background: var(--bg-secondary, #e5e7eb);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.mm-prob-bar {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.5s ease-out;
+}
+
+.mm-prob-bar.low { background: #22c55e; }
+.mm-prob-bar.medium { background: #f59e0b; }
+.mm-prob-bar.high { background: #ef4444; }
+
+.mm-prob-value {
+  width: 45px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-main, #1f2937);
+  text-align: right;
+}
+
+/* Summary Cards */
+.mm-summary-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 600px) {
+  .mm-summary-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mm-summary-card {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border-left: 4px solid;
+}
+
+.mm-summary-card.survival {
+  background: #eff6ff;
+  border-left-color: #2563eb;
+}
+
+.mm-summary-card.recurrence {
+  background: #fdf2f8;
+  border-left-color: #ec4899;
+}
+
+.mm-summary-card.tmz {
+  background: #ecfdf5;
+  border-left-color: #10b981;
+}
+
+.mm-summary-card.os-days {
+  background: #f5f3ff;
+  border-left-color: #8b5cf6;
+}
+
+.mm-summary-card-title {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-sub, #6b7280);
+  margin: 0 0 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.mm-summary-card-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.mm-summary-card.survival .mm-summary-card-value { color: #1e40af; }
+.mm-summary-card.recurrence .mm-summary-card-value { color: #be185d; }
+.mm-summary-card.tmz .mm-summary-card-value { color: #059669; }
+.mm-summary-card.os-days .mm-summary-card-value { color: #6d28d9; }
+
+.mm-summary-card-sub {
+  font-size: 0.75rem;
+  color: var(--text-sub, #6b7280);
+  margin: 0.25rem 0 0 0;
+}
+
+/* ============================================
+   Survival Analysis Tab
+   ============================================ */
+.mm-survival-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.mm-survival-section h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-main, #1f2937);
+  margin: 0 0 1rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #d97706;
+}
+
+.mm-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 600px) {
+  .mm-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mm-stat-item {
+  background: var(--bg-secondary, #f9fafb);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+.mm-stat-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-sub, #6b7280);
+  margin: 0 0 0.5rem 0;
+}
+
+.mm-stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-main, #1f2937);
+  margin: 0;
+}
+
+.mm-stat-value.highlight {
+  color: #d97706;
+}
+
+.mm-stat-item.cindex {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, #fffbeb, #fef3c7);
+  border: 1px solid #fcd34d;
+}
+
+.mm-stat-value.cindex-value {
+  color: #92400e;
+}
+
+/* OS Days Display */
+.mm-os-display {
+  text-align: center;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f5f3ff, #ede9fe);
+  border-radius: 0.75rem;
+}
+
+.mm-os-main {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.mm-os-value {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #6d28d9;
+}
+
+.mm-os-unit {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #8b5cf6;
+}
+
+.mm-os-detail {
+  font-size: 0.875rem;
+  color: var(--text-sub, #6b7280);
+  margin-top: 0.25rem;
+}
+
+.mm-os-ci {
+  font-size: 0.75rem;
+  color: var(--text-sub, #6b7280);
+  margin-top: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  background: rgba(139, 92, 246, 0.1);
+  border-radius: 0.25rem;
+  display: inline-block;
+}
+
+/* ============================================
+   Predictions Tab (Circular Progress)
+   ============================================ */
+.mm-predictions-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.mm-prediction-group {
+  text-align: center;
+}
+
+.mm-prediction-group h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-main, #1f2937);
+  margin: 0 0 1rem 0;
+}
+
+.mm-prediction-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.mm-prediction-class {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.mm-prediction-class.recurrence {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.mm-prediction-class.no-recurrence {
+  background: #ecfdf5;
+  color: #059669;
+}
+
+.mm-prediction-class.responder {
+  background: #ecfdf5;
+  color: #059669;
+}
+
+.mm-prediction-class.non-responder {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.mm-prediction-prob {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mm-prob-circle {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.mm-prob-circle svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.mm-prob-circle circle {
+  fill: none;
+  stroke-width: 8;
+  stroke-linecap: round;
+}
+
+.mm-prob-circle .bg-circle {
+  stroke: #e5e7eb;
+}
+
+.mm-prob-circle .progress-circle {
+  transition: stroke-dasharray 0.5s ease-out;
+}
+
+.mm-prob-circle .progress-circle.warning {
+  stroke: #f59e0b;
+}
+
+.mm-prob-circle .progress-circle.danger {
+  stroke: #ef4444;
+}
+
+.mm-prob-circle .progress-circle.success {
+  stroke: #22c55e;
+}
+
+.mm-prob-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main, #1f2937);
+}
+
+.mm-prob-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-sub, #6b7280);
+}
+
+/* ============================================
+   Recommendation Section
+   ============================================ */
+.mm-recommendation-section {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: linear-gradient(135deg, #fffbeb, #fef3c7);
+  border: 1px solid #fcd34d;
+  border-radius: 0.5rem;
+}
+
+.mm-recommendation-section h4 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #92400e;
+  margin: 0 0 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.mm-recommendation-text {
+  font-size: 0.875rem;
+  color: #78350f;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ============================================
+   Metadata Section
+   ============================================ */
+.mm-metadata-section {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color, #e5e7eb);
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.mm-metadata-item {
+  font-size: 0.75rem;
+}
+
+.mm-meta-label {
+  color: var(--text-sub, #6b7280);
+}
+
+.mm-meta-value {
+  color: var(--text-main, #1f2937);
+  font-weight: 500;
+  margin-left: 0.25rem;
+}
+
+/* ============================================
+   Empty State
+   ============================================ */
+.mm-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  text-align: center;
+  background: var(--bg-secondary, #f9fafb);
+  border-radius: 0.75rem;
+  min-height: 400px;
+}
+
+.mm-empty-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.mm-empty-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-main, #1f2937);
+  margin: 0 0 0.5rem 0;
+}
+
+.mm-empty-text {
+  font-size: 0.875rem;
+  color: var(--text-sub, #6b7280);
+  margin: 0;
+  max-width: 300px;
+}
+
+/* ============================================
+   Error Container
+   ============================================ */
+.mm-error-container {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+}
+
+.mm-error-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #991b1b;
+  margin: 0 0 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mm-error-message {
+  font-size: 0.875rem;
+  color: #dc2626;
+  margin: 0;
+}
+
+/* ============================================
+   History Section
+   ============================================ */
+.mm-history-section {
+  margin-top: 0.5rem;
+}
+
+.mm-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.mm-section-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-main, #1f2937);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mm-btn-clear {
+  font-size: 0.8125rem;
+  color: #dc2626;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.375rem;
+  transition: background-color 0.2s;
+}
+
+.mm-btn-clear:hover {
+  background: #fef2f2;
+}
+
+/* History Table */
+.mm-history-table-container {
+  background: var(--bg-card, white);
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.mm-history-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.mm-history-table thead {
+  background: linear-gradient(135deg, #fffbeb, #fef3c7);
+}
+
+.mm-history-table th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #92400e;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.mm-history-table tbody tr {
+  border-top: 1px solid var(--border-color, #e5e7eb);
+  transition: background-color 0.2s;
+}
+
+.mm-history-table tbody tr:hover {
+  background: var(--bg-secondary, #f9fafb);
+}
+
+.mm-history-table tbody tr.selected {
+  background: #fffbeb;
+}
+
+.mm-history-table td {
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: var(--text-main, #1f2937);
+}
+
+/* Modality Badges in Table */
+.mm-history-modality-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.mm-history-badge {
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-size: 0.625rem;
+  font-weight: 600;
+}
+
+.mm-history-badge.mri {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.mm-history-badge.gene {
+  background: #f3e8ff;
+  color: #7e22ce;
+}
+
+.mm-history-badge.protein {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+/* Status Badges */
+.mm-status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.mm-status-badge.completed {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.mm-status-badge.processing {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.mm-status-badge.pending {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.mm-status-badge.failed {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* Action Buttons */
+.mm-action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.mm-btn-action {
+  padding: 0.375rem 0.625rem;
+  background: none;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.mm-btn-action.view {
+  color: #d97706;
+}
+
+.mm-btn-action.view:hover {
+  background: #fffbeb;
+  color: #b45309;
+}
+
+.mm-btn-action.detail {
+  color: #059669;
+}
+
+.mm-btn-action.detail:hover {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.mm-btn-action.delete {
+  color: #dc2626;
+}
+
+.mm-btn-action.delete:hover {
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+/* Text Helpers */
+.mm-text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 120px;
+  display: block;
+}
+
+/* Empty History */
+.mm-empty-history {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-sub, #6b7280);
+  font-size: 0.875rem;
+}
+
+/* ============================================
+   Loading State
+   ============================================ */
+.mm-loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+}
+
+.mm-loading-spinner {
+  width: 3rem;
+  height: 3rem;
+  border: 3px solid #fcd34d;
+  border-top-color: #d97706;
+  border-radius: 50%;
+  animation: mm-spin 1s linear infinite;
+}
+
+.mm-loading-text {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: var(--text-sub, #6b7280);
+}
+
+/* ============================================
+   Responsive Adjustments
+   ============================================ */
+@media (max-width: 1200px) {
+  .mm-main-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mm-left-panel {
+    order: 1;
+  }
+
+  .mm-right-panel {
+    order: 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .mm-page-header {
+    padding: 1rem 1.25rem;
+  }
+
+  .mm-header-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .mm-page-title {
+    font-size: 1.5rem;
+  }
+
+  .mm-connection-badges {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .mm-prediction-display {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .mm-risk-display {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .mm-os-value {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mm-summary-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .mm-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mm-result-tabs {
+    flex-wrap: wrap;
+  }
+
+  .mm-result-tab {
+    flex: 1 1 50%;
+  }
+}

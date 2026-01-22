@@ -1,0 +1,117 @@
+/* 공통 카드 스타일 */
+.summary-card {
+  flex: 1;
+  padding: 16px;
+  border-radius: 8px;
+  text-align: center;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+}
+
+.summary-container {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* 라벨 */
+.summary-card .label {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 6px;
+}
+
+/* 숫자 */
+.summary-card .count {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* 총 검사 */
+.summary-card.total {
+  border-left: 4px solid #333;
+}
+/* 공통 카드 */
+.summary-card {
+  flex: 1;
+  padding: 16px;
+  border-radius: 8px;
+  text-align: center;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+}
+
+/* 라벨 */
+.summary-card .label {
+  font-size: 0.875rem;
+  color: #666;
+  margin-bottom: 6px;
+}
+
+/* 숫자 */
+.summary-card .count {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* 총 검사 */
+.summary-card.total {
+  border-left: 4px solid #333;
+}
+.summary-card.total .count {
+  color: #333;
+}
+
+/* 진행 중 */
+.summary-card.in-progress {
+  border-left: 4px solid #339af0;
+}
+.summary-card.in-progress .count {
+  color: #339af0;
+}
+
+/* 결과 대기 */
+.summary-card.waiting {
+  border-left: 4px solid #ff6b6b;
+}
+.summary-card.waiting .count {
+  color: #ff6b6b;
+}
+
+/* 확정 완료 */
+.summary-card.confirmed {
+  border-left: 4px solid #51cf66;
+}
+.summary-card.confirmed .count {
+  color: #51cf66;
+}
+
+/* 판독 대기 */
+.summary-card.waiting .count {
+  color: #ff6b6b;
+}
+
+/* 판독 완료 */
+.summary-card.confirmed {
+  border-left: 4px solid #27ae60;
+}
+.summary-card.confirmed .count {
+  color: #27ae60;
+}
+
+/* 진행 중 */
+.summary-card.in-progress {
+  border-left: 4px solid #339af0;
+}
+.summary-card.in-progress .count {
+  color: #339af0;
+}
+
+/* 결과 대기 */
+.summary-card.waiting {
+  border-left: 4px solid #ff6b6b;
+}
+.summary-card.waiting .count {
+  color: #ff6b6b;
+}

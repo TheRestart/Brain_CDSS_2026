@@ -1,0 +1,26 @@
+[
+  {
+    "model": "menus.menupermission",
+    "pk": 1,
+    "fields": {
+      "menu": "DASHBOARD",
+      "permission": 1
+    }
+  },
+  {
+    "model": "menus.menupermission",
+    "pk": 2,
+    "fields": {
+      "menu": "PATIENT_LIST",
+      "permission": 2
+    }
+  },
+  {
+    "model": "menus.menupermission",
+    "pk": 3,
+    "fields": {
+      "menu": "PATIENT_DETAIL",
+      "permission": 3
+    }
+  }
+]

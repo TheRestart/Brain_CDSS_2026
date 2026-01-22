@@ -1,0 +1,418 @@
+.page {
+  animation: fadeIn 0.25s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 전체 레이아웃 */
+/* Header(최상단 영역) */
+.app-header {
+  position: relative;
+  height: 56px;
+
+  background-color: var(--header-bg);
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+
+  padding: 0 24px;
+
+  box-shadow:
+    inset 0 -1px 0 rgba(255,255,255,0.15),
+    0 1px 4px rgba(0,0,0,0.12);
+}
+
+.app-header::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.header-left {
+  display: flex;          /* 가로 배치 */
+  align-items: center;    /* 세로 중앙 정렬 */
+  gap: 8px;               /* 요소 사이 간격 */
+}
+
+.system-title {
+  display: flex;
+  flex-direction: column; /* 병원명 + 시스템명은 세로로 */
+}
+.system-title strong {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.system-title span {
+  font-size: 12px;
+  color: #64748b;
+}
+
+/* 로고 사이즈 조절*/
+.system-logo {
+  width: 20px;
+  height: 20px;
+}
+
+.divider {
+  color: #ccc;
+  margin: 0 6px;
+}
+
+.timer-display {
+  display: flex; 
+  justify-content: flex-end;
+  align-items: center; 
+  line-height: 1;
+  padding-top: 1%;
+}
+
+.timer-display span {
+  display: flex;
+  align-items: center;
+}
+
+.current-time {
+  margin-right: 12px;
+}
+.session-timer {
+  margin-left: 12px;
+}
+.current-time,
+.session-timer {
+  font-size: 14px;
+  color: #475569;
+}
+/* Header 아래 영역 */
+.app-layout {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  flex-direction: column;
+}
+
+/* 햄버거 버튼 */
+.hamburger-btn {
+  background: none;
+  border: none;
+  font-size: 20px;   /* 아이콘 크기 */
+  cursor: pointer;
+  margin-right: 12px;
+  color: #333;       /* 기본 아이콘 색상 지정 */
+
+  width: auto;
+  padding: 0;        /* 기본 패딩 제거 */
+  line-height: 1;    /* 세로 크기 줄이기 */
+}
+
+/* 햄버거 버튼 hover 시 스타일 */
+.hamburger-btn:hover {
+  background-color: #f1f5f9; /* 버튼 배경색 살짝 추가 */
+  border-radius: 4px;      /* 둥근 모서리 */
+  color: #333;       /* 기본 아이콘 색상 지정 */
+}
+
+
+/* 좌측 AppBar (Sidebar) */
+.sidebar {
+  width: 240px;
+  flex-shrink: 0;
+
+  display: flex;             /* 내부 아이템 정렬 가능 */
+  flex-direction: column;    /* 세로로 메뉴 배치 */
+  padding: 12px 0;           /* 위아래 여백 */
+  box-sizing: border-box;
+
+  height: 100%;              /* 부모(app-body) 높이에 맞추기 */
+  overflow-y: auto;          /* 메뉴가 많으면 스크롤 */
+  
+  background-color: var(--sidebar-bg); /* 사이드바 배경색 */
+  border-right: 1px solid var(--sidebar-border);
+
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar-nav {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.sidebar.closed {
+  transform: translateX(-100%); /* 왼쪽으로 숨김 */
+}
+
+
+/* 우측 메인 영역 */
+.app-main {
+  flex: 1;
+  min-width: 0;   /* 내용이 넘칠 때를 대비 */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.app-body {
+  flex: 1;          
+  min-width: 0;     /* 내부 overflow 방지 */
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+
+}
+
+/* 실제 페이지 영역 */
+.app-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: #f8fafc;
+}
+
+/* 세션 연장 모달 */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal {
+  width: 360px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 20px 40px rgba(0,0,0,.2);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+
+/* Breadcrumb 컨테이너 */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-left: 24px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #1f2937; /* gray-800 */
+
+  white-space: nowrap;
+}
+
+/* 개별 breadcrumb 아이템 */
+.breadcrumb span {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* 링크 (이전 경로) */
+.breadcrumb a {
+  color: #4f46e5; /* indigo-600 */
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+/* 구분자 */
+.breadcrumb .sep {
+  margin: 0 6px;
+  color: #9ca3af; /* gray-400 */
+  font-weight: 400;
+}
+
+/* 현재 페이지 (마지막 breadcrumb) */
+.breadcrumb span:last-child span {
+  color: #111827; /* 거의 블랙 */
+  font-weight: 700;
+}
+
+/* ============================================
+   모바일 반응형 (768px 이하)
+   ============================================ */
+@media (max-width: 768px) {
+  /* 헤더 */
+  .app-header {
+    padding: 0 12px;
+    height: 52px;
+  }
+
+  .system-title strong {
+    font-size: 12px;
+  }
+
+  .system-title span {
+    font-size: 10px;
+  }
+
+  .timer-display {
+    display: none;
+  }
+
+  .breadcrumb {
+    display: none;
+  }
+
+  /* 사이드바 - 모바일에서 오버레이 방식 */
+  .sidebar {
+    position: fixed;
+    top: 52px;
+    left: 0;
+    bottom: 0;
+    z-index: 1000;
+    width: 280px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.15);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  /* 사이드바 백드롭 */
+  .sidebar-backdrop {
+    position: fixed;
+    inset: 0;
+    top: 52px;
+    background: rgba(0,0,0,0.3);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+  }
+
+  .sidebar-backdrop.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* 메인 컨텐츠 */
+  .app-content {
+    padding: 0;
+  }
+
+  /* 햄버거 버튼 크기 조정 */
+  .hamburger-btn {
+    font-size: 24px;
+    padding: 8px;
+  }
+}
+
+/* ============================================
+   작은 모바일 (480px 이하)
+   ============================================ */
+@media (max-width: 480px) {
+  .app-header {
+    padding: 0 8px;
+    height: 48px;
+  }
+
+  .system-logo {
+    width: 16px;
+    height: 16px;
+  }
+
+  .system-title strong {
+    font-size: 11px;
+  }
+
+  .system-title span {
+    display: none;
+  }
+
+  .sidebar {
+    top: 48px;
+    width: 260px;
+  }
+
+  .sidebar-backdrop {
+    top: 48px;
+  }
+}
+
+/* ============================================
+   인쇄 스타일
+   ============================================ */
+@media print {
+  /* 기본 페이지 설정 */
+  @page {
+    size: A4;
+    margin: 10mm;
+  }
+
+  /* 레이아웃 요소 숨김 */
+  .app-header,
+  .sidebar,
+  .breadcrumb,
+  .hamburger-btn {
+    display: none !important;
+  }
+
+  /* 앱 레이아웃 초기화 */
+  .app-layout {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .app-body {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* 컨텐츠 영역 전체 너비로 확장 */
+  .app-content {
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    background: white !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* 스크롤바 숨김 */
+  * {
+    overflow: visible !important;
+  }
+
+  /* 모달, 토스트 등 숨김 */
+  .modal-backdrop,
+  .toast-container,
+  [class*="notification"],
+  [class*="Toast"] {
+    display: none !important;
+  }
+
+  /* no-print 클래스 숨김 */
+  .no-print {
+    display: none !important;
+  }
+}

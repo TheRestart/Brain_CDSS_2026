@@ -1,0 +1,132 @@
+/* Dashboard Header with Role Icon */
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  background: var(--card-bg);
+  border-radius: var(--radius-lg, 12px);
+  margin-bottom: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border-left: 4px solid var(--primary);
+}
+
+.dashboard-header .header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.dashboard-header .header-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--role-color, var(--primary)) 0%, var(--role-color-light, var(--primary-light)) 100%);
+  color: white;
+  flex-shrink: 0;
+}
+
+.dashboard-header .header-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.dashboard-header .header-text h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.3;
+}
+
+.dashboard-header .header-text p {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: var(--text-sub);
+}
+
+.dashboard-header .header-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* Role-specific colors */
+.dashboard-header.role-lis {
+  border-left-color: #8b5cf6;
+  --role-color: #8b5cf6;
+  --role-color-light: #a78bfa;
+}
+
+.dashboard-header.role-ris {
+  border-left-color: #06b6d4;
+  --role-color: #06b6d4;
+  --role-color-light: #22d3ee;
+}
+
+.dashboard-header.role-doctor {
+  border-left-color: #3b82f6;
+  --role-color: #3b82f6;
+  --role-color-light: #60a5fa;
+}
+
+.dashboard-header.role-nurse {
+  border-left-color: #ec4899;
+  --role-color: #ec4899;
+  --role-color-light: #f472b6;
+}
+
+.dashboard-header.role-admin {
+  border-left-color: #f59e0b;
+  --role-color: #f59e0b;
+  --role-color-light: #fbbf24;
+}
+
+.dashboard-header.role-patient {
+  border-left-color: #10b981;
+  --role-color: #10b981;
+  --role-color-light: #34d399;
+}
+
+.dashboard-header.role-external {
+  border-left-color: #6366f1;
+  --role-color: #6366f1;
+  --role-color-light: #818cf8;
+}
+
+.dashboard-header.role-system {
+  border-left-color: #64748b;
+  --role-color: #64748b;
+  --role-color-light: #94a3b8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .dashboard-header .header-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .dashboard-header .header-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .dashboard-header .header-text h1 {
+    font-size: 18px;
+  }
+
+  .dashboard-header .header-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}

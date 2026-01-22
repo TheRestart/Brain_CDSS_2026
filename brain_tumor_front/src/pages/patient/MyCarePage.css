@@ -1,0 +1,437 @@
+/* MyCarePage.css - 환자 포털 공통 스타일 */
+
+.my-care {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 섹션 공통 */
+.my-exam-list,
+.my-visit-list,
+.my-summary {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.section-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #1a1a2e;
+}
+
+/* 필터 탭 */
+.filter-tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.filter-tab {
+  padding: 6px 16px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+}
+
+.filter-tab:hover {
+  border-color: #4a90d9;
+  color: #4a90d9;
+}
+
+.filter-tab.active {
+  background: #4a90d9;
+  border-color: #4a90d9;
+  color: #fff;
+}
+
+/* 테이블 */
+.exam-table-wrapper {
+  overflow-x: auto;
+}
+
+.exam-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.exam-table th,
+.exam-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.exam-table th {
+  background: #f8f9fa;
+  font-weight: 600;
+  color: #495057;
+  white-space: nowrap;
+}
+
+.exam-table tbody tr:hover {
+  background: #f8f9fa;
+}
+
+/* 방문 기록 테이블 */
+.visit-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.visit-table th,
+.visit-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.visit-table th {
+  background: #f8f9fa;
+  font-weight: 600;
+  color: #495057;
+  white-space: nowrap;
+}
+
+.visit-table tbody tr:hover {
+  background: #f8f9fa;
+}
+
+/* 배지 */
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.badge-ris {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.badge-lis {
+  background: #f3e5f5;
+  color: #7b1fa2;
+}
+
+.badge-outpatient {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.badge-inpatient {
+  background: #fff3e0;
+  color: #ef6c00;
+}
+
+.badge-emergency {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.badge-scheduled {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.badge-completed {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.badge-cancelled {
+  background: #f5f5f5;
+  color: #757575;
+}
+
+/* 상태 표시 */
+.loading-state,
+.error-state,
+.empty-state {
+  padding: 40px;
+  text-align: center;
+  color: #6c757d;
+}
+
+.error-state {
+  color: #dc3545;
+}
+
+.empty-state p {
+  margin: 0;
+}
+
+/* 페이지네이션 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #eee;
+}
+
+.page-btn {
+  padding: 6px 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+}
+
+.page-btn:hover:not(:disabled) {
+  border-color: #4a90d9;
+  color: #4a90d9;
+}
+
+.page-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.page-info {
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+
+.total-count {
+  text-align: right;
+  font-size: 0.875rem;
+  color: #6c757d;
+  margin-top: 12px;
+}
+
+/* 요약 카드 */
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.summary-card {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+}
+
+.summary-card .card-label {
+  display: block;
+  font-size: 0.875rem;
+  color: #6c757d;
+  margin-bottom: 8px;
+}
+
+.summary-card .card-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+/* 오늘 일정 */
+.today-schedule {
+  background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+  color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.today-schedule h3 {
+  margin: 0 0 16px 0;
+  font-size: 1rem;
+}
+
+.schedule-item {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 8px;
+}
+
+.schedule-item:last-child {
+  margin-bottom: 0;
+}
+
+.schedule-time {
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+.schedule-info {
+  opacity: 0.9;
+}
+
+.no-schedule {
+  text-align: center;
+  padding: 20px;
+  opacity: 0.8;
+}
+
+.schedule-complaint {
+  font-size: 0.875rem;
+  opacity: 0.85;
+  margin-top: 6px;
+}
+
+/* 환자 정보 카드 */
+.patient-info-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.patient-info-card h2 {
+  margin: 0 0 16px 0;
+  font-size: 1.25rem;
+  color: #1a1a2e;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-label {
+  font-size: 0.75rem;
+  color: #6c757d;
+  text-transform: uppercase;
+}
+
+.info-value {
+  font-size: 1rem;
+  color: #1a1a2e;
+  font-weight: 500;
+}
+
+/* 주의사항 섹션 */
+.alerts-section {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.alerts-section h3 {
+  margin: 0 0 16px 0;
+  font-size: 1.1rem;
+  color: #1a1a2e;
+}
+
+.alerts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.alert-item {
+  border-radius: 6px;
+  padding: 12px;
+  border-left: 4px solid #6c757d;
+  background: #f8f9fa;
+}
+
+.alert-item.severity-high {
+  border-left-color: #dc3545;
+  background: #fff5f5;
+}
+
+.alert-item.severity-medium {
+  border-left-color: #ffc107;
+  background: #fffbf0;
+}
+
+.alert-item.severity-low {
+  border-left-color: #28a745;
+  background: #f0fff4;
+}
+
+.alert-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.alert-type {
+  font-size: 0.75rem;
+  color: #6c757d;
+  text-transform: uppercase;
+}
+
+.alert-severity {
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.alert-severity.severity-high {
+  background: #dc3545;
+  color: #fff;
+}
+
+.alert-severity.severity-medium {
+  background: #ffc107;
+  color: #212529;
+}
+
+.alert-severity.severity-low {
+  background: #28a745;
+  color: #fff;
+}
+
+.alert-title {
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 4px;
+}
+
+.alert-description {
+  font-size: 0.875rem;
+  color: #495057;
+}
+
+/* 방문 기록 테이블 wrapper */
+.visit-table-wrapper {
+  overflow-x: auto;
+}
+
+/* 진행중 배지 */
+.badge-in-progress {
+  background: #fff3e0;
+  color: #ef6c00;
+}

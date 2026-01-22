@@ -1,0 +1,264 @@
+# =============================================================
+# docker-compose.unified.yml - Single VM Unified Deployment
+# =============================================================
+# Django + FastAPI + All Infrastructure on ONE GPU VM
+#
+# Usage:
+#   docker compose -f docker-compose.unified.yml up -d --build
+#
+# React 빌드 후 자동 반영:
+#   cd ../brain_tumor_front && npm run build
+#   (dist/ 폴더가 Nginx에 마운트되어 즉시 반영됨)
+#
+# 자동 시작: 모든 서비스에 restart: always 설정
+#   VM 재시작 시 Docker 서비스가 자동으로 모든 컨테이너 시작
+#   (sudo systemctl enable docker 필요)
+# =============================================================
+
+services:
+  # --- Nginx (Reverse Proxy + React SPA) ---
+  nginx:
+    image: nginx:alpine
+    container_name: nn-nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ../brain_tumor_front/dist:/usr/share/nginx/html:ro
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+      - django_static:/app/static:ro
+      - django_media:/app/media:ro
+    depends_on:
+      django:
+        condition: service_healthy
+      fastapi:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost/nginx-health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - medical-net
+
+  # --- Django Application ---
+  django:
+    build:
+      context: ../brain_tumor_back
+      dockerfile: Dockerfile
+    image: nn-django:latest
+    container_name: nn-django
+    restart: always
+    depends_on:
+      django-db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    environment:
+      # Django Settings
+      - DJANGO_SETTINGS_MODULE=config.settings
+      - DEBUG=${DJANGO_DEBUG:-False}
+      - SECRET_KEY=${DJANGO_SECRET_KEY:-your-secret-key-change-in-production}
+      - ALLOWED_HOSTS=${DJANGO_ALLOWED_HOSTS:-*}
+      # Database
+      - MYSQL_HOST=django-db
+      - MYSQL_PORT=3306
+      - MYSQL_DB=${DJANGO_DB_NAME:-brain_tumor}
+      - MYSQL_USER=${DJANGO_DB_USER:-root}
+      - MYSQL_PASSWORD=${DJANGO_DB_PASS:-root1234}
+      # Redis (통합 Redis 사용)
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_URL=redis://redis:6379/0
+      # Email
+      - EMAIL_HOST_USER=${EMAIL_HOST_USER:-}
+      - EMAIL_HOST_PASSWORD=${EMAIL_HOST_PASSWORD:-}
+      # External Services (같은 VM 내 Docker 서비스)
+      - FASTAPI_URL=http://fastapi:9000
+      - ORTHANC_URL=http://orthanc:8042
+    volumes:
+      - ../brain_tumor_back:/app
+      - ../CDSS_STORAGE:/CDSS_STORAGE
+      - ../patient_data:/patient_data
+      - django_static:/app/static
+      - django_media:/app/media
+    command: >
+      sh -c "python manage.py migrate --noinput &&
+             python manage.py collectstatic --noinput &&
+             daphne -b 0.0.0.0 -p 8000 config.asgi:application"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health/"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    networks:
+      - medical-net
+
+  # --- Django Database (MySQL) ---
+  django-db:
+    image: mysql:8.0
+    container_name: nn-django-db
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DJANGO_DB_ROOT_PASS:-root1234}
+      - MYSQL_DATABASE=${DJANGO_DB_NAME:-brain_tumor}
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --default-authentication-plugin=mysql_native_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - django_db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DJANGO_DB_ROOT_PASS:-root1234}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    networks:
+      - medical-net
+
+  # --- Redis (Unified - Cache + Celery Broker/Backend) ---
+  # DB 0: Django Cache
+  # DB 1: Celery Broker
+  # DB 2: Celery Result Backend
+  redis:
+    image: redis:7-alpine
+    container_name: nn-redis
+    restart: always
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes --maxmemory 1gb --maxmemory-policy allkeys-lru
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - medical-net
+
+  # --- Orthanc (DICOM/PACS Server) ---
+  orthanc:
+    image: orthancteam/orthanc:latest
+    container_name: nn-orthanc
+    restart: always
+    ports:
+      - "8042:8042"
+      - "4242:4242"
+    environment:
+      - ORTHANC__AUTHENTICATION_ENABLED=false
+      - ORTHANC__REMOTE_ACCESS_ALLOWED=true
+      - ORTHANC__HTTP_SERVER_HOST=0.0.0.0
+      - AUTHORIZATION_PLUGIN_ENABLED=false
+      - ORTHANC__AUTHORIZATION__ENABLE=false
+      - ORTHANC__AUTHORIZATION__CHECK_VIEWERS=false
+      - ORTHANC__ORTHANC_EXPLORER_2__IS_DEFAULT_ORTHANC_UI=true
+      - ORTHANC__ORTHANC_EXPLORER_2__UI__ENABLE_ANONYMOUS_ACCESS=true
+    volumes:
+      - ./orthanc/orthanc.json:/etc/orthanc/orthanc.json:ro
+      - orthanc_data:/var/lib/orthanc/db
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://localhost:8042/system || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    networks:
+      - medical-net
+
+  # --- FastAPI Application (GPU) ---
+  fastapi:
+    build:
+      context: ../modAI
+      dockerfile: Dockerfile
+      args:
+        USE_GPU: ${USE_GPU:-true}
+    image: nn-fastapi:latest
+    container_name: nn-fastapi
+    restart: always
+    depends_on:
+      redis:
+        condition: service_healthy
+    ports:
+      - "9000:9000"
+    environment:
+      # FastAPI Settings
+      - APP_ENV=${APP_ENV:-production}
+      - DEBUG=${FASTAPI_DEBUG:-false}
+      # Redis (통합 Redis 사용)
+      - REDIS_URL=redis://redis:6379/0
+      - CELERY_BROKER_URL=redis://redis:6379/1
+      - CELERY_RESULT_BACKEND=redis://redis:6379/2
+      # External Services (같은 VM 내 Docker 서비스)
+      - DJANGO_URL=http://django:8000
+      - ORTHANC_URL=http://orthanc:8042
+      - ORTHANC_USER=${ORTHANC_USER:-orthanc}
+      - ORTHANC_PASSWORD=${ORTHANC_PASSWORD:-orthanc}
+      # GPU Settings
+      - CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-0}
+    volumes:
+      - ../modAI:/app
+      - fastapi_models:/app/models
+      - fastapi_temp:/app/temp
+    command: uvicorn main:app --host 0.0.0.0 --port 9000 --workers 2
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    networks:
+      - medical-net
+    # GPU Support - setup.py가 자동으로 관리합니다
+
+  # --- Celery Worker ---
+  fastapi-celery:
+    image: nn-fastapi:latest
+    container_name: nn-fastapi-celery
+    restart: always
+    depends_on:
+      redis:
+        condition: service_healthy
+      fastapi:
+        condition: service_started
+    environment:
+      # Celery Settings (통합 Redis 사용)
+      - CELERY_BROKER_URL=redis://redis:6379/1
+      - CELERY_RESULT_BACKEND=redis://redis:6379/2
+      # External Services (같은 VM 내 Docker 서비스)
+      - DJANGO_URL=http://django:8000
+      - ORTHANC_URL=http://orthanc:8042
+      - ORTHANC_USER=${ORTHANC_USER:-orthanc}
+      - ORTHANC_PASSWORD=${ORTHANC_PASSWORD:-orthanc}
+      # GPU Settings
+      - CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-0}
+    volumes:
+      - ../modAI:/app
+      - fastapi_models:/app/models
+      - fastapi_temp:/app/temp
+    command: celery -A celery_app worker --loglevel=info --concurrency=2 -Q m1_queue,mg_queue,mm_queue,celery
+    networks:
+      - medical-net
+    # GPU Support - setup.py가 자동으로 관리합니다
+
+networks:
+  medical-net:
+    name: medical-net
+    driver: bridge
+
+volumes:
+  django_db_data:
+  django_static:
+  django_media:
+  redis_data:
+  orthanc_data:
+  fastapi_models:
+  fastapi_temp:

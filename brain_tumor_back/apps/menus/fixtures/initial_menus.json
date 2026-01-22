@@ -1,0 +1,71 @@
+[
+  {
+    "model": "menus.menu",
+    "pk": "DASHBOARD",
+    "fields": {
+      "path": "/dashboard",
+      "icon": "home",
+      "group_label": null,
+      "breadcrumb_only": false,
+      "parent": null,
+      "order": 1,
+      "is_active": true
+    }
+  },
+
+  {
+    "model": "menus.menu",
+    "pk": "PATIENT",
+    "fields": {
+      "path": null,
+      "icon": null,
+      "group_label": "환자",
+      "breadcrumb_only": false,
+      "parent": null,
+      "order": 2,
+      "is_active": true
+    }
+  },
+
+  {
+    "model": "menus.menu",
+    "pk": "PATIENT_LIST",
+    "fields": {
+      "path": "/patients",
+      "icon": null,
+      "group_label": null,
+      "breadcrumb_only": false,
+      "parent": "PATIENT",
+      "order": 1,
+      "is_active": true
+    }
+  },
+
+  {
+    "model": "menus.menu",
+    "pk": "PATIENT_DETAIL",
+    "fields": {
+      "path": "/patients/:id",
+      "icon": null,
+      "group_label": null,
+      "breadcrumb_only": true,
+      "parent": "PATIENT_LIST",
+      "order": 1,
+      "is_active": true
+    }
+  },
+
+  {
+    "model": "menus.menu",
+    "pk": "ENCOUNTER_LIST",
+    "fields": {
+      "path": "/encounters",
+      "icon": null,
+      "group_label": null,
+      "breadcrumb_only": false,
+      "parent": "PATIENT",
+      "order": 3,
+      "is_active": true
+    }
+  }
+]

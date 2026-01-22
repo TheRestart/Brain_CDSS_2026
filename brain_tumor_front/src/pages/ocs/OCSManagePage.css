@@ -1,0 +1,286 @@
+/* OCSManagePage.css - OCS 관리 페이지 스타일 */
+
+.ocs-manage {
+  padding: 20px 24px;
+  background: var(--bg-main, #f4f6f9);
+}
+
+.ocs-manage .page-header {
+  margin-bottom: 20px;
+}
+
+.ocs-manage .page-header h2 {
+  margin: 0 0 6px 0;
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: var(--text-main, #1f2937);
+}
+
+.ocs-manage .page-header .subtitle {
+  color: var(--text-sub, #6b7280);
+  font-size: 0.875rem;
+}
+
+/* 필터 바 */
+.ocs-manage .filter-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  background: var(--card-bg, #ffffff);
+  border-radius: var(--radius-md, 8px);
+  box-shadow: var(--shadow-card, 0 4px 12px rgba(0,0,0,0.08));
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.ocs-manage .filter-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ocs-manage .ocs-count {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-main, #1f2937);
+  white-space: nowrap;
+}
+
+.ocs-manage .ocs-count span {
+  color: var(--primary, #5b6fd6);
+  font-weight: 700;
+}
+
+.ocs-manage .filter-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* 검색 박스 */
+.ocs-manage .search-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ocs-manage .search-box input {
+  padding: 8px 12px;
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: var(--radius-md, 8px);
+  font-size: 13px;
+  min-width: 220px;
+  background: var(--card-bg, #ffffff);
+  color: var(--text-main, #1f2937);
+}
+
+.ocs-manage .search-box input::placeholder {
+  color: var(--text-sub, #6b7280);
+}
+
+.ocs-manage .search-box input:focus {
+  outline: none;
+  border-color: var(--primary, #5b6fd6);
+}
+
+.ocs-manage .btn-search {
+  padding: 8px 14px;
+  background: var(--primary, #5b6fd6);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md, 8px);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.ocs-manage .btn-search:hover {
+  background: var(--primary-dark, #4a5bc4);
+}
+
+.ocs-manage .btn-clear {
+  padding: 8px 14px;
+  background: var(--text-sub, #6b7280);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md, 8px);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.ocs-manage .btn-clear:hover {
+  background: #5a6370;
+}
+
+/* 필터 셀렉트 */
+.ocs-manage .filter-right select {
+  padding: 8px 10px;
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: var(--radius-md, 8px);
+  font-size: 13px;
+  background: var(--card-bg, #ffffff);
+  color: var(--text-main, #1f2937);
+  cursor: pointer;
+  min-width: 110px;
+}
+
+.ocs-manage .filter-right select:focus {
+  outline: none;
+  border-color: var(--primary, #5b6fd6);
+}
+
+/* 버튼 스타일 */
+.ocs-manage .btn-primary {
+  padding: 8px 16px;
+  background: var(--primary, #5b6fd6);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md, 8px);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.ocs-manage .btn-primary:hover {
+  background: var(--primary-dark, #4a5bc4);
+}
+
+/* 컨텐츠 영역 */
+.ocs-manage .content {
+  background: var(--card-bg, #ffffff);
+  border-radius: var(--radius-md, 8px);
+  overflow: hidden;
+  box-shadow: var(--shadow-card, 0 4px 12px rgba(0,0,0,0.08));
+}
+
+/* OCS 테이블 */
+.ocs-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ocs-table thead th {
+  background: var(--bg-main, #f4f6f9);
+  color: var(--text-sub, #6b7280);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 12px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.ocs-table tbody td {
+  padding: 12px;
+  font-size: 13px;
+  color: var(--text-main, #1f2937);
+  border-top: 1px solid var(--border, #e5e7eb);
+}
+
+.ocs-table tbody tr.clickable-row {
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.ocs-table tbody tr.clickable-row:hover {
+  background: var(--bg-main, #f4f6f9);
+}
+
+/* 상태 배지 */
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.status-badge.status-ordered {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-badge.status-accepted {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.status-badge.status-in_progress {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.status-badge.status-result-ready {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.status-badge.status-confirmed {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-badge.status-cancelled {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* 우선순위 배지 */
+.priority-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.priority-badge.priority-urgent {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.priority-badge.priority-normal {
+  background: var(--bg-main, #f4f6f9);
+  color: var(--text-main, #1f2937);
+}
+
+.priority-badge.priority-scheduled {
+  background: #e0f2fe;
+  color: #0284c7;
+}
+
+/* 페이징 바 */
+.ocs-manage .pagination-bar {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+/* 반응형 */
+@media (max-width: 1200px) {
+  .ocs-manage .filter-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ocs-manage .filter-right {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .ocs-manage {
+    padding: 16px;
+  }
+
+  .ocs-manage .search-box input {
+    min-width: 160px;
+  }
+
+  .ocs-manage .filter-right select {
+    min-width: 90px;
+  }
+}

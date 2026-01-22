@@ -1,0 +1,229 @@
+/* 보고서 카드 스타일 */
+
+.report-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.report-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* 썸네일 영역 */
+.report-card .card-thumbnail {
+  position: relative;
+  height: 140px;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.report-card .thumbnail-image {
+  width: 100%;
+  height: 100%;
+}
+
+.report-card .thumbnail-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.report-card .thumbnail-icon,
+.report-card .thumbnail-segmentation,
+.report-card .thumbnail-chart {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #fff;
+}
+
+.report-card .thumbnail-icon .icon,
+.report-card .thumbnail-segmentation .icon,
+.report-card .thumbnail-chart .icon {
+  font-size: 48px;
+}
+
+.report-card .thumbnail-icon .label,
+.report-card .thumbnail-segmentation .label,
+.report-card .thumbnail-chart .label {
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.9;
+}
+
+/* DICOM 멀티채널 썸네일 (2x2 그리드) */
+.report-card .thumbnail-dicom-multi {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2px;
+  background: #1f2937;
+}
+
+.report-card .dicom-channel {
+  position: relative;
+  overflow: hidden;
+  background: #374151;
+}
+
+.report-card .dicom-channel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.report-card .dicom-channel .channel-badge {
+  position: absolute;
+  bottom: 2px;
+  left: 2px;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 9px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.report-card .dicom-channel .channel-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.report-card .dicom-channel .channel-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.report-card .type-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* 정보 영역 */
+.report-card .card-content {
+  padding: 16px;
+}
+
+.report-card .card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.report-card .sub-type {
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.report-card .result-badge {
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.report-card .result-normal {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.report-card .result-abnormal {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.report-card .result-default {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.report-card .card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 12px 0;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.report-card .card-patient {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.report-card .patient-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.report-card .patient-number {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.report-card .card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12px;
+  border-top: 1px solid #f3f4f6;
+}
+
+.report-card .date {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.report-card .status {
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+/* 반응형 */
+@media (max-width: 480px) {
+  .report-card .card-thumbnail {
+    height: 120px;
+  }
+
+  .report-card .thumbnail-icon .icon,
+  .report-card .thumbnail-segmentation .icon,
+  .report-card .thumbnail-chart .icon {
+    font-size: 40px;
+  }
+}

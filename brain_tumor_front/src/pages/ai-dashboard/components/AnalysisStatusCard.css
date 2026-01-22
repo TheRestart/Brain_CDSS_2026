@@ -1,0 +1,66 @@
+.analysis-status-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border-left: 4px solid;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.analysis-status-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.analysis-status-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.analysis-status-card__icon .material-icons {
+  font-size: 24px;
+}
+
+.analysis-status-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.analysis-status-card__title {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+.analysis-status-card__count {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+.analysis-status-card__skeleton {
+  width: 60px;
+  height: 32px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}

@@ -1,0 +1,151 @@
+/* AI 알림 Toast 스타일 */
+.ai-toast-container {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+}
+
+.ai-toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: slideIn 0.3s ease-out;
+  border-left: 4px solid;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.ai-toast-success {
+  border-left-color: #10b981;
+  background: linear-gradient(to right, #ecfdf5, #fff);
+}
+
+.ai-toast-error {
+  border-left-color: #ef4444;
+  background: linear-gradient(to right, #fef2f2, #fff);
+}
+
+.ai-toast-info {
+  border-left-color: #3b82f6;
+  background: linear-gradient(to right, #eff6ff, #fff);
+}
+
+.ai-toast-warning {
+  border-left-color: #f59e0b;
+  background: linear-gradient(to right, #fffbeb, #fff);
+}
+
+.ai-toast-persistent {
+  animation: none;
+}
+
+.ai-toast-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.ai-toast-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.ai-toast-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: #1f2937;
+  margin-bottom: 4px;
+}
+
+.ai-toast-message {
+  font-size: 13px;
+  color: #6b7280;
+  line-height: 1.4;
+}
+
+.ai-toast-close {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #9ca3af;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  margin-left: auto;
+}
+
+.ai-toast-close:hover {
+  color: #6b7280;
+}
+
+/* 작업 표시 */
+.ai-toast-job {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  padding: 6px 8px;
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.ai-toast-job-type {
+  font-weight: 600;
+  color: #3b82f6;
+  background: #dbeafe;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.ai-toast-job-id {
+  color: #6b7280;
+  font-family: monospace;
+}
+
+.ai-toast-job-status {
+  margin-left: auto;
+  color: #f59e0b;
+  font-weight: 500;
+}
+
+.ai-toast-job-id-small {
+  font-size: 11px;
+  color: #9ca3af;
+  font-family: monospace;
+  margin-top: 4px;
+}
+
+/* 스피너 */
+.ai-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #e5e7eb;
+  border-top-color: #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

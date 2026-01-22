@@ -1,0 +1,421 @@
+/* RIS 전체 판독 현황 대시보드 스타일 */
+
+.ris-process-status-page {
+  padding: 20px;
+}
+
+.ris-process-status-page .page-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  /* margin-bottom: 24px; */
+}
+
+.ris-process-status-page .page-header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.ris-process-status-page .page-header .subtitle {
+  color: #6c757d;
+  font-size: 14px;
+}
+
+.ris-process-status-page .page-header .header-controls {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ris-process-status-page .page-header .date-range-filter {
+  padding: 8px 12px;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  font-size: 14px;
+  background: #fff;
+  color: #495057;
+  cursor: pointer;
+}
+
+.ris-process-status-page .page-header .date-range-filter:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+.ris-process-status-page .page-header .refresh-btn {
+  padding: 8px 16px;
+  background: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.ris-process-status-page .page-header .refresh-btn:hover:not(:disabled) {
+  background: #2980b9;
+}
+
+.ris-process-status-page .page-header .refresh-btn:disabled {
+  background: #95a5a6;
+  cursor: not-allowed;
+}
+
+/* 요약 카드 (6개 상태) */
+.ris-process-status-page .summary-cards {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.ris-process-status-page .summary-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ris-process-status-page .summary-card .card-icon {
+  font-size: 32px;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #f8f9fa;
+}
+
+.ris-process-status-page .summary-card .card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ris-process-status-page .summary-card .card-label {
+  font-size: 13px;
+  color: #6c757d;
+}
+
+.ris-process-status-page .summary-card .card-value {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+/* 6개 상태별 카드 색상 */
+.ris-process-status-page .summary-card.ordered .card-icon {
+  background: #fef9e6;
+}
+
+.ris-process-status-page .summary-card.ordered .card-value {
+  color: #e67e22;
+}
+
+.ris-process-status-page .summary-card.accepted .card-icon {
+  background: #fef4e6;
+}
+
+.ris-process-status-page .summary-card.accepted .card-value {
+  color: #f39c12;
+}
+
+.ris-process-status-page .summary-card.in-progress .card-icon {
+  background: #e8f4fc;
+}
+
+.ris-process-status-page .summary-card.in-progress .card-value {
+  color: #3498db;
+}
+
+.ris-process-status-page .summary-card.result-ready .card-icon {
+  background: #e8f0fc;
+}
+
+.ris-process-status-page .summary-card.result-ready .card-value {
+  color: #9b59b6;
+}
+
+.ris-process-status-page .summary-card.confirmed .card-icon {
+  background: #e8f8f0;
+}
+
+.ris-process-status-page .summary-card.confirmed .card-value {
+  color: #27ae60;
+}
+
+.ris-process-status-page .summary-card.cancelled .card-icon {
+  background: #f5f5f5;
+}
+
+.ris-process-status-page .summary-card.cancelled .card-value {
+  color: #95a5a6;
+}
+
+/* 진행 상황 분포 */
+.ris-process-status-page .progress-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 24px;
+}
+
+.ris-process-status-page .progress-section h3 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.ris-process-status-page .progress-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ris-process-status-page .progress-bar {
+  display: flex;
+  height: 32px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #e9ecef;
+}
+
+.ris-process-status-page .progress-segment {
+  transition: width 0.3s ease;
+}
+
+/* 6개 상태별 진행바 색상 */
+.ris-process-status-page .progress-segment.ordered {
+  background: #e67e22;
+}
+
+.ris-process-status-page .progress-segment.accepted {
+  background: #f39c12;
+}
+
+.ris-process-status-page .progress-segment.in-progress {
+  background: #3498db;
+}
+
+.ris-process-status-page .progress-segment.result-ready {
+  background: #9b59b6;
+}
+
+.ris-process-status-page .progress-segment.confirmed {
+  background: #27ae60;
+}
+
+.ris-process-status-page .progress-segment.cancelled {
+  background: #95a5a6;
+}
+
+.ris-process-status-page .progress-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.ris-process-status-page .legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #495057;
+}
+
+.ris-process-status-page .legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+}
+
+/* 6개 상태별 범례 색상 */
+.ris-process-status-page .legend-color.ordered {
+  background: #e67e22;
+}
+
+.ris-process-status-page .legend-color.accepted {
+  background: #f39c12;
+}
+
+.ris-process-status-page .legend-color.in-progress {
+  background: #3498db;
+}
+
+.ris-process-status-page .legend-color.result-ready {
+  background: #9b59b6;
+}
+
+.ris-process-status-page .legend-color.confirmed {
+  background: #27ae60;
+}
+
+.ris-process-status-page .legend-color.cancelled {
+  background: #95a5a6;
+}
+
+/* 지연 판독 알림 */
+.ris-process-status-page .delayed-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.ris-process-status-page .delayed-section h3 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ris-process-status-page .threshold-info {
+  font-size: 13px;
+  font-weight: 400;
+  color: #6c757d;
+}
+
+.ris-process-status-page .empty-message {
+  padding: 40px 20px;
+  text-align: center;
+  color: #6c757d;
+  font-size: 14px;
+}
+
+.ris-process-status-page .delayed-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ris-process-status-page .delayed-table th {
+  background: #f8f9fa;
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 600;
+  color: #495057;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.ris-process-status-page .delayed-table td {
+  padding: 12px 16px;
+  font-size: 14px;
+  color: #212529;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.ris-process-status-page .delayed-table .clickable-row {
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.ris-process-status-page .delayed-table .clickable-row:hover {
+  background: #f8f9fa;
+}
+
+.ris-process-status-page .delayed-table .urgent-row {
+  background: #fff5f5;
+}
+
+.ris-process-status-page .delayed-table .urgent-row:hover {
+  background: #ffe8e8;
+}
+
+.ris-process-status-page .ocs-id {
+  font-family: monospace;
+  font-size: 13px;
+  color: #6c757d;
+}
+
+.ris-process-status-page .patient-name {
+  font-weight: 500;
+}
+
+.ris-process-status-page .status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.ris-process-status-page .status-badge.ordered,
+.ris-process-status-page .status-badge.accepted {
+  background: #fef4e6;
+  color: #f39c12;
+}
+
+.ris-process-status-page .status-badge.in_progress,
+.ris-process-status-page .status-badge.result_ready {
+  background: #e8f4fc;
+  color: #3498db;
+}
+
+.ris-process-status-page .status-badge.confirmed {
+  background: #e8f8f0;
+  color: #27ae60;
+}
+
+.ris-process-status-page .elapsed-time {
+  font-weight: 600;
+}
+
+.ris-process-status-page .elapsed-time.delayed {
+  color: #f39c12;
+}
+
+.ris-process-status-page .elapsed-time.urgent {
+  color: #e74c3c;
+}
+
+/* 반응형 */
+@media (max-width: 1400px) {
+  .ris-process-status-page .summary-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1000px) {
+  .ris-process-status-page .summary-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .ris-process-status-page .summary-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .ris-process-status-page .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ris-process-status-page .page-header .header-controls {
+    margin-left: 0;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .ris-process-status-page .progress-legend {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ris-process-status-page .delayed-table {
+    display: block;
+    overflow-x: auto;
+  }
+}

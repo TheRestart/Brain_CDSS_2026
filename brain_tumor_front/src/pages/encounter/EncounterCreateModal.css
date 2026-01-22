@@ -1,0 +1,48 @@
+/* 진료 등록 모달 XL 사이즈 + 패딩 */
+.encounter-modal-content {
+  width: 90vw;
+  max-width: 1200px;
+  min-width: 600px;
+  padding: 2rem;
+}
+
+/* 검색 가능한 Select 스타일 */
+.search-input {
+  margin-bottom: 0.5rem;
+}
+
+.searchable-select {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  min-height: 150px;
+  max-height: 200px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.searchable-select:focus {
+  outline: none;
+  border-color: var(--primary, #2563eb);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.searchable-select option {
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.searchable-select option:hover {
+  background-color: #f0f0f0;
+}
+
+/* 진료 모달 폼 그룹 */
+.encounter-modal .form-group input,
+.encounter-modal .form-group select,
+.encounter-modal .form-group textarea {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}

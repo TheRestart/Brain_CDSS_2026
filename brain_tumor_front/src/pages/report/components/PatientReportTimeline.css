@@ -1,0 +1,236 @@
+/* 환자별 보고서 타임라인 스타일 */
+
+.patient-timeline {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.patient-timeline.loading,
+.patient-timeline.error,
+.patient-timeline.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 200px;
+  color: #6b7280;
+}
+
+.patient-timeline .spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #e5e7eb;
+  border-top-color: #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* 헤더 */
+.patient-timeline .timeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.patient-timeline .timeline-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.patient-timeline .timeline-header .count {
+  font-size: 13px;
+  color: #6b7280;
+  background: #f3f4f6;
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+/* 타임라인 리스트 */
+.patient-timeline .timeline-list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 타임라인 아이템 */
+.patient-timeline .timeline-item {
+  display: flex;
+  gap: 16px;
+  cursor: pointer;
+  padding: 8px;
+  margin: -8px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.patient-timeline .timeline-item:hover {
+  background: #f9fafb;
+}
+
+/* 타임라인 선 */
+.patient-timeline .timeline-line {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40px;
+  flex-shrink: 0;
+}
+
+.patient-timeline .timeline-dot {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.patient-timeline .dot-icon {
+  font-size: 18px;
+}
+
+.patient-timeline .line-connector {
+  width: 2px;
+  flex: 1;
+  min-height: 20px;
+  background: #e5e7eb;
+  margin: 4px 0;
+}
+
+/* 컨텐츠 */
+.patient-timeline .timeline-content {
+  flex: 1;
+  padding-bottom: 20px;
+}
+
+.patient-timeline .timeline-item:last-child .timeline-content {
+  padding-bottom: 0;
+}
+
+.patient-timeline .content-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.patient-timeline .type-badge {
+  font-size: 10px;
+  font-weight: 600;
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.patient-timeline .sub-type {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.patient-timeline .content-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1f2937;
+  margin: 0 0 8px 0;
+  line-height: 1.4;
+}
+
+.patient-timeline .content-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.patient-timeline .result {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.patient-timeline .result-normal {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.patient-timeline .result-abnormal {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.patient-timeline .result-ai {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.patient-timeline .result-final {
+  background: #ede9fe;
+  color: #5b21b6;
+}
+
+.patient-timeline .author {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.patient-timeline .content-date {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+/* 더보기 버튼 */
+.patient-timeline .timeline-more {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e5e7eb;
+  text-align: center;
+}
+
+.patient-timeline .timeline-more button {
+  padding: 8px 20px;
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #4b5563;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.patient-timeline .timeline-more button:hover {
+  background: #e5e7eb;
+}
+
+/* 반응형 */
+@media (max-width: 480px) {
+  .patient-timeline {
+    padding: 16px;
+  }
+
+  .patient-timeline .timeline-line {
+    width: 32px;
+  }
+
+  .patient-timeline .timeline-dot {
+    width: 28px;
+    height: 28px;
+  }
+
+  .patient-timeline .dot-icon {
+    font-size: 14px;
+  }
+}

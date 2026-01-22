@@ -1,0 +1,6 @@
+/*
+ * OCS Notification Toast 스타일
+ * 이 파일은 Toast.css로 통합되었습니다.
+ * 호환성을 위해 Toast.css를 import합니다.
+ */
+@import '../components/common/Toast.css';

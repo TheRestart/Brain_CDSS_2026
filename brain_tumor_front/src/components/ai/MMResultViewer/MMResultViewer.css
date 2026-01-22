@@ -1,0 +1,511 @@
+/**
+ * MM Result Viewer Component Styles
+ * Multimodal Analysis - 밝고 깔끔한 디자인
+ */
+
+.mm-result-viewer {
+  background: #ffffff;
+  border-radius: 12px;
+  color: #1e293b;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 4px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+}
+
+.mm-result-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #0d9488, #14b8a6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.mm-result-header h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #fff;
+  font-weight: 600;
+}
+
+.mm-model-badge {
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  font-size: 12px;
+  color: #fff;
+}
+
+.mm-patient-id {
+  font-size: 0.85rem;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.mm-close-btn {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 1.3rem;
+  line-height: 1;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.mm-close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.mm-result-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: #ffffff;
+}
+
+/* Loading State */
+.mm-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  gap: 12px;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.mm-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e5e7eb;
+  border-top-color: #0d9488;
+  border-radius: 50%;
+  animation: mm-spin 0.8s linear infinite;
+}
+
+@keyframes mm-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Error State */
+.mm-error {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  color: #dc2626;
+  font-size: 13px;
+}
+
+.mm-error-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: #dc2626;
+  color: white;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+/* Empty State */
+.mm-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  gap: 12px;
+  color: #9ca3af;
+  font-size: 13px;
+  text-align: center;
+}
+
+.mm-empty-icon {
+  font-size: 32px;
+}
+
+/* Section Styles */
+.mm-section {
+  background: #f8fafc;
+  border-radius: 10px;
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+}
+
+.mm-section h3 {
+  margin: 0 0 12px;
+  font-size: 0.9rem;
+  color: #0d9488;
+  font-weight: 600;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* Modalities Section */
+.mm-modality-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.mm-modality-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.mm-modality-tag.mri {
+  background: #f3e8ff;
+  color: #7c3aed;
+  border: 1px solid #c4b5fd;
+}
+
+.mm-modality-tag.gene {
+  background: #dcfce7;
+  color: #16a34a;
+  border: 1px solid #86efac;
+}
+
+.mm-modality-tag.protein {
+  background: #fef3c7;
+  color: #d97706;
+  border: 1px solid #fcd34d;
+}
+
+.mm-modality-tag.clinical {
+  background: #e0f2fe;
+  color: #0284c7;
+  border: 1px solid #7dd3fc;
+}
+
+/* Risk Section */
+.mm-risk-display {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.mm-risk-badge {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  min-width: 100px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mm-risk-probabilities {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mm-prob-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mm-prob-label {
+  width: 50px;
+  font-size: 0.8rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.mm-prob-bar-wrapper {
+  flex: 1;
+  height: 10px;
+  background: #e2e8f0;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.mm-prob-bar {
+  height: 100%;
+  border-radius: 5px;
+  transition: width 0.5s ease;
+}
+
+.mm-prob-value {
+  width: 45px;
+  font-size: 0.8rem;
+  color: #1e293b;
+  font-weight: 600;
+  text-align: right;
+}
+
+/* Stats Grid */
+.mm-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+}
+
+.mm-stat-item {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #e2e8f0;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.mm-stat-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.mm-stat-label {
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.mm-stat-value {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.mm-stat-value.mm-highlight {
+  color: #0d9488;
+}
+
+.mm-stat-item.mm-cindex {
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+}
+
+.mm-stat-value.mm-cindex-value {
+  color: #16a34a;
+  font-weight: 700;
+}
+
+/* OS Section */
+.mm-os-display {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.mm-os-main {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.mm-os-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #0d9488;
+  line-height: 1;
+}
+
+.mm-os-unit {
+  font-size: 1rem;
+  color: #64748b;
+}
+
+.mm-os-detail {
+  font-size: 0.9rem;
+  color: #94a3b8;
+}
+
+.mm-os-ci {
+  width: 100%;
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: #64748b;
+  background: #f1f5f9;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+
+/* Prediction Display */
+.mm-prediction-display {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.mm-prediction-class {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.mm-prediction-class.recurrence {
+  background: #fef3c7;
+  color: #d97706;
+  border: 1px solid #fcd34d;
+}
+
+.mm-prediction-class.no-recurrence {
+  background: #dcfce7;
+  color: #16a34a;
+  border: 1px solid #86efac;
+}
+
+.mm-prediction-class.responder {
+  background: #dcfce7;
+  color: #16a34a;
+  border: 1px solid #86efac;
+}
+
+.mm-prediction-class.non-responder {
+  background: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #fca5a5;
+}
+
+.mm-prediction-prob {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.mm-prob-circle {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.mm-prob-circle svg {
+  width: 100%;
+  height: 100%;
+}
+
+.mm-prob-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.mm-prediction-prob .mm-prob-label {
+  font-size: 0.75rem;
+  color: #64748b;
+  width: auto;
+  font-weight: 500;
+}
+
+/* Recommendation Section */
+.mm-recommendation-text {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #1e293b;
+  background: #e0f2fe;
+  padding: 14px;
+  border-radius: 8px;
+  border-left: 4px solid #0284c7;
+}
+
+/* Metadata Section */
+.mm-metadata-section {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  background: transparent;
+  padding: 12px 0 0;
+  border-top: 1px solid #e2e8f0;
+}
+
+.mm-metadata-item {
+  font-size: 0.8rem;
+}
+
+.mm-meta-label {
+  color: #64748b;
+  margin-right: 6px;
+}
+
+.mm-meta-value {
+  color: #475569;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .mm-result-header {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .mm-close-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+  }
+
+  .mm-risk-display {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .mm-prediction-display {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .mm-os-display {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .mm-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .mm-result-body {
+    padding: 14px;
+  }
+
+  .mm-section {
+    padding: 14px;
+  }
+
+  .mm-os-value {
+    font-size: 2rem;
+  }
+
+  .mm-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}

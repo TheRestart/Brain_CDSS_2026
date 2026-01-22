@@ -1,0 +1,616 @@
+/* OCS 결과 보고서 페이지 스타일 */
+
+.ocs-result-report {
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  background: #f5f5f5;
+  min-height: 100vh;
+}
+
+.ocs-result-report.loading,
+.ocs-result-report.error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  gap: 16px;
+}
+
+/* 액션 버튼 (인쇄 시 숨김) */
+.report-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+/* 보고서 컨테이너 */
+.report-container {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+}
+
+/* 보고서 헤더 */
+.report-header {
+  text-align: center;
+  padding-bottom: 24px;
+  border-bottom: 2px solid #333;
+  margin-bottom: 24px;
+}
+
+.report-header h1 {
+  margin: 0 0 12px 0;
+  font-size: 24px;
+  color: #333;
+  font-weight: 700;
+}
+
+.report-meta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.report-id {
+  font-size: 14px;
+  color: #666;
+  font-family: monospace;
+}
+
+.report-type {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.report-type.ris {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.report-type.lis {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.report-type.treatment {
+  background: #fff3e0;
+  color: #ef6c00;
+}
+
+.report-type.consult {
+  background: #f3e5f5;
+  color: #7b1fa2;
+}
+
+/* 섹션 공통 */
+.report-section {
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.report-section:last-of-type {
+  border-bottom: none;
+}
+
+.report-section h2 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  color: #333;
+  font-weight: 600;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.report-section h3 {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  color: #555;
+  font-weight: 600;
+}
+
+/* 정보 그리드 */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px 24px;
+}
+
+.info-item {
+  display: flex;
+  gap: 8px;
+}
+
+.info-item label {
+  min-width: 80px;
+  color: #666;
+  font-size: 13px;
+}
+
+.info-item span {
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* 우선순위 태그 */
+.priority-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.priority-tag.priority-urgent {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.priority-tag.priority-normal {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.priority-tag.priority-scheduled {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+/* 요청 정보 */
+.request-info {
+  margin-top: 16px;
+  padding: 12px;
+  background: #fafafa;
+  border-radius: 4px;
+}
+
+.request-info h3 {
+  margin-bottom: 12px;
+}
+
+.request-item {
+  margin-bottom: 8px;
+}
+
+.request-item:last-child {
+  margin-bottom: 0;
+}
+
+.request-item label {
+  font-size: 13px;
+  color: #666;
+}
+
+.request-item p {
+  margin: 4px 0 0 0;
+  font-size: 14px;
+  color: #333;
+}
+
+/* 검사 결과 테이블 */
+.lab-results {
+  margin-top: 16px;
+}
+
+.result-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.result-table th,
+.result-table td {
+  padding: 10px 12px;
+  text-align: left;
+  border: 1px solid #e0e0e0;
+}
+
+.result-table th {
+  background: #f5f5f5;
+  font-weight: 600;
+  color: #333;
+}
+
+.result-table .result-value {
+  font-weight: 600;
+}
+
+.result-table .row-abnormal {
+  background: #fff8e1;
+}
+
+.result-table .row-critical {
+  background: #ffebee;
+}
+
+/* Flag 표시 */
+.flag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.flag-normal {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.flag-abnormal {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.flag-critical {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* 영상 결과 */
+.imaging-results {
+  margin-top: 16px;
+}
+
+/* MRI 썸네일 그리드 */
+.mri-thumbnails {
+  margin-bottom: 20px;
+}
+
+.mri-thumbnails h3 {
+  margin-bottom: 12px;
+}
+
+.thumbnail-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.thumbnail-item {
+  position: relative;
+  aspect-ratio: 1;
+  background: #1a1a2e;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.thumbnail-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thumbnail-fallback {
+  display: none;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #2d2d44 0%, #1a1a2e 100%);
+  color: #666;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.thumbnail-fallback.show {
+  display: flex;
+}
+
+.thumbnail-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .thumbnail-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.result-block {
+  margin-bottom: 16px;
+  padding: 12px;
+  background: #fafafa;
+  border-radius: 4px;
+  border-left: 3px solid #1976d2;
+}
+
+.result-block:last-child {
+  margin-bottom: 0;
+}
+
+.result-block.interpretation {
+  border-left-color: #388e3c;
+  background: #f1f8e9;
+}
+
+.result-block.notes {
+  border-left-color: #f57c00;
+  background: #fff8e1;
+}
+
+.result-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  white-space: pre-wrap;
+}
+
+/* JSON 표시 */
+.raw-result {
+  margin-top: 16px;
+}
+
+.json-viewer {
+  background: #f5f5f5;
+  padding: 16px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: 'Consolas', 'Monaco', monospace;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* 첨부파일 섹션 */
+.attachments-section {
+  margin-top: 24px;
+}
+
+.attachments-list {
+  margin-top: 12px;
+}
+
+.attachments-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.attachments-table th,
+.attachments-table td {
+  padding: 10px 12px;
+  text-align: left;
+  border: 1px solid #e0e0e0;
+}
+
+.attachments-table th {
+  background: #f5f5f5;
+  font-weight: 600;
+  color: #333;
+}
+
+.attachments-table .file-name {
+  font-weight: 500;
+  color: #1976d2;
+}
+
+.attachments-summary {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding: 8px 12px;
+  background: #f5f5f5;
+  border-radius: 4px;
+  font-size: 13px;
+  color: #666;
+}
+
+.preview-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.preview-badge.image {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.preview-badge.table {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.preview-badge.iframe {
+  background: #fff3e0;
+  color: #ef6c00;
+}
+
+.preview-badge.download {
+  background: #f5f5f5;
+  color: #666;
+}
+
+.dicom-link {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  background: #7c4dff;
+  color: white;
+  text-decoration: none;
+}
+
+.dicom-link:hover {
+  background: #651fff;
+}
+
+/* 확정 정보 */
+.confirmation-section {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 24px;
+}
+
+.confirmation-info {
+  display: flex;
+  justify-content: space-around;
+  gap: 24px;
+}
+
+.confirmation-item {
+  text-align: center;
+}
+
+.confirmation-item label {
+  display: block;
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.confirmation-item span {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.result-status {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 4px;
+}
+
+.result-status.normal {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.result-status.abnormal {
+  background: #ffebee;
+  color: #c62828;
+}
+
+/* 보고서 푸터 */
+.report-footer {
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px solid #e0e0e0;
+  text-align: center;
+}
+
+.report-footer p {
+  margin: 4px 0;
+  font-size: 12px;
+  color: #999;
+}
+
+.print-date {
+  margin-top: 8px;
+}
+
+/* 버튼 */
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary {
+  background: #1976d2;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #1565c0;
+}
+
+.btn-secondary {
+  background: #f5f5f5;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.btn-secondary:hover {
+  background: #e8e8e8;
+}
+
+/* 인쇄 스타일 */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  .ocs-result-report {
+    padding: 0;
+    background: white;
+  }
+
+  .report-container {
+    box-shadow: none;
+    padding: 20px;
+  }
+
+  .report-header {
+    border-bottom-width: 1px;
+  }
+
+  .report-section {
+    page-break-inside: avoid;
+  }
+
+  .result-table {
+    page-break-inside: auto;
+  }
+
+  .result-table tr {
+    page-break-inside: avoid;
+  }
+
+  .confirmation-section {
+    background: #f5f5f5 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .report-container {
+    padding: 20px;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .confirmation-info {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .result-table {
+    font-size: 12px;
+  }
+
+  .result-table th,
+  .result-table td {
+    padding: 8px;
+  }
+}

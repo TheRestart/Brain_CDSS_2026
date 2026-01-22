@@ -1,0 +1,77 @@
+/* 공통 */
+.menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-item {
+  list-style: none;
+  margin: 4px 5px;
+}
+
+.menu-group {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: transparent;
+  
+  color : var(--sidebar-text);
+  cursor: pointer;
+}
+
+.menu-group:hover {
+  background: var(--menu-hover-bg);
+  color: var(--menu-active-text);
+  
+}
+
+/* 열려 있는 메뉴 그룹 */
+.menu-group.open {
+  background: var(--menu-active-bg);
+  color: var(--menu-active-text);
+}
+
+.menu-children {
+  margin-left: 12px;
+  padding-left: 8px;
+  border-left: 2px solid #e5e7eb;
+}
+/* Menu Link */
+.menu-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px 20px;
+  color: var(--sidebar-text);
+  text-decoration: none;
+  border-radius: 8px;
+
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.menu-link:hover {
+  background-color: var(--menu-hover-bg);
+  color: var(--menu-active-text);
+}
+
+/* Active */
+.menu-link.active {
+  background-color: var(--menu-active-bg);
+  color: var(--menu-active-text);
+  font-weight: 600;
+}
+
+/* Icon */
+.menu-icon {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.menu-link.active .menu-icon {
+  color: #38bb8f;
+}

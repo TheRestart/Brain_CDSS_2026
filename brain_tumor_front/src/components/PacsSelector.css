@@ -1,0 +1,226 @@
+.selCard {
+  background: #181b21;
+  border: 1px solid #2a2f3a;
+  border-radius: 14px;
+  padding: 14px;
+  color: #e6e6e6;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  overflow: hidden; /* 스크롤바 제거 */
+  min-width: 0;
+  min-height: 320px; /* 최소 높이 부여 - 스크롤 유도 */
+}
+
+.selHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 10px;
+}
+
+.selTitle { margin: 0; font-size: 16px; color: #fff; }
+.selHint { font-size: 12px; color: #9aa0aa; }
+
+.selGrid {
+  display: grid;
+  gap: 10px;
+  overflow: hidden; /* 스크롤바 제거 */
+  min-width: 0;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 10px;
+  align-items: center;
+  min-width: 0; /* flex/grid 내 ellipsis 동작 */
+}
+
+.label { font-size: 12px; color: #c7cbd4; }
+
+.select {
+  height: 40px;
+  background: #0f1115;
+  border: 1px solid #2a2f3a;
+  border-radius: 10px;
+  color: #fff;
+  padding: 0 10px;
+  outline: none;
+  /* ellipsis 처리 */
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.select:focus {
+  border-color: #4da3ff;
+  box-shadow: 0 0 0 1px rgba(77,163,255,0.5);
+}
+
+/* OCS 연동 정보 박스 */
+.ocsLinkBox {
+  background: rgba(100, 170, 255, 0.08);
+  border: 1px solid rgba(100, 170, 255, 0.20);
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-bottom: 12px;
+}
+
+.ocsLinkRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+
+.ocsLinkLabel {
+  color: rgba(255, 255, 255, 0.60);
+}
+
+.ocsLinkValue {
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 180px;
+}
+
+/* Orthanc ID 표시 */
+.idDisplay {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 8px;
+  padding: 4px 0 0 140px;
+  font-size: 11px;
+}
+
+.idLabel {
+  color: rgba(255, 255, 255, 0.50);
+}
+
+.idValue {
+  font-family: 'Consolas', 'Monaco', monospace;
+  color: rgba(100, 200, 255, 0.85);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 200px;
+}
+
+/* Study 정보 박스 */
+.studyInfoBox {
+  background: rgba(60, 80, 120, 0.15);
+  border: 1px solid rgba(100, 170, 255, 0.25);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-top: 8px;
+  grid-column: 1 / -1;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.studyInfoRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 4px 0;
+  font-size: 12px;
+  gap: 8px;
+  min-width: 0;
+}
+
+.studyInfoRow:not(:last-child) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.studyInfoLabel {
+  color: rgba(255, 255, 255, 0.55);
+  min-width: 80px;
+  flex-shrink: 0;
+}
+
+.studyInfoValue {
+  color: rgba(255, 255, 255, 0.90);
+  text-align: right;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; /* 한 줄로 제한하여 ellipsis 적용 */
+}
+
+.studyInfoValue.mono {
+  font-family: 'Consolas', 'Monaco', monospace;
+  color: rgba(100, 200, 255, 0.85);
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* OCS 환자 정보 박스 (연동 모드) */
+.ocsPatientBox {
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.12) 0%, rgba(33, 150, 243, 0.12) 100%);
+  border: 1px solid rgba(76, 175, 80, 0.35);
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.ocsPatientHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ocsPatientIcon {
+  font-size: 16px;
+}
+
+.ocsPatientTitle {
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.ocsPatientContent {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ocsPatientRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+
+.ocsPatientLabel {
+  color: rgba(255, 255, 255, 0.60);
+  min-width: 70px;
+}
+
+.ocsPatientValue {
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 600;
+  text-align: right;
+}
+
+.ocsPatientValue.mono {
+  font-family: 'Consolas', 'Monaco', monospace;
+  color: rgba(100, 200, 255, 0.90);
+}
+
+.ocsPatientValue.matched {
+  color: rgba(76, 175, 80, 0.95);
+}
+
+.ocsPatientValue.not-matched {
+  color: rgba(255, 152, 0, 0.95);
+}

@@ -1,0 +1,432 @@
+/**
+ * MM Result Viewer Component Styles - Light Mode
+ * Multimodal Analysis - 밝고 깔끔한 디자인
+ */
+
+.mm-result-viewer {
+  background: #ffffff;
+  border-radius: 12px;
+  color: #1e293b;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 4px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+}
+
+.result-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  background: linear-gradient(135deg, #0d9488, #14b8a6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.result-header h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: #fff;
+  font-weight: 600;
+}
+
+.patient-id {
+  font-size: 0.9rem;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.close-btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 1.5rem;
+  line-height: 1;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.result-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background: #ffffff;
+}
+
+/* Section Styles */
+.section {
+  background: #f8fafc;
+  border-radius: 10px;
+  padding: 20px;
+  border: 1px solid #e2e8f0;
+}
+
+.section h3 {
+  margin: 0 0 16px;
+  font-size: 1rem;
+  color: #0d9488;
+  font-weight: 600;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* Modalities Section */
+.modality-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.modality-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.modality-tag.mri {
+  background: #f3e8ff;
+  color: #7c3aed;
+  border: 1px solid #c4b5fd;
+}
+
+.modality-tag.gene {
+  background: #dcfce7;
+  color: #16a34a;
+  border: 1px solid #86efac;
+}
+
+.modality-tag.protein {
+  background: #fef3c7;
+  color: #d97706;
+  border: 1px solid #fcd34d;
+}
+
+.modality-tag.clinical {
+  background: #e0f2fe;
+  color: #0284c7;
+  border: 1px solid #7dd3fc;
+}
+
+/* Risk Section */
+.risk-display {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.risk-badge {
+  padding: 16px 32px;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  min-width: 120px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.risk-probabilities {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.prob-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.prob-label {
+  width: 60px;
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.prob-bar-wrapper {
+  flex: 1;
+  height: 12px;
+  background: #e2e8f0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.prob-bar {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 0.5s ease;
+}
+
+.prob-value {
+  width: 50px;
+  font-size: 0.85rem;
+  color: #1e293b;
+  font-weight: 600;
+  text-align: right;
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+}
+
+.stat-item {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  border: 1px solid #e2e8f0;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.stat-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.stat-value {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.stat-value.highlight {
+  color: #0d9488;
+}
+
+.stat-item.cindex {
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+}
+
+.stat-value.cindex-value {
+  color: #16a34a;
+  font-weight: 700;
+}
+
+/* OS Section */
+.os-display {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.os-main {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.os-value {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #0d9488;
+  line-height: 1;
+}
+
+.os-unit {
+  font-size: 1.2rem;
+  color: #64748b;
+}
+
+.os-detail {
+  font-size: 1rem;
+  color: #94a3b8;
+}
+
+.os-ci {
+  width: 100%;
+  margin-top: 12px;
+  font-size: 0.85rem;
+  color: #64748b;
+  background: #f1f5f9;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+
+/* Prediction Display */
+.prediction-display {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.prediction-class {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.prediction-class.recurrence {
+  background: #fef3c7;
+  color: #d97706;
+  border: 1px solid #fcd34d;
+}
+
+.prediction-class.no-recurrence {
+  background: #dcfce7;
+  color: #16a34a;
+  border: 1px solid #86efac;
+}
+
+.prediction-class.responder {
+  background: #dcfce7;
+  color: #16a34a;
+  border: 1px solid #86efac;
+}
+
+.prediction-class.non-responder {
+  background: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #fca5a5;
+}
+
+.prediction-prob {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.prob-circle {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.prob-circle svg {
+  width: 100%;
+  height: 100%;
+}
+
+.prob-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.prediction-prob .prob-label {
+  font-size: 0.8rem;
+  color: #64748b;
+  width: auto;
+  font-weight: 500;
+}
+
+/* Recommendation Section */
+.recommendation-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #1e293b;
+  background: #e0f2fe;
+  padding: 16px;
+  border-radius: 8px;
+  border-left: 4px solid #0284c7;
+}
+
+/* Metadata Section */
+.metadata-section {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  background: transparent;
+  padding: 12px 0 0;
+  border-top: 1px solid #e2e8f0;
+}
+
+.metadata-item {
+  font-size: 0.85rem;
+}
+
+.meta-label {
+  color: #64748b;
+  margin-right: 8px;
+}
+
+.meta-value {
+  color: #475569;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .result-header {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+  }
+
+  .risk-display {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .prediction-display {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .os-display {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .result-body {
+    padding: 16px;
+  }
+
+  .section {
+    padding: 16px;
+  }
+
+  .os-value {
+    font-size: 2.5rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}

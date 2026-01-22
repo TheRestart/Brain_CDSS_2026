@@ -1,0 +1,56 @@
+:root {
+  /* Color */
+  --primary: #5b6fd6; /* 메인 블루 */
+  --primary-color: #5b6fd6; /* 메인 블루 (alias) */
+  --primary-dark: #6a7bdc; /* 보조 블루 */
+  --accent-ai: #7c8ce3; /* 강조 */
+
+  --bg-main: #f4f6f9;
+  --bg-card: #ffffff;
+
+  --text-main: #1f2937;
+  --text-sub: #6b7280;
+  --border: #e5e7eb;
+
+  /* Font */
+  --font-main: 'Pretendard', system-ui, sans-serif;
+
+  /* Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+
+  /* Shadow */
+  --shadow-card: 0 4px 12px rgba(0,0,0,0.08);
+
+  /* Header */
+  --header-bg: #f2f3fb;
+  --header-shadow: rgba(0, 0, 0, 0.08);
+  --header-text: #ffffff;
+
+  --app-bg: #f2f3fb;
+
+  /* Sidebar */
+  --sidebar-bg: #eef1fb;
+  --sidebar-border: #dbe0f3;
+  --sidebar-text: #2f3a66;
+  --sidebar-muted: #7b85b8;
+
+  /* Menu States */
+  --menu-hover-bg: #374b6a;
+  --menu-active-bg: #1e293b;
+  --menu-active-text: #ffffff;
+
+  /* Content bg */
+  --content-bg: #f6f8fd;
+  --card-bg: #ffffff;
+  --card-border: #e4e8f5;
+
+  /* Alert Color */
+  --danger: #e56b6f;   /* 빨강 알림 */
+  --warning: #f2a65a;  /* 주황 */
+  --info: #5b8def;     /* 정보 */
+  --success: #5fb3a2;  /* 성공 */
+
+
+
+}

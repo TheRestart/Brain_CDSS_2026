@@ -1,0 +1,253 @@
+/**
+ * OCSTable Component Styles
+ * M1/MG/MM 스타일과 일관된 디자인
+ */
+
+.ocs-table-container {
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 350px;
+}
+
+/* Loading State */
+.ocs-loading {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ocs-loading-skeleton {
+  height: 44px;
+  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+  background-size: 200% 100%;
+  border-radius: 8px;
+  animation: ocs-shimmer 1.5s infinite;
+}
+
+@keyframes ocs-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Empty State */
+.ocs-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  gap: 12px;
+  color: #94a3b8;
+  font-size: 0.95rem;
+}
+
+.ocs-empty-icon {
+  font-size: 2rem;
+}
+
+/* Table */
+.ocs-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+/* Table Header */
+.ocs-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.ocs-table thead tr {
+  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+}
+
+.ocs-table th {
+  padding: 12px 12px;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid #e2e8f0;
+  white-space: nowrap;
+}
+
+.ocs-table th.ocs-th-select {
+  width: 40px;
+  padding-left: 16px;
+}
+
+/* Table Body */
+.ocs-table tbody tr {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.ocs-table tbody tr:hover {
+  background: linear-gradient(135deg, #eff6ff, #f8fafc);
+}
+
+.ocs-table tbody tr.selected {
+  background: linear-gradient(135deg, #dbeafe, #eff6ff);
+  border-left: 3px solid #2563eb;
+}
+
+.ocs-table tbody tr.selected:hover {
+  background: linear-gradient(135deg, #bfdbfe, #dbeafe);
+}
+
+.ocs-table td {
+  padding: 10px 12px;
+  font-size: 0.875rem;
+  color: #475569;
+  vertical-align: middle;
+}
+
+.ocs-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Radio Button */
+.ocs-td-select {
+  padding-left: 16px !important;
+}
+
+.ocs-radio {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #cbd5e1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  background: white;
+}
+
+.ocs-radio.checked {
+  border-color: #2563eb;
+  background: #2563eb;
+}
+
+.ocs-radio-dot {
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+}
+
+.ocs-table tbody tr:hover .ocs-radio:not(.checked) {
+  border-color: #93c5fd;
+}
+
+/* Cell Styles */
+.ocs-td-id {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.ocs-td-name {
+  font-weight: 500;
+  color: #334155;
+}
+
+.ocs-td-number {
+  font-family: 'Monaco', 'Menlo', monospace;
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.ocs-td-result {
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #94a3b8;
+}
+
+/* Badges */
+.ocs-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.ocs-badge-role {
+  background: #f3e8ff;
+  color: #7c3aed;
+  border: 1px solid #c4b5fd;
+}
+
+.ocs-badge-type {
+  background: #dcfce7;
+  color: #16a34a;
+  border: 1px solid #86efac;
+}
+
+/* AI 추론 상태 배지 */
+.ocs-badge-ai-completed {
+  background: #dbeafe;
+  color: #1d4ed8;
+  border: 1px solid #93c5fd;
+}
+
+.ocs-badge-ai-pending {
+  background: #fef3c7;
+  color: #b45309;
+  border: 1px solid #fcd34d;
+}
+
+.ocs-td-ai {
+  min-width: 70px;
+}
+
+/* Scrollbar */
+.ocs-table-container::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.ocs-table-container::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 3px;
+}
+
+.ocs-table-container::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.ocs-table-container::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .ocs-table th,
+  .ocs-table td {
+    padding: 8px 8px;
+    font-size: 0.8rem;
+  }
+
+  .ocs-table th {
+    font-size: 0.7rem;
+  }
+
+  .ocs-badge {
+    font-size: 0.65rem;
+    padding: 2px 6px;
+  }
+
+  .ocs-td-result {
+    max-width: 100px;
+  }
+}

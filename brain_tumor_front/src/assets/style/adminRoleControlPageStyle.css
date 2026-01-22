@@ -1,0 +1,320 @@
+/* 상단 헤더 영역 */
+.admin-toolbar {
+  display: flex;
+  justify-content: space-between; /* 좌우 분리 */
+  align-items: center;            /* 수직 가운데 */
+  margin-bottom: 16px;
+}
+
+.header-left p {
+  margin: 0;
+  font-size: 14px;
+  color: #4b5563;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+
+.role-modal {
+  width: 520px;
+  max-width: 90vw;
+  background: #fff;
+  border-radius: 16px;
+
+  padding: 28px 32px; /* ← 핵심 */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.form-group input,
+.form-group textarea {
+  align-self: flex-start;
+  width: 100%;
+  max-width: 500px;
+  font-size: 13px;
+  border-radius: 6px;
+}
+
+label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.required {
+  color: red;
+}
+
+.helper,
+.help-text {
+  font-size: 12px;
+  color: #777;
+}
+
+
+.hint {
+  background: #f4f6f8;
+  padding: 10px;
+  font-size: 13px;
+  margin-bottom: 14px;
+  border-radius: 6px;
+}
+
+/* Toggle */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 42px;
+  height: 22px;
+}
+
+.switch input {
+  opacity: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  background-color: #ccc;
+  border-radius: 22px;
+  inset: 0;
+}
+
+.slider:before {
+  content: "";
+  position: absolute;
+  height: 18px;
+  width: 18px;
+  left: 2px;
+  bottom: 2px;
+  background: white;
+  border-radius: 50%;
+  transition: 0.2s;
+}
+
+.switch input:checked + .slider {
+  background-color: #4caf50;
+}
+
+.switch input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+.status-row {
+  display: flex;
+  justify-content: space-between;
+  max-width: 420px;
+  /* align-items: center; */
+}
+
+.status-control {
+  display: flex;
+  /* align-items: center; */
+  gap: 10px;
+}
+
+.status-text {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.status-text.on {
+  color: #2e7d32; /* green */
+}
+
+.status-text.off {
+  color: #9e9e9e; /* gray */
+}
+
+.roleTextarea{
+    width: 100%;
+    min-height: 96px;
+    padding: 10px 12px;
+    font-size: 14px;
+    line-height: 1.5;
+    border: 1px solid #d0d5dd;
+    border-radius: 8px;
+    resize: vertical;
+    background: #fafafa;
+}
+
+.roleTextarea:focus {
+    outline: none;
+    border-color: #5b7cfa;
+    background-color: #ffffff;
+}
+
+.btn {
+  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  margin-right : 8px;
+}
+
+.btn-cancel {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.btn-cancel:hover {
+  background: var(--menu-hover-bg);
+  color: var(--menu-active-text);
+}
+
+.btn-primary {
+  background: #4f6df5;
+  color: #ffffff;
+  border: none;
+}
+
+.btn-primary:hover {
+  background: #3f5ae0;
+}
+
+.field-error {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #d92d20;
+  line-height: 1.4;
+}
+
+
+/* 역할 관리 리스트 css */
+.role-card {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+
+.role-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.role-table th {
+  padding: 12px 10px;
+  background: #f9fafb;
+  font-weight: 600;
+  color: #374151;
+}
+
+
+.role-table th,
+.role-table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid #e5e7eb;
+  vertical-align: middle;
+}
+
+.role-table td:nth-child(1),
+.role-table td:nth-child(2),
+.role-table td:nth-child(3),
+.role-table th:nth-child(n+4),
+.role-table td:nth-child(n+4) {
+  text-align: center;
+}
+
+.role-table td:nth-child(4) {
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.role-table tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+.role-table tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+.role-table .actions {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+
+.btn-edit {
+  background: #eef3ff;
+  color: #3b5bfd;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-danger {
+  background: #ffecec;
+  color: #e53935;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-edit:hover {
+  background: #dbe4ff;
+}
+
+.btn-danger:hover {
+  background: #ffd6d6;
+}
+
+/* 검색 입력창 스타일 */
+.search-input {
+  width: 240px;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.search-input::placeholder {
+  color: #9ca3af;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+/* 역할 필터 셀렉트박스 스타일 */
+.activate-select {
+  height: 36px;
+  padding: 0 36px 0 12px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  background-color: #fff;
+  cursor: pointer;
+
+  appearance: none;          /* 기본 화살표 제거 */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7' /%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+}
+
+.activate-select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}

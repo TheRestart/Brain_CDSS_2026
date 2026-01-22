@@ -1,0 +1,368 @@
+/* Treatment Tab Styles */
+
+.treatment-tab {
+  padding: 1rem;
+}
+
+.treatment-tab.loading,
+.treatment-tab.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  color: #666;
+}
+
+.treatment-tab.error {
+  color: #dc2626;
+}
+
+/* Header */
+.treatment-tab .tab-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.treatment-tab .tab-header h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+/* Empty State */
+.treatment-tab .empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: #666;
+  background: #f9fafb;
+  border-radius: 8px;
+}
+
+/* Plan List */
+.plan-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.plan-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.plan-card:hover {
+  border-color: #2563eb;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.plan-card.selected {
+  border-color: #2563eb;
+  background: #f8fafc;
+}
+
+.plan-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+
+.plan-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.plan-title h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Type Badge */
+.type-badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.type-badge.type-surgery {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.type-badge.type-radiation {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.type-badge.type-chemotherapy {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.type-badge.type-observation {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.type-badge.type-combined {
+  background: #e0e7ff;
+  color: #3730a3;
+}
+
+/* Status Badge */
+.status-badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.status-badge.status-draft {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.status-badge.status-planned {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.status-badge.status-active {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.status-badge.status-completed {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.status-badge.status-cancelled {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+/* Plan Info */
+.plan-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.plan-info .info-row {
+  display: flex;
+  font-size: 0.875rem;
+}
+
+.plan-info .label {
+  color: #666;
+  width: 80px;
+  flex-shrink: 0;
+}
+
+/* Plan Detail (expanded) */
+.plan-detail {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.detail-section {
+  margin-bottom: 1rem;
+}
+
+.detail-section h5 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0 0 0.5rem 0;
+}
+
+.detail-section p {
+  margin: 0;
+  color: #4b5563;
+  font-size: 0.875rem;
+}
+
+/* Session List */
+.session-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.session-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+  background: #f9fafb;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+.session-number {
+  font-weight: 600;
+  color: #2563eb;
+}
+
+.session-date {
+  color: #666;
+}
+
+.session-status {
+  margin-left: auto;
+  padding: 0.125rem 0.375rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+}
+
+.session-status.status-scheduled {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.session-status.status-completed {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.session-status.status-cancelled {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+/* Plan Actions */
+.plan-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 500px;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-content h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 1.5rem 0;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.375rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.9375rem;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+/* Buttons */
+.treatment-tab .btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.treatment-tab .btn-primary {
+  background: #2563eb;
+  color: #fff;
+}
+
+.treatment-tab .btn-primary:hover {
+  background: #1d4ed8;
+}
+
+.treatment-tab .btn-secondary {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.treatment-tab .btn-secondary:hover {
+  background: #d1d5db;
+}
+
+.treatment-tab .btn-success {
+  background: #059669;
+  color: #fff;
+}
+
+.treatment-tab .btn-success:hover {
+  background: #047857;
+}
+
+.treatment-tab .btn-danger {
+  background: #dc2626;
+  color: #fff;
+}
+
+.treatment-tab .btn-danger:hover {
+  background: #b91c1c;
+}

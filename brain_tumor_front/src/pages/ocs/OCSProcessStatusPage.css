@@ -1,0 +1,658 @@
+/* OCS 통합 처리 현황 대시보드 스타일 */
+
+.ocs-process-status-page {
+  padding: 20px;
+}
+
+.ocs-process-status-page .page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* margin-bottom: 24px; */
+}
+
+.ocs-process-status-page .page-header .header-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.ocs-process-status-page .page-header h2 {
+  margin: 0 0 4px 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-main, #1f2937);
+}
+
+.ocs-process-status-page .page-header .subtitle {
+  color: var(--text-sub, #6b7280);
+  font-size: 14px;
+}
+
+.ocs-process-status-page .page-header .header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ocs-process-status-page .refresh-btn {
+  padding: 10px 20px;
+  background: var(--primary, #5b6fd6);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md, 8px);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.ocs-process-status-page .refresh-btn:hover:not(:disabled) {
+  background: var(--primary-dark, #4a5bc4);
+}
+
+.ocs-process-status-page .refresh-btn:disabled {
+  background: #95a5a6;
+  cursor: not-allowed;
+}
+
+/* 에러 메시지 */
+.ocs-process-status-page .error-message {
+  padding: 16px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  color: #dc2626;
+  margin-bottom: 20px;
+}
+
+/* 로딩 메시지 */
+.ocs-process-status-page .loading-message {
+  padding: 40px;
+  text-align: center;
+  color: var(--text-sub, #6b7280);
+  font-size: 14px;
+}
+
+/* 통합 요약 카드 - 6개 상태 */
+.ocs-process-status-page .combined-summary {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.ocs-process-status-page .combined-summary .summary-card {
+  background: var(--card-bg, #fff);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: var(--shadow-card, 0 4px 12px rgba(0, 0, 0, 0.08));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 4px solid transparent;
+}
+
+.ocs-process-status-page .combined-summary .card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.ocs-process-status-page .combined-summary .card-label {
+  font-size: 12px;
+  color: var(--text-sub, #6b7280);
+}
+
+.ocs-process-status-page .combined-summary .card-value {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+/* 6개 상태별 색상 - 요약 카드 */
+.ocs-process-status-page .combined-summary .summary-card.ordered {
+  border-left-color: #9ca3af;
+}
+.ocs-process-status-page .combined-summary .summary-card.ordered .card-value {
+  color: #9ca3af;
+}
+
+.ocs-process-status-page .combined-summary .summary-card.accepted {
+  border-left-color: #60a5fa;
+}
+.ocs-process-status-page .combined-summary .summary-card.accepted .card-value {
+  color: #60a5fa;
+}
+
+.ocs-process-status-page .combined-summary .summary-card.in-progress {
+  border-left-color: #f59e0b;
+}
+.ocs-process-status-page .combined-summary .summary-card.in-progress .card-value {
+  color: #f59e0b;
+}
+
+.ocs-process-status-page .combined-summary .summary-card.result-ready {
+  border-left-color: #8b5cf6;
+}
+.ocs-process-status-page .combined-summary .summary-card.result-ready .card-value {
+  color: #8b5cf6;
+}
+
+.ocs-process-status-page .combined-summary .summary-card.confirmed {
+  border-left-color: #10b981;
+}
+.ocs-process-status-page .combined-summary .summary-card.confirmed .card-value {
+  color: #10b981;
+}
+
+.ocs-process-status-page .combined-summary .summary-card.cancelled {
+  border-left-color: #ef4444;
+}
+.ocs-process-status-page .combined-summary .summary-card.cancelled .card-value {
+  color: #ef4444;
+}
+
+/* 부서별 현황 */
+.ocs-process-status-page .department-section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.ocs-process-status-page .department-card {
+  background: var(--card-bg, #fff);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: var(--shadow-card, 0 4px 12px rgba(0, 0, 0, 0.08));
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.ocs-process-status-page .department-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.ocs-process-status-page .department-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.ocs-process-status-page .department-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-main, #1f2937);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ocs-process-status-page .dept-icon {
+  font-size: 24px;
+}
+
+.ocs-process-status-page .today-count {
+  font-size: 13px;
+  color: var(--text-sub, #6b7280);
+  background: #f3f4f6;
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+/* 통계 그리드 - 6개 상태 */
+.ocs-process-status-page .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.ocs-process-status-page .stat-item {
+  text-align: center;
+  padding: 10px 6px;
+  border-radius: 8px;
+  background: #f8f9fa;
+}
+
+.ocs-process-status-page .stat-item .stat-label {
+  display: block;
+  font-size: 11px;
+  color: var(--text-sub, #6b7280);
+  margin-bottom: 4px;
+}
+
+.ocs-process-status-page .stat-item .stat-value {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* 6개 상태별 색상 - 부서별 통계 */
+.ocs-process-status-page .stat-item.ordered .stat-value {
+  color: #9ca3af;
+}
+
+.ocs-process-status-page .stat-item.accepted .stat-value {
+  color: #60a5fa;
+}
+
+.ocs-process-status-page .stat-item.in-progress .stat-value {
+  color: #f59e0b;
+}
+
+.ocs-process-status-page .stat-item.result-ready .stat-value {
+  color: #8b5cf6;
+}
+
+.ocs-process-status-page .stat-item.confirmed .stat-value {
+  color: #10b981;
+}
+
+.ocs-process-status-page .stat-item.cancelled .stat-value {
+  color: #ef4444;
+}
+
+/* 진행바 */
+.ocs-process-status-page .progress-bar {
+  display: flex;
+  height: 12px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #e9ecef;
+  margin-bottom: 16px;
+}
+
+.ocs-process-status-page .progress-segment {
+  transition: width 0.3s ease;
+}
+
+/* 6개 상태별 색상 - 진행바 */
+.ocs-process-status-page .progress-segment.ordered {
+  background: #9ca3af;
+}
+
+.ocs-process-status-page .progress-segment.accepted {
+  background: #60a5fa;
+}
+
+.ocs-process-status-page .progress-segment.in-progress {
+  background: #f59e0b;
+}
+
+.ocs-process-status-page .progress-segment.result-ready {
+  background: #8b5cf6;
+}
+
+.ocs-process-status-page .progress-segment.confirmed {
+  background: #10b981;
+}
+
+/* 상세보기 링크 */
+.ocs-process-status-page .view-detail {
+  text-align: right;
+  font-size: 13px;
+  color: var(--primary, #5b6fd6);
+  font-weight: 500;
+}
+
+/* 범례 */
+.ocs-process-status-page .legend-section {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  padding: 16px;
+  background: var(--card-bg, #fff);
+  border-radius: 8px;
+  box-shadow: var(--shadow-card, 0 4px 12px rgba(0, 0, 0, 0.08));
+  margin-bottom: 10px;
+}
+
+.ocs-process-status-page .legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text-sub, #6b7280);
+}
+
+.ocs-process-status-page .legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+}
+
+/* 6개 상태별 색상 - 범례 */
+.ocs-process-status-page .legend-color.ordered {
+  background: #9ca3af;
+}
+
+.ocs-process-status-page .legend-color.accepted {
+  background: #60a5fa;
+}
+
+.ocs-process-status-page .legend-color.in-progress {
+  background: #f59e0b;
+}
+
+.ocs-process-status-page .legend-color.result-ready {
+  background: #8b5cf6;
+}
+
+.ocs-process-status-page .legend-color.confirmed {
+  background: #10b981;
+}
+
+.ocs-process-status-page .legend-color.cancelled {
+  background: #ef4444;
+}
+
+/* 반응형 */
+@media (max-width: 1200px) {
+  .ocs-process-status-page .combined-summary {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .ocs-process-status-page .combined-summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .ocs-process-status-page .department-section {
+    grid-template-columns: 1fr;
+  }
+  .ocs-process-status-page .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .ocs-process-status-page .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .ocs-process-status-page .page-header .header-right {
+    width: 100%;
+  }
+
+  .ocs-process-status-page .refresh-btn {
+    width: 100%;
+  }
+
+  .ocs-process-status-page .legend-section {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+}
+
+/* =============================================================================
+   사용자 로그인 현황 섹션
+============================================================================= */
+
+.ocs-process-status-page .user-login-section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.ocs-process-status-page .user-login-card {
+  background: var(--card-bg, #fff);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: var(--shadow-card, 0 4px 12px rgba(0, 0, 0, 0.08));
+}
+
+.ocs-process-status-page .user-login-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.ocs-process-status-page .user-login-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-main, #1f2937);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ocs-process-status-page .login-count {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary, #5b6fd6);
+  background: #eef2ff;
+  padding: 4px 12px;
+  border-radius: 16px;
+}
+
+.ocs-process-status-page .user-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.ocs-process-status-page .user-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border-radius: 8px;
+  background: #f9fafb;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.ocs-process-status-page .user-item:hover {
+  background: #f3f4f6;
+  transform: translateX(4px);
+}
+
+.ocs-process-status-page .user-item.online {
+  border-left: 3px solid #10b981;
+}
+
+.ocs-process-status-page .user-item.offline {
+  border-left: 3px solid #f59e0b;
+}
+
+.ocs-process-status-page .user-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ocs-process-status-page .user-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-main, #1f2937);
+}
+
+.ocs-process-status-page .user-id {
+  font-size: 12px;
+  color: var(--text-sub, #6b7280);
+}
+
+.ocs-process-status-page .user-status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.ocs-process-status-page .last-activity {
+  font-size: 12px;
+  color: var(--text-sub, #6b7280);
+}
+
+.ocs-process-status-page .status-badge {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.ocs-process-status-page .status-badge.online {
+  background: #d1fae5;
+  color: #059669;
+}
+
+.ocs-process-status-page .status-badge.offline {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.ocs-process-status-page .no-users {
+  padding: 20px;
+  text-align: center;
+  color: var(--text-sub, #6b7280);
+  font-size: 14px;
+}
+
+/* =============================================================================
+   사용자 상세 정보 모달
+============================================================================= */
+
+.ocs-process-status-page .user-detail-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.ocs-process-status-page .user-detail-modal {
+  background: #fff;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  animation: modalSlideIn 0.2s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ocs-process-status-page .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.ocs-process-status-page .modal-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-main, #1f2937);
+}
+
+.ocs-process-status-page .close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--text-sub, #6b7280);
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.ocs-process-status-page .close-btn:hover {
+  color: var(--text-main, #1f2937);
+}
+
+.ocs-process-status-page .modal-content {
+  padding: 20px;
+}
+
+.ocs-process-status-page .detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.ocs-process-status-page .detail-row:last-child {
+  border-bottom: none;
+}
+
+.ocs-process-status-page .detail-label {
+  font-size: 14px;
+  color: var(--text-sub, #6b7280);
+}
+
+.ocs-process-status-page .detail-value {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-main, #1f2937);
+}
+
+.ocs-process-status-page .detail-value.status.online {
+  color: #059669;
+}
+
+.ocs-process-status-page .detail-value.status.offline {
+  color: #d97706;
+}
+
+/* 반응형 - 사용자 로그인 현황 */
+@media (max-width: 900px) {
+  .ocs-process-status-page .user-login-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .ocs-process-status-page .user-login-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .ocs-process-status-page .user-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .ocs-process-status-page .user-status {
+    align-items: flex-start;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .ocs-process-status-page .user-detail-modal {
+    margin: 20px;
+    max-width: calc(100% - 40px);
+  }
+}

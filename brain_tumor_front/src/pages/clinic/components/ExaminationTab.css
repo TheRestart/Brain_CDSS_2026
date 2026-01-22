@@ -1,0 +1,1365 @@
+/* ExaminationTab - 진찰 탭 스타일 (Enhanced) */
+
+.examination-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  font-size: 11px;
+}
+
+.examination-tab.enhanced {
+  gap: 12px;
+  padding: 16px 20px;
+  font-size: 11px;
+}
+
+.examination-tab.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  color: var(--text-sub);
+}
+
+/* 상단 요약 영역 */
+.top-summary-row {
+  display: flex;
+  gap: 12px;
+}
+
+.top-summary-row .exam-section {
+  flex: 1;
+}
+
+.exam-section {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+}
+
+.exam-section.compact {
+  padding: 12px 16px;
+}
+
+.exam-section h4 {
+  margin: 0 0 12px 0;
+  font-size: 15px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-main);
+}
+
+/* 섹션 아이콘 */
+.section-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.section-icon.warning {
+  background: #fff3e0;
+  color: #ef6c00;
+}
+
+.section-icon.info {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.section-icon.edit {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.section-icon.ai {
+  background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+  color: #7b1fa2;
+}
+
+.section-icon.history {
+  background: #fce4ec;
+  color: #c2185b;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.section-header h4 {
+  margin: 0;
+}
+
+/* Alert Section */
+.alert-count {
+  background: var(--danger);
+  color: #fff;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+
+.alert-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* 가로 배치 Alert Chips */
+.alert-list.horizontal {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.alert-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: var(--bg-main);
+  border: 1px solid var(--border);
+  border-left-width: 3px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.alert-chip:hover {
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.alert-chip .alert-icon {
+  font-size: 14px;
+}
+
+.alert-chip .alert-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-main);
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.alert-chip .btn-remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  background: none;
+  border: none;
+  color: var(--text-sub);
+  cursor: pointer;
+  font-size: 14px;
+  opacity: 0.5;
+  margin-left: 2px;
+}
+
+.alert-chip .btn-remove:hover {
+  opacity: 1;
+  color: var(--danger);
+}
+
+.more-alerts {
+  font-size: 12px;
+  color: var(--text-sub);
+  padding: 6px 10px;
+}
+
+.alert-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px;
+  background: var(--bg-main);
+  border-radius: 6px;
+}
+
+.alert-icon {
+  font-size: 18px;
+}
+
+.alert-content {
+  flex: 1;
+}
+
+.alert-title {
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--text-main);
+}
+
+.alert-desc {
+  font-size: 12px;
+  color: var(--text-sub);
+  margin-top: 2px;
+}
+
+.alert-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  font-size: 14px;
+  opacity: 0.6;
+}
+
+.btn-icon:hover {
+  opacity: 1;
+}
+
+/* Info Section - Chip Style */
+.info-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.info-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: var(--bg-main);
+  border-radius: 16px;
+  font-size: 12px;
+}
+
+.info-chip .chip-label {
+  color: var(--text-sub);
+}
+
+.info-chip .chip-value {
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.info-chip.highlight {
+  background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+}
+
+.info-chip.highlight .chip-value {
+  color: var(--primary);
+}
+
+/* Legacy Info Grid */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-item.full {
+  grid-column: span 3;
+}
+
+.info-item .label {
+  font-size: 11px;
+  color: var(--text-sub);
+}
+
+.info-item .value {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+/* 4컬럼 메인 그리드 - 균등 분포 */
+.main-content-grid.three-column {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 14px;
+  min-height: 0;
+}
+
+.content-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 0;
+}
+
+.content-column .exam-section {
+  flex-shrink: 0;
+}
+
+/* SOAP Section */
+.soap-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.soap-form.compact {
+  gap: 8px;
+}
+
+.soap-form.compact .soap-field textarea {
+  padding: 8px;
+  font-size: 12px;
+}
+
+.soap-field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-sub);
+  margin-bottom: 4px;
+}
+
+.soap-field textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 11px;
+  font-family: inherit;
+  resize: none;
+  background: var(--card-bg);
+  color: var(--text-main);
+  min-height: 40px;
+  overflow-y: hidden;
+  field-sizing: content;
+}
+
+.soap-field textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+/* SOAP & History Grid (병렬 배치) - Legacy */
+.soap-history-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.soap-history-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.soap-history-column .exam-section {
+  flex: 1;
+  height: 100%;
+}
+
+/* History Section */
+.history-section.compact {
+  padding: 12px;
+}
+
+.history-tabs {
+  display: flex;
+  flex-direction: column;
+}
+
+.history-tab-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.history-mini-list h5 {
+  margin: 0 0 6px 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-sub);
+}
+
+.history-list.mini li {
+  padding: 4px 0;
+  font-size: 11px;
+}
+
+.ocs-inline {
+  display: flex;
+  gap: 8px;
+}
+
+.ocs-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.ocs-badge.ris {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.ocs-badge.lis {
+  background: #f3e5f5;
+  color: #7b1fa2;
+}
+
+.history-grid-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.history-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.history-column h5 {
+  margin: 0 0 8px 0;
+  font-size: 13px;
+  color: var(--text-sub);
+}
+
+.history-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.history-list li {
+  display: flex;
+  gap: 8px;
+  padding: 6px 0;
+  font-size: 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-main);
+}
+
+.history-list .date {
+  color: var(--text-sub);
+}
+
+.ocs-group {
+  margin-bottom: 8px;
+}
+
+.ocs-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-sub);
+  margin-bottom: 4px;
+}
+
+.ocs-item {
+  font-size: 12px;
+  padding: 4px 0;
+  color: var(--text-main);
+}
+
+/* AI Summary Compact */
+.ai-summary.compact {
+  padding: 8px 0;
+}
+
+.ai-summary.compact .ai-result {
+  padding: 8px;
+  font-size: 10px;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+/* AI Section */
+.ai-meta {
+  font-size: 11px;
+  color: var(--text-sub);
+  margin-bottom: 8px;
+}
+
+.ai-result {
+  background: var(--bg-main);
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  overflow-x: auto;
+  margin: 0;
+  color: var(--text-main);
+}
+
+.empty-message {
+  padding: 16px;
+  text-align: center;
+  color: var(--text-sub);
+  font-size: 13px;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  padding: 4px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.btn-outline:hover {
+  background: var(--bg-main);
+}
+
+/* Toast Messages */
+.examination-tab .toast-message {
+  position: sticky;
+  top: 0;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  animation: slideIn 0.3s ease;
+  z-index: 100;
+}
+
+.examination-tab .toast-success {
+  background: #e8f5e9;
+  color: #1e8449;
+  border: 1px solid #a5d6a7;
+}
+
+.examination-tab .toast-error {
+  background: #ffebee;
+  color: #c62828;
+  border: 1px solid #ef9a9a;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Success Button */
+.examination-tab .btn-success {
+  background: var(--success) !important;
+  border-color: var(--success) !important;
+  color: white !important;
+}
+
+/* Button Secondary */
+.examination-tab .btn-secondary {
+  background: var(--bg-main);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  padding: 4px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.examination-tab .btn-secondary:hover {
+  background: var(--border);
+}
+
+/* Order Section Grid */
+.order-section-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.order-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Order Card */
+.order-card .card-icon,
+.result-card .card-icon {
+  margin-right: 6px;
+}
+
+.order-counts {
+  font-size: 12px;
+  font-weight: normal;
+  color: var(--text-sub);
+  margin-left: 8px;
+}
+
+.pending-count {
+  color: var(--warning);
+}
+
+.completed-count {
+  color: var(--success);
+}
+
+.result-count {
+  font-size: 12px;
+  font-weight: normal;
+  color: var(--text-sub);
+  margin-left: 4px;
+}
+
+.order-list,
+.result-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.order-item,
+.result-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.order-item:hover,
+.result-item:hover {
+  background: var(--bg-main);
+  margin: 0 -16px;
+  padding: 10px 16px;
+}
+
+.order-item:last-child,
+.result-item:last-child {
+  border-bottom: none;
+}
+
+.order-item-content,
+.result-item-content {
+  flex: 1;
+}
+
+.order-item-title,
+.result-item-title {
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  color: var(--text-main);
+}
+
+.order-item-subtitle,
+.result-item-subtitle {
+  font-size: 11px;
+  color: var(--text-sub);
+  margin-top: 2px;
+}
+
+.job-role-badge {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  margin-right: 6px;
+}
+
+.job-role-badge.ris {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.job-role-badge.lis {
+  background: #f3e5f5;
+  color: #7b1fa2;
+}
+
+.examination-tab .status-badge {
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.examination-tab .status-badge.ordered {
+  background: #fff3e0;
+  color: #ef6c00;
+}
+
+.examination-tab .status-badge.accepted {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.examination-tab .status-badge.in_progress {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.examination-tab .status-badge.result_ready {
+  background: #f3e5f5;
+  color: #7b1fa2;
+}
+
+.examination-tab .status-badge.confirmed {
+  background: #e8f5e9;
+  color: #1b5e20;
+}
+
+.examination-tab .status-badge.cancelled {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.more-link {
+  padding: 12px 0;
+  text-align: center;
+  font-size: 12px;
+  color: var(--primary);
+  cursor: pointer;
+}
+
+.more-link:hover {
+  text-decoration: underline;
+}
+
+/* AI Request Card */
+.ai-request-card {
+  background: linear-gradient(135deg, #f5f7ff 0%, var(--card-bg) 100%);
+  border: 1px solid #e3e8ff;
+}
+
+.ai-model-info {
+  padding: 12px 0;
+}
+
+.ai-model-info .info-text {
+  font-size: 13px;
+  color: var(--text-sub);
+  margin-bottom: 12px;
+}
+
+.model-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.model-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  background: #e3f2fd;
+  color: #1565c0;
+  border-radius: 16px;
+  font-size: 12px;
+  cursor: help;
+}
+
+/* 통합 결과 섹션 스타일 */
+.unified-results {
+  padding: 12px;
+}
+
+.unified-results .section-header {
+  margin-bottom: 12px;
+}
+
+.result-subsection {
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border, #e5e7eb);
+}
+
+.result-subsection:last-of-type {
+  border-bottom: none;
+  margin-bottom: 8px;
+}
+
+.subsection-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-main);
+  margin: 0 0 8px 0;
+}
+
+.subsection-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 16px;
+  border-radius: 3px;
+  font-size: 9px;
+  font-weight: 700;
+  color: white;
+}
+
+.subsection-icon.ris {
+  background: #7c4dff;
+}
+
+.subsection-icon.lis {
+  background: #00bcd4;
+}
+
+.subsection-icon.ai {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.subsection-count {
+  font-size: 10px;
+  color: var(--text-sub);
+  font-weight: 400;
+}
+
+.result-list.compact {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.result-list.compact .result-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 8px;
+  background: var(--bg-main, #f4f6f9);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.result-list.compact .result-item:hover {
+  background: var(--bg-hover, #e8eaed);
+}
+
+.result-item-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.result-type {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+.result-date {
+  font-size: 10px;
+  color: var(--text-sub);
+}
+
+.status-badge.mini {
+  font-size: 9px;
+  padding: 2px 6px;
+}
+
+/* AI 결과 카드 */
+.ai-result-card {
+  background: linear-gradient(135deg, #f5f7fa 0%, #e8eaed 100%);
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: 6px;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.ai-result-card:hover {
+  border-color: #667eea;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
+}
+
+.ai-result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.ai-model-name {
+  font-size: 11px;
+  font-weight: 600;
+  color: #667eea;
+}
+
+.ai-date {
+  font-size: 10px;
+  color: var(--text-sub);
+}
+
+.ai-result-preview {
+  font-size: 10px;
+  color: var(--text-sub);
+  font-family: monospace;
+  white-space: pre-wrap;
+  word-break: break-all;
+  max-height: 40px;
+  overflow: hidden;
+}
+
+/* AI 모델 안내 (컴팩트) */
+.ai-model-info.compact {
+  padding-top: 8px;
+}
+
+.ai-model-info.compact .model-badges {
+  justify-content: center;
+  gap: 6px;
+}
+
+.ai-model-info.compact .model-badge {
+  padding: 2px 8px;
+  font-size: 10px;
+}
+
+/* Modal Styles */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: var(--card-bg);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.modal-content h3 {
+  margin: 0 0 16px 0;
+  color: var(--text-main);
+}
+
+.form-group {
+  margin-bottom: 12px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--text-sub);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 13px;
+  background: var(--card-bg);
+  color: var(--text-main);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+/* 과거 기록 컬럼 */
+.content-column.past-column {
+  gap: 8px;
+}
+
+.past-column-header {
+  padding: 8px 12px;
+  background: var(--bg-main);
+  border-radius: 6px;
+  margin-bottom: 4px;
+}
+
+.past-column-header h4 {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.past-column-header h4::before {
+  content: '📁';
+}
+
+.past-column .clinic-card {
+  margin-bottom: 0;
+}
+
+/* 캘린더 카드 - 정사각형 */
+.past-column .clinic-card:has(.calendar-body) {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.past-column .clinic-card:has(.calendar-body) .clinic-card-header {
+  flex-shrink: 0;
+}
+
+.past-column .clinic-card .calendar-body {
+  padding: 8px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.past-column .clinic-card .calendar-nav {
+  margin-bottom: 6px;
+  flex-shrink: 0;
+}
+
+.past-column .clinic-card .nav-btn {
+  width: 24px;
+  height: 24px;
+  font-size: 12px;
+}
+
+.past-column .clinic-card .nav-title {
+  font-size: 12px;
+}
+
+.past-column .clinic-card .calendar-weekdays {
+  margin-bottom: 4px;
+  flex-shrink: 0;
+}
+
+.past-column .clinic-card .weekday {
+  font-size: 10px;
+  padding: 2px;
+}
+
+.past-column .clinic-card .calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  gap: 1px;
+  flex: 1;
+  min-height: 0;
+}
+
+.past-column .clinic-card .calendar-day {
+  font-size: 10px;
+  min-height: 0;
+  padding: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.past-column .clinic-card .day-number {
+  margin-bottom: 1px;
+}
+
+.past-column .clinic-card .day-events {
+  display: flex;
+  gap: 1px;
+}
+
+.past-column .clinic-card .calendar-legend {
+  margin-top: 6px;
+  padding-top: 6px;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.past-column .clinic-card .legend-item {
+  font-size: 9px;
+}
+
+.past-column .clinic-card .event-dot {
+  width: 6px;
+  height: 6px;
+}
+
+.past-column .clinic-card-header {
+  padding: 8px 10px;
+}
+
+.past-column .clinic-card-header .btn-sm {
+  padding: 2px 6px;
+  font-size: 10px;
+}
+
+/* 과거 기록 컬럼 내부 카드 축소 */
+.past-column .clinic-card-header h3 {
+  font-size: 12px;
+}
+
+.past-column .clinic-card-body {
+  overflow-y: auto;
+}
+
+/* 빈 컬럼 메시지 (환자 미선택 시) */
+.empty-column-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+  color: var(--text-sub, #6b7280);
+  font-size: 12px;
+  text-align: center;
+  background: var(--bg-main, #f4f6f9);
+  border-radius: var(--radius-md, 8px);
+  border: 1px dashed var(--border, #e5e7eb);
+}
+
+/* Responsive - 태블릿 */
+@media (max-width: 1400px) {
+  .main-content-grid.three-column {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .main-content-grid.three-column {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .content-column.past-column {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .content-column.order-column {
+    grid-column: span 2;
+  }
+
+  .past-column-header {
+    grid-column: span 2;
+  }
+
+  .top-summary-row {
+    flex-direction: column;
+  }
+}
+
+/* Responsive - 모바일 */
+@media (max-width: 768px) {
+  .main-content-grid.three-column {
+    grid-template-columns: 1fr;
+  }
+
+  .content-column.order-column {
+    grid-column: span 1;
+    grid-template-columns: 1fr;
+  }
+
+  .content-column.past-column {
+    grid-column: span 1;
+    grid-template-columns: 1fr;
+  }
+
+  .past-column-header {
+    grid-column: span 1;
+  }
+
+  .soap-history-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .order-section-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .history-grid-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .info-item.full {
+    grid-column: span 1;
+  }
+
+  .info-chips {
+    flex-direction: column;
+  }
+
+  .alert-list.horizontal {
+    flex-direction: column;
+  }
+}
+
+/* 예약 환자 리스트 컬럼 */
+.content-column.order-column .clinic-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-column.order-column .clinic-card-body {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* 과거 기록 섹션 - 이제 4번째 컬럼으로 통합됨 */
+
+/* ============================================
+   Order Item Wrapper & Actions (CONFIRMED 상태 버튼)
+   ============================================ */
+.order-item-wrapper {
+  border-bottom: 1px solid var(--border, #e5e7eb);
+}
+
+.order-item-wrapper:last-child {
+  border-bottom: none;
+}
+
+.order-item-wrapper .order-item {
+  border-bottom: none;
+}
+
+.order-item-actions {
+  display: flex;
+  gap: 6px;
+  padding: 6px 0 10px 0;
+  flex-wrap: wrap;
+}
+
+.order-item-actions .btn {
+  font-size: 10px;
+  padding: 4px 8px;
+}
+
+.order-item-actions .btn-outline {
+  background: var(--card-bg, white);
+  border: 1px solid var(--border, #e5e7eb);
+  color: var(--text-main, #374151);
+}
+
+.order-item-actions .btn-outline:hover {
+  background: var(--bg-main, #f4f6f9);
+  border-color: var(--primary, #4f46e5);
+  color: var(--primary, #4f46e5);
+}
+
+.order-item-actions .btn-primary {
+  background: var(--primary, #4f46e5);
+  border: 1px solid var(--primary, #4f46e5);
+  color: white;
+}
+
+.order-item-actions .btn-primary:hover {
+  background: var(--primary-dark, #4338ca);
+}
+
+/* ============================================
+   AI Inference Card 스타일
+   ============================================ */
+.ai-inference-card {
+  background: linear-gradient(135deg, #f5f7ff 0%, var(--card-bg, white) 100%);
+  border: 1px solid #e3e8ff;
+}
+
+.ai-inference-card .card-icon {
+  margin-right: 6px;
+}
+
+/* AI 액션 버튼 (수동 추론 요청 페이지 이동) */
+.ai-action-button {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border, #e5e7eb);
+  margin-bottom: 12px;
+}
+
+.ai-action-button .btn-block {
+  width: 100%;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.ai-action-hint {
+  margin: 10px 0 0 0;
+  font-size: 11px;
+  color: var(--text-sub, #6b7280);
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* AI 결과 리스트 */
+.ai-results-list {
+  padding-top: 4px;
+}
+
+.ai-results-list .subsection-title {
+  margin-bottom: 10px;
+}
+
+.ai-request-item {
+  background: var(--bg-main, #f4f6f9);
+  border-radius: 4px;
+  margin-bottom: 4px;
+}
+
+.ai-request-item:hover {
+  background: var(--bg-hover, #e8eaed);
+}
+
+/* AI 상태 배지 추가 */
+.examination-tab .status-badge.pending {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.examination-tab .status-badge.validating {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.examination-tab .status-badge.processing {
+  background: #e0e7ff;
+  color: #4338ca;
+}
+
+.examination-tab .status-badge.completed {
+  background: #d1fae5;
+  color: #047857;
+}
+
+.examination-tab .status-badge.failed {
+  background: #fee2e2;
+  color: #dc2626;
+}

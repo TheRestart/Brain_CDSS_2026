@@ -1,0 +1,17 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #0f1115;
+  color: #e6e6e6;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+.appShell {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 20px 16px;
+}
+
+.appHeader { margin-bottom: 14px; }
+.appTitle { margin: 0; font-size: 22px; color: #fff; }
+.appSubtitle { margin: 6px 0 0; font-size: 13px; color: #9aa0aa; }

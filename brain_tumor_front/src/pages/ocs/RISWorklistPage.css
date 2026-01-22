@@ -1,0 +1,457 @@
+/* RISWorklistPage.css */
+
+.ris-worklist {
+  padding: 20px;
+}
+
+/* 헤더 */
+.ris-worklist .page-header {
+  margin-bottom: 0px;
+}
+
+.ris-worklist .page-header h2 {
+  margin: 0 0 8px 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.ris-worklist .page-header .subtitle {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* 요약 카드 (6개 상태) */
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.summary-card {
+  padding: 16px;
+  border-radius: 8px;
+  text-align: center;
+  background: white;
+  border: 1px solid #e0e0e0;
+}
+
+.summary-card .count {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.summary-card .label {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+/* 6개 상태별 카드 스타일 */
+.summary-card.ordered {
+  border-left: 4px solid #e67e22;
+}
+
+.summary-card.ordered .count {
+  color: #e67e22;
+}
+
+.summary-card.accepted {
+  border-left: 4px solid #f39c12;
+}
+
+.summary-card.accepted .count {
+  color: #f39c12;
+}
+
+.summary-card.in-progress {
+  border-left: 4px solid #3498db;
+}
+
+.summary-card.in-progress .count {
+  color: #3498db;
+}
+
+.summary-card.result-ready {
+  border-left: 4px solid #9b59b6;
+}
+
+.summary-card.result-ready .count {
+  color: #9b59b6;
+}
+
+.summary-card.confirmed {
+  border-left: 4px solid #27ae60;
+}
+
+.summary-card.confirmed .count {
+  color: #27ae60;
+}
+
+.summary-card.cancelled {
+  border-left: 4px solid #95a5a6;
+}
+
+.summary-card.cancelled .count {
+  color: #95a5a6;
+}
+
+/* 반응형 카드 */
+@media (max-width: 1400px) {
+  .summary-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .summary-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 필터 바 */
+.ris-worklist .filter-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.ris-worklist .filter-left {
+  display: flex;
+  align-items: center;
+}
+
+.ris-worklist .ocs-count {
+  font-size: 1rem;
+  color: #333;
+}
+
+.ris-worklist .ocs-count span {
+  color: #1976d2;
+  font-weight: bold;
+}
+
+.ris-worklist .filter-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* 검색 박스 */
+.ris-worklist .search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ris-worklist .search-box input {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  min-width: 200px;
+}
+
+.ris-worklist .search-box input:focus {
+  outline: none;
+  border-color: #1976d2;
+}
+
+.ris-worklist .btn-search {
+  padding: 8px 16px;
+  background: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.ris-worklist .btn-search:hover {
+  background: #1565c0;
+}
+
+.ris-worklist .btn-clear {
+  padding: 8px 16px;
+  background: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.ris-worklist .btn-clear:hover {
+  background: #545b62;
+}
+
+/* 셀렉트 */
+.ris-worklist .filter-right select {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  background: white;
+  cursor: pointer;
+  min-width: 120px;
+}
+
+.ris-worklist .filter-right select:focus {
+  outline: none;
+  border-color: #1976d2;
+}
+
+/* 체크박스 */
+.ris-worklist .checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: #333;
+  cursor: pointer;
+}
+
+.ris-worklist .checkbox-label input {
+  cursor: pointer;
+}
+
+/* 콘텐츠 */
+.ris-worklist .content {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.ris-worklist .loading {
+  padding: 40px;
+  text-align: center;
+  color: #666;
+}
+
+/* 테이블 */
+.ris-worklist .ocs-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ris-worklist .ocs-table thead {
+  background: #f1f3f5;
+}
+
+.ris-worklist .ocs-table th {
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  color: #495057;
+  font-size: 0.85rem;
+  border-bottom: 2px solid #dee2e6;
+  white-space: nowrap;
+}
+
+.ris-worklist .ocs-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e9ecef;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.ris-worklist .ocs-table tbody tr:hover {
+  background: #f8f9fa;
+}
+
+.ris-worklist .clickable-row {
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.ris-worklist .clickable-row:hover {
+  background: #e9f5ff !important;
+}
+
+.ris-worklist .urgent-row {
+  background: #fff8e1;
+}
+
+.ris-worklist .urgent-row:hover {
+  background: #ffecb3 !important;
+}
+
+/* 상태 배지 */
+.ris-worklist .status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.ris-worklist .status-ordered {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.ris-worklist .status-accepted {
+  background: #cce5ff;
+  color: #004085;
+}
+
+.ris-worklist .status-in_progress {
+  background: #d4edda;
+  color: #155724;
+}
+
+.ris-worklist .status-result-ready {
+  background: #e2e3e5;
+  color: #383d41;
+}
+
+.ris-worklist .status-confirmed {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
+.ris-worklist .status-cancelled {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* 우선순위 배지 */
+.ris-worklist .priority-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.ris-worklist .priority-urgent {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.ris-worklist .priority-normal {
+  background: #d4edda;
+  color: #155724;
+}
+
+.ris-worklist .priority-scheduled {
+  background: #cce5ff;
+  color: #004085;
+}
+
+/* Modality 배지 */
+.modality-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  background: #e3f2fd;
+  color: #1565c0;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* 미배정 */
+.unassigned {
+  color: #999;
+  font-style: italic;
+}
+
+/* 버튼 */
+.ris-worklist .btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.ris-worklist .btn-sm {
+  padding: 4px 10px;
+  font-size: 0.75rem;
+}
+
+.ris-worklist .btn-primary {
+  background: #1976d2;
+  color: white;
+}
+
+.ris-worklist .btn-primary:hover {
+  background: #1565c0;
+}
+
+.ris-worklist .btn-success {
+  background: #4caf50;
+  color: white;
+}
+
+.ris-worklist .btn-success:hover {
+  background: #43a047;
+}
+
+.ris-worklist .btn-info {
+  background: #00bcd4;
+  color: white;
+}
+
+.ris-worklist .btn-info:hover {
+  background: #00acc1;
+}
+
+.ris-worklist .btn-secondary {
+  background: #f5f5f5;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.ris-worklist .btn-secondary:hover {
+  background: #e8e8e8;
+}
+
+/* 페이징 */
+.ris-worklist .pagination-bar {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+/* 반응형 */
+@media (max-width: 1200px) {
+  .ris-worklist .filter-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ris-worklist .filter-right {
+    width: 100%;
+  }
+
+  .summary-cards {
+    flex-wrap: wrap;
+  }
+
+  .summary-card {
+    min-width: 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ris-worklist .search-box input {
+    min-width: 150px;
+  }
+
+  .ris-worklist .ocs-table {
+    display: block;
+    overflow-x: auto;
+  }
+}

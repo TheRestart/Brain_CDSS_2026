@@ -1,0 +1,341 @@
+/* src/components/ViewerSection.css */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.viewerShell {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.20);
+  padding: 10px;
+}
+
+.viewerShell,
+.viewerToolbar,
+.viewerStage,
+.sliceBar {
+  max-width: none !important;
+}
+
+/* ===== Toolbar ===== */
+.viewerToolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  flex-wrap: nowrap;
+  width: 100%;
+  min-width: 0;
+
+  gap: 16px;
+  padding: 10px 16px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.25);
+
+  flex: 0 0 auto;
+  overflow: hidden;
+}
+
+.toolLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  flex: 1 1 auto;
+  min-width: 0;
+
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.toolBadge {
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  white-space: nowrap;
+  color: #fff;
+}
+
+.subtleBadge {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+
+.toolError {
+  font-size: 12px;
+  color: #ff6b6b;
+  opacity: 0.95;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.toolRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.sliceInfo {
+  font-size: 13px;
+  white-space: nowrap;
+  color: #fff;
+}
+
+/* 백그라운드 프리로드 진행률 */
+.preloadProgress {
+  font-size: 11px;
+  color: rgba(66, 245, 141, 0.9);
+  margin-left: 8px;
+  opacity: 0.85;
+}
+
+/* 버튼 */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 72px;
+  height: 38px;
+
+  padding: 0 16px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.10);
+
+  color: rgba(255, 255, 255, 0.95);
+  cursor: pointer;
+}
+
+.btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* ===== Seg Labels: Toolbar 안 가로 칩 ===== */
+.segToolbar {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding-left: 12px;
+  margin-left: 6px;
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+
+  min-width: 0;
+}
+
+.segTitle {
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+  color: #fff;
+}
+
+.segScanHint {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.segChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 6px 10px;
+  border-radius: 12px;
+
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.segChk {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.segName {
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.92);
+  white-space: nowrap;
+}
+
+.segColor {
+  width: 24px;
+  height: 18px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+.segOpacity {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ✅ 투명도 슬라이더 짧게 */
+.segOpacity input[type="range"] {
+  width: 56px; /* 기존 80px -> 56px */
+}
+
+.segOpVal {
+  font-size: 11px;
+  min-width: 34px;
+  text-align: right;
+  opacity: 0.85;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* ===== Viewer Stage ===== */
+.viewerStage {
+  position: relative;
+  flex: 1 1 auto;
+
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+
+  overflow: visible;
+
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: #000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cornerstoneHost {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.overlayCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* ✅ 메타 오버레이: Study UID, Series, Instance 정보 표시 */
+.metaOverlay {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+
+  padding: 8px 10px;
+  border: none;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 6px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  pointer-events: none;
+  max-width: 300px;
+}
+
+.metaRow {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+}
+
+/* Key/Value 모두 녹색 */
+.metaGreen {
+  color: #42f58d;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.metaKey {
+  white-space: nowrap;
+  min-width: 55px;
+  flex-shrink: 0;
+}
+
+.metaVal {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ===== Slice bar ===== */
+.sliceBar {
+  width: 100%;
+  flex: 0 0 auto;
+  padding: 0 6px 4px 6px;
+}
+
+.sliceBar input[type="range"] {
+  width: 100%;
+}
+
+/* ===== Play 버튼 ===== */
+.btnPlay {
+  background: rgba(66, 245, 141, 0.15);
+  border-color: rgba(66, 245, 141, 0.4);
+  color: #42f58d;
+}
+
+.btnPlay:hover:not(:disabled) {
+  background: rgba(66, 245, 141, 0.25);
+}
+
+.btnPlay.playing {
+  background: rgba(255, 77, 77, 0.2);
+  border-color: rgba(255, 77, 77, 0.5);
+  color: #ff4d4d;
+  animation: playingPulse 0.8s ease-in-out infinite;
+}
+
+.btnPlay.playing:hover:not(:disabled) {
+  background: rgba(255, 77, 77, 0.3);
+}
+
+@keyframes playingPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}

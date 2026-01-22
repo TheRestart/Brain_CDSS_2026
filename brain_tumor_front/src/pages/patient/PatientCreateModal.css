@@ -1,0 +1,43 @@
+/*
+ * 환자 등록 모달 스타일
+ * 공통 스타일(버튼, 폼, 모달 등)은 common.css에서 상속
+ * 이 파일은 환자 모달 전용 스타일만 포함
+ */
+
+/* 진료 등록 모달 전용 스타일 - 75% */
+.encounter-modal-content {
+  width: 75vw;
+  max-width: 950px;
+  min-width: 450px;
+}
+
+/* Patient detail view styles */
+.patient-detail-view {
+  padding: 0.5rem 0;
+}
+
+/* 환자 모달 내 폼 그룹 간격 */
+.modal-large .form-group {
+  margin-bottom: 0.875rem;
+}
+
+/* 환자 모달 input/textarea 일관된 스타일 */
+.modal-large .form-group input,
+.modal-large .form-group select,
+.modal-large .form-group textarea {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* 모달 내 tag-input 스타일 일관성 */
+.modal-large .tag-input {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.modal-large .tag-input input {
+  flex: 1;
+  min-width: 0;
+}

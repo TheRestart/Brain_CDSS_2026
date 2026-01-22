@@ -1,0 +1,310 @@
+/* LIS 검사 결과 Alert 페이지 스타일 */
+
+.lis-alert-page {
+  padding: 20px;
+}
+
+.lis-alert-page .page-header {
+  margin-bottom: 24px;
+}
+
+.lis-alert-page .page-header h2 {
+  margin: 0 0 4px 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.lis-alert-page .page-header .subtitle {
+  color: #6c757d;
+  font-size: 14px;
+}
+
+/* 요약 카드 */
+.lis-alert-page .summary-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.lis-alert-page .summary-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 16px 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lis-alert-page .summary-card .card-label {
+  font-size: 13px;
+  color: #6c757d;
+}
+
+.lis-alert-page .summary-card .card-value {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.lis-alert-page .summary-card.total .card-value {
+  color: #2c3e50;
+}
+
+.lis-alert-page .summary-card.critical {
+  border-left: 4px solid #e74c3c;
+}
+
+.lis-alert-page .summary-card.critical .card-value {
+  color: #e74c3c;
+}
+
+.lis-alert-page .summary-card.high {
+  border-left: 4px solid #f39c12;
+}
+
+.lis-alert-page .summary-card.high .card-value {
+  color: #f39c12;
+}
+
+.lis-alert-page .summary-card.unconfirmed {
+  border-left: 4px solid #3498db;
+}
+
+.lis-alert-page .summary-card.unconfirmed .card-value {
+  color: #3498db;
+}
+
+/* 필터 섹션 */
+.lis-alert-page .filter-section {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.lis-alert-page .filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lis-alert-page .filter-group label {
+  font-size: 14px;
+  color: #495057;
+  font-weight: 500;
+}
+
+.lis-alert-page .filter-group select {
+  padding: 8px 12px;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  font-size: 14px;
+  background: #fff;
+  min-width: 120px;
+}
+
+.lis-alert-page .refresh-btn {
+  margin-left: auto;
+  padding: 8px 16px;
+  background: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.lis-alert-page .refresh-btn:hover:not(:disabled) {
+  background: #2980b9;
+}
+
+.lis-alert-page .refresh-btn:disabled {
+  background: #95a5a6;
+  cursor: not-allowed;
+}
+
+/* Alert 테이블 */
+.lis-alert-page .alert-table-section {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.lis-alert-page .alert-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.lis-alert-page .alert-table th {
+  background: #f8f9fa;
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 600;
+  color: #495057;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.lis-alert-page .alert-table td {
+  padding: 12px 16px;
+  font-size: 14px;
+  color: #212529;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.lis-alert-page .alert-table tr:hover {
+  background: #f8f9fa;
+}
+
+.lis-alert-page .alert-table tr.unconfirmed-row {
+  background: #fff8e6;
+}
+
+.lis-alert-page .alert-table tr.unconfirmed-row:hover {
+  background: #fff3cd;
+}
+
+.lis-alert-page .patient-name {
+  font-weight: 500;
+}
+
+.lis-alert-page .test-name {
+  font-weight: 500;
+}
+
+.lis-alert-page .test-code {
+  font-size: 12px;
+  color: #6c757d;
+  margin-left: 4px;
+}
+
+.lis-alert-page .result-value.abnormal {
+  color: #e74c3c;
+  font-weight: 600;
+}
+
+.lis-alert-page .reference {
+  color: #6c757d;
+  font-size: 13px;
+}
+
+/* 중요도 뱃지 */
+.lis-alert-page .severity-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.lis-alert-page .severity-badge.severity-critical {
+  background: #fdeaea;
+  color: #e74c3c;
+}
+
+.lis-alert-page .severity-badge.severity-high {
+  background: #fef4e6;
+  color: #f39c12;
+}
+
+.lis-alert-page .severity-badge.severity-normal {
+  background: #e8f4f8;
+  color: #17a2b8;
+}
+
+/* 상태 뱃지 */
+.lis-alert-page .status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.lis-alert-page .status-badge.status-unconfirmed {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.lis-alert-page .status-badge.status-confirmed {
+  background: #d4edda;
+  color: #155724;
+}
+
+/* 액션 셀 */
+.lis-alert-page .action-cell {
+  display: flex;
+  gap: 8px;
+}
+
+.lis-alert-page .confirm-btn,
+.lis-alert-page .detail-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.lis-alert-page .confirm-btn {
+  background: #27ae60;
+  color: #fff;
+}
+
+.lis-alert-page .confirm-btn:hover {
+  background: #219a52;
+}
+
+.lis-alert-page .detail-btn {
+  background: #6c757d;
+  color: #fff;
+}
+
+.lis-alert-page .detail-btn:hover {
+  background: #5a6268;
+}
+
+/* 로딩 & 빈 메시지 */
+.lis-alert-page .loading,
+.lis-alert-page .empty-message {
+  padding: 60px 20px;
+  text-align: center;
+  color: #6c757d;
+  font-size: 15px;
+}
+
+/* 반응형 */
+@media (max-width: 1200px) {
+  .lis-alert-page .summary-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .lis-alert-page .summary-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .lis-alert-page .filter-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .lis-alert-page .refresh-btn {
+    margin-left: 0;
+    margin-top: 8px;
+  }
+
+  .lis-alert-page .alert-table {
+    display: block;
+    overflow-x: auto;
+  }
+}

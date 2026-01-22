@@ -1,0 +1,603 @@
+/*
+ * Encounter List View Styles
+ * 공통 스타일(버튼, 테이블, 필터바 등)은 common.css에서 상속
+ * 이 파일은 Encounter 전용 스타일만 포함
+ */
+
+/* ========================================
+   Encounter Table 전용 스타일
+   ======================================== */
+.encounter-table {
+  font-size: 0.85rem;
+  border-collapse: separate !important;
+  border-spacing: 0;
+  width: 100%;
+}
+
+.encounter-table th,
+.encounter-table td {
+  padding: 0.75rem 1rem;
+  vertical-align: middle;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.encounter-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #495057;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.encounter-table th.sortable {
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.encounter-table th.sortable:hover {
+  background-color: #e9ecef;
+}
+
+.encounter-table th.sortable.sorted {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+/* 정렬 아이콘 스타일 */
+.sort-icon {
+  display: inline-block;
+  margin-left: 4px;
+  font-size: 0.75rem;
+  vertical-align: middle;
+}
+
+.sort-icon.sort-none {
+  color: #adb5bd;
+  opacity: 0.5;
+}
+
+.sort-icon.sort-asc,
+.sort-icon.sort-desc {
+  color: #1976d2;
+  font-weight: 600;
+}
+
+.encounter-table th.action-column {
+  text-align: center;
+  width: 180px;
+}
+
+/* ========================================
+   행(Row) 인터랙션 스타일
+   ======================================== */
+.encounter-row {
+  transition: background-color 0.15s ease;
+  text-align: center;
+}
+
+.encounter-row:hover {
+  background-color: #f8f9fa;
+}
+
+/* 좌측 컬러 바 - 첫번째 td에 적용 */
+.encounter-row > td:first-child {
+  position: relative;
+}
+
+.encounter-row > td:first-child::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: transparent;
+  transition: background-color 0.15s ease;
+}
+
+.encounter-row:hover > td:first-child::before {
+  background-color: #007bff;
+}
+
+/* 진행중(입원중) 행 강조 */
+.encounter-row.row-in-progress {
+  background-color: #e7f3ff;
+}
+
+.encounter-row.row-in-progress:hover {
+  background-color: #d4e9ff;
+}
+
+.encounter-row.row-in-progress > td:first-child::before {
+  background-color: #007bff;
+}
+
+/* 시간 기준 행 스타일 - 지난 시간 환자 (주황색 계열) */
+.encounter-row.row-past {
+  background-color: #fff8e1;
+}
+
+.encounter-row.row-past:hover {
+  background-color: #ffecb3;
+}
+
+.encounter-row.row-past > td:first-child::before {
+  background-color: #ff9800;
+}
+
+/* 시간 기준 행 스타일 - 이후 시간 환자 (파란색 계열) */
+.encounter-row.row-future {
+  background-color: #e3f2fd;
+}
+
+.encounter-row.row-future:hover {
+  background-color: #bbdefb;
+}
+
+.encounter-row.row-future > td:first-child::before {
+  background-color: #2196f3;
+}
+
+/* ========================================
+   환자 식별 컬럼 스타일
+   ======================================== */
+.patient-cell {
+  min-width: 120px;
+  padding-left: 1.25rem !important;
+}
+
+.patient-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.patient-name {
+  font-weight: 600;
+  color: #212529;
+  font-size: 0.9rem;
+}
+
+.patient-number {
+  font-size: 0.75rem;
+  color: #6c757d;
+}
+
+/* ========================================
+   상태 Badge 스타일
+   ======================================== */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.3rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  min-width: 50px;
+}
+
+/* 예약 - 파란색 */
+.status-scheduled {
+  background-color: #e7f3ff;
+  color: #0066cc;
+  border: 1px solid #b3d9ff;
+}
+
+/* 입원중 - 강조된 파란색 */
+.status-in-progress {
+  background-color: #007bff;
+  color: #ffffff;
+  border: 1px solid #0056b3;
+  font-weight: 600;
+}
+
+/* 완료 - 초록색 */
+.status-completed {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+/* 취소 - 연한 빨강/회색 */
+.status-cancelled {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* ========================================
+   진료유형 Badge 스타일
+   ======================================== */
+.type-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  min-width: 40px;
+}
+
+/* 외래 */
+.type-outpatient {
+  background-color: #e9ecef;
+  color: #495057;
+  border: 1px solid #dee2e6;
+}
+
+/* 입원 */
+.type-inpatient {
+  background-color: #cce5ff;
+  color: #004085;
+  border: 1px solid #b8daff;
+}
+
+/* 응급 */
+.type-emergency {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* ========================================
+   주호소 컬럼 스타일
+   ======================================== */
+.chief-complaint-cell {
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ========================================
+   퇴원일시 스타일
+   ======================================== */
+.discharge-pending {
+  color: #adb5bd;
+}
+
+/* ========================================
+   Action 컬럼 스타일
+   ======================================== */
+.action-cell {
+  text-align: right !important;
+  padding-right: 1rem !important;
+}
+
+.action-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* 진료 시작 버튼 - 회색 텍스트 버튼 스타일 */
+.action-buttons .btn-text {
+  padding: 0.35rem 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  white-space: nowrap;
+  color: #6c757d;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.action-buttons .btn-text:hover {
+  color: #007bff;
+}
+
+/* Primary 버튼 스타일 */
+.action-buttons .btn.primary.small {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* ========================================
+   더보기 메뉴 스타일
+   ======================================== */
+.more-menu-wrapper {
+  position: relative;
+  display: inline-flex;
+}
+
+.btn-more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  background-color: #ffffff;
+  color: #6c757d;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-more:hover {
+  background-color: #f8f9fa;
+  border-color: #adb5bd;
+  color: #495057;
+}
+
+.more-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 1000;
+  min-width: 120px;
+  margin-top: 4px;
+  padding: 0.25rem 0;
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.more-menu-item {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border: none;
+  background: none;
+  text-align: left;
+  font-size: 0.85rem;
+  color: #212529;
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+}
+
+.more-menu-item:hover {
+  background-color: #f8f9fa;
+}
+
+/* 삭제 버튼 - 빨간색 */
+.more-menu-item.delete {
+  color: #dc3545;
+}
+
+.more-menu-item.delete:hover {
+  background-color: #fff5f5;
+}
+
+/* ========================================
+   Empty State 스타일
+   ======================================== */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+.empty-state-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.6;
+}
+
+.empty-state-text {
+  font-size: 1rem;
+  color: #6c757d;
+  margin-bottom: 1.5rem;
+}
+
+.empty-state .btn {
+  padding: 0.5rem 1.5rem;
+}
+
+/* ========================================
+   필터바 추가 스타일
+   ======================================== */
+.filter-bar .btn.primary {
+  font-weight: 500;
+}
+
+/* ========================================
+   반응형 스타일
+   ======================================== */
+@media (max-width: 1200px) {
+  .encounter-table th,
+  .encounter-table td {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .chief-complaint-cell {
+    max-width: 100px;
+  }
+
+  .encounter-table th.action-column {
+    width: 150px;
+  }
+}
+
+@media (max-width: 992px) {
+  .encounter-table {
+    font-size: 0.75rem;
+  }
+
+  .patient-name {
+    font-size: 0.85rem;
+  }
+
+  .patient-number {
+    font-size: 0.7rem;
+  }
+
+  .action-buttons .btn.primary.small {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  .btn-more {
+    width: 24px;
+    height: 24px;
+    font-size: 0.9rem;
+  }
+}
+
+/* ========================================
+   Encounter Widget 스타일
+   ======================================== */
+.encounter-widget {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* 카드 스타일 */
+.encounter-widget-card {
+  background-color: #ffffff;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+/* 위젯 헤더 */
+.encounter-widget-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.encounter-widget-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #212529;
+}
+
+/* 위젯 필터 */
+.encounter-widget-filters {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.encounter-widget-search {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.encounter-widget-search input {
+  min-width: 200px;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.85rem;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+}
+
+.encounter-widget-filters select {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.85rem;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  background-color: #ffffff;
+}
+
+/* 위젯 콘텐츠 */
+.encounter-widget-content {
+  flex: 1;
+  overflow: auto;
+}
+
+.encounter-widget-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  color: #6c757d;
+}
+
+/* 위젯 푸터 */
+.encounter-widget-footer {
+  padding: 0.75rem 1rem;
+  background-color: #f8f9fa;
+  border-top: 1px solid #e9ecef;
+}
+
+/* 위젯 사이즈별 스타일 */
+.encounter-widget-compact .encounter-table {
+  font-size: 0.8rem;
+}
+
+.encounter-widget-compact .encounter-table th,
+.encounter-widget-compact .encounter-table td {
+  padding: 0.5rem 0.75rem;
+}
+
+.encounter-widget-compact .patient-name {
+  font-size: 0.85rem;
+}
+
+.encounter-widget-compact .status-badge,
+.encounter-widget-compact .type-badge {
+  font-size: 0.7rem;
+  padding: 0.2rem 0.5rem;
+}
+
+.encounter-widget-compact .action-buttons .btn.primary.small {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+}
+
+.encounter-widget-compact .btn-more {
+  width: 24px;
+  height: 24px;
+  font-size: 0.85rem;
+}
+
+/* Medium 사이즈 */
+.encounter-widget-medium .encounter-table {
+  font-size: 0.85rem;
+}
+
+/* 위젯 반응형 */
+@media (max-width: 768px) {
+  .encounter-widget-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .encounter-widget-filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .encounter-widget-search {
+    width: 100%;
+  }
+
+  .encounter-widget-search input {
+    flex: 1;
+    min-width: auto;
+  }
+
+  .encounter-widget-filters select {
+    width: 100%;
+  }
+}

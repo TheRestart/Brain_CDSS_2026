@@ -1,0 +1,916 @@
+/**
+ * Patient Portal CSS
+ * 환자 전용 페이지 스타일 (모바일 반응형 포함)
+ */
+
+/* ============================================
+   기본 레이아웃
+   ============================================ */
+.patient-portal-page {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-color, #e0e0e0);
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-primary, #1a1a1a);
+}
+
+.result-count {
+  font-size: 14px;
+  color: var(--text-secondary, #666);
+  background: var(--bg-secondary, #f5f5f5);
+  padding: 4px 12px;
+  border-radius: 16px;
+}
+
+/* ============================================
+   로딩/빈 상태
+   ============================================ */
+.loading-state,
+.empty-state,
+.error-state {
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--text-secondary, #666);
+}
+
+.empty-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.empty-text {
+  font-size: 16px;
+}
+
+/* ============================================
+   Summary Page - 요약 그리드
+   ============================================ */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.summary-card {
+  background: var(--bg-primary, #fff);
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.summary-card .card-header {
+  padding: 16px;
+  background: var(--bg-secondary, #f8f9fa);
+  border-bottom: 1px solid var(--border-color, #e0e0e0);
+}
+
+.summary-card .card-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary, #1a1a1a);
+}
+
+.summary-card .card-body {
+  padding: 16px;
+}
+
+.summary-card .info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-color, #f0f0f0);
+}
+
+.summary-card .info-row:last-child {
+  border-bottom: none;
+}
+
+.summary-card .info-row .label {
+  color: var(--text-secondary, #666);
+  font-size: 14px;
+}
+
+.summary-card .info-row .value {
+  color: var(--text-primary, #1a1a1a);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* 예약 카드 */
+.appointment-card .appointment-date {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--primary, #1976d2);
+  margin-bottom: 8px;
+}
+
+.appointment-card .appointment-info {
+  display: flex;
+  gap: 12px;
+  color: var(--text-secondary, #666);
+  font-size: 14px;
+}
+
+/* 결과 요약 카드 */
+.result-counts {
+  display: flex;
+  gap: 24px;
+}
+
+.result-item {
+  flex: 1;
+  text-align: center;
+  padding: 12px;
+  background: var(--bg-secondary, #f8f9fa);
+  border-radius: 8px;
+}
+
+.result-item .count {
+  display: block;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--primary, #1976d2);
+}
+
+.result-item .label {
+  display: block;
+  font-size: 12px;
+  color: var(--text-secondary, #666);
+  margin-top: 4px;
+}
+
+/* ============================================
+   Visit List - 진료 기록
+   ============================================ */
+.visit-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.visit-card {
+  background: var(--bg-primary, #fff);
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.visit-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: var(--bg-secondary, #f8f9fa);
+}
+
+.visit-date {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary, #1a1a1a);
+}
+
+.visit-status {
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.visit-status.status-completed {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.visit-status.status-scheduled {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.visit-body {
+  padding: 16px;
+}
+
+.visit-info {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.visit-info .department {
+  font-weight: 500;
+  color: var(--text-primary, #1a1a1a);
+}
+
+.visit-info .doctor {
+  color: var(--text-secondary, #666);
+}
+
+.visit-body .diagnosis {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.visit-body .diagnosis .label {
+  font-size: 12px;
+  color: var(--text-secondary, #666);
+}
+
+.visit-body .diagnosis .value {
+  font-size: 14px;
+  color: var(--text-primary, #1a1a1a);
+}
+
+/* ============================================
+   Imaging List - 영상 검사
+   ============================================ */
+.imaging-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.imaging-card {
+  background: var(--bg-primary, #fff);
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.imaging-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: var(--bg-secondary, #f8f9fa);
+  border-bottom: 1px solid var(--border-color, #e0e0e0);
+}
+
+.imaging-modality {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary, #1976d2);
+  background: var(--primary-light, #e3f2fd);
+  padding: 4px 12px;
+  border-radius: 4px;
+}
+
+.imaging-date {
+  font-size: 14px;
+  color: var(--text-secondary, #666);
+}
+
+.imaging-body {
+  padding: 16px;
+}
+
+.imaging-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+}
+
+.imaging-info .info-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.imaging-info .info-row .label {
+  font-size: 12px;
+  color: var(--text-secondary, #666);
+}
+
+.imaging-info .info-row .value {
+  font-size: 14px;
+  color: var(--text-primary, #1a1a1a);
+}
+
+.imaging-actions {
+  padding: 12px 16px;
+  border-top: 1px solid var(--border-color, #e0e0e0);
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* ============================================
+   Lab List - 검사 결과
+   ============================================ */
+.lab-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.lab-card {
+  background: var(--bg-primary, #fff);
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.lab-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.lab-header:hover {
+  background: var(--bg-secondary, #f8f9fa);
+}
+
+.lab-info {
+  flex: 1;
+}
+
+.lab-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary, #1a1a1a);
+}
+
+.lab-date {
+  font-size: 13px;
+  color: var(--text-secondary, #666);
+  margin-top: 4px;
+}
+
+.lab-status-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.expand-icon {
+  font-size: 12px;
+  color: var(--text-secondary, #999);
+  transition: transform 0.2s;
+}
+
+.expand-icon.expanded {
+  transform: rotate(180deg);
+}
+
+.lab-body {
+  padding: 0 16px 16px;
+  border-top: 1px solid var(--border-color, #e0e0e0);
+}
+
+.lab-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+.lab-table th,
+.lab-table td {
+  padding: 10px 8px;
+  text-align: left;
+  font-size: 13px;
+  border-bottom: 1px solid var(--border-color, #f0f0f0);
+}
+
+.lab-table th {
+  font-weight: 500;
+  color: var(--text-secondary, #666);
+  background: var(--bg-secondary, #fafafa);
+}
+
+.lab-table .item-high td,
+.lab-table .item-low td {
+  background: #fff3e0;
+}
+
+.value-high {
+  color: #d32f2f;
+  font-weight: 500;
+}
+
+.value-low {
+  color: #1976d2;
+  font-weight: 500;
+}
+
+/* ============================================
+   상태 뱃지
+   ============================================ */
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status-badge.status-normal {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status-badge.status-abnormal {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.status-badge.status-pending {
+  background: #fff3e0;
+  color: #f57c00;
+}
+
+.status-badge.status-completed,
+.status-badge.status-reported {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status-badge.status-in_progress {
+  background: #fff3e0;
+  color: #f57c00;
+}
+
+.status-badge.status-ordered {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+/* ============================================
+   버튼
+   ============================================ */
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--primary, #1976d2);
+  color: #fff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--primary-dark, #1565c0);
+}
+
+.btn-secondary {
+  background: var(--bg-secondary, #f5f5f5);
+  color: var(--text-primary, #1a1a1a);
+  border: 1px solid var(--border-color, #e0e0e0);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--border-color, #e0e0e0);
+}
+
+/* ============================================
+   모달
+   ============================================ */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-content {
+  background: var(--bg-primary, #fff);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid var(--border-color, #e0e0e0);
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--text-secondary, #666);
+  padding: 0;
+  line-height: 1;
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 20px;
+  border-top: 1px solid var(--border-color, #e0e0e0);
+}
+
+/* 판독문 모달 */
+.report-modal .report-info {
+  margin-bottom: 16px;
+}
+
+.report-modal .report-info .info-row {
+  display: flex;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-color, #f0f0f0);
+}
+
+.report-modal .report-info .label {
+  width: 80px;
+  color: var(--text-secondary, #666);
+  font-size: 14px;
+}
+
+.report-modal .report-info .value {
+  flex: 1;
+  color: var(--text-primary, #1a1a1a);
+  font-size: 14px;
+}
+
+.report-modal .divider {
+  border: none;
+  border-top: 1px solid var(--border-color, #e0e0e0);
+  margin: 16px 0;
+}
+
+.report-modal .report-section {
+  margin-bottom: 16px;
+}
+
+.report-modal .report-section h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary, #1a1a1a);
+  margin: 0 0 8px 0;
+}
+
+.report-modal .report-text {
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-primary, #1a1a1a);
+  white-space: pre-wrap;
+  margin: 0;
+  padding: 12px;
+  background: var(--bg-secondary, #f8f9fa);
+  border-radius: 8px;
+}
+
+.report-modal .report-conclusion {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-primary, #1a1a1a);
+  margin: 0;
+  padding: 12px;
+  background: #e8f5e9;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+/* 경고 모달 */
+.warning-modal {
+  text-align: center;
+  padding: 32px 24px;
+}
+
+.warning-modal .warning-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.warning-modal h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+}
+
+.warning-modal .warning-message {
+  margin-bottom: 24px;
+}
+
+.warning-modal .warning-message p {
+  margin: 0 0 12px 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-primary, #1a1a1a);
+}
+
+.warning-modal .sub-message {
+  font-size: 13px;
+  color: var(--text-secondary, #666);
+}
+
+.warning-modal .warning-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* ============================================
+   모바일 반응형 (768px 이하)
+   ============================================ */
+@media (max-width: 768px) {
+  .patient-portal-page {
+    padding: 16px;
+  }
+
+  .page-header h1 {
+    font-size: 20px;
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .imaging-info {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .imaging-actions {
+    flex-direction: column;
+  }
+
+  .imaging-actions .btn {
+    width: 100%;
+  }
+
+  .lab-table th,
+  .lab-table td {
+    padding: 8px 4px;
+    font-size: 12px;
+  }
+
+  .modal-content {
+    margin: 0;
+    border-radius: 12px;
+  }
+
+  .modal-footer {
+    flex-direction: column;
+  }
+
+  .modal-footer .btn {
+    width: 100%;
+  }
+}
+
+/* ============================================
+   병원 소개 페이지
+   ============================================ */
+.hospital-info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.hospital-section {
+  background: var(--bg-primary, #fff);
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.hospital-section h2 {
+  margin: 0 0 16px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary, #1a1a1a);
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color, #e0e0e0);
+}
+
+.hospital-description {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--text-primary, #333);
+  margin: 0;
+}
+
+/* 진료과목 그리드 */
+.department-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.department-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  background: var(--bg-secondary, #f8f9fa);
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.department-item:hover {
+  background: var(--primary-light, #e3f2fd);
+}
+
+.dept-icon {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.dept-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary, #1a1a1a);
+}
+
+/* 진료 시간 테이블 */
+.schedule-table {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.schedule-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: var(--bg-secondary, #f8f9fa);
+  border-radius: 8px;
+}
+
+.schedule-row .day {
+  font-weight: 500;
+  color: var(--text-primary, #1a1a1a);
+}
+
+.schedule-row .time {
+  color: var(--text-secondary, #666);
+}
+
+.schedule-row.holiday {
+  background: #ffebee;
+}
+
+.schedule-row.holiday .day,
+.schedule-row.holiday .time {
+  color: #c62828;
+}
+
+/* 연락처 */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.contact-label {
+  min-width: 80px;
+  font-size: 14px;
+  color: var(--text-secondary, #666);
+}
+
+.contact-value {
+  font-size: 15px;
+  color: var(--text-primary, #1a1a1a);
+}
+
+.contact-value.phone {
+  color: var(--primary, #1976d2);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.contact-value.phone:hover {
+  text-decoration: underline;
+}
+
+/* 오시는 길 */
+.location-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.address {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary, #1a1a1a);
+  margin: 0;
+  padding: 12px 16px;
+  background: var(--bg-secondary, #f8f9fa);
+  border-radius: 8px;
+}
+
+.transport-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.transport-item {
+  display: flex;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-color, #f0f0f0);
+}
+
+.transport-item:last-child {
+  border-bottom: none;
+}
+
+.transport-label {
+  min-width: 60px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--primary, #1976d2);
+}
+
+.transport-value {
+  font-size: 13px;
+  color: var(--text-secondary, #666);
+}
+
+/* ============================================
+   작은 모바일 (480px 이하)
+   ============================================ */
+@media (max-width: 480px) {
+  .patient-portal-page {
+    padding: 12px;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .visit-info {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .result-counts {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .warning-modal {
+    padding: 24px 16px;
+  }
+
+  .warning-modal .warning-actions {
+    flex-direction: column;
+  }
+
+  .warning-modal .warning-actions .btn {
+    width: 100%;
+  }
+}
