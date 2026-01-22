@@ -28,12 +28,30 @@ self.model = SwinUNETR(
 **파일 위치:** `modAI/services/mg_service.py`
 
 ```python
+# 프로젝트 내부에 직접 정의된 커스텀 클래스들 (외부 라이브러리 아님)
+class Gene2VecEncoder(nn.Module):    # Line 207 - 유전자 임베딩 인코더
+class DEGEncoder(nn.Module):          # Line 238 - DEG 클러스터 인코더
+class GeneExpressionCDSS(nn.Module):  # Line 254 - 통합 모델
+
+# 모델 로딩
 self.model = self._create_model(gene_embeddings)  # 순수 PyTorch
 self.model.load_state_dict(checkpoint['model_state_dict'])
 ```
 
-- Gene2Vec + DEG Encoder 기반
-- 순수 PyTorch 모델
+- **커스텀 모델**: Gene2VecEncoder, DEGEncoder는 외부 라이브러리가 아닌 프로젝트 내부에 직접 구현
+- 순수 PyTorch 기반 (nn.Module 상속)
+
+### M1 vs MG 모델 출처 비교
+
+| 모델 | 출처 | Import 방식 |
+|------|------|-------------|
+| **SwinUNETR** | MONAI 라이브러리 | `from monai.networks.nets import SwinUNETR` |
+| **Gene2VecEncoder** | 프로젝트 내부 정의 | `mg_service.py` 내부 class 정의 |
+| **DEGEncoder** | 프로젝트 내부 정의 | `mg_service.py` 내부 class 정의 |
+| **GeneExpressionCDSS** | 프로젝트 내부 정의 | `mg_service.py` 내부 class 정의 |
+
+> **참고:** SwinUNETR은 의료영상 분야에서 널리 사용되는 표준 아키텍처라 MONAI가 제공하지만,
+> Gene2Vec 관련 클래스들은 우리 프로젝트의 유전자 발현 데이터에 특화된 커스텀 모델이라 직접 구현했습니다.
 
 ---
 
