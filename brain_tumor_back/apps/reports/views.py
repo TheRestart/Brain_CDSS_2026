@@ -45,6 +45,10 @@ class FinalReportListCreateView(APIView):
     def get(self, request):
         queryset = FinalReport.objects.filter(is_deleted=False)
 
+        # 외부기관(EXTERNAL) 사용자는 자신과 연결된 환자의 보고서만 조회 가능
+        if request.user.role and request.user.role.code == 'EXTERNAL':
+            queryset = queryset.filter(patient__external_institution=request.user)
+
         # 필터링
         patient_id = request.query_params.get('patient_id')
         if patient_id:
@@ -90,8 +94,16 @@ class FinalReportDetailView(APIView):
             return [IsAuthenticated()]
         return [IsDoctorOrAdmin()]
 
-    def get_object(self, pk):
-        return get_object_or_404(FinalReport, pk=pk, is_deleted=False)
+    def get_object(self, pk, request=None):
+        report = get_object_or_404(FinalReport, pk=pk, is_deleted=False)
+
+        # 외부기관(EXTERNAL) 사용자는 자신과 연결된 환자의 보고서만 접근 가능
+        if request and request.user.role and request.user.role.code == 'EXTERNAL':
+            if report.patient.external_institution != request.user:
+                from rest_framework.exceptions import PermissionDenied
+                raise PermissionDenied('해당 보고서에 접근 권한이 없습니다.')
+
+        return report
 
     @extend_schema(
         summary="보고서 상세 조회",
@@ -99,7 +111,7 @@ class FinalReportDetailView(APIView):
         responses={200: FinalReportDetailSerializer},
     )
     def get(self, request, pk):
-        report = self.get_object(pk)
+        report = self.get_object(pk, request)
         serializer = FinalReportDetailSerializer(report)
         return Response(serializer.data)
 

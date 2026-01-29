@@ -85,13 +85,13 @@ class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     def perform_update(self, serializer):
         # system 계정 보호
-        if serializer.instance.username == 'system':
+        if serializer.instance.login_id == 'system':
             raise PermissionDenied('system 계정은 수정할 수 없습니다.')
         serializer.save()
 
     def perform_destroy(self, instance):
         # system 계정 보호
-        if instance.username == 'system':
+        if instance.login_id == 'system':
             raise PermissionDenied('system 계정은 삭제할 수 없습니다.')
         instance.delete()
 
@@ -182,9 +182,43 @@ class ChangePasswordView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+# ========== Orthanc Auth Views ==========
+
+# 7. Orthanc 접근 권한 확인 (nginx auth_request용)
+ORTHANC_ALLOWED_ROLES = {"SYSTEMMANAGER", "ADMIN", "DOCTOR", "RIS"}
+
+class OrthancAuthView(APIView):
+    """
+    Orthanc UI 접근 권한 확인 (nginx auth_request용)
+
+    - nginx에서 /orthanc/ 경로 접근 시 이 API를 호출하여 권한 확인
+    - 허용된 역할: SYSTEMMANAGER, ADMIN, DOCTOR, RIS
+    - 200: 허용, 401/403: 거부
+    """
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+
+        # 역할 확인
+        if not user.role:
+            return Response(
+                {"detail": "역할이 지정되지 않은 사용자입니다."},
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+        if user.role.code not in ORTHANC_ALLOWED_ROLES:
+            return Response(
+                {"detail": "Orthanc 접근 권한이 없습니다."},
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+        return Response({"detail": "OK"}, status=status.HTTP_200_OK)
+
+
 # ========== External Institution Views ==========
 
-# 7. 외부기관(EXTERNAL 역할) 사용자 목록 조회
+# 8. 외부기관(EXTERNAL 역할) 사용자 목록 조회
 class ExternalInstitutionListView(APIView):
     """
     외부기관(EXTERNAL 역할) 사용자 목록 조회

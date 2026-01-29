@@ -7,6 +7,7 @@ from .views import (
     MyProfileView,
     ChangePasswordView,
     ExternalInstitutionListView,
+    OrthancAuthView,
 )
 
 # 사용자 관리 API 엔드포인트 정의
@@ -20,6 +21,9 @@ urlpatterns = [
 
     # 외부기관(EXTERNAL 역할) 목록 조회
     path("external-institutions/", ExternalInstitutionListView.as_view(), name="external-institutions"),
+
+    # Orthanc 접근 권한 확인 (nginx auth_request용)
+    path("orthanc-auth/", OrthancAuthView.as_view(), name="orthanc-auth"),
 
     # 특정 사용자 상세 조회, 수정, 삭제 (관리자)
     path("<int:pk>/", UserDetailView.as_view(), name="user-detail"),

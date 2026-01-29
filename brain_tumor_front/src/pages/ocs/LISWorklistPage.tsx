@@ -52,7 +52,7 @@ export default function LISWorklistPage() {
   // OCS 액션 훅
   // 성공/실패 모두 새로고침 (WebSocket 알림과 별개로 즉시 반영)
   // DB 트랜잭션 완료를 위해 300ms 딜레이 추가
-  const { accept, start } = useOCSActions({
+  const { accept, start, cancel } = useOCSActions({
     onSuccess: () => {
       setTimeout(() => refresh(), 300);
     },
@@ -60,6 +60,7 @@ export default function LISWorklistPage() {
       const defaultMessages: Record<string, string> = {
         accept: '접수에 실패했습니다.',
         start: '작업 시작에 실패했습니다.',
+        cancel: '접수취소에 실패했습니다.',
       };
       const message = serverMessage || defaultMessages[action] || '작업에 실패했습니다.';
       alert(message);
@@ -83,6 +84,13 @@ export default function LISWorklistPage() {
   const handleStart = async (ocsId: number, e: React.MouseEvent) => {
     e.stopPropagation();
     await start(ocsId);
+  };
+
+  // 접수 취소 (작업자)
+  const handleCancel = async (ocsId: number, e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!confirm('접수를 취소하시겠습니까?\n취소 시 다른 작업자가 접수할 수 있습니다.')) return;
+    await cancel(ocsId);
   };
 
   // 행 클릭 시 상세 페이지로 이동
@@ -286,20 +294,36 @@ export default function LISWorklistPage() {
                       </button>
                     )}
                     {ocs.ocs_status === 'ACCEPTED' && ocs.worker?.id === user?.id && (
-                      <button
-                        className="btn btn-sm btn-success"
-                        onClick={(e) => handleStart(ocs.id, e)}
-                      >
-                        시작
-                      </button>
+                      <>
+                        <button
+                          className="btn btn-sm btn-success"
+                          onClick={(e) => handleStart(ocs.id, e)}
+                        >
+                          시작
+                        </button>
+                        <button
+                          className="btn btn-sm btn-danger"
+                          onClick={(e) => handleCancel(ocs.id, e)}
+                        >
+                          접수취소
+                        </button>
+                      </>
                     )}
                     {ocs.ocs_status === 'IN_PROGRESS' && ocs.worker?.id === user?.id && (
-                      <button
-                        className="btn btn-sm btn-info"
-                        onClick={() => handleRowClick(ocs)}
-                      >
-                        결과 입력
-                      </button>
+                      <>
+                        <button
+                          className="btn btn-sm btn-info"
+                          onClick={() => handleRowClick(ocs)}
+                        >
+                          결과 입력
+                        </button>
+                        <button
+                          className="btn btn-sm btn-danger"
+                          onClick={(e) => handleCancel(ocs.id, e)}
+                        >
+                          접수취소
+                        </button>
+                      </>
                     )}
                     {ocs.ocs_status === 'RESULT_READY' && (
                       <button

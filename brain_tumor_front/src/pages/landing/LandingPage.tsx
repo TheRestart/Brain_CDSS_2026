@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '@/services/auth.api';
 import { useAuth } from '@/pages/auth/AuthProvider';
@@ -14,10 +14,11 @@ export default function LandingPage() {
   const { refreshAuth, role } = useAuth();
 
   // 이미 로그인된 경우 대시보드로 이동
-  if (role) {
-    navigate('/dashboard', { replace: true });
-    return null;
-  }
+  useEffect(() => {
+    if (role) {
+      navigate('/dashboard', { replace: true });
+    }
+  }, [role, navigate]);
 
   const handleLogin = async () => {
     if (!id || !pw) {
