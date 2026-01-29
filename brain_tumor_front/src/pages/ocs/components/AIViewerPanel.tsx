@@ -379,7 +379,10 @@ export default function AIViewerPanel({ ocsId, patientId, canEdit = false, refre
               alt={`AI 분석 결과 ${selectedImageIndex + 1}`}
               onClick={() => setFullscreen(true)}
               onError={(e) => {
-                (e.target as HTMLImageElement).src = '/placeholder-image.png';
+                const target = e.target as HTMLImageElement;
+                target.src = '/images/brain_nu_white.png';
+                target.style.objectFit = 'contain';
+                target.style.backgroundColor = '#374151';
               }}
             />
             <div className="image-controls">
@@ -419,7 +422,11 @@ export default function AIViewerPanel({ ocsId, patientId, canEdit = false, refre
                     src={`${baseUrl}${path}`}
                     alt={`썸네일 ${idx + 1}`}
                     onError={(e) => {
-                      (e.target as HTMLImageElement).style.display = 'none';
+                      const target = e.target as HTMLImageElement;
+                      target.src = '/images/brain_nu_white.png';
+                      target.style.objectFit = 'contain';
+                      target.style.padding = '4px';
+                      target.style.backgroundColor = '#374151';
                     }}
                   />
                 </div>
@@ -459,6 +466,12 @@ export default function AIViewerPanel({ ocsId, patientId, canEdit = false, refre
             <img
               src={`${baseUrl}${currentImage}`}
               alt={`AI 분석 결과 ${selectedImageIndex + 1}`}
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.src = '/images/brain_nu_white.png';
+                target.style.objectFit = 'contain';
+                target.style.backgroundColor = '#374151';
+              }}
             />
             <div className="fullscreen-controls">
               <button
