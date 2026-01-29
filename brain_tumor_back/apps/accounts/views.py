@@ -15,6 +15,7 @@ from .serializers import (
 )
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.exceptions import PermissionDenied
 from django.utils import timezone
 from datetime import timedelta
 from django.db.models import BooleanField, Case, When, Value
@@ -75,12 +76,24 @@ class UserListView(generics.ListCreateAPIView):
 class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    
+
     def get_serializer_class(self):
         # 사용자 수정(PUT)
         if self.request.method in ["PUT", "PATCH"]:
             return UserUpdateSerializer
         return UserSerializer
+
+    def perform_update(self, serializer):
+        # system 계정 보호
+        if serializer.instance.username == 'system':
+            raise PermissionDenied('system 계정은 수정할 수 없습니다.')
+        serializer.save()
+
+    def perform_destroy(self, instance):
+        # system 계정 보호
+        if instance.username == 'system':
+            raise PermissionDenied('system 계정은 삭제할 수 없습니다.')
+        instance.delete()
 
 # 3. 사용자 활성/비활성 토글
 class UserToggleActiveView(APIView):
@@ -89,6 +102,13 @@ class UserToggleActiveView(APIView):
             user = User.objects.get(pk=pk)
         except User.DoesNotExist:
             return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        # system 계정 보호
+        if user.username == 'system':
+            return Response(
+                {"error": "system 계정은 수정할 수 없습니다."},
+                status=status.HTTP_403_FORBIDDEN
+            )
 
         user.is_active = not user.is_active
         user.save()

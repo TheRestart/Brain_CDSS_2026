@@ -352,3 +352,66 @@
   color: #888;
   font-family: monospace;
 }
+
+.ai-viewer-info .edit-badge {
+  font-size: 0.75rem;
+  color: #2e7d32;
+  background: #e8f5e9;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+/* M1 뷰어 탭 스타일 */
+.ai-viewer-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 12px;
+  background: #f0f0f0;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.ai-viewer-tab {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  background: transparent;
+  color: #666;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.ai-viewer-tab:hover {
+  background: rgba(255, 255, 255, 0.5);
+  color: #333;
+}
+
+.ai-viewer-tab.active {
+  background: white;
+  color: #1976d2;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.ai-viewer-tab--edit {
+  color: #2e7d32;
+}
+
+.ai-viewer-tab--edit.active {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.ai-viewer-tab:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: transparent;
+}
+
+.ai-viewer-tab:disabled:hover {
+  background: transparent;
+  color: #666;
+}

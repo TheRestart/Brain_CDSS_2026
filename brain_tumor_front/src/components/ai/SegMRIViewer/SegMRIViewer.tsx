@@ -28,6 +28,15 @@ export interface SliceMapping {
 /** MRI 채널 타입 */
 export type MRIChannel = 't1' | 't1ce' | 't2' | 'flair'
 
+/** 볼륨 데이터 (ml) */
+export interface VolumeData {
+  wt_volume?: number  // Whole Tumor
+  tc_volume?: number  // Tumor Core
+  et_volume?: number  // Enhancing Tumor
+  ncr_volume?: number // NCR/NET
+  ed_volume?: number  // Edema
+}
+
 /** 세그멘테이션 데이터 */
 export interface SegmentationData {
   mri: number[][][]           // 3D MRI 볼륨 [X][Y][Z] (기본: T1CE)
@@ -41,6 +50,7 @@ export interface SegmentationData {
     t2?: number[][][]
     flair?: number[][][]
   }
+  volumes?: VolumeData        // 예측 볼륨 정보 (선택)
 }
 
 /** Dice Score */
@@ -78,12 +88,16 @@ export interface SegMRIViewerProps {
   initialViewMode?: ViewMode
   /** 초기 디스플레이 모드 */
   initialDisplayMode?: DisplayMode
+  /** 초기 뷰어 레이아웃 ('single' | 'orthogonal' | '3d') */
+  initialViewerLayout?: ViewerLayout
   /** 캔버스 최대 크기 (px) */
   maxCanvasSize?: number
   /** Compare 탭 활성화 여부 */
   enableCompareTab?: boolean
   /** Compare 탭 클릭 시 GT 데이터 로드 콜백 */
   onCompareRequest?: () => Promise<CompareResult | null>
+  /** 레이아웃 탭 숨기기 (외부에서 탭 제어 시) */
+  hideLayoutTabs?: boolean
 }
 
 // ============== Constants ==============
@@ -110,9 +124,11 @@ const SegMRIViewer: React.FC<SegMRIViewerProps> = ({
   diceScores,
   initialViewMode = 'axial',
   initialDisplayMode = 'pred_only',
+  initialViewerLayout = 'single',
   maxCanvasSize = 450,
   enableCompareTab = false,
   onCompareRequest,
+  hideLayoutTabs = false,
 }) => {
   // Canvas refs (최대 4개 뷰어)
   const canvasRefs = useRef<(HTMLCanvasElement | null)[]>([null, null, null, null])
@@ -134,7 +150,7 @@ const SegMRIViewer: React.FC<SegMRIViewerProps> = ({
   const [isPlaying, setIsPlaying] = useState(false)
 
   // 뷰어 레이아웃 모드
-  const [viewerLayout, setViewerLayout] = useState<ViewerLayout>('single')
+  const [viewerLayout, setViewerLayout] = useState<ViewerLayout>(initialViewerLayout)
 
   // Orthogonal view용 각 축별 슬라이스 인덱스
   const [orthoSlices, setOrthoSlices] = useState({ axial: 0, sagittal: 0, coronal: 0 })
@@ -573,41 +589,43 @@ const SegMRIViewer: React.FC<SegMRIViewerProps> = ({
           {title}
         </h3>
         <div className="seg-mri-viewer__header-right">
-          {/* 뷰어 레이아웃 탭 */}
-          <div className="seg-mri-viewer__layout-tabs">
-            <button
-              className={`seg-mri-viewer__layout-tab ${viewerLayout === 'single' ? 'seg-mri-viewer__layout-tab--active' : ''}`}
-              onClick={() => setViewerLayout('single')}
-              title="2D 슬라이스 뷰"
-            >
-              2D
-            </button>
-            <button
-              className={`seg-mri-viewer__layout-tab ${viewerLayout === 'orthogonal' ? 'seg-mri-viewer__layout-tab--active' : ''}`}
-              onClick={() => setViewerLayout('orthogonal')}
-              title="3축 동시 보기"
-            >
-              3-Axis
-            </button>
-            <button
-              className={`seg-mri-viewer__layout-tab ${viewerLayout === '3d' ? 'seg-mri-viewer__layout-tab--active' : ''}`}
-              onClick={() => setViewerLayout('3d')}
-              title="3D 볼륨 렌더링"
-            >
-              3D
-            </button>
-            {/* Compare 탭 */}
-            {enableCompareTab && (
+          {/* 뷰어 레이아웃 탭 (외부에서 탭 제어 시 숨김) */}
+          {!hideLayoutTabs && (
+            <div className="seg-mri-viewer__layout-tabs">
               <button
-                className={`seg-mri-viewer__layout-tab ${isCompareMode ? 'seg-mri-viewer__layout-tab--active seg-mri-viewer__layout-tab--compare' : ''}`}
-                onClick={handleCompareClick}
-                title="GT vs Prediction 비교"
-                disabled={loadingCompare}
+                className={`seg-mri-viewer__layout-tab ${viewerLayout === 'single' ? 'seg-mri-viewer__layout-tab--active' : ''}`}
+                onClick={() => setViewerLayout('single')}
+                title="2D 슬라이스 뷰"
               >
-                {loadingCompare ? '...' : 'Compare'}
+                2D
               </button>
-            )}
-          </div>
+              <button
+                className={`seg-mri-viewer__layout-tab ${viewerLayout === 'orthogonal' ? 'seg-mri-viewer__layout-tab--active' : ''}`}
+                onClick={() => setViewerLayout('orthogonal')}
+                title="3축 동시 보기"
+              >
+                3-Axis
+              </button>
+              <button
+                className={`seg-mri-viewer__layout-tab ${viewerLayout === '3d' ? 'seg-mri-viewer__layout-tab--active' : ''}`}
+                onClick={() => setViewerLayout('3d')}
+                title="3D 볼륨 렌더링"
+              >
+                3D
+              </button>
+              {/* Compare 탭 */}
+              {enableCompareTab && (
+                <button
+                  className={`seg-mri-viewer__layout-tab ${isCompareMode ? 'seg-mri-viewer__layout-tab--active seg-mri-viewer__layout-tab--compare' : ''}`}
+                  onClick={handleCompareClick}
+                  title="GT vs Prediction 비교"
+                  disabled={loadingCompare}
+                >
+                  {loadingCompare ? '...' : 'Compare'}
+                </button>
+              )}
+            </div>
+          )}
           {/* Dice Scores - Compare 모드일 때는 compareDiceScores 표시 */}
           {(() => {
             const displayDiceScores = isCompareMode ? compareDiceScores : diceScores
@@ -636,6 +654,27 @@ const SegMRIViewer: React.FC<SegMRIViewerProps> = ({
               </div>
             )
           })()}
+          {/* Volume Info - 예측 볼륨 정보 */}
+          {data.volumes && (data.volumes.wt_volume !== undefined || data.volumes.tc_volume !== undefined || data.volumes.et_volume !== undefined) && (
+            <div className="seg-mri-viewer__volumes">
+              <span className="seg-mri-viewer__volumes-title">Volume:</span>
+              {data.volumes.wt_volume !== undefined && (
+                <span className="seg-mri-viewer__volume-chip seg-mri-viewer__volume-chip--wt">
+                  WT: {data.volumes.wt_volume.toFixed(1)}ml
+                </span>
+              )}
+              {data.volumes.tc_volume !== undefined && (
+                <span className="seg-mri-viewer__volume-chip seg-mri-viewer__volume-chip--tc">
+                  TC: {data.volumes.tc_volume.toFixed(1)}ml
+                </span>
+              )}
+              {data.volumes.et_volume !== undefined && (
+                <span className="seg-mri-viewer__volume-chip seg-mri-viewer__volume-chip--et">
+                  ET: {data.volumes.et_volume.toFixed(1)}ml
+                </span>
+              )}
+            </div>
+          )}
         </div>
       </div>
 

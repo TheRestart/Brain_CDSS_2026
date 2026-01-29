@@ -332,24 +332,31 @@ button.close-btn:hover {
 }
 
 .pdf-preview-modal .type-btns button {
-  flex: 1;
-  padding: 8px 12px;
-  font-size: 13px;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  background: white;
-  cursor: pointer;
-  transition: all 0.2s;
+  flex: 1 !important;
+  padding: 8px 12px !important;
+  font-size: 13px !important;
+  border: 1px solid #d1d5db !important;
+  border-radius: 6px !important;
+  background: white !important;
+  background-color: white !important;
+  cursor: pointer !important;
+  transition: all 0.2s !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  color: #374151 !important;
 }
 
 .pdf-preview-modal .type-btns button:hover {
-  border-color: #3b82f6;
+  border-color: #3b82f6 !important;
+  background: #f0f9ff !important;
+  background-color: #f0f9ff !important;
 }
 
 .pdf-preview-modal .type-btns button.active {
-  background: #3b82f6;
-  color: white;
-  border-color: #3b82f6;
+  background: #3b82f6 !important;
+  background-color: #3b82f6 !important;
+  color: white !important;
+  border-color: #3b82f6 !important;
 }
 
 /* Color Row */

@@ -81,17 +81,36 @@ class M1InferenceView(APIView):
             )
 
         # 3. DICOM 정보 검증 (study_uid만 필요, series는 FastAPI에서 자동 탐색)
+        # dicom.study_uid 또는 orthanc.study_uid에서 찾기 (호환성 유지)
         worker_result = ocs.worker_result or {}
         dicom_info = worker_result.get('dicom', {})
-        study_uid = dicom_info.get('study_uid')
+        orthanc_info = worker_result.get('orthanc', {})
+        study_uid = dicom_info.get('study_uid') or orthanc_info.get('study_uid')
 
         if not study_uid:
             return Response(
-                {'detail': 'DICOM study_uid 정보가 없습니다.'},
+                {'detail': 'DICOM study_uid 정보가 없습니다. DICOM Viewer에서 영상을 먼저 업로드해주세요.'},
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        # 4. 기존 완료된 추론 확인
+        # 4. 진행 중인 추론 확인 (더블클릭 방지)
+        in_progress = AIInference.objects.filter(
+            model_type=AIInference.ModelType.M1,
+            mri_ocs=ocs,
+            status__in=[AIInference.Status.PENDING, AIInference.Status.PROCESSING]
+        ).first()
+
+        if in_progress:
+            logger.info(f'M1 진행 중인 추론 있음: ocs_id={ocs_id}, job_id={in_progress.job_id}')
+            return Response({
+                'job_id': in_progress.job_id,
+                'status': in_progress.status,
+                'cached': False,
+                'message': '이미 진행 중인 추론이 있습니다.',
+                'in_progress': True
+            }, status=status.HTTP_409_CONFLICT)
+
+        # 5. 기존 완료된 추론 확인
         existing = AIInference.find_existing(
             model_type=AIInference.ModelType.M1,
             mri_ocs=ocs
@@ -1008,6 +1027,201 @@ class AIInferenceSegmentationView(APIView):
                 {'detail': '데이터 로드에 실패했습니다.'},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
+
+    def put(self, request, job_id):
+        """
+        세그멘테이션 마스크 수정
+
+        PUT /api/ai/inferences/<job_id>/segmentation/
+
+        Request Body:
+        {
+            "edited_mask": base64 인코딩된 마스크 (uint8),
+            "shape": [128, 128, 128],
+            "comment": "수정 사유 (선택)"
+        }
+
+        Returns:
+        {
+            "success": true,
+            "backup_path": "백업 파일 경로",
+            "new_volumes": { ... }
+        }
+        """
+        import base64
+        import numpy as np
+        import shutil
+        import time
+
+        start_time = time.time()
+
+        try:
+            inference = AIInference.objects.get(job_id=job_id)
+        except AIInference.DoesNotExist:
+            return Response(
+                {'detail': '추론 결과를 찾을 수 없습니다.'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        # 권한 검증: 담당 의료진만 수정 가능
+        user = request.user
+        ocs = inference.mri_ocs
+
+        if ocs is None:
+            return Response(
+                {'detail': '연결된 OCS가 없습니다.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # 담당자 또는 superuser만 수정 가능
+        is_worker = ocs.worker_id == user.id
+        is_superuser = user.is_superuser
+
+        if not (is_worker or is_superuser):
+            return Response(
+                {'detail': '담당 의료진만 세그멘테이션을 수정할 수 있습니다.'},
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+        # OCS 상태 검증 (IN_PROGRESS, CONFIRMED에서 수정 가능)
+        allowed_statuses = ['ACCEPTED', 'IN_PROGRESS', 'RESULT_READY', 'CONFIRMED']
+        if ocs.ocs_status not in allowed_statuses:
+            return Response(
+                {'detail': f'현재 OCS 상태({ocs.ocs_status})에서는 수정할 수 없습니다.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # 요청 데이터 검증
+        edited_mask_b64 = request.data.get('edited_mask')
+        shape = request.data.get('shape')
+        comment = request.data.get('comment', '')
+
+        if not edited_mask_b64 or not shape:
+            return Response(
+                {'detail': 'edited_mask와 shape가 필요합니다.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Base64 디코딩
+        try:
+            mask_bytes = base64.b64decode(edited_mask_b64)
+            edited_mask = np.frombuffer(mask_bytes, dtype=np.uint8)
+            edited_mask = edited_mask.reshape(shape)
+        except Exception as e:
+            logger.error(f'마스크 디코딩 실패: {e}')
+            return Response(
+                {'detail': '마스크 데이터 형식이 잘못되었습니다.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # 파일 경로
+        result_dir = self.STORAGE_BASE / job_id
+        seg_file = result_dir / "m1_segmentation.npz"
+
+        if not seg_file.exists():
+            return Response(
+                {'detail': '원본 세그멘테이션 파일을 찾을 수 없습니다.'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        # 1. 원본 파일 백업
+        backup_dir = result_dir / "backups"
+        backup_dir.mkdir(parents=True, exist_ok=True)
+
+        timestamp = timezone.now().strftime("%Y%m%d_%H%M%S")
+        backup_filename = f"m1_segmentation_backup_{timestamp}.npz"
+        backup_path = backup_dir / backup_filename
+
+        try:
+            shutil.copy2(seg_file, backup_path)
+            logger.info(f'세그멘테이션 백업 완료: {backup_path}')
+        except Exception as e:
+            logger.error(f'백업 실패: {e}')
+            return Response(
+                {'detail': '백업 생성에 실패했습니다.'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+        # 2. 볼륨 재계산
+        voxel_volume_ml = 0.001  # 1 voxel = 1mm³ = 0.001ml (가정)
+
+        ncr_volume = float((edited_mask == 1).sum()) * voxel_volume_ml
+        ed_volume = float((edited_mask == 2).sum()) * voxel_volume_ml
+        et_volume = float((edited_mask == 3).sum()) * voxel_volume_ml
+
+        wt_volume = ncr_volume + ed_volume + et_volume
+        tc_volume = ncr_volume + et_volume
+
+        new_volumes = {
+            'wt_volume': round(wt_volume, 2),
+            'tc_volume': round(tc_volume, 2),
+            'et_volume': round(et_volume, 2),
+            'ncr_volume': round(ncr_volume, 2),
+            'ed_volume': round(ed_volume, 2),
+        }
+
+        # 3. 새 마스크 저장
+        try:
+            # 기존 NPZ 데이터 로드 (다른 필드 보존)
+            existing_data = dict(np.load(seg_file, allow_pickle=True))
+
+            # 마스크 및 볼륨 업데이트
+            existing_data['mask'] = edited_mask.astype(np.float32)
+            for key, value in new_volumes.items():
+                existing_data[key] = np.float32(value)
+
+            # 편집 메타데이터 추가
+            existing_data['_edited'] = np.array(True)
+            existing_data['_edited_at'] = np.array(timezone.now().isoformat())
+            existing_data['_edited_by'] = np.array(user.id)
+
+            np.savez(seg_file, **existing_data)
+            logger.info(f'세그멘테이션 수정 저장 완료: {seg_file}')
+
+        except Exception as e:
+            logger.error(f'세그멘테이션 저장 실패: {e}')
+            # 백업 복원
+            try:
+                shutil.copy2(backup_path, seg_file)
+            except:
+                pass
+            return Response(
+                {'detail': '세그멘테이션 저장에 실패했습니다.'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+        # 4. 수정 이력 저장 (result_data)
+        result_data = inference.result_data or {}
+
+        if 'edit_history' not in result_data:
+            result_data['edit_history'] = []
+
+        edit_record = {
+            'timestamp': timezone.now().isoformat(),
+            'user_id': user.id,
+            'user_name': getattr(user, 'name', user.username),
+            'backup_path': str(backup_path.relative_to(self.STORAGE_BASE)),
+            'comment': comment,
+            'new_volumes': new_volumes,
+        }
+
+        result_data['edit_history'].append(edit_record)
+        result_data['last_edited_at'] = timezone.now().isoformat()
+        result_data['last_edited_by'] = getattr(user, 'name', user.username)
+
+        inference.result_data = result_data
+        inference.save(update_fields=['result_data'])
+
+        elapsed = time.time() - start_time
+        logger.info(f'세그멘테이션 수정 완료: job_id={job_id}, user={user.username}, elapsed={elapsed:.2f}s')
+
+        return Response({
+            'success': True,
+            'job_id': job_id,
+            'backup_path': backup_filename,
+            'new_volumes': new_volumes,
+            'edit_count': len(result_data['edit_history']),
+        })
 
 
 class MGGeneExpressionView(APIView):

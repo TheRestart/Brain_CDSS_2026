@@ -8,7 +8,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../auth/AuthProvider';
-import { getOCS, startOCS, saveOCSResult, confirmOCS, uploadRISFile } from '@/services/ocs.api';
+import { getOCS, startOCS, saveOCSResult, confirmOCS, cancelOCS, uploadRISFile } from '@/services/ocs.api';
 import type { OCSDetail, RISWorkerResult } from '@/types/ocs';
 import { OCS_STATUS_LABELS, isRISWorkerResult } from '@/types/ocs';
 import { getErrorMessage } from '@/types/error';
@@ -240,6 +240,25 @@ export default function RISStudyDetailPage() {
     } catch (error) {
       console.error('Failed to start reading:', error);
       alert('판독 시작에 실패했습니다.');
+    }
+  };
+
+  // 접수 취소 (담당자가 작업을 포기, 다른 담당자가 접수 가능)
+  const handleCancelAcceptance = async () => {
+    if (!ocsDetail) return;
+
+    if (!confirm('접수를 취소하시겠습니까?\n다른 담당자가 이 검사를 접수할 수 있게 됩니다.')) {
+      return;
+    }
+
+    try {
+      await cancelOCS(ocsDetail.id, { cancel_reason: '담당자 접수 취소' });
+      alert('접수가 취소되었습니다.');
+      // 목록으로 이동
+      navigate('/ris');
+    } catch (error) {
+      console.error('Failed to cancel acceptance:', error);
+      alert('접수 취소에 실패했습니다.');
     }
   };
 
@@ -686,6 +705,13 @@ export default function RISStudyDetailPage() {
   const canEdit = isMyWork && ['ACCEPTED', 'IN_PROGRESS'].includes(ocsDetail.ocs_status);
   const isFinalized = ['RESULT_READY', 'CONFIRMED'].includes(ocsDetail.ocs_status);
   const workerResult = ocsDetail.worker_result as RISWorkerResult | null;
+  // DICOM 업로드 여부 확인 (M1 추론 가능 조건)
+  const hasDicomUploaded = !!(workerResult?.orthanc?.study_uid || workerResult?.dicom?.study_uid);
+  // M1 추론 가능: DICOM 업로드 완료 후 (IN_PROGRESS 또는 CONFIRMED)
+  const canRequestM1 = isMyWork && hasDicomUploaded && ['IN_PROGRESS', 'CONFIRMED'].includes(ocsDetail.ocs_status);
+  // 세그멘테이션 편집 권한: 담당 의료진이면서 IN_PROGRESS 또는 CONFIRMED 상태
+  // (M1 추론 완료 후 편집 가능)
+  const canEditSegmentation = isMyWork && ['IN_PROGRESS', 'CONFIRMED'].includes(ocsDetail.ocs_status);
 
   return (
     <div className="page ris-study-detail">
@@ -702,9 +728,14 @@ export default function RISStudyDetailPage() {
         </div>
         <div className="header-right">
           {ocsDetail.ocs_status === 'ACCEPTED' && isMyWork && (
-            <button className="btn btn-primary" onClick={handleStartReading}>
-              판독 시작
-            </button>
+            <>
+              <button className="btn btn-primary" onClick={handleStartReading}>
+                판독 시작
+              </button>
+              <button className="btn btn-danger" onClick={handleCancelAcceptance}>
+                접수 취소
+              </button>
+            </>
           )}
           {ocsDetail.ocs_status === 'ORDERED' && (
             <span className="info-text">접수 대기 중</span>
@@ -727,21 +758,21 @@ export default function RISStudyDetailPage() {
               </button>
             </>
           )}
+          {/* M1 추론 버튼: DICOM 업로드 완료 후 (IN_PROGRESS, CONFIRMED) */}
+          {canRequestM1 && (
+            <button
+              className="btn btn-ai"
+              onClick={handleRequestAIInference}
+              disabled={aiRequesting}
+              title="M1 추론 요청"
+            >
+              {aiRequesting && aiJobId
+                ? `'${aiJobId}' 요청 중...`
+                : 'M1 추론'}
+            </button>
+          )}
           {isFinalized && (
             <>
-              {/* AI 분석 요청 버튼 (CONFIRMED 상태에서만) */}
-              {ocsDetail.ocs_status === 'CONFIRMED' && (
-                <button
-                  className="btn btn-ai"
-                  onClick={handleRequestAIInference}
-                  disabled={aiRequesting}
-                  title="M1 추론 요청"
-                >
-                  {aiRequesting && aiJobId
-                    ? `'${aiJobId}' 요청 중, 현재 페이지를 벗어나도 괜찮습니다`
-                    : 'M1 추론'}
-                </button>
-              )}
               <button className="btn btn-success" onClick={handleSendToEMR}>
                 EMR 전송
               </button>
@@ -1063,8 +1094,12 @@ export default function RISStudyDetailPage() {
               )}
             </div>
 
-            {/* AI 분석 뷰어 */}
-            <AIViewerPanel ocsId={ocsDetail.id} patientId={ocsDetail.patient.id} />
+            {/* AI 분석 뷰어 (세그멘테이션 편집 가능) */}
+            <AIViewerPanel
+              ocsId={ocsDetail.id}
+              patientId={ocsDetail.patient.id}
+              canEdit={canEditSegmentation}
+            />
 
             {/* 검사 결과 항목 */}
             <div className="result-items-section">

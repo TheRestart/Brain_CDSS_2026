@@ -647,7 +647,40 @@ export const aiApi = {
 
     return data as SegmentationCompareData;
   },
+
+  // 세그멘테이션 데이터 수정 저장
+  saveSegmentationData: async (
+    jobId: string,
+    editedMask: string,  // base64 인코딩
+    shape: [number, number, number],
+    comment?: string
+  ): Promise<SaveSegmentationResponse> => {
+    const response = await api.put(`/ai/inferences/${jobId}/segmentation/`, {
+      edited_mask: editedMask,
+      shape,
+      comment: comment || '',
+    });
+    return response.data;
+  },
 };
+
+// =============================================================================
+// 세그멘테이션 저장 응답 타입
+// =============================================================================
+
+export interface SaveSegmentationResponse {
+  success: boolean;
+  job_id: string;
+  backup_path: string;
+  new_volumes: {
+    wt_volume: number;
+    tc_volume: number;
+    et_volume: number;
+    ncr_volume: number;
+    ed_volume: number;
+  };
+  edit_count: number;
+}
 
 // =============================================================================
 // SEG 비교 데이터 타입

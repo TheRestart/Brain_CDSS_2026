@@ -1,21 +1,27 @@
 /**
  * AI Viewer Panel
  * - AI 분석 결과 시각화
- * - M1 모델: SegMRIViewer로 세그멘테이션 표시
+ * - M1 모델: 4개 탭 (2D, 3-Axis, 3D, 편집)
  * - 기타 모델: 이미지 뷰어
  */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { getPatientAIRequests, aiApi } from '@/services/ai.api';
 import type { AIInferenceRequest } from '@/services/ai.api';
-import SegMRIViewer, { type SegmentationData, type DiceScores } from '@/components/ai/SegMRIViewer/SegMRIViewer';
+import SegMRIViewer, { type SegmentationData, type DiceScores, type ViewerLayout } from '@/components/ai/SegMRIViewer/SegMRIViewer';
+import SegmentationEditor from '@/components/ai/SegMRIViewer/SegmentationEditor';
+import type { SaveSegmentationRequest } from '@/components/ai/SegMRIViewer/types';
 import './AIViewerPanel.css';
+
+type M1ViewerTab = '2d' | '3axis' | '3d' | 'edit';
 
 interface AIViewerPanelProps {
   ocsId: number;
   patientId?: number;
+  /** 세그멘테이션 편집 가능 여부 (담당 의료진만 true) */
+  canEdit?: boolean;
 }
 
-export default function AIViewerPanel({ ocsId, patientId }: AIViewerPanelProps) {
+export default function AIViewerPanel({ ocsId, patientId, canEdit = false }: AIViewerPanelProps) {
   const [aiRequest, setAiRequest] = useState<AIInferenceRequest | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -27,7 +33,41 @@ export default function AIViewerPanel({ ocsId, patientId }: AIViewerPanelProps) 
   const [segLoading, setSegLoading] = useState(false);
   const [segError, setSegError] = useState<string | null>(null);
 
+  // M1 뷰어 탭 (2D, 3-Axis, 3D, 편집)
+  const [m1Tab, setM1Tab] = useState<M1ViewerTab>('2d');
+
   const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000';
+
+  // 세그멘테이션 데이터 로드 함수 (저장 후 리로드용)
+  const loadSegmentationData = useCallback(async (requestId: string) => {
+    setSegLoading(true);
+    setSegError(null);
+    try {
+      const segResponse = await aiApi.getSegmentationData(requestId);
+      if (segResponse && segResponse.mri && segResponse.prediction) {
+        setSegData({
+          mri: segResponse.mri,
+          groundTruth: segResponse.groundTruth || segResponse.prediction,
+          prediction: segResponse.prediction,
+          shape: segResponse.shape,
+          mri_channels: segResponse.mri_channels,
+          volumes: segResponse.volumes,
+        });
+        if (segResponse.comparison_metrics) {
+          setDiceScores({
+            wt: segResponse.comparison_metrics.dice_wt,
+            tc: segResponse.comparison_metrics.dice_tc,
+            et: segResponse.comparison_metrics.dice_et,
+          });
+        }
+      }
+    } catch (err) {
+      console.error('Failed to load segmentation data:', err);
+      setSegError('세그멘테이션 데이터를 불러오는데 실패했습니다.');
+    } finally {
+      setSegLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     const fetchAIResult = async () => {
@@ -47,33 +87,7 @@ export default function AIViewerPanel({ ocsId, patientId }: AIViewerPanelProps) 
 
         // M1 모델인 경우 세그멘테이션 데이터 로드
         if (matchingRequest?.model_code === 'M1' && matchingRequest.request_id) {
-          setSegLoading(true);
-          setSegError(null);
-          try {
-            const segResponse = await aiApi.getSegmentationData(matchingRequest.request_id);
-            if (segResponse && segResponse.mri && segResponse.prediction) {
-              setSegData({
-                mri: segResponse.mri,
-                groundTruth: segResponse.groundTruth || segResponse.prediction, // GT 없으면 prediction 사용
-                prediction: segResponse.prediction,
-                shape: segResponse.shape,
-                mri_channels: segResponse.mri_channels,
-              });
-              // Dice scores (비교 API에서 가져올 수도 있음)
-              if (segResponse.comparison_metrics) {
-                setDiceScores({
-                  wt: segResponse.comparison_metrics.dice_wt,
-                  tc: segResponse.comparison_metrics.dice_tc,
-                  et: segResponse.comparison_metrics.dice_et,
-                });
-              }
-            }
-          } catch (err) {
-            console.error('Failed to load segmentation data:', err);
-            setSegError('세그멘테이션 데이터를 불러오는데 실패했습니다.');
-          } finally {
-            setSegLoading(false);
-          }
+          await loadSegmentationData(matchingRequest.request_id);
         }
       } catch (error) {
         console.error('Failed to fetch AI result:', error);
@@ -83,7 +97,31 @@ export default function AIViewerPanel({ ocsId, patientId }: AIViewerPanelProps) 
     };
 
     fetchAIResult();
-  }, [ocsId, patientId]);
+  }, [ocsId, patientId, loadSegmentationData]);
+
+  // 세그멘테이션 저장 핸들러
+  const handleSaveSegmentation = useCallback(async (request: SaveSegmentationRequest) => {
+    if (!aiRequest?.request_id) {
+      throw new Error('AI 요청 정보가 없습니다.');
+    }
+
+    const response = await aiApi.saveSegmentationData(
+      aiRequest.request_id,
+      request.edited_mask,
+      request.shape,
+      request.comment
+    );
+
+    if (response.success) {
+      // 저장 성공 후 데이터 리로드
+      await loadSegmentationData(aiRequest.request_id);
+      alert('세그멘테이션이 저장되었습니다.');
+    } else {
+      throw new Error('저장에 실패했습니다.');
+    }
+
+    return response;
+  }, [aiRequest?.request_id, loadSegmentationData]);
 
   const visualizationPaths = aiRequest?.result?.visualization_paths || [];
   const isM1Model = aiRequest?.model_code === 'M1';
@@ -151,6 +189,14 @@ export default function AIViewerPanel({ ocsId, patientId }: AIViewerPanelProps) 
       );
     }
 
+    // 뷰어 레이아웃 매핑
+    const viewerLayoutMap: Record<M1ViewerTab, ViewerLayout> = {
+      '2d': 'single',
+      '3axis': 'orthogonal',
+      '3d': '3d',
+      'edit': 'single',
+    };
+
     return (
       <div className="ai-viewer-panel ai-viewer-segmentation">
         <div className="ai-viewer-header">
@@ -160,14 +206,58 @@ export default function AIViewerPanel({ ocsId, patientId }: AIViewerPanelProps) 
             <span className="job-id">{aiRequest.request_id}</span>
           </div>
         </div>
+        {/* 4개 탭: 2D, 3-Axis, 3D, 편집 */}
+        <div className="ai-viewer-tabs">
+          <button
+            className={`ai-viewer-tab ${m1Tab === '2d' ? 'active' : ''}`}
+            onClick={() => setM1Tab('2d')}
+          >
+            2D
+          </button>
+          <button
+            className={`ai-viewer-tab ${m1Tab === '3axis' ? 'active' : ''}`}
+            onClick={() => setM1Tab('3axis')}
+          >
+            3-Axis
+          </button>
+          <button
+            className={`ai-viewer-tab ${m1Tab === '3d' ? 'active' : ''}`}
+            onClick={() => setM1Tab('3d')}
+          >
+            3D
+          </button>
+          <button
+            className={`ai-viewer-tab ai-viewer-tab--edit ${m1Tab === 'edit' ? 'active' : ''}`}
+            onClick={() => setM1Tab('edit')}
+            disabled={!canEdit}
+            title={canEdit ? '세그멘테이션 편집' : '편집 권한 없음 (담당자 + IN_PROGRESS/CONFIRMED 상태 필요)'}
+          >
+            편집 {!canEdit && '🔒'}
+          </button>
+        </div>
         <div className="ai-viewer-seg-content">
-          <SegMRIViewer
-            data={segData}
-            title="종양 세그멘테이션"
-            diceScores={diceScores || undefined}
-            initialDisplayMode="pred_only"
-            maxCanvasSize={400}
-          />
+          {m1Tab === 'edit' && canEdit ? (
+            <SegmentationEditor
+              data={segData}
+              title="종양 세그멘테이션"
+              jobId={aiRequest.request_id}
+              canEdit={true}
+              onSave={handleSaveSegmentation}
+              onCancel={() => setM1Tab('2d')}
+              maxCanvasSize={400}
+            />
+          ) : (
+            <SegMRIViewer
+              data={segData}
+              title="종양 세그멘테이션"
+              diceScores={diceScores || undefined}
+              initialDisplayMode="pred_only"
+              initialViewerLayout={viewerLayoutMap[m1Tab]}
+              maxCanvasSize={400}
+              hideLayoutTabs={true}
+              key={m1Tab}
+            />
+          )}
         </div>
       </div>
     );

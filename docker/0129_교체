@@ -1,0 +1,25 @@
+
+Docker (PowerShell에서):
+
+cd C:\Users\302-28\Desktop\brain_tumor_dev_3\brain_tumor_dev\docker
+docker compose -f docker-compose.unified.yml build django
+docker compose -f docker-compose.unified.yml up -d django
+프론트엔드 (WSL에서):
+
+cd /mnt/c/Users/302-28/Desktop/brain_tumor_dev_3/brain_tumor_dev/brain_tumor_front
+npm run build
+
+
+
+==========
+==========
+docker compose -f docker-compose.unified.yml restart django
+
+
+==========
+
+
+
+
+
+
