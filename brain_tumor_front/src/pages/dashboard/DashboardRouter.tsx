@@ -5,6 +5,7 @@ import RISDashboard from '@/pages/dashboard/ris/RISDashboard';
 import SystemManagerDashboard from './systemManager/SystemManagerDashboard';
 import AdminDashboard from './admin/AdminDashboard';
 import ExternalDashboard from './external/ExternalDashboard';
+import PatientDashboard from '@/pages/patient/PatientDashboard';
 
 interface Props {
   role: string;
@@ -32,6 +33,9 @@ export default function DashboardRouter({ role }: Props) {
 
     case 'EXTERNAL':
       return <ExternalDashboard />;
+
+    case 'PATIENT':
+      return <PatientDashboard />;
 
     default:
       return <div>대시보드를 찾을 수 없습니다.</div>;

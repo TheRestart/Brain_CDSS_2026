@@ -307,7 +307,7 @@ export interface OCSOrderSampleData {
   orders: Array<{
     code: string;
     name: string;
-    priority: 'routine' | 'urgent' | 'stat';
+    priority: 'normal' | 'urgent';  // 백엔드 Priority 타입과 일치
   }>;
 }
 
@@ -317,8 +317,8 @@ export const OCS_ORDER_SAMPLES: OCSOrderSampleData[] = [
     label: '뇌종양 의심 검사',
     orders: [
       { code: 'MRI001', name: 'Brain MRI with enhancement', priority: 'urgent' },
-      { code: 'MRI002', name: 'MR Spectroscopy', priority: 'routine' },
-      { code: 'CT001', name: 'Chest CT (전이 평가)', priority: 'routine' },
+      { code: 'MRI002', name: 'MR Spectroscopy', priority: 'normal' },
+      { code: 'CT001', name: 'Chest CT (전이 평가)', priority: 'normal' },
     ],
   },
   {
@@ -328,8 +328,8 @@ export const OCS_ORDER_SAMPLES: OCSOrderSampleData[] = [
       { code: 'LAB001', name: 'CBC with differential', priority: 'urgent' },
       { code: 'LAB002', name: 'BMP (Basic Metabolic Panel)', priority: 'urgent' },
       { code: 'LAB003', name: 'Coagulation panel (PT/aPTT)', priority: 'urgent' },
-      { code: 'LAB004', name: 'LFT (Liver Function Test)', priority: 'routine' },
-      { code: 'LAB005', name: 'Tumor markers (NSE, S-100)', priority: 'routine' },
+      { code: 'LAB004', name: 'LFT (Liver Function Test)', priority: 'normal' },
+      { code: 'LAB005', name: 'Tumor markers (NSE, S-100)', priority: 'normal' },
     ],
   },
 ];
@@ -397,7 +397,7 @@ export interface OCSCreateSampleData {
   description: string;
   job_role: 'RIS' | 'LIS' | 'TREATMENT' | 'CONSULT';
   job_type: string;
-  priority: 'normal' | 'urgent' | 'stat';
+  priority: 'normal' | 'urgent';  // 백엔드 Priority 타입과 일치
   clinical_info: string;
   special_instruction: string;
 }

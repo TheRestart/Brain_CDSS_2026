@@ -1858,40 +1858,55 @@ class AIModelsListView(APIView):
     """
     permission_classes = [IsAuthenticated]
 
-    # 지원되는 AI 모델 정의
+    # 지원되는 AI 모델 정의 (실제 운영 모델 기준)
     AI_MODELS = [
         {
             'id': 1,
             'code': 'M1',
-            'name': 'M1 MRI 분석',
-            'description': 'MRI 영상을 분석하여 Grade, IDH, MGMT, 생존 예측',
+            'name': 'M1-Cls (MRI 분류)',
+            'description': 'MRI 영상 분석으로 Grade(II/III/IV), IDH, MGMT, Survival Risk 예측. 정확도: Grade 83.8%, IDH AUC 0.878',
             'ocs_sources': ['RIS'],
             'required_keys': {'RIS': ['MRI']},
-            'version': '1.0.0',
+            'version': '-',
             'is_active': True,
-            'config': {},
+            'config': {
+                'accuracy': 'Grade 83.8%',
+                'detailed_metrics': 'IDH AUC: 0.878, MGMT AUC: 0.568, C-Index: 0.660',
+                'processing_time': 'GPU: ~5초, CPU: ~40초',
+                'training_data': 'BraTS2021 1,242명',
+            },
         },
         {
             'id': 2,
             'code': 'MG',
-            'name': 'MG Gene Analysis',
-            'description': '유전자 발현 데이터 분석',
+            'name': 'MG (유전자 발현 분석)',
+            'description': '2000개 유전자 발현 + DEG score 분석. Survival Risk, Grade, Survival Time, Recurrence 예측. C-Index: 0.761',
             'ocs_sources': ['LIS'],
             'required_keys': {'LIS': ['RNA_SEQ']},
-            'version': '1.0.0',
+            'version': '-',
             'is_active': True,
-            'config': {},
+            'config': {
+                'accuracy': 'Grade 62.3%',
+                'detailed_metrics': 'C-Index: 0.761, Recurrence AUC: 0.848',
+                'processing_time': '< 5초',
+                'training_data': 'CGGA 1,018명',
+            },
         },
         {
             'id': 3,
             'code': 'MM',
-            'name': 'MM 멀티모달',
-            'description': 'MRI + 유전자 통합 분석',
+            'name': 'MM (멀티모달 융합)',
+            'description': 'MRI + Gene + Protein 통합 분석 (1,061 dim). Survival, Recurrence, Risk Group 예측',
             'ocs_sources': ['RIS', 'LIS'],
-            'required_keys': {'RIS': ['MRI'], 'LIS': ['RNA_SEQ']},
-            'version': '1.0.0',
+            'required_keys': {'RIS': ['MRI'], 'LIS': ['RNA_SEQ', 'PROTEIN']},
+            'version': '-',
             'is_active': True,
-            'config': {},
+            'config': {
+                'accuracy': 'C-Index 0.610',
+                'detailed_metrics': 'Recurrence AUC: 0.400, Risk AUC: 0.491',
+                'processing_time': '< 5초',
+                'training_data': 'TCGA 72명 (5-Fold CV)',
+            },
         },
     ]
 

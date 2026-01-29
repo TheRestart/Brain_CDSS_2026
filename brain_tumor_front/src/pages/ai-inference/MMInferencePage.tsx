@@ -983,13 +983,13 @@ export default function MMInferencePage() {
                           <>
                             <button
                               onClick={() => handleSelectHistory(record)}
-                              className="mm-btn-action mm-btn-view"
+                              className="mm-btn-action view"
                             >
                               보기
                             </button>
                             <button
                               onClick={() => handleViewDetail(record)}
-                              className="mm-btn-action mm-btn-detail"
+                              className="mm-btn-action detail"
                             >
                               상세
                             </button>
@@ -997,7 +997,7 @@ export default function MMInferencePage() {
                         )}
                         <button
                           onClick={() => handleDeleteInference(record)}
-                          className="mm-btn-action mm-btn-delete"
+                          className="mm-btn-action delete"
                         >
                           삭제
                         </button>

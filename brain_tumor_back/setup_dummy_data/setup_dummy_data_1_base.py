@@ -840,7 +840,7 @@ def load_menu_permission_seed():
     create_menu(54, code='AI_M1_DETAIL', path='/ai/m1/:jobId', breadcrumb_only=True, order=1, is_active=True, parent=menu_ai_m1)
     menu_ai_mg, _ = create_menu(55, code='AI_MG_INFERENCE', path='/ai/mg', icon='dna', order=6, is_active=True, parent=menu_ai)
     create_menu(56, code='AI_MG_DETAIL', path='/ai/mg/:jobId', breadcrumb_only=True, order=1, is_active=True, parent=menu_ai_mg)
-    menu_ai_mm, _ = create_menu(57, code='AI_MM_INFERENCE', path='/ai/mm', icon='layers', order=7, is_active=True, parent=menu_ai)
+    menu_ai_mm, _ = create_menu(57, code='AI_MM_INFERENCE', path='/ai/mm', icon='layer-group', order=7, is_active=True, parent=menu_ai)
     create_menu(58, code='AI_MM_DETAIL', path='/ai/mm/:jobId', breadcrumb_only=True, order=1, is_active=True, parent=menu_ai_mm)
 
     # 진료 보고서 메뉴

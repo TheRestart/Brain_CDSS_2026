@@ -1,9 +1,29 @@
 /* 진료 등록 모달 XL 사이즈 + 패딩 */
+/* 브라우저 호환성 이슈 해결 - Chrome에서 모달이 화면을 초과하는 문제 수정 */
 .encounter-modal-content {
   width: 90vw;
   max-width: 1200px;
   min-width: 600px;
+  max-height: 90vh;           /* 화면 높이 제한 - 브라우저 호환성 */
+  overflow-y: auto;           /* 내용 초과 시 스크롤 */
   padding: 2rem;
+  box-sizing: border-box;     /* padding 포함 크기 계산 */
+}
+
+/* 소형 화면 대응 (노트북, 작은 모니터) */
+@media (max-height: 700px) {
+  .encounter-modal-content {
+    max-height: 95vh;
+    padding: 1rem;
+  }
+
+  .encounter-modal-content .form-section {
+    margin-bottom: 0.75rem;
+  }
+
+  .encounter-modal-content .form-group {
+    margin-bottom: 0.5rem;
+  }
 }
 
 /* 모달 헤더 (샘플 버튼 포함) */

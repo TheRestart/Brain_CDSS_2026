@@ -173,20 +173,48 @@ class RoleViewSet(ModelViewSet): # - ModelViewSet을 상속하면 기본적으�
             code=serializer.validated_data["code"].upper()
         )
 
+    # SYSTEMMANAGER 역할 보호 검사
+    def _check_systemmanager_protection(self, request, role):
+        """SYSTEMMANAGER 역할은 SYSTEMMANAGER만 수정 가능"""
+        if role.code == 'SYSTEMMANAGER':
+            if not request.user.role or request.user.role.code != 'SYSTEMMANAGER':
+                return Response(
+                    {"detail": "SYSTEMMANAGER 역할은 수정할 수 없습니다."},
+                    status=status.HTTP_403_FORBIDDEN
+                )
+        return None
+
     # 역할 수정 put 방식
     def update(self, request, *args, **kwargs):
+        role = self.get_object()
+        # SYSTEMMANAGER 역할 보호
+        error_response = self._check_systemmanager_protection(request, role)
+        if error_response:
+            return error_response
+
         request.data.pop("code", None)
-        kwargs["partial"] = True   # PUT도 안전하게    
+        kwargs["partial"] = True   # PUT도 안전하게
         return super().update(request, *args, **kwargs)
 
     # 역할 수정 patch 방식
     def partial_update(self, request, *args, **kwargs):
+        role = self.get_object()
+        # SYSTEMMANAGER 역할 보호
+        error_response = self._check_systemmanager_protection(request, role)
+        if error_response:
+            return error_response
+
         request.data.pop("code", None)
         return super().partial_update(request, *args, **kwargs)
-    
+
     # 역할 삭제
     def destroy(self, request, *args, **kwargs):
         role = self.get_object()
+        # SYSTEMMANAGER 역할 보호
+        error_response = self._check_systemmanager_protection(request, role)
+        if error_response:
+            return error_response
+
         role.is_active = False
         role.save()
         return Response(status=status.HTTP_204_NO_CONTENT)
