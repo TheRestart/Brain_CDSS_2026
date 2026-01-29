@@ -67,6 +67,44 @@
   color: white;
 }
 
+/* Volume Info */
+.seg-mri-viewer__volumes {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 12px;
+  padding-left: 12px;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.seg-mri-viewer__volumes-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.seg-mri-viewer__volume-chip {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.seg-mri-viewer__volume-chip--wt {
+  background: rgba(76, 175, 80, 0.3);
+  color: white;
+}
+
+.seg-mri-viewer__volume-chip--tc {
+  background: rgba(156, 39, 176, 0.3);
+  color: white;
+}
+
+.seg-mri-viewer__volume-chip--et {
+  background: rgba(244, 67, 54, 0.3);
+  color: white;
+}
+
 /* Body */
 .seg-mri-viewer__body {
   display: grid;
@@ -999,323 +1037,4 @@
 
 .volume-3d-viewer__fullscreen-content .volume-3d-viewer__hint {
   color: rgba(255, 255, 255, 0.5);
-}
-
-/* ========== 레이저 치료 시뮬레이션 스타일 ========== */
-
-.volume-3d-viewer__laser-toggle {
-  padding: 6px 14px;
-  border: 1px solid #e91e63;
-  background: white;
-  color: #e91e63;
-  font-size: 12px;
-  font-weight: 500;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.volume-3d-viewer__laser-toggle:hover {
-  background: #fce4ec;
-}
-
-.volume-3d-viewer__laser-toggle.active {
-  background: linear-gradient(135deg, #e91e63, #f06292);
-  color: white;
-  border-color: #e91e63;
-  box-shadow: 0 2px 8px rgba(233, 30, 99, 0.3);
-  animation: laserActiveGlow 2s ease-in-out infinite;
-}
-
-@keyframes laserActiveGlow {
-  0%, 100% {
-    box-shadow: 0 2px 8px rgba(233, 30, 99, 0.3);
-  }
-  50% {
-    box-shadow: 0 2px 16px rgba(233, 30, 99, 0.6);
-  }
-}
-
-/* 레이저 설정 버튼 */
-.volume-3d-viewer__laser-settings {
-  padding: 6px 10px;
-  border: 1px solid #9c27b0;
-  background: white;
-  color: #9c27b0;
-  font-size: 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.volume-3d-viewer__laser-settings:hover {
-  background: #f3e5f5;
-}
-
-.volume-3d-viewer__laser-settings.active {
-  background: #9c27b0;
-  color: white;
-}
-
-/* 레이저 컨트롤 패널 */
-.volume-3d-viewer__laser-panel {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 280px;
-  background: rgba(26, 26, 46, 0.95);
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  overflow: hidden;
-  z-index: 100;
-  backdrop-filter: blur(10px);
-}
-
-.volume-3d-viewer__laser-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 14px;
-  background: linear-gradient(135deg, #e91e63, #f06292);
-  color: white;
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.volume-3d-viewer__laser-close {
-  width: 24px;
-  height: 24px;
-  border: none;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  font-size: 14px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-}
-
-.volume-3d-viewer__laser-close:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: scale(1.1);
-}
-
-.volume-3d-viewer__laser-controls {
-  padding: 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-/* 레이저 개수 선택 */
-.volume-3d-viewer__laser-count {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.volume-3d-viewer__laser-count label {
-  font-size: 12px;
-  color: #ddd;
-  font-weight: 500;
-}
-
-.volume-3d-viewer__laser-count input[type="range"] {
-  width: 100%;
-  height: 6px;
-  -webkit-appearance: none;
-  appearance: none;
-  background: linear-gradient(90deg, #e91e63, #f06292);
-  border-radius: 3px;
-  outline: none;
-  cursor: pointer;
-}
-
-.volume-3d-viewer__laser-count input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  background: white;
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  transition: transform 0.15s;
-}
-
-.volume-3d-viewer__laser-count input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.15);
-}
-
-.volume-3d-viewer__laser-count input[type="range"]:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.volume-3d-viewer__laser-count-labels {
-  display: flex;
-  justify-content: space-between;
-  font-size: 11px;
-  color: #888;
-  padding: 0 4px;
-}
-
-/* 레이저 버튼 */
-.volume-3d-viewer__laser-buttons {
-  display: flex;
-  gap: 8px;
-}
-
-.volume-3d-viewer__laser-start {
-  flex: 1;
-  padding: 10px 16px;
-  border: none;
-  border-radius: 6px;
-  background: linear-gradient(135deg, #4caf50, #66bb6a);
-  color: white;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
-}
-
-.volume-3d-viewer__laser-start:hover {
-  background: linear-gradient(135deg, #43a047, #4caf50);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
-}
-
-.volume-3d-viewer__laser-stop {
-  flex: 1;
-  padding: 10px 16px;
-  border: none;
-  border-radius: 6px;
-  background: linear-gradient(135deg, #f44336, #ef5350);
-  color: white;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-  box-shadow: 0 2px 8px rgba(244, 67, 54, 0.3);
-  animation: laserPulse 1.5s ease-in-out infinite;
-}
-
-.volume-3d-viewer__laser-stop:hover {
-  background: linear-gradient(135deg, #e53935, #f44336);
-}
-
-@keyframes laserPulse {
-  0%, 100% {
-    box-shadow: 0 2px 8px rgba(244, 67, 54, 0.3);
-  }
-  50% {
-    box-shadow: 0 2px 16px rgba(244, 67, 54, 0.6);
-  }
-}
-
-/* 진행률 바 */
-.volume-3d-viewer__laser-progress {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.volume-3d-viewer__laser-progress-bar {
-  flex: 1;
-  height: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.volume-3d-viewer__laser-progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #f44336, #ff9800, #4caf50);
-  border-radius: 4px;
-  transition: width 0.1s linear;
-  box-shadow: 0 0 10px rgba(244, 67, 54, 0.5);
-}
-
-.volume-3d-viewer__laser-progress span {
-  font-size: 12px;
-  font-weight: 600;
-  color: #4caf50;
-  min-width: 40px;
-  text-align: right;
-}
-
-/* 레이저 좌표 목록 */
-.volume-3d-viewer__laser-coords {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 12px 14px;
-}
-
-.volume-3d-viewer__laser-coords-title {
-  font-size: 12px;
-  font-weight: 600;
-  color: #ddd;
-  margin-bottom: 10px;
-}
-
-.volume-3d-viewer__laser-coords-list {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  max-height: 200px;
-  overflow-y: auto;
-}
-
-.volume-3d-viewer__laser-coord-item {
-  padding: 6px 10px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 4px;
-  font-size: 11px;
-  font-family: 'Monaco', 'Consolas', monospace;
-  color: #bbb;
-}
-
-/* 스크롤바 스타일 */
-.volume-3d-viewer__laser-coords-list::-webkit-scrollbar {
-  width: 6px;
-}
-
-.volume-3d-viewer__laser-coords-list::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 3px;
-}
-
-.volume-3d-viewer__laser-coords-list::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 3px;
-}
-
-.volume-3d-viewer__laser-coords-list::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-/* 전체화면 모드에서 레이저 패널 위치 조정 */
-.volume-3d-viewer__fullscreen-content .volume-3d-viewer__laser-panel {
-  position: fixed;
-  top: 50%;
-  right: 24px;
-  transform: translateY(-50%);
-}
-
-.volume-3d-viewer__fullscreen-content .volume-3d-viewer__laser-toggle {
-  border-color: #f06292;
-  color: #f06292;
-  background: transparent;
-}
-
-.volume-3d-viewer__fullscreen-content .volume-3d-viewer__laser-toggle:hover {
-  background: rgba(240, 98, 146, 0.1);
-}
-
-.volume-3d-viewer__fullscreen-content .volume-3d-viewer__laser-toggle.active {
-  background: linear-gradient(135deg, #e91e63, #f06292);
-  color: white;
 }
