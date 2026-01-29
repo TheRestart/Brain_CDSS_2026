@@ -1199,7 +1199,7 @@ class AIInferenceSegmentationView(APIView):
         edit_record = {
             'timestamp': timezone.now().isoformat(),
             'user_id': user.id,
-            'user_name': getattr(user, 'name', user.username),
+            'user_name': getattr(user, 'name', user.login_id),
             'backup_path': str(backup_path.relative_to(self.STORAGE_BASE)),
             'comment': comment,
             'new_volumes': new_volumes,
@@ -1207,13 +1207,13 @@ class AIInferenceSegmentationView(APIView):
 
         result_data['edit_history'].append(edit_record)
         result_data['last_edited_at'] = timezone.now().isoformat()
-        result_data['last_edited_by'] = getattr(user, 'name', user.username)
+        result_data['last_edited_by'] = getattr(user, 'name', user.login_id)
 
         inference.result_data = result_data
         inference.save(update_fields=['result_data'])
 
         elapsed = time.time() - start_time
-        logger.info(f'세그멘테이션 수정 완료: job_id={job_id}, user={user.username}, elapsed={elapsed:.2f}s')
+        logger.info(f'세그멘테이션 수정 완료: job_id={job_id}, user={user.login_id}, elapsed={elapsed:.2f}s')
 
         return Response({
             'success': True,
@@ -2304,13 +2304,13 @@ class AIInferenceReviewView(APIView):
         result_data['review_status'] = review_status
         result_data['review_comment'] = review_comment
         result_data['reviewed_by'] = request.user.id
-        result_data['reviewed_by_name'] = request.user.name or request.user.username
+        result_data['reviewed_by_name'] = request.user.name or request.user.login_id
         result_data['reviewed_at'] = timezone.now().isoformat()
 
         inference.result_data = result_data
         inference.save(update_fields=['result_data'])
 
-        logger.info(f'Inference reviewed: {job_id} - {review_status} by {request.user.username}')
+        logger.info(f'Inference reviewed: {job_id} - {review_status} by {request.user.login_id}')
 
         return Response({
             'message': f'추론 결과가 {"승인" if review_status == "approved" else "반려"}되었습니다.',

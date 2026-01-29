@@ -130,6 +130,7 @@ function M1Panel({ isResearch: _isResearch }: PanelProps) {
   const [segData, setSegData] = useState<SegmentationData | null>(null)
   const [segLoading, setSegLoading] = useState(false)
   const [segError, setSegError] = useState('')
+  const [diceScores, setDiceScores] = useState<{ wt?: number; tc?: number; et?: number } | null>(null)
 
   const { lastMessage, requestInference } = useAIInference()
 
@@ -262,6 +263,7 @@ function M1Panel({ isResearch: _isResearch }: PanelProps) {
     setSegLoading(true)
     setSegError('')
     setSegData(null)
+    setDiceScores(null)
 
     try {
       // enc=binary로 base64 인코딩된 데이터 요청 (더 효율적)
@@ -361,10 +363,21 @@ function M1Panel({ isResearch: _isResearch }: PanelProps) {
       }
 
       setSegData(segmentationData)
+
+      // Dice Score 설정 (comparison_metrics가 있는 경우)
+      if (data.comparison_metrics) {
+        setDiceScores({
+          wt: data.comparison_metrics.dice_wt,
+          tc: data.comparison_metrics.dice_tc,
+          et: data.comparison_metrics.dice_et,
+        })
+      }
+
       console.log('[M1Panel] SegmentationData ready:', {
         mriShape: segmentationData.mri.length,
         predShape: segmentationData.prediction.length,
-        hasChannels: !!segmentationData.mri_channels
+        hasChannels: !!segmentationData.mri_channels,
+        hasDiceScores: !!data.comparison_metrics
       })
     } catch (err: any) {
       console.error('[M1Panel] Failed to load segmentation:', err)
@@ -381,6 +394,7 @@ function M1Panel({ isResearch: _isResearch }: PanelProps) {
       loadSegmentationData(lastJobId)
     } else {
       setSegData(null)
+      setDiceScores(null)
     }
   }, [result, lastJobId])
 
@@ -497,11 +511,7 @@ function M1Panel({ isResearch: _isResearch }: PanelProps) {
             <SegMRIViewer
               data={segData}
               title="M1 세그멘테이션 결과"
-              diceScores={result?.segmentation ? {
-                wt: result.segmentation.wt_volume,
-                tc: result.segmentation.tc_volume,
-                et: result.segmentation.et_volume,
-              } : undefined}
+              diceScores={diceScores || undefined}
               initialViewMode="axial"
               initialDisplayMode="overlay"
             />

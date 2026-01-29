@@ -36,6 +36,9 @@ export default function AIViewerPanel({ ocsId, patientId, canEdit = false }: AIV
   // M1 뷰어 탭 (2D, 3-Axis, 3D, 편집)
   const [m1Tab, setM1Tab] = useState<M1ViewerTab>('2d');
 
+  // 환자의 모든 M1 AI 요청 목록 (이전 기록 선택용)
+  const [allM1Requests, setAllM1Requests] = useState<AIInferenceRequest[]>([]);
+
   const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000';
 
   // 세그멘테이션 데이터 로드 함수 (저장 후 리로드용)
@@ -79,15 +82,32 @@ export default function AIViewerPanel({ ocsId, patientId, canEdit = false }: AIV
       setLoading(true);
       try {
         const requests = await getPatientAIRequests(patientId);
-        const matchingRequest = requests
-          .filter(req => req.ocs_references?.includes(ocsId) && req.has_result)
-          .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0];
 
-        setAiRequest(matchingRequest || null);
+        // 환자의 모든 M1 AI 요청 (결과가 있는 것만) - 최신순 정렬
+        const m1Requests = requests
+          .filter(req => req.model_code === 'M1' && req.has_result)
+          .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+
+        setAllM1Requests(m1Requests);
+
+        // 기본 선택: 가장 최신 M1 요청 (없으면 현재 OCS에 해당하는 다른 모델 요청)
+        let selectedRequest: AIInferenceRequest | null = null;
+
+        if (m1Requests.length > 0) {
+          // M1 요청이 있으면 가장 최신 것 선택
+          selectedRequest = m1Requests[0];
+        } else {
+          // M1 요청이 없으면 현재 OCS에 대한 다른 모델 요청 선택
+          selectedRequest = requests
+            .filter(req => req.ocs_references?.includes(ocsId) && req.has_result)
+            .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0] || null;
+        }
+
+        setAiRequest(selectedRequest);
 
         // M1 모델인 경우 세그멘테이션 데이터 로드
-        if (matchingRequest?.model_code === 'M1' && matchingRequest.request_id) {
-          await loadSegmentationData(matchingRequest.request_id);
+        if (selectedRequest?.model_code === 'M1' && selectedRequest.request_id) {
+          await loadSegmentationData(selectedRequest.request_id);
         }
       } catch (error) {
         console.error('Failed to fetch AI result:', error);
@@ -98,6 +118,20 @@ export default function AIViewerPanel({ ocsId, patientId, canEdit = false }: AIV
 
     fetchAIResult();
   }, [ocsId, patientId, loadSegmentationData]);
+
+  // 이전 기록 선택 핸들러
+  const handleSelectHistory = useCallback(async (requestId: string) => {
+    const selectedReq = allM1Requests.find(req => req.request_id === requestId);
+    if (!selectedReq) return;
+
+    setAiRequest(selectedReq);
+    setSegData(null);
+    setDiceScores(null);
+
+    if (selectedReq.model_code === 'M1' && selectedReq.request_id) {
+      await loadSegmentationData(selectedReq.request_id);
+    }
+  }, [allM1Requests, loadSegmentationData]);
 
   // 세그멘테이션 저장 핸들러
   const handleSaveSegmentation = useCallback(async (request: SaveSegmentationRequest) => {
@@ -206,6 +240,40 @@ export default function AIViewerPanel({ ocsId, patientId, canEdit = false }: AIV
             <span className="job-id">{aiRequest.request_id}</span>
           </div>
         </div>
+        {/* 이전 기록 선택 드롭다운 */}
+        {allM1Requests.length > 1 && (
+          <div className="ai-viewer-history-selector">
+            <label htmlFor="history-select">분석 기록:</label>
+            <select
+              id="history-select"
+              value={aiRequest.request_id}
+              onChange={(e) => handleSelectHistory(e.target.value)}
+              className="history-select"
+            >
+              {allM1Requests.map((req, index) => {
+                const date = new Date(req.created_at);
+                const isCurrentOcs = req.ocs_references?.includes(ocsId);
+                const isLatest = index === 0;
+                return (
+                  <option key={req.request_id} value={req.request_id}>
+                    {date.toLocaleString('ko-KR', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                      hour: '2-digit',
+                      minute: '2-digit'
+                    })}
+                    {isLatest && ' (최신)'}
+                    {isCurrentOcs && ' [현재 OCS]'}
+                  </option>
+                );
+              })}
+            </select>
+            <span className="history-count">
+              총 {allM1Requests.length}건의 분석 기록
+            </span>
+          </div>
+        )}
         {/* 4개 탭: 2D, 3-Axis, 3D, 편집 */}
         <div className="ai-viewer-tabs">
           <button

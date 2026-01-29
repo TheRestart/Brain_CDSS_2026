@@ -104,7 +104,7 @@ class UserToggleActiveView(APIView):
             return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
 
         # system 계정 보호
-        if user.username == 'system':
+        if user.login_id == 'system':
             return Response(
                 {"error": "system 계정은 수정할 수 없습니다."},
                 status=status.HTTP_403_FORBIDDEN
