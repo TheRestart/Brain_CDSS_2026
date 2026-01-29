@@ -85,6 +85,7 @@ const Volume3DViewer: React.FC<Volume3DViewerProps> = ({
   const [zoom, setZoom] = useState(1)
   const [showBrain, setShowBrain] = useState(true)
   const [brainOpacity, setBrainOpacity] = useState(0.15)
+  const [lesionOpacity, setLesionOpacity] = useState(0.8)  // 병변 투명도
   const [isFullscreen, setIsFullscreen] = useState(false)
 
   // 레이저 치료 관련 상태
@@ -93,7 +94,7 @@ const Volume3DViewer: React.FC<Volume3DViewerProps> = ({
   const [laserActive, setLaserActive] = useState(false)     // 레이저 활성화 상태 (토글)
   const [laserPositions, setLaserPositions] = useState<LaserPosition[]>([]) // 레이저 위치들
   const [laserAnimationProgress, setLaserAnimationProgress] = useState(0) // 애니메이션 진행률
-  const [laserHoldTime, setLaserHoldTime] = useState(0)     // 완료 후 대기 시간
+  const [, setLaserHoldTime] = useState(0)     // 완료 후 대기 시간
   const laserMeshesRef = useRef<THREE.Object3D[]>([])       // 레이저 메시들
   const laserLabelsRef = useRef<THREE.Sprite[]>([])         // 좌표 라벨 스프라이트
   const laserGlowRef = useRef<THREE.Points | null>(null)    // 조사점 글로우 효과
@@ -539,13 +540,13 @@ const Volume3DViewer: React.FC<Volume3DViewerProps> = ({
 
     if (positions.length === 0) return
 
-    // 색상 배열 생성 (회색 계열)
+    // 색상 배열 생성 (흰색에 가까운 밝은 회색)
     const colors: number[] = []
     for (let i = 0; i < intensities.length; i++) {
       const intensity = intensities[i]
-      // 회백색 계열로 표시
-      const gray = 0.3 + intensity * 0.5
-      colors.push(gray, gray * 0.95, gray)
+      // 흰색에 가까운 밝은 gray (0.75~0.95 범위)
+      const gray = 0.75 + intensity * 0.2
+      colors.push(gray, gray, gray)
     }
 
     const geometry = new THREE.BufferGeometry()
@@ -600,7 +601,7 @@ const Volume3DViewer: React.FC<Volume3DViewerProps> = ({
         size: 0.012,
         vertexColors: true,
         transparent: true,
-        opacity: Math.min(1, opacity + 0.2), // 종양은 더 불투명하게
+        opacity: lesionOpacity, // 병변 투명도 적용
         sizeAttenuation: true,
       })
 
@@ -609,7 +610,7 @@ const Volume3DViewer: React.FC<Volume3DViewerProps> = ({
       meshesRef.current.push(points)
     })
 
-  }, [segmentationVolume, showLabels, opacity, extractSurfacePoints])
+  }, [segmentationVolume, showLabels, opacity, lesionOpacity, extractSurfacePoints])
 
   /** 애니메이션 루프 */
   const animate = useCallback(() => {
@@ -831,6 +832,18 @@ const Volume3DViewer: React.FC<Volume3DViewerProps> = ({
         </div>
       )}
 
+      <div className="volume-3d-viewer__speed">
+        <span>병변 투명도:</span>
+        <input
+          type="range"
+          min="0.2"
+          max="1"
+          step="0.1"
+          value={lesionOpacity}
+          onChange={(e) => setLesionOpacity(Number(e.target.value))}
+        />
+      </div>
+
       <label className="volume-3d-viewer__checkbox">
         <input
           type="checkbox"
@@ -860,6 +873,7 @@ const Volume3DViewer: React.FC<Volume3DViewerProps> = ({
           setIsRotating(true)
           setShowBrain(true)
           setBrainOpacity(0.15)
+          setLesionOpacity(0.8)
           stopLaserTreatment()
         }}
       >

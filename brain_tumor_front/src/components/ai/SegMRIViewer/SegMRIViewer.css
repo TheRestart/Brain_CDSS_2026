@@ -67,6 +67,44 @@
   color: white;
 }
 
+/* Volume Info */
+.seg-mri-viewer__volumes {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 12px;
+  padding-left: 12px;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.seg-mri-viewer__volumes-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.seg-mri-viewer__volume-chip {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.seg-mri-viewer__volume-chip--wt {
+  background: rgba(76, 175, 80, 0.3);
+  color: white;
+}
+
+.seg-mri-viewer__volume-chip--tc {
+  background: rgba(156, 39, 176, 0.3);
+  color: white;
+}
+
+.seg-mri-viewer__volume-chip--et {
+  background: rgba(244, 67, 54, 0.3);
+  color: white;
+}
+
 /* Body */
 .seg-mri-viewer__body {
   display: grid;
