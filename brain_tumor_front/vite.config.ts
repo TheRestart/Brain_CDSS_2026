@@ -2,22 +2,21 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 import fs from 'fs'
+import { fileURLToPath } from 'url'
 
-// WSL 환경에서 dist 폴더 생성 문제 해결용 플러그인
-const ensureDistDir = () => ({
-  name: 'ensure-dist-dir',
-  config() {
-    // config 훅은 Vite 설정 단계에서 실행되어 prepareOutDir보다 먼저 실행됨
-    const distPath = path.resolve(__dirname, 'dist')
-    if (!fs.existsSync(distPath)) {
-      fs.mkdirSync(distPath, { recursive: true })
-    }
-  }
-})
+// ESM 환경에서 __dirname 대체
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
+// WSL 환경에서 dist 폴더 생성 문제 해결 (모듈 로드 시 즉시 실행)
+const distPath = path.resolve(__dirname, 'dist')
+if (!fs.existsSync(distPath)) {
+  fs.mkdirSync(distPath, { recursive: true })
+}
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [ensureDistDir(), react()],
+  plugins: [react()],
   resolve : {
     alias : {
       '@' : path.resolve(__dirname, 'src'), // @를 src 폴더로 mapping 해줌
