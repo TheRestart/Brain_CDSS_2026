@@ -611,21 +611,26 @@ const SegMRIViewer: React.FC<SegMRIViewerProps> = ({
           {/* Dice Scores - Compare 모드일 때는 compareDiceScores 표시 */}
           {(() => {
             const displayDiceScores = isCompareMode ? compareDiceScores : diceScores
+            // Dice 값을 0~1 범위로 클램핑하여 퍼센트로 변환
+            const formatDice = (value: number) => {
+              const clamped = Math.max(0, Math.min(1, value))
+              return (clamped * 100).toFixed(1)
+            }
             return displayDiceScores && (
               <div className="seg-mri-viewer__dice-scores">
                 {displayDiceScores.wt !== undefined && (
                   <span className="seg-mri-viewer__dice-chip seg-mri-viewer__dice-chip--wt">
-                    WT: {(displayDiceScores.wt * 100).toFixed(1)}%
+                    WT: {formatDice(displayDiceScores.wt)}%
                   </span>
                 )}
                 {displayDiceScores.tc !== undefined && (
                   <span className="seg-mri-viewer__dice-chip seg-mri-viewer__dice-chip--tc">
-                    TC: {(displayDiceScores.tc * 100).toFixed(1)}%
+                    TC: {formatDice(displayDiceScores.tc)}%
                   </span>
                 )}
                 {displayDiceScores.et !== undefined && (
                   <span className="seg-mri-viewer__dice-chip seg-mri-viewer__dice-chip--et">
-                    ET: {(displayDiceScores.et * 100).toFixed(1)}%
+                    ET: {formatDice(displayDiceScores.et)}%
                   </span>
                 )}
               </div>

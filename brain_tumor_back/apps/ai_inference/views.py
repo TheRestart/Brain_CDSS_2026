@@ -1979,6 +1979,11 @@ class AIInferenceSegmentationCompareView(APIView):
                         intersection = np.sum(pred_tumor & gt_tumor)
                         dice_wt = 2.0 * intersection / (np.sum(pred_tumor) + np.sum(gt_tumor)) if (np.sum(pred_tumor) + np.sum(gt_tumor)) > 0 else 1.0
 
+                        # Dice 값 범위 검증 (0~1)
+                        if not (0.0 <= dice_wt <= 1.0):
+                            logger.warning(f"비정상 Dice 값 감지: {dice_wt:.4f}, 0~1 범위로 클램핑")
+                            dice_wt = max(0.0, min(1.0, dice_wt))
+
                         # 개별 라벨 Dice (라벨이 일치하는 경우만)
                         pred_unique = set(np.unique(pred_mask)) - {0}
                         gt_unique = set(np.unique(gt_resampled)) - {0}
