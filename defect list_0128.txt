@@ -33,26 +33,3 @@ study가 1개만 불러진다
 MM 모델부분에서 mg처럼 기본 데이터 분석 (단백질 3D 뷰어 추가)
 진짜 seg와 추론 seg의 비교, 과거 추론 seg의 비교 
 dicom_HTJ2K (고속 압축)HTJ2K (High-Throughput JPEG 2000) 압축 지원 
-
-
-== 안할거 : 
-emr, fhir, grafana, prometheus, alertmanager
-장고 Swagger UI: http://localhost/api/docs/
-
-
-
-
-======== 추가 설명 
-=3
-seg의 dicom를 넌파이로 변환후 재 배치해야한다. 중앙도 안맞고 인스턴스의 크기가 다르기때문에 오탕크에서 seg를 다시 계산해야한다. 
-그런데 'brain_tumor_dev\CDSS_STORAGE\AI\ai_req_0001\m1_preprocessed_mri.npz'에 전처리가 된 seg가 있지만 쓰레기 이다. [mon에서 했으면 좋은데] 확인 필요, 추론시간의 단축을 위해 제거했을수 있음 
-
-
-
-==== 개인적으로 하고 싶은거
-= 한별 
-# 사용자가 각자 self 업무 프레임워크(자동화) 세팅을 할수 있어야한다. 
-# 사용자가 '설정'버튼(톱니 아이콘)을 눌러 자체적인 환경값을 설정할수 있다. 
-# n8n 을 통한 업무 자동화 
-# AI 추론 요청의 실시간 처리 상태를 모니터링합니다 시간에 따른 ai 요청량의 시각화 
-## 기존 동작중인 서버를 어떻게 업데이트해야하나?
