@@ -665,6 +665,9 @@ label {
   border: 1px solid #ccc;
   border-radius: 4px;
   text-align: center;
+  -webkit-user-select: text;
+  user-select: text;
+  -webkit-user-drag: none;
 }
 
 .phone-group span {

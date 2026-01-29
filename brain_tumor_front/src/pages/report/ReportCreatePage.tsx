@@ -13,7 +13,6 @@ import {
 } from '@/services/report.api';
 import { searchPatients, getExaminationSummary } from '@/services/patient.api';
 import type { Patient, ExaminationSummary } from '@/types/patient';
-import { useToast } from '@/components/common';
 import './ReportCreatePage.css';
 
 // 보고서 유형 옵션
@@ -27,7 +26,6 @@ const REPORT_TYPE_OPTIONS: { value: FinalReportType; label: string }[] = [
 export default function ReportCreatePage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const toast = useToast();
 
   // 폼 데이터
   const [formData, setFormData] = useState<FinalReportCreateData>({
@@ -197,7 +195,7 @@ export default function ReportCreatePage() {
     } finally {
       setLoadingPatientData(false);
     }
-  }, [toast]);
+  }, []);
 
   // 환자 선택 해제
   const handlePatientClear = useCallback(() => {
@@ -303,15 +301,15 @@ export default function ReportCreatePage() {
   // 폼 유효성 검사
   const validateForm = (): boolean => {
     if (!formData.patient) {
-      toast.error('환자를 선택해주세요.');
+      alert('환자를 선택해주세요.');
       return false;
     }
     if (!formData.primary_diagnosis.trim()) {
-      toast.error('주 진단명을 입력해주세요.');
+      alert('주 진단명을 입력해주세요.');
       return false;
     }
     if (!formData.diagnosis_date) {
-      toast.error('진단일을 입력해주세요.');
+      alert('진단일을 입력해주세요.');
       return false;
     }
     return true;
@@ -324,14 +322,14 @@ export default function ReportCreatePage() {
     setSubmitting(true);
     try {
       const report = await createFinalReport(formData);
-      toast.success('보고서가 저장되었습니다.');
+      alert('보고서가 저장되었습니다.');
       navigate(`/reports/${report.id}`);
     } catch (error: any) {
-      toast.error(error.response?.data?.detail || '보고서 저장에 실패했습니다.');
+      alert(error.response?.data?.detail || '보고서 저장에 실패했습니다.');
     } finally {
       setSubmitting(false);
     }
-  }, [formData, navigate, toast]);
+  }, [formData, navigate]);
 
   // 취소
   const handleCancel = useCallback(() => {
@@ -621,8 +619,6 @@ export default function ReportCreatePage() {
           </button>
         </div>
       </div>
-
-      <toast.ToastContainer position="top-right" />
     </div>
   );
 }

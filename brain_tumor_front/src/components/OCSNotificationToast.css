@@ -1,6 +1,100 @@
 /*
  * OCS Notification Toast 스타일
- * 이 파일은 Toast.css로 통합되었습니다.
- * 호환성을 위해 Toast.css를 import합니다.
+ * Django WebSocket 알림 표시용
  */
-@import '../components/common/Toast.css';
+
+.ocs-toast-container {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 360px;
+}
+
+.ocs-toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s;
+  animation: slideIn 0.3s ease-out;
+}
+
+.ocs-toast:hover {
+  transform: translateX(-4px);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.ocs-toast--info {
+  border-left: 4px solid #3b82f6;
+}
+
+.ocs-toast--success {
+  border-left: 4px solid #10b981;
+}
+
+.ocs-toast--warning {
+  border-left: 4px solid #f59e0b;
+}
+
+.ocs-toast__icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.ocs-toast__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.ocs-toast__message {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #1f2937;
+  line-height: 1.4;
+}
+
+.ocs-toast__time {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.ocs-toast__close {
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  font-size: 1.25rem;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.ocs-toast__close:hover {
+  background: #f3f4f6;
+  color: #4b5563;
+}

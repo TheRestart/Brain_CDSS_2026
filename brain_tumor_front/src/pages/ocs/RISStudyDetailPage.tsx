@@ -29,6 +29,7 @@ import {
   DocumentPreview,
   formatDate as formatDatePreview,
 } from '@/components/pdf-preview';
+import { RIS_REPORT_SAMPLES } from '@/constants/sampleData';
 import './RISStudyDetailPage.css';
 
 // 검사 결과 항목 타입
@@ -93,6 +94,9 @@ export default function RISStudyDetailPage() {
   const [_aiInferenceStatus, setAiInferenceStatus] = useState<'none' | 'pending' | 'processing' | 'completed' | 'failed'>('none');
   const [aiJobId, setAiJobId] = useState<string | null>(null);
   const [aiRequesting, setAiRequesting] = useState(false);
+
+  // AI Viewer 리프레시 트리거 (업로드 완료 시 증가)
+  const [aiViewerRefreshTrigger, setAiViewerRefreshTrigger] = useState(0);
 
   // PDF 미리보기 모달
   const [pdfPreviewOpen, setPdfPreviewOpen] = useState(false);
@@ -582,6 +586,9 @@ export default function RISStudyDetailPage() {
       const updated = await getOCS(ocsDetail.id);
       setOcsDetail(updated);
 
+      // AI Viewer 리프레시 트리거 증가 (삭제 반영)
+      setAiViewerRefreshTrigger(prev => prev + 1);
+
       alert('기존 영상 정보가 삭제되었습니다.');
     } catch (error) {
       console.error('Failed to clear DICOM info:', error);
@@ -685,6 +692,9 @@ export default function RISStudyDetailPage() {
       // 상태 갱신
       const updated = await getOCS(ocsDetail.id);
       setOcsDetail(updated);
+
+      // AI Viewer 리프레시 트리거 증가 (새 데이터 로드)
+      setAiViewerRefreshTrigger(prev => prev + 1);
 
       alert('DICOM 영상 정보가 저장되었습니다.');
     } catch (error) {
@@ -947,6 +957,32 @@ export default function RISStudyDetailPage() {
           <div className="tab-panel report-panel">
             {/* 판독 폼 */}
             <div className="report-form">
+              {/* 샘플 데이터 버튼 */}
+              {canEdit && !isFinalized && (
+                <div className="sample-buttons-row">
+                  <span className="sample-label">샘플 입력:</span>
+                  {RIS_REPORT_SAMPLES.map((sample) => (
+                    <button
+                      key={sample.type}
+                      type="button"
+                      className="btn btn-xs btn-sample"
+                      onClick={() => {
+                        setFindings(sample.findings);
+                        setImpression(sample.impression);
+                        setRecommendation(sample.recommendation);
+                        // Brain MRI (종양) 샘플의 경우 tumorDetected를 true로 설정
+                        if (sample.type === 'brain_mri') {
+                          setTumorDetected(true);
+                        }
+                      }}
+                      title={sample.label}
+                    >
+                      {sample.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+
               {/* 뇌종양 유무 체크 */}
               <div className="form-group tumor-detection-group">
                 <label>뇌종양 판정 결과 *</label>
@@ -1096,9 +1132,11 @@ export default function RISStudyDetailPage() {
 
             {/* AI 분석 뷰어 (세그멘테이션 편집 가능) */}
             <AIViewerPanel
+              key={`ai-viewer-${aiViewerRefreshTrigger}`}
               ocsId={ocsDetail.id}
               patientId={ocsDetail.patient.id}
               canEdit={canEditSegmentation}
+              refreshTrigger={aiViewerRefreshTrigger}
             />
 
             {/* 검사 결과 항목 */}

@@ -874,3 +874,42 @@
     max-width: none;
   }
 }
+
+/* ============================================
+   샘플 데이터 버튼 스타일
+   ============================================ */
+.sample-buttons-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.sample-buttons-row .sample-label {
+  font-size: 12px;
+  color: #666;
+  font-weight: 500;
+}
+
+.btn-xs {
+  padding: 4px 10px;
+  font-size: 11px;
+  border-radius: 4px;
+}
+
+.btn-sample {
+  background: white;
+  border: 1px solid #ddd;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-sample:hover {
+  background: #1976d2;
+  color: white;
+  border-color: #1976d2;
+}

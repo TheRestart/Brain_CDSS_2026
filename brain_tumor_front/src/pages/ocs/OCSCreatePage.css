@@ -10,11 +10,50 @@
   margin-bottom: 32px;
 }
 
+.ocs-create-page .page-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
 .ocs-create-page .page-header h1 {
-  margin: 0 0 8px 0;
+  margin: 0;
   font-size: 28px;
   font-weight: 600;
   color: #1a1a2e;
+}
+
+.ocs-create-page .sample-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ocs-create-page .sample-label {
+  font-size: 13px;
+  color: #6c757d;
+  font-weight: 500;
+}
+
+.ocs-create-page .btn-sample {
+  padding: 6px 12px;
+  font-size: 12px;
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #495057;
+  font-weight: 500;
+}
+
+.ocs-create-page .btn-sample:hover {
+  background: #3498db;
+  color: white;
+  border-color: #3498db;
 }
 
 .ocs-create-page .page-subtitle {
@@ -493,6 +532,15 @@
 @media (max-width: 768px) {
   .ocs-create-page {
     padding: 16px;
+  }
+
+  .ocs-create-page .page-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ocs-create-page .sample-buttons {
+    flex-wrap: wrap;
   }
 
   .ocs-create-form .form-row {

@@ -10,7 +10,7 @@ import Pagination from '@/layout/Pagination';
 import { useOCSList } from '@/hooks/useOCSList';
 import { useOCSActions } from '@/hooks/useOCSActions';
 import { useOCSEventCallback } from '@/context/OCSNotificationContext';
-import { LoadingSpinner, EmptyState, useToast } from '@/components/common';
+import { LoadingSpinner, EmptyState } from '@/components/common';
 import {
   OCS_STATUS_LABELS,
   PRIORITY_LABELS,
@@ -24,7 +24,6 @@ import './OCSManagePage.css';
 export default function OCSManagePage() {
   const navigate = useNavigate();
   const { role, user } = useAuth();
-  const toast = useToast();
 
   // 검색 입력 상태
   const [searchInput, setSearchInput] = useState('');
@@ -57,12 +56,7 @@ export default function OCSManagePage() {
   // OCS 액션 훅
   // DB 트랜잭션 완료를 위해 300ms 딜레이 추가
   const { confirm: _confirm, cancel: _cancel } = useOCSActions({
-    onSuccess: (action) => {
-      const messages: Record<string, string> = {
-        confirm: 'OCS를 확정했습니다.',
-        cancel: 'OCS를 취소했습니다.',
-      };
-      toast.success(messages[action] || '작업이 완료되었습니다.');
+    onSuccess: (_action) => {
       setTimeout(() => refresh(), 300);
     },
     onError: (action, _error, serverMessage) => {
@@ -71,7 +65,7 @@ export default function OCSManagePage() {
         cancel: '취소에 실패했습니다.',
       };
       const message = serverMessage || defaultMessages[action] || '작업에 실패했습니다.';
-      toast.error(message);
+      alert(message);
       setTimeout(() => refresh(), 300);
     },
   });
@@ -224,9 +218,6 @@ export default function OCSManagePage() {
           onSuccess={handleModalSuccess}
         />
       )}
-
-      {/* Toast 컨테이너 */}
-      <toast.ToastContainer position="top-right" />
     </div>
   );
 }

@@ -4,7 +4,6 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/pages/auth/AuthProvider';
 import { getMyProfile, updateMyProfile, changeMyPassword } from '@/services/mypage.api';
-import { useToast } from '@/components/common';
 import type { User, MyProfileUpdateForm, ChangePasswordForm } from '@/types/user';
 import './MyPage.css';
 
@@ -12,7 +11,6 @@ type MyPageTab = 'profile' | 'password';
 
 export default function MyPage() {
   const { refreshAuth } = useAuth();
-  const toast = useToast();
 
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
@@ -57,7 +55,7 @@ export default function MyPage() {
         },
       });
     } catch (err) {
-      toast.error('프로필 정보를 불러오는데 실패했습니다.');
+      alert('프로필 정보를 불러오는데 실패했습니다.');
     } finally {
       setLoading(false);
     }
@@ -66,7 +64,7 @@ export default function MyPage() {
   // 프로필 저장
   const handleSaveProfile = async () => {
     if (!profileForm.name.trim()) {
-      toast.error('이름을 입력하세요.');
+      alert('이름을 입력하세요.');
       return;
     }
 
@@ -76,10 +74,10 @@ export default function MyPage() {
       setUser(updated);
       await refreshAuth(); // AuthContext 업데이트
       setEditMode(false);
-      toast.success('프로필이 수정되었습니다.');
+      alert('프로필이 수정되었습니다.');
     } catch (err: any) {
       const errorMsg = err.response?.data?.detail || '프로필 수정에 실패했습니다.';
-      toast.error(errorMsg);
+      alert(errorMsg);
     } finally {
       setSaving(false);
     }
@@ -104,12 +102,12 @@ export default function MyPage() {
   // 비밀번호 변경
   const handleChangePassword = async () => {
     if (passwordForm.new_password !== passwordForm.confirm_password) {
-      toast.error('새 비밀번호가 일치하지 않습니다.');
+      alert('새 비밀번호가 일치하지 않습니다.');
       return;
     }
 
     if (passwordForm.new_password.length < 8) {
-      toast.error('비밀번호는 8자 이상이어야 합니다.');
+      alert('비밀번호는 8자 이상이어야 합니다.');
       return;
     }
 
@@ -121,7 +119,7 @@ export default function MyPage() {
         new_password: '',
         confirm_password: '',
       });
-      toast.success('비밀번호가 변경되었습니다.');
+      alert('비밀번호가 변경되었습니다.');
     } catch (err: any) {
       const errorMsg =
         err.response?.data?.current_password?.[0] ||
@@ -129,7 +127,7 @@ export default function MyPage() {
         err.response?.data?.confirm_password?.[0] ||
         err.response?.data?.detail ||
         '비밀번호 변경에 실패했습니다.';
-      toast.error(errorMsg);
+      alert(errorMsg);
     } finally {
       setSaving(false);
     }

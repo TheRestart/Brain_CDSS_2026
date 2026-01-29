@@ -12,6 +12,7 @@ import { fetchExternalInstitutions, type ExternalInstitution } from '@/services/
 import type { Patient } from '@/types/patient';
 import type { OCSCreateData, JobRole, Priority } from '@/types/ocs';
 import { JOB_ROLE_LABELS, PRIORITY_LABELS } from '@/types/ocs';
+import { OCS_CREATE_SAMPLES } from '@/constants/sampleData';
 import './OCSCreatePage.css';
 
 // 작업 유형 옵션
@@ -292,6 +293,22 @@ export default function OCSCreatePage() {
     navigate(-1);
   };
 
+  // 샘플 데이터 적용
+  const applySampleData = (index: number) => {
+    const sample = OCS_CREATE_SAMPLES[index];
+    if (!sample) return;
+
+    setFormData(prev => ({
+      ...prev,
+      job_role: sample.job_role,
+      job_type: sample.job_type,
+      priority: sample.priority,
+    }));
+    setClinicalInfo(sample.clinical_info);
+    setSpecialInstruction(sample.special_instruction);
+    setJobTypeSearch('');
+  };
+
   // 현재 선택된 job_role에 따른 검사 유형 필터링
   const filteredJobTypes = (JOB_TYPE_OPTIONS[formData.job_role as JobRole] || [])
     .filter(type =>
@@ -302,7 +319,23 @@ export default function OCSCreatePage() {
   return (
     <div className="page ocs-create-page">
       <div className="page-header">
-        <h1>OCS 생성</h1>
+        <div className="page-header-row">
+          <h1>OCS 생성</h1>
+          <div className="sample-buttons">
+            <span className="sample-label">샘플:</span>
+            {OCS_CREATE_SAMPLES.map((sample, idx) => (
+              <button
+                key={sample.type}
+                type="button"
+                className="btn btn-sample"
+                onClick={() => applySampleData(idx)}
+                title={sample.description}
+              >
+                {sample.type}({sample.label})
+              </button>
+            ))}
+          </div>
+        </div>
         <p className="page-subtitle">새로운 검사/처치 오더를 생성합니다</p>
       </div>
 

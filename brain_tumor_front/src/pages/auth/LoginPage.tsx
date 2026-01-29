@@ -148,12 +148,13 @@ export default function LoginPage(){
             </header>
 
             <div className="login-container">
-                <div className="login-card">
+                <form className="login-card" onSubmit={(e) => { e.preventDefault(); handleLogin(); }}>
                 <h2>로그인</h2>
 
                 <div className="login-field">
                     <input
                     placeholder="아이디"
+                    value={id}
                     onChange={(e) => setId(e.target.value)}
                     />
                 </div>
@@ -162,18 +163,19 @@ export default function LoginPage(){
                     <input
                     type="password"
                     placeholder="비밀번호"
+                    value={pw}
                     onChange={(e) => setPw(e.target.value)}
                     />
                 </div>
 
-                <button className="login-button" onClick={handleLogin}>
+                <button type="submit" className="login-button">
                     로그인
                 </button>
 
                 <div className="login-footer">
                     <a href="#">비밀번호를 잊으셨나요?</a>
                 </div>
-                </div>
+                </form>
             </div>
         </div>
     )

@@ -34,6 +34,7 @@ import PastRecordCard from './PastRecordCard';
 import CalendarCard from './CalendarCard';
 import PastPrescriptionCard from './PastPrescriptionCard';
 import { AIAnalysisPopup } from '@/components/AIAnalysisPopup';
+import { SOAP_SAMPLES } from '@/constants/sampleData';
 import './ExaminationTab.css';
 
 interface ExaminationTabProps {
@@ -384,13 +385,38 @@ export default function ExaminationTab({
                 <span className="section-icon edit">S</span>
                 SOAP 노트
               </h4>
-              <button
-                className={`btn btn-sm ${soapSaved ? 'btn-success' : 'btn-primary'}`}
-                onClick={handleSaveSOAP}
-                disabled={savingSOAP || !encounterId}
-              >
-                {savingSOAP ? '저장 중...' : soapSaved ? '저장됨 ✓' : '저장'}
-              </button>
+              <div className="section-header-actions">
+                <div className="soap-sample-buttons">
+                  <span className="sample-label">샘플:</span>
+                  {SOAP_SAMPLES.map((sample) => (
+                    <button
+                      key={sample.type}
+                      type="button"
+                      className="btn btn-xs btn-sample"
+                      onClick={() => {
+                        setSOAPData({
+                          subjective: sample.subjective,
+                          objective: sample.objective,
+                          assessment: sample.assessment,
+                          plan: sample.plan,
+                        });
+                        setSOAPSaved(false);
+                      }}
+                      title={sample.description}
+                      disabled={!encounterId}
+                    >
+                      {sample.type}({sample.label})
+                    </button>
+                  ))}
+                </div>
+                <button
+                  className={`btn btn-sm ${soapSaved ? 'btn-success' : 'btn-primary'}`}
+                  onClick={handleSaveSOAP}
+                  disabled={savingSOAP || !encounterId}
+                >
+                  {savingSOAP ? '저장 중...' : soapSaved ? '저장됨 ✓' : '저장'}
+                </button>
+              </div>
             </div>
             {!encounterId ? (
               <div className="empty-message">진료 시작 후 작성 가능</div>
@@ -604,6 +630,21 @@ export default function ExaminationTab({
                   )}
                 </div>
               )}
+            </div>
+
+            {/* 보고서 바로가기 버튼 */}
+            <div className="ai-action-button" style={{ marginTop: '12px' }}>
+              <button
+                className="btn btn-outline btn-block"
+                onClick={() => {
+                  // 환자번호로 검색 (더 정확한 검색), 없으면 이름으로 fallback
+                  const searchTerm = summary?.patient?.patient_number || summary?.patient?.name || '';
+                  navigate(`/reports?patient=${encodeURIComponent(searchTerm)}`);
+                }}
+                disabled={!patientId || patientId <= 0 || !summary?.patient}
+              >
+                📋 보고서 바로가기
+              </button>
             </div>
           </section>
         </div>

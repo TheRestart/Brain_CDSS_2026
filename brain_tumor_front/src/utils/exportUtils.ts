@@ -661,6 +661,14 @@ export const generateM1ReportPDF = async (data: {
     predicted_months: number;
   };
   processing_time_ms?: number;
+  // 종양 볼륨 정보
+  volumes?: {
+    wt_volume?: number;  // Whole Tumor
+    tc_volume?: number;  // Tumor Core
+    et_volume?: number;  // Enhancing Tumor
+    ncr_volume?: number; // Necrotic Core
+    ed_volume?: number;  // Edema
+  };
   // MRI 썸네일 이미지 (T1, T1C, T2, FLAIR)
   mri_thumbnails?: Array<{
     channel: string;
@@ -767,6 +775,32 @@ export const generateM1ReportPDF = async (data: {
               ${data.os_days.predicted_months.toFixed(1)}개월
             </p>
             <p style="margin: 4px 0 0 0; font-size: 12px; color: #666;">(약 ${data.os_days.predicted_days}일)</p>
+          </div>
+          ` : ''}
+        </div>
+      </div>
+      ` : ''}
+
+      ${data.volumes && (data.volumes.wt_volume !== undefined || data.volumes.tc_volume !== undefined || data.volumes.et_volume !== undefined) ? `
+      <div style="margin-bottom: 24px;">
+        <h2 style="font-size: 16px; margin: 0 0 12px 0; padding-bottom: 8px; border-bottom: 1px solid #ddd;">종양 볼륨</h2>
+        <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+          ${data.volumes.wt_volume !== undefined ? `
+          <div style="flex: 1; min-width: 140px; padding: 12px 16px; background: #fef2f2; border-left: 4px solid #ef4444; border-radius: 4px;">
+            <h4 style="margin: 0 0 4px 0; font-size: 12px; color: #666;">Whole Tumor (WT)</h4>
+            <p style="margin: 0; font-size: 18px; font-weight: bold; color: #ef4444;">${data.volumes.wt_volume.toFixed(2)} ml</p>
+          </div>
+          ` : ''}
+          ${data.volumes.tc_volume !== undefined ? `
+          <div style="flex: 1; min-width: 140px; padding: 12px 16px; background: #fefce8; border-left: 4px solid #f59e0b; border-radius: 4px;">
+            <h4 style="margin: 0 0 4px 0; font-size: 12px; color: #666;">Tumor Core (TC)</h4>
+            <p style="margin: 0; font-size: 18px; font-weight: bold; color: #f59e0b;">${data.volumes.tc_volume.toFixed(2)} ml</p>
+          </div>
+          ` : ''}
+          ${data.volumes.et_volume !== undefined ? `
+          <div style="flex: 1; min-width: 140px; padding: 12px 16px; background: #eff6ff; border-left: 4px solid #3b82f6; border-radius: 4px;">
+            <h4 style="margin: 0 0 4px 0; font-size: 12px; color: #666;">Enhancing Tumor (ET)</h4>
+            <p style="margin: 0; font-size: 18px; font-weight: bold; color: #3b82f6;">${data.volumes.et_volume.toFixed(2)} ml</p>
           </div>
           ` : ''}
         </div>

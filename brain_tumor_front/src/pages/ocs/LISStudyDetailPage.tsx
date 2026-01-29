@@ -27,6 +27,7 @@ import {
   DocumentPreview,
   formatDate as formatDatePreview,
 } from '@/components/pdf-preview';
+import { LIS_RESULT_SAMPLES } from '@/constants/sampleData';
 import './LISStudyDetailPage.css';
 
 // 탭 타입 - genetic, protein 탭 추가
@@ -1175,9 +1176,36 @@ export default function LISStudyDetailPage() {
                   <h4>검사 결과 입력</h4>
                   <div className="result-actions">
                     {canEdit && (
-                      <button className="btn btn-sm btn-primary" onClick={handleAddResult}>
-                        + 항목 추가
-                      </button>
+                      <>
+                        {/* 샘플 데이터 버튼 */}
+                        <div className="sample-buttons-row">
+                          <span className="sample-label">샘플:</span>
+                          {LIS_RESULT_SAMPLES.map((sample) => (
+                            <button
+                              key={sample.type}
+                              type="button"
+                              className="btn btn-xs btn-sample"
+                              onClick={() => {
+                                const convertedResults = sample.results.map(r => ({
+                                  testName: r.item,
+                                  value: r.value,
+                                  unit: r.unit,
+                                  refRange: r.reference,
+                                  flag: r.status as 'normal' | 'abnormal' | 'critical',
+                                }));
+                                setLabResults(convertedResults);
+                                setInterpretation(sample.interpretation);
+                              }}
+                              title={sample.label}
+                            >
+                              {sample.label}
+                            </button>
+                          ))}
+                        </div>
+                        <button className="btn btn-sm btn-primary" onClick={handleAddResult}>
+                          + 항목 추가
+                        </button>
+                      </>
                     )}
                   </div>
                 </div>

@@ -353,17 +353,51 @@
   background: #374151;
 }
 
-.thumbnail-wrapper.thumbnail-error::after {
-  content: '이미지 로드 실패';
-  color: #9ca3af;
-  font-size: 0.75rem;
-  text-align: center;
+/* 에러 시 플레이스홀더 텍스트 변경 */
+.thumbnail-wrapper.thumbnail-error .thumbnail-placeholder span {
+  color: #ef4444;
+}
+
+.thumbnail-wrapper.thumbnail-error .thumbnail-placeholder span::after {
+  content: ' (로드 실패)';
 }
 
 .thumbnail-image {
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+/* 썸네일 로딩 플레이스홀더 */
+.thumbnail-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: #1f2937;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.thumbnail-placeholder img {
+  width: 60px;
+  height: 60px;
+  opacity: 0.6;
+  margin-bottom: 8px;
+}
+
+.thumbnail-placeholder span {
+  color: #9ca3af;
+  font-size: 0.7rem;
+  text-align: center;
+}
+
+/* 이미지 로드 완료 시 플레이스홀더 숨김 */
+.thumbnail-wrapper.loaded .thumbnail-placeholder {
+  display: none;
 }
 
 .thumbnail-label {

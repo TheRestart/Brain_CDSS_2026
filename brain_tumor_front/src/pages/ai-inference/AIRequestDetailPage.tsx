@@ -8,7 +8,7 @@ import { useState, useCallback, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../auth/AuthProvider';
 import { useAIRequestDetail } from '@/hooks';
-import { LoadingSpinner, useToast } from '@/components/common';
+import { LoadingSpinner } from '@/components/common';
 import type { AIInferenceLog } from '@/services/ai.api';
 import './AIRequestDetailPage.css';
 
@@ -33,7 +33,6 @@ export default function AIRequestDetailPage() {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const { user: _user } = useAuth();
-  const toast = useToast();
 
   // 상태
   const [showReviewModal, setShowReviewModal] = useState(false);
@@ -91,23 +90,22 @@ export default function AIRequestDetailPage() {
 
     try {
       await cancel();
-      toast.success('AI 분석 요청이 취소되었습니다.');
+      alert('AI 분석 요청이 취소되었습니다.');
     } catch (err) {
-      toast.error('취소에 실패했습니다.');
+      alert('취소에 실패했습니다.');
     }
-  }, [cancel, toast]);
+  }, [cancel]);
 
   // 검토 제출
   const handleReviewSubmit = useCallback(async () => {
     try {
       await review(reviewStatus, reviewComment || undefined);
-      toast.success(`결과가 ${reviewStatus === 'approved' ? '승인' : '반려'}되었습니다.`);
       setShowReviewModal(false);
       setReviewComment('');
     } catch (err) {
-      toast.error('검토 처리에 실패했습니다.');
+      console.error('검토 처리 실패:', err);
     }
-  }, [review, reviewStatus, reviewComment, toast]);
+  }, [review, reviewStatus, reviewComment]);
 
   // 뒤로 가기
   const handleBack = useCallback(() => {
@@ -390,8 +388,6 @@ export default function AIRequestDetailPage() {
           </div>
         </div>
       )}
-
-      <toast.ToastContainer position="top-right" />
     </div>
   );
 }

@@ -12,7 +12,16 @@ const cache = {
   TTL: 5 * 60 * 1000,  // 5분
 };
 
-const getCachedStudies = async (patientId) => {
+// 캐시 무효화 함수
+const clearCache = () => {
+  cache.studies.clear();
+  cache.series.clear();
+};
+
+const getCachedStudies = async (patientId, forceRefresh = false) => {
+  if (forceRefresh) {
+    cache.studies.delete(patientId);
+  }
   const cached = cache.studies.get(patientId);
   if (cached && Date.now() - cached.timestamp < cache.TTL) {
     return cached.data;
@@ -22,7 +31,10 @@ const getCachedStudies = async (patientId) => {
   return data;
 };
 
-const getCachedSeries = async (studyId) => {
+const getCachedSeries = async (studyId, forceRefresh = false) => {
+  if (forceRefresh) {
+    cache.series.delete(studyId);
+  }
   const cached = cache.series.get(studyId);
   if (cached && Date.now() - cached.timestamp < cache.TTL) {
     return cached.data;
@@ -38,7 +50,7 @@ const truncate = (text, maxLen = 40) => {
   return text.substring(0, maxLen) + '...';
 };
 
-export default function PacsSelector({ onChange, ocsInfo, initialSelection }) {
+export default function PacsSelector({ onChange, ocsInfo, initialSelection, refreshKey = 0 }) {
   const [patients, setPatients] = useState([]);
   const [studies, setStudies] = useState([]);
   const [seriesList, setSeriesList] = useState([]);
@@ -70,6 +82,18 @@ export default function PacsSelector({ onChange, ocsInfo, initialSelection }) {
       mountedRef.current = false;
     };
   }, []);
+
+  // refreshKey > 0일 때 캐시 무효화 (마운트 시점에도 적용)
+  // key prop으로 인해 컴포넌트가 재마운트되므로, 마운트 시 refreshKey > 0이면 캐시 무효화
+  useEffect(() => {
+    if (refreshKey > 0) {
+      // 캐시 무효화
+      clearCache();
+      // 플래그 리셋 (OCS 자동 선택 다시 실행)
+      ocsAutoSelectRef.current = false;
+      initializedRef.current = false;
+    }
+  }, []); // 마운트 시 1회만 실행
 
   // initialSelection 복원 useEffect (복수 화면 전환 시 데이터 유지)
   useEffect(() => {

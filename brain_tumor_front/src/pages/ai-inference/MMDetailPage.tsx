@@ -11,7 +11,6 @@ import {
 import { aiApi } from '@/services/ai.api'
 import { useAIRequestDetail } from '@/hooks'
 import { useThumbnailCache } from '@/context/ThumbnailCacheContext'
-import { useToast } from '@/components/common'
 import PdfPreviewModal from '@/components/PdfPreviewModal'
 import type { PdfWatermarkConfig } from '@/services/pdfWatermark.api'
 import {
@@ -126,7 +125,6 @@ export default function MMDetailPage() {
   const { jobId } = useParams<{ jobId: string }>()
   const navigate = useNavigate()
   const { markAsCached } = useThumbnailCache()
-  const toast = useToast()
 
   // AI Request Detail Hook (for review functionality)
   const { request: aiRequest, review } = useAIRequestDetail(jobId ?? null)
@@ -149,13 +147,12 @@ export default function MMDetailPage() {
   const handleReviewSubmit = useCallback(async () => {
     try {
       await review(reviewStatus, reviewComment || undefined)
-      toast.success(`결과가 ${reviewStatus === 'approved' ? '승인' : '반려'}되었습니다.`)
       setShowReviewModal(false)
       setReviewComment('')
     } catch (err) {
-      toast.error('검토 처리에 실패했습니다.')
+      console.error('검토 처리 실패:', err)
     }
-  }, [review, reviewStatus, reviewComment, toast])
+  }, [review, reviewStatus, reviewComment])
 
   // 데이터 로드
   useEffect(() => {
@@ -848,9 +845,6 @@ export default function MMDetailPage() {
           </div>
         </div>
       )}
-
-      {/* Toast Container */}
-      <toast.ToastContainer position="top-right" />
     </div>
   )
 }

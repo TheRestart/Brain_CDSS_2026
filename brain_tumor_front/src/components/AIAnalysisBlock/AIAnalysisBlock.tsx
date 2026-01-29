@@ -344,6 +344,7 @@ function M1Panel({ isResearch: _isResearch }: PanelProps) {
         groundTruth: [], // GT는 없음 (추론 결과만)
         prediction: predVolume,
         shape: data.shape as [number, number, number],
+        volumes: data.volumes,  // 볼륨 정보 (wt_volume, tc_volume, et_volume 등)
       }
 
       // MRI 채널 데이터가 있으면 추가 (MRI는 float 값이므로 roundToInt=false)

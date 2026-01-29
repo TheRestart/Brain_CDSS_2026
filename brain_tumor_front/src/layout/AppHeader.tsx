@@ -4,6 +4,7 @@ import { useAuth } from '@/pages/auth/AuthProvider';
 import brainIcon from '@/assets/icon/mri-brain.png';
 import Breadcrumb from '@/layout/Breadcrumb';
 import { ROLE_THEME } from '@/utils/roleTheme';
+import FontSizeSettingsModal from '@/components/common/FontSizeSettingsModal';
 
 interface AppHeaderProps {
   onToggleSidebar: () => void;
@@ -20,6 +21,7 @@ export default function AppHeader({ onToggleSidebar }: AppHeaderProps) {
   const navigator = useNavigate();
   const { user , sessionRemain, logout } = useAuth();
   const [open, setOpen] = useState(false); // 드롭다운 컨트롤
+  const [settingsOpen, setSettingsOpen] = useState(false); // 설정 모달 컨트롤
   const dropdownRef = useRef<HTMLDivElement>(null); // 드롭다운 닫기
 
   if (!user) return null; // auth 준비 전 방어
@@ -63,6 +65,12 @@ export default function AppHeader({ onToggleSidebar }: AppHeaderProps) {
 
   return (
     <>
+    {/* 글자 크기 설정 모달 */}
+    <FontSizeSettingsModal
+      isOpen={settingsOpen}
+      onClose={() => setSettingsOpen(false)}
+    />
+
     <div
       style={{
         height: 4,
@@ -110,6 +118,9 @@ export default function AppHeader({ onToggleSidebar }: AppHeaderProps) {
                     </li>
                     <li onClick={() => navigator('/change-password')}>
                       <i className="fa-solid fa-key" /> 비밀번호 변경
+                    </li>
+                    <li onClick={() => { setSettingsOpen(true); setOpen(false); }}>
+                      <i className="fa-solid fa-gear" /> 화면 설정
                     </li>
                   </ul>
                 </div>

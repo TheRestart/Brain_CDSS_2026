@@ -8,7 +8,7 @@ import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthProvider';
 import { useAIRequestList, useAIModels } from '@/hooks';
-import { LoadingSpinner, EmptyState, useToast } from '@/components/common';
+import { LoadingSpinner, EmptyState } from '@/components/common';
 import { AIAnalysisPopup } from '@/components/AIAnalysisPopup';
 import Pagination from '@/layout/Pagination';
 import type { AIInferenceRequest } from '@/services/ai.api';
@@ -59,7 +59,6 @@ const REVIEW_STATUS_COLORS: Record<string, string> = {
 export default function AIRequestListPage() {
   const navigate = useNavigate();
   const { user: _user } = useAuth();
-  const toast = useToast();
 
   // 필터 상태
   const [statusFilter, setStatusFilter] = useState('');
@@ -355,9 +354,6 @@ export default function AIRequestListPage() {
           </div>
         </div>
       )}
-
-      {/* Toast 컨테이너 */}
-      <toast.ToastContainer position="top-right" />
 
       {/* 새 분석 요청 모달 */}
       <AIAnalysisPopup

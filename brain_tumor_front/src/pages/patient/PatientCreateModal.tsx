@@ -3,6 +3,7 @@ import { createPatient } from '@/services/patient.api';
 import type { PatientCreateData, PatientSeverity } from '@/types/patient';
 import { PATIENT_SEVERITY_LABELS } from '@/types/patient';
 import PhoneInput from '@/pages/common/PhoneInput';
+import { PATIENT_SAMPLES } from '@/constants/sampleData';
 import './PatientCreateModal.css';
 
 type Props = {
@@ -132,11 +133,64 @@ export default function PatientCreateModal({ isOpen, onClose, onSuccess }: Props
     onClose();
   };
 
+  // 샘플 데이터 입력
+  const applySampleData = (index: number) => {
+    const sample = PATIENT_SAMPLES[index];
+    if (!sample) return;
+
+    // 주민등록번호 생성 (생년월일 기반, PhoneInput segments [6, 7] 에 맞게 하이픈 포함)
+    const birthParts = sample.birth_date.split('-');
+    const birthYear = parseInt(birthParts[0]);
+    const year2digit = birthParts[0].slice(2);
+
+    // 뒷자리 첫번째 숫자: 1900년대 남성=1, 여성=2 / 2000년대 남성=3, 여성=4
+    let genderDigit: string;
+    if (birthYear >= 2000) {
+      genderDigit = sample.gender === 'M' ? '3' : '4';
+    } else {
+      genderDigit = sample.gender === 'M' ? '1' : '2';
+    }
+
+    const randomDigits = Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
+    const ssn = `${year2digit}${birthParts[1]}${birthParts[2]}-${genderDigit}${randomDigits}`;
+
+    // 영문 이메일 ID 생성 (한글 불가)
+    const emailIds = ['kimbraintumor', 'leeheadache', 'parkdizziness'];
+
+    setFormData({
+      name: sample.name,
+      birth_date: sample.birth_date,
+      gender: sample.gender,
+      phone: sample.phone,
+      email: `${emailIds[index] || 'patient' + (index + 1)}@example.com`,
+      address: sample.address,
+      ssn: ssn, // 하이픈 포함 형식 (PhoneInput segments [6, 7])
+      blood_type: 'A+',
+      allergies: sample.allergies ? sample.allergies.split(', ').filter(a => a !== '없음') : [],
+      chronic_diseases: sample.medical_history ? sample.medical_history.split(', ') : [],
+      severity: index === 0 ? 'critical' : index === 1 ? 'moderate' : 'normal',
+    });
+  };
+
   return (
     <div className="modal-overlay" onClick={handleClose}>
       <div className="modal-content modal-large" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h2>환자 등록</h2>
+          <div className="sample-buttons">
+            <span className="sample-label">샘플:</span>
+            {PATIENT_SAMPLES.map((sample, idx) => (
+              <button
+                key={idx}
+                type="button"
+                className="btn btn-sample"
+                onClick={() => applySampleData(idx)}
+                title={sample.chief_complaint}
+              >
+                {sample.name.slice(0, 1)}({['뇌종양', '두통', '어지럼'][idx]})
+              </button>
+            ))}
+          </div>
           <button className="btn-close" onClick={handleClose}>
             ✕
           </button>

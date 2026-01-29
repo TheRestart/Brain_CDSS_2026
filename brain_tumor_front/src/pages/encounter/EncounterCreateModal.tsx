@@ -3,6 +3,7 @@ import { createEncounter } from '@/services/encounter.api';
 import { getPatients } from '@/services/patient.api';
 import { api } from '@/services/api';
 import type { EncounterCreateData, EncounterType, EncounterStatus, Department } from '@/types/encounter';
+import { ENCOUNTER_SAMPLES } from '@/constants/sampleData';
 import '@/pages/patient/PatientCreateModal.css';
 import './EncounterCreateModal.css';
 
@@ -154,10 +155,52 @@ export default function EncounterCreateModal({ isOpen, onClose, onSuccess }: Pro
     });
   };
 
+  // 샘플 데이터 적용
+  const applySampleData = (index: number) => {
+    const sample = ENCOUNTER_SAMPLES[index];
+    if (!sample) return;
+
+    // 현재 로컬 시간을 기본 입원일시로 설정 (toISOString()은 UTC를 반환하므로 직접 포맷)
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const admissionDate = `${year}-${month}-${day}T${hours}:${minutes}`; // "YYYY-MM-DDTHH:mm" 형식 (로컬 시간)
+
+    setFormData({
+      ...formData,
+      encounter_type: sample.encounter_type,
+      department: sample.department,
+      chief_complaint: sample.chief_complaint,
+      primary_diagnosis: sample.primary_diagnosis,
+      secondary_diagnoses: sample.secondary_diagnoses,
+      admission_date: admissionDate,
+      status: 'scheduled',
+    });
+  };
+
   return (
     <div className="modal-overlay" onClick={handleClose}>
       <div className="modal-content encounter-modal-content" onClick={(e) => e.stopPropagation()}>
-        <h2>진료 등록</h2>
+        <div className="modal-header">
+          <h2>진료 등록</h2>
+          <div className="sample-buttons">
+            <span className="sample-label">샘플:</span>
+            {ENCOUNTER_SAMPLES.map((sample, idx) => (
+              <button
+                key={idx}
+                type="button"
+                className="btn btn-sample"
+                onClick={() => applySampleData(idx)}
+                title={sample.description}
+              >
+                {sample.type}({sample.label})
+              </button>
+            ))}
+          </div>
+        </div>
 
         {error && <div className="error-message">{error}</div>}
 

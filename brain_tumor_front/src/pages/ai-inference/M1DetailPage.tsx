@@ -5,7 +5,6 @@ import SegMRIViewer, { type SegmentationData, type CompareResult } from '@/compo
 import { aiApi, getPatientAIHistory, type AIInferenceRequest } from '@/services/ai.api'
 import { useAIRequestDetail } from '@/hooks'
 import { useThumbnailCache } from '@/context/ThumbnailCacheContext'
-import { useToast } from '@/components/common'
 import PdfPreviewModal from '@/components/PdfPreviewModal'
 import type { PdfWatermarkConfig } from '@/services/pdfWatermark.api'
 import {
@@ -85,7 +84,6 @@ export default function M1DetailPage() {
   const { jobId } = useParams<{ jobId: string }>()
   const navigate = useNavigate()
   const { markAsCached } = useThumbnailCache()
-  const toast = useToast()
 
   // State
   const [loading, setLoading] = useState(true)
@@ -117,13 +115,12 @@ export default function M1DetailPage() {
   const handleReviewSubmit = useCallback(async () => {
     try {
       await review(reviewStatus, reviewComment || undefined)
-      toast.success(`결과가 ${reviewStatus === 'approved' ? '승인' : '반려'}되었습니다.`)
       setShowReviewModal(false)
       setReviewComment('')
     } catch (err) {
-      toast.error('검토 처리에 실패했습니다.')
+      console.error('검토 처리 실패:', err)
     }
-  }, [review, reviewStatus, reviewComment, toast])
+  }, [review, reviewStatus, reviewComment])
 
   // 데이터 로드
   useEffect(() => {
@@ -190,6 +187,7 @@ export default function M1DetailPage() {
         prediction: data.prediction,
         shape: data.shape as [number, number, number],
         mri_channels: data.mri_channels,
+        volumes: data.volumes,  // 볼륨 정보 (wt_volume, tc_volume, et_volume 등)
       }
 
       setSegmentationData(segData)
@@ -350,6 +348,7 @@ export default function M1DetailPage() {
         survival: inferenceDetail.result_data.survival,
         os_days: inferenceDetail.result_data.os_days,
         processing_time_ms: inferenceDetail.result_data.processing_time_ms,
+        volumes: segmentationData?.volumes,  // 종양 볼륨 정보
         mri_thumbnails: mriThumbnails,
       }, watermarkConfig)
 
@@ -528,10 +527,19 @@ export default function M1DetailPage() {
             {inferenceDetail.mri_thumbnails?.map((thumb) => (
               <div key={thumb.channel} className="mri-thumbnail-card">
                 <div className="thumbnail-wrapper">
+                  {/* 로딩 플레이스홀더 */}
+                  <div className="thumbnail-placeholder">
+                    <img src="/images/brain_nu_white.png" alt="loading" />
+                    <span>이미지 준비중</span>
+                  </div>
                   <img
                     src={`${API_BASE_URL}${thumb.url.startsWith('/api/') ? thumb.url.slice(4) : thumb.url}`}
                     alt={thumb.channel}
                     className="thumbnail-image"
+                    onLoad={(e) => {
+                      const target = e.target as HTMLImageElement
+                      target.parentElement?.classList.add('loaded')
+                    }}
                     onError={(e) => {
                       const target = e.target as HTMLImageElement
                       target.style.display = 'none'
@@ -829,9 +837,6 @@ export default function M1DetailPage() {
           </div>
         </div>
       )}
-
-      {/* Toast 컨테이너 */}
-      <toast.ToastContainer position="top-right" />
     </div>
   )
 }

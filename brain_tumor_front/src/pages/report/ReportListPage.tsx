@@ -5,7 +5,7 @@
  * - 보고서 생성 링크
  */
 import { useState, useEffect, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { getFinalReportList, type FinalReportListItem, type ReportStatus, type FinalReportType } from '@/services/report.api';
 import { LoadingSpinner, EmptyState } from '@/components/common';
 import Pagination from '@/layout/Pagination';
@@ -39,6 +39,10 @@ const TYPE_LABELS: Record<FinalReportType, string> = {
 
 export default function ReportListPage() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  // URL에서 검색어 가져오기
+  const initialSearch = searchParams.get('search') || '';
 
   // 데이터 상태
   const [reports, setReports] = useState<FinalReportListItem[]>([]);
@@ -48,7 +52,7 @@ export default function ReportListPage() {
   // 필터 상태
   const [statusFilter, setStatusFilter] = useState<ReportStatus | ''>('');
   const [typeFilter, setTypeFilter] = useState<FinalReportType | ''>('');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(initialSearch);
 
   // 페이지네이션
   const [page, setPage] = useState(1);
@@ -75,6 +79,15 @@ export default function ReportListPage() {
   useEffect(() => {
     fetchReports();
   }, [fetchReports]);
+
+  // URL 파라미터 변경 시 검색어 업데이트
+  useEffect(() => {
+    const search = searchParams.get('search') || '';
+    if (search !== searchQuery) {
+      setSearchQuery(search);
+      setPage(1);
+    }
+  }, [searchParams]);
 
   // 검색 필터링 (클라이언트 사이드)
   const filteredReports = reports.filter(report => {

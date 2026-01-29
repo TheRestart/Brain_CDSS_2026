@@ -119,6 +119,9 @@
   color: var(--text-primary);
   background: var(--bg-card);
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  -webkit-user-select: text;
+  user-select: text;
+  -webkit-user-drag: none;
 }
 
 .login-field input::placeholder {

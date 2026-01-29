@@ -993,4 +993,41 @@
 .result-actions {
   display: flex;
   gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* ============================================
+   샘플 데이터 버튼 스타일
+   ============================================ */
+.sample-buttons-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sample-buttons-row .sample-label {
+  font-size: 11px;
+  color: #666;
+  font-weight: 500;
+}
+
+.btn-xs {
+  padding: 4px 8px;
+  font-size: 11px;
+  border-radius: 4px;
+}
+
+.btn-sample {
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-sample:hover {
+  background: #3498db;
+  color: white;
+  border-color: #3498db;
 }

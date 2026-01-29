@@ -199,11 +199,44 @@
   background: var(--bg-card);
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
   box-sizing: border-box;
+  -webkit-user-select: text;
+  user-select: text;
+  -webkit-user-drag: none;
+}
+
+/* 전화번호/주민번호 입력 그룹 - 가로 배치 */
+.form-group .phone-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: nowrap;
+}
+
+.form-group .phone-group .phone-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-group .phone-group input {
+  width: auto;
+  min-width: 60px;
+  max-width: 100px;
+  flex: 1;
+  text-align: center;
+}
+
+.form-group .phone-group span {
+  color: var(--text-secondary);
+  font-weight: 500;
 }
 
 .form-group textarea {
   resize: vertical;
   min-height: 80px;
+  max-width: 100%;
 }
 
 .form-group input:hover,

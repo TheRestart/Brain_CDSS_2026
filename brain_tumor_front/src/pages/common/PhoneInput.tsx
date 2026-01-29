@@ -8,15 +8,29 @@ interface Props {
 }
 
 export default function PhoneInput({ value, onChange, segments }: Props) {
-  const initial = value ? value.split("-") : [];
-  const [parts, setParts] = useState<string[]>(
-    segments.map((_, i) => initial[i] || "")
-  );
+  const [parts, setParts] = useState<string[]>(() => {
+    const initial = value ? value.split("-") : [];
+    return segments.map((_, i) => initial[i] || "");
+  });
 
   const refs = useRef<HTMLInputElement[]>([]);
 
+  // 외부에서 value가 변경되면 내부 parts 상태를 동기화
   useEffect(() => {
-    onChange(parts.filter(Boolean).join("-"));
+    const newParts = value ? value.split("-") : [];
+    const mapped = segments.map((_, i) => newParts[i] || "");
+    // 현재 parts와 다른 경우에만 업데이트 (무한 루프 방지)
+    if (mapped.join("-") !== parts.join("-")) {
+      setParts(mapped);
+    }
+  }, [value, segments]);
+
+  useEffect(() => {
+    const joined = parts.filter(Boolean).join("-");
+    // 현재 value와 다른 경우에만 onChange 호출 (무한 루프 방지)
+    if (joined !== value) {
+      onChange(joined);
+    }
   }, [parts]);
 
   const handleChange = (idx: number, max: number) =>

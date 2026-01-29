@@ -19,9 +19,11 @@ interface AIViewerPanelProps {
   patientId?: number;
   /** 세그멘테이션 편집 가능 여부 (담당 의료진만 true) */
   canEdit?: boolean;
+  /** 데이터 리프레시 트리거 (업로드 완료 시 증가시켜 새 데이터 로드) */
+  refreshTrigger?: number;
 }
 
-export default function AIViewerPanel({ ocsId, patientId, canEdit = false }: AIViewerPanelProps) {
+export default function AIViewerPanel({ ocsId, patientId, canEdit = false, refreshTrigger = 0 }: AIViewerPanelProps) {
   const [aiRequest, setAiRequest] = useState<AIInferenceRequest | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -45,6 +47,7 @@ export default function AIViewerPanel({ ocsId, patientId, canEdit = false }: AIV
   const loadSegmentationData = useCallback(async (requestId: string) => {
     setSegLoading(true);
     setSegError(null);
+    setDiceScores(null); // 기존 dice scores 초기화
     try {
       const segResponse = await aiApi.getSegmentationData(requestId);
       if (segResponse && segResponse.mri && segResponse.prediction) {
@@ -80,6 +83,12 @@ export default function AIViewerPanel({ ocsId, patientId, canEdit = false }: AIV
       }
 
       setLoading(true);
+      // 기존 데이터 초기화 (새로고침 시 이전 데이터 표시 방지)
+      setSegData(null);
+      setDiceScores(null);
+      setAiRequest(null);
+      setAllM1Requests([]);
+
       try {
         const requests = await getPatientAIRequests(patientId);
 
@@ -117,7 +126,7 @@ export default function AIViewerPanel({ ocsId, patientId, canEdit = false }: AIV
     };
 
     fetchAIResult();
-  }, [ocsId, patientId, loadSegmentationData]);
+  }, [ocsId, patientId, loadSegmentationData, refreshTrigger]);
 
   // 이전 기록 선택 핸들러
   const handleSelectHistory = useCallback(async (requestId: string) => {

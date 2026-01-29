@@ -2327,6 +2327,7 @@ class AIInferenceM1ThumbnailView(APIView):
 
     Returns:
         - PNG 이미지: T1CE MRI 중간 슬라이스에 세그멘테이션 마스크 오버레이
+        - 파일이 없거나 에러 시 플레이스홀더 이미지 반환
     """
     permission_classes = [AllowAny]
 
@@ -2341,59 +2342,72 @@ class AIInferenceM1ThumbnailView(APIView):
         try:
             inference = AIInference.objects.get(job_id=job_id)
         except AIInference.DoesNotExist:
-            return Response(
-                {'detail': '추론 결과를 찾을 수 없습니다.'},
-                status=status.HTTP_404_NOT_FOUND
-            )
+            # 추론 결과 없음 - 플레이스홀더 반환
+            return self._create_placeholder_response("Not Found")
 
         # M1 모델만 지원
         if inference.model_type != AIInference.ModelType.M1:
-            return Response(
-                {'detail': 'M1 모델만 썸네일을 지원합니다.'},
-                status=status.HTTP_400_BAD_REQUEST
-            )
+            return self._create_placeholder_response("N/A")
 
         result_dir = self.STORAGE_BASE / job_id
         seg_file = result_dir / "m1_segmentation.npz"
         mri_file = result_dir / "m1_preprocessed_mri.npz"
 
         if not seg_file.exists():
-            return Response(
-                {'detail': '세그멘테이션 파일을 찾을 수 없습니다.'},
-                status=status.HTTP_404_NOT_FOUND
-            )
+            # 세그멘테이션 파일 없음 - 플레이스홀더 반환
+            return self._create_placeholder_response("No SEG")
 
         try:
             # 세그멘테이션 마스크 로드
             seg_data = np.load(seg_file, allow_pickle=True)
-            if 'mask' in seg_data:
-                seg_mask = seg_data['mask']
-            elif 'segmentation_mask' in seg_data:
-                seg_mask = seg_data['segmentation_mask']
-            else:
-                raise KeyError("세그멘테이션 데이터를 찾을 수 없습니다.")
+            seg_mask = None
+            for key in ['mask', 'segmentation_mask', 'prediction', 'seg']:
+                if key in seg_data:
+                    seg_mask = seg_data[key]
+                    break
+
+            if seg_mask is None:
+                logger.warning(f'M1 썸네일: {job_id} - 세그멘테이션 키를 찾을 수 없음. keys={list(seg_data.keys())}')
+                return self._create_placeholder_response("No Data")
+
+            # 3D 배열이 아니면 에러 처리
+            if seg_mask.ndim < 3:
+                logger.warning(f'M1 썸네일: {job_id} - 세그멘테이션 차원 오류 ndim={seg_mask.ndim}')
+                return self._create_placeholder_response("Invalid")
+
+            # 4D 배열인 경우 첫 번째 채널 사용 (channels first)
+            if seg_mask.ndim == 4:
+                seg_mask = seg_mask[0]
 
             # MRI 데이터 로드
             mri_data = None
             if mri_file.exists():
-                mri_npz = np.load(mri_file, allow_pickle=True)
-                # T1CE 채널 우선, 없으면 다른 채널 사용
-                for key in ['t1ce', 't1c', 'T1CE', 'T1C', 't1', 'T1']:
-                    if key in mri_npz:
-                        mri_data = mri_npz[key]
-                        break
-                if mri_data is None and len(mri_npz.files) > 0:
-                    mri_data = mri_npz[mri_npz.files[0]]
+                try:
+                    mri_npz = np.load(mri_file, allow_pickle=True)
+                    # T1CE 채널 우선, 없으면 다른 채널 사용
+                    for key in ['t1ce', 't1c', 'T1CE', 'T1C', 't1', 'T1', 'flair', 'FLAIR']:
+                        if key in mri_npz:
+                            mri_data = mri_npz[key]
+                            break
+                    if mri_data is None and len(mri_npz.files) > 0:
+                        mri_data = mri_npz[mri_npz.files[0]]
+                except Exception as e:
+                    logger.warning(f'M1 썸네일: {job_id} - MRI 로드 실패: {e}')
 
             # MRI 없으면 세그멘테이션에서 MRI 찾기 (legacy)
             if mri_data is None and 'mri' in seg_data:
                 mri_data = seg_data['mri']
 
+            # MRI 4D인 경우 채널 선택
+            if mri_data is not None and mri_data.ndim == 4:
+                # T1CE가 보통 두 번째 채널 (index 1)
+                mri_data = mri_data[1] if mri_data.shape[0] > 1 else mri_data[0]
+
             # 중간 슬라이스 선택
             mid_slice = seg_mask.shape[2] // 2
             seg_slice = seg_mask[:, :, mid_slice]
 
-            if mri_data is not None:
+            if mri_data is not None and mri_data.ndim >= 3:
                 mri_slice = mri_data[:, :, mid_slice]
             else:
                 # MRI 없으면 빈 배경 사용
@@ -2405,13 +2419,37 @@ class AIInferenceM1ThumbnailView(APIView):
             return HttpResponse(img_bytes, content_type='image/png')
 
         except Exception as e:
-            logger.error(f'M1 썸네일 생성 실패: {str(e)}')
+            logger.error(f'M1 썸네일 생성 실패 ({job_id}): {str(e)}')
             import traceback
             traceback.print_exc()
-            return Response(
-                {'detail': f'썸네일 생성에 실패했습니다: {str(e)}'},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
-            )
+            # 에러 발생 시에도 플레이스홀더 이미지 반환 (500 대신)
+            return self._create_placeholder_response("Error")
+
+    def _create_placeholder_response(self, text="N/A"):
+        """플레이스홀더 이미지 생성 (128x128 회색 배경 + 텍스트)"""
+        from PIL import Image, ImageDraw
+        import io
+        from django.http import HttpResponse
+
+        # 128x128 회색 이미지 생성
+        img = Image.new('RGB', (128, 128), color=(64, 64, 64))
+        draw = ImageDraw.Draw(img)
+
+        # 중앙에 텍스트 추가
+        try:
+            # 폰트 없이 기본 폰트 사용
+            text_bbox = draw.textbbox((0, 0), text)
+            text_width = text_bbox[2] - text_bbox[0]
+            text_height = text_bbox[3] - text_bbox[1]
+            x = (128 - text_width) // 2
+            y = (128 - text_height) // 2
+            draw.text((x, y), text, fill=(128, 128, 128))
+        except Exception:
+            pass
+
+        buffer = io.BytesIO()
+        img.save(buffer, format='PNG')
+        return HttpResponse(buffer.getvalue(), content_type='image/png')
 
     def _create_overlay(self, mri_slice, seg_slice):
         """MRI 슬라이스에 세그멘테이션 마스크를 오버레이한 PNG 이미지 생성"""

@@ -7,7 +7,7 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import { getPatient } from '@/services/patient.api';
 import { getOCSByPatient } from '@/services/ocs.api';
 import { getEncounters, createEncounter, completeEncounter } from '@/services/encounter.api';
-import { LoadingSpinner, useToast } from '@/components/common';
+import { LoadingSpinner } from '@/components/common';
 import { useAuth } from '@/pages/auth/AuthProvider';
 import ExaminationTab from './components/ExaminationTab';
 import type { OCSListItem } from '@/types/ocs';
@@ -26,7 +26,6 @@ interface Patient {
 export default function ClinicPage() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const toast = useToast();
   const { role, user } = useAuth();
 
   // 진료 시작 가능 역할 확인 (DOCTOR, SYSTEMMANAGER)
@@ -109,7 +108,7 @@ export default function ClinicPage() {
       setActiveEncounter(activeEnc);
     } catch (err) {
       console.error('Failed to load patient data:', err);
-      toast.error('환자 데이터를 불러오는데 실패했습니다.');
+      alert('환자 데이터를 불러오는데 실패했습니다.');
     } finally {
       setLoading(false);
     }
@@ -132,7 +131,7 @@ export default function ClinicPage() {
   // 진료 시작
   const handleStartEncounter = useCallback(async () => {
     if (!patient || !user?.id) {
-      toast.error('로그인 정보를 확인해주세요.');
+      alert('로그인 정보를 확인해주세요.');
       return;
     }
 
@@ -144,7 +143,7 @@ export default function ClinicPage() {
         attending_doctor: user.id,
       });
       setActiveEncounter(encounter);
-      toast.success('진료가 시작되었습니다.');
+      alert('진료가 시작되었습니다.');
       // 진료 목록 새로고침
       const encounterData = await getEncounters({ patient: patient.id });
       setEncounters(encounterData.results || []);
@@ -155,7 +154,7 @@ export default function ClinicPage() {
         || err.response?.data?.patient?.[0]
         || err.response?.data?.detail
         || '진료 시작에 실패했습니다.';
-      toast.error(errorMsg);
+      alert(errorMsg);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [patient, user?.id]);
@@ -168,7 +167,7 @@ export default function ClinicPage() {
     try {
       await completeEncounter(activeEncounter.id);
       setActiveEncounter(null);
-      toast.success('진료가 완료되었습니다.');
+      alert('진료가 완료되었습니다.');
       // 진료 목록 새로고침
       const encounterData = await getEncounters({ patient: patient.id });
       setEncounters(encounterData.results || []);
@@ -177,7 +176,7 @@ export default function ClinicPage() {
     } catch (err: any) {
       console.error('Failed to end encounter:', err);
       const errorMsg = err.response?.data?.detail || '진료 종료에 실패했습니다.';
-      toast.error(errorMsg);
+      alert(errorMsg);
     } finally {
       setIsEndingEncounter(false);
     }
@@ -205,7 +204,7 @@ export default function ClinicPage() {
 
     try {
       await completeEncounter(activeEncounter.id);
-      toast.success('진료가 완료되었습니다.');
+      alert('진료가 완료되었습니다.');
       setShowLeaveConfirm(false);
       if (pendingPatientId) {
         navigate(`/patientsCare?patientId=${pendingPatientId}`);
@@ -213,7 +212,7 @@ export default function ClinicPage() {
     } catch (err: any) {
       console.error('Failed to end encounter:', err);
       const errorMsg = err.response?.data?.detail || '진료 종료에 실패했습니다.';
-      toast.error(errorMsg);
+      alert(errorMsg);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeEncounter, patient, pendingPatientId]);

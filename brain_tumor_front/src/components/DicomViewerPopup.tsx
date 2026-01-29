@@ -95,6 +95,15 @@ export default function DicomViewerPopup({ open, onClose, ocsInfo, existingStudy
     }
   }, [onUploadComplete]);
 
+  // Study 삭제 완료 핸들러 (refreshKey 증가 + 부모 콜백 호출)
+  const handleStudyDeleted = useCallback(async () => {
+    setRefreshKey((k) => k + 1);
+    // 부모 컴포넌트에 삭제 완료 알림
+    if (onStudyDeleted) {
+      await onStudyDeleted();
+    }
+  }, [onStudyDeleted]);
+
   // 활성 뷰어의 selection 업데이트
   const handleSelectionChange = useCallback((newSelection: Selection) => {
     setViewers(prev => prev.map(v =>
@@ -226,7 +235,7 @@ export default function DicomViewerPopup({ open, onClose, ocsInfo, existingStudy
                 onUploaded={onUploaded}
                 ocsInfo={ocsInfo}
                 existingStudy={existingStudy}
-                onStudyDeleted={onStudyDeleted}
+                onStudyDeleted={handleStudyDeleted}
                 isMyWork={isMyWork}
                 workerName={workerName}
               />
@@ -235,6 +244,7 @@ export default function DicomViewerPopup({ open, onClose, ocsInfo, existingStudy
                 onChange={handleSelectionChange}
                 ocsInfo={ocsInfo}
                 initialSelection={activeViewer?.selection}
+                refreshKey={refreshKey}
               />
             </div>
           </aside>
