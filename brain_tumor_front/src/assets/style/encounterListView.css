@@ -4,6 +4,12 @@
  * 이 파일은 Encounter 전용 스타일만 포함
  */
 
+/* 공통레이아웃 */
+.page.encounter-list {
+  padding: 20px 24px;
+  background: var(--bg-main, #f4f6f9);
+}
+
 /* ========================================
    Encounter Table 전용 스타일
    ======================================== */

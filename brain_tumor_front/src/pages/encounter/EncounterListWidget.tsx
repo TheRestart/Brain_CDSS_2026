@@ -232,116 +232,122 @@ export default function EncounterListWidget({
     <div className={wrapperClass}>
       {/* Header */}
       {(title || showFilters || canCreate) && (
-        <div className="encounter-widget-header">
-          {title && <h3 className="encounter-widget-title">{title}</h3>}
+        <section className="filter-bar">
+          {/* <div className="encounter-widget-header"> */}
+            {title && <h3 className="encounter-widget-title">{title}</h3>}
 
-          {showFilters && (
-            <div className="encounter-widget-filters">
-              <form onSubmit={handleSearch} className="encounter-widget-search">
-                <input
-                  type="text"
-                  placeholder="환자명, 환자번호, 주호소 검색"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-                <button type="submit" className="btn primary small">검색</button>
-              </form>
+            {showFilters && (
+              <div className="encounter-widget-filters">
+                <form onSubmit={handleSearch} className="encounter-widget-search">
+                  <input
+                    type="text"
+                    placeholder="환자명, 환자번호, 주호소 검색"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
+                  <button type="submit" className="btn primary small">검색</button>
+                </form>
 
-              <select
-                value={encounterTypeFilter}
-                onChange={(e) => {
-                  setEncounterTypeFilter(e.target.value as EncounterType | '');
-                  setPage(1);
-                }}
-              >
-                <option value="">전체 진료유형</option>
-                <option value="outpatient">외래</option>
-                <option value="inpatient">입원</option>
-                <option value="emergency">응급</option>
-              </select>
+                <select
+                  value={encounterTypeFilter}
+                  onChange={(e) => {
+                    setEncounterTypeFilter(e.target.value as EncounterType | '');
+                    setPage(1);
+                  }}
+                >
+                  <option value="">전체 진료유형</option>
+                  <option value="outpatient">외래</option>
+                  <option value="inpatient">입원</option>
+                  <option value="emergency">응급</option>
+                </select>
 
-              <select
-                value={statusFilter}
-                onChange={(e) => {
-                  setStatusFilter(e.target.value as EncounterStatus | '');
-                  setPage(1);
-                }}
-              >
-                <option value="">전체 상태</option>
-                <option value="scheduled">예정</option>
-                <option value="in_progress">진행중</option>
-                <option value="completed">완료</option>
-                <option value="cancelled">취소</option>
-              </select>
+                <select
+                  value={statusFilter}
+                  onChange={(e) => {
+                    setStatusFilter(e.target.value as EncounterStatus | '');
+                    setPage(1);
+                  }}
+                >
+                  <option value="">전체 상태</option>
+                  <option value="scheduled">예정</option>
+                  <option value="in_progress">진행중</option>
+                  <option value="completed">완료</option>
+                  <option value="cancelled">취소</option>
+                </select>
 
-              <select
-                value={departmentFilter}
-                onChange={(e) => {
-                  setDepartmentFilter(e.target.value as Department | '');
-                  setPage(1);
-                }}
-              >
-                <option value="">전체 진료과</option>
-                <option value="neurology">신경과</option>
-                <option value="neurosurgery">신경외과</option>
-              </select>
+                <select
+                  value={departmentFilter}
+                  onChange={(e) => {
+                    setDepartmentFilter(e.target.value as Department | '');
+                    setPage(1);
+                  }}
+                >
+                  <option value="">전체 진료과</option>
+                  <option value="neurology">신경과</option>
+                  <option value="neurosurgery">신경외과</option>
+                </select>
 
-              <select
-                value={timeFilter}
-                onChange={(e) => {
-                  setTimeFilter(e.target.value as TimeFilter);
-                  setPage(1);
-                }}
-              >
-                <option value="all">전체 시간</option>
-                <option value="past">지난 시간</option>
-                <option value="future">이후 시간</option>
-              </select>
+                <select
+                  value={timeFilter}
+                  onChange={(e) => {
+                    setTimeFilter(e.target.value as TimeFilter);
+                    setPage(1);
+                  }}
+                >
+                  <option value="all">전체 시간</option>
+                  <option value="past">지난 시간</option>
+                  <option value="future">이후 시간</option>
+                </select>
 
-              <button className="btn small" onClick={handleResetFilters}>
-                필터 초기화
+                <button className="btn small" onClick={handleResetFilters}>
+                  필터 초기화
+                </button>
+              </div>
+            )}
+
+            {canCreate && (
+              <button className="btn primary" onClick={handleCreateClick}>
+                진료 등록
               </button>
-            </div>
-          )}
-
-          {canCreate && (
-            <button className="btn primary" onClick={handleCreateClick}>
-              진료 등록
-            </button>
-          )}
-        </div>
+            )}
+          {/* </div> */}
+        </section>
       )}
 
       {/* Content */}
-      <div className="encounter-widget-content">
-        {loading ? (
-          <div className="encounter-widget-loading">로딩 중...</div>
-        ) : (
-          <EncounterListTable
-            role={role || ''}
-            encounters={encounters}
-            onEdit={handleEditClick}
-            onDelete={handleDeleteClick}
-            onResetFilters={handleResetFilters}
-            sortConfig={sortable ? sortConfig : null}
-            onSort={sortable ? handleSort : undefined}
-            onRowClick={onRowClick}
-            onStatusChange={handleStatusChange}
-          />
-        )}
-      </div>
+      <section className="content">
+        <div className="encounter-widget-content">
+          {loading ? (
+            <div className="encounter-widget-loading">로딩 중...</div>
+          ) : (
+            <EncounterListTable
+              role={role || ''}
+              encounters={encounters}
+              onEdit={handleEditClick}
+              onDelete={handleDeleteClick}
+              onResetFilters={handleResetFilters}
+              sortConfig={sortable ? sortConfig : null}
+              onSort={sortable ? handleSort : undefined}
+              onRowClick={onRowClick}
+              onStatusChange={handleStatusChange}
+            />
+          )}
+        </div>
+      </section>
 
       {/* Footer */}
-      {showPagination && totalCount > pageSize && (
-        <div className="encounter-widget-footer">
-          <Pagination
-            currentPage={page}
-            totalCount={totalCount}
-            pageSize={pageSize}
-            onPageChange={setPage}
-          />
-        </div>
-      )}
+      <section className="pagination-bar">
+        {showPagination && totalCount > pageSize && (
+          // <div className="encounter-widget-footer">
+            <Pagination
+              currentPage={page}
+              totalCount={totalCount}
+              pageSize={pageSize}
+              onPageChange={setPage}
+            />
+          // </div>
+        )}
+      </section>
 
       {/* Modals */}
       {isCreateModalOpen && (

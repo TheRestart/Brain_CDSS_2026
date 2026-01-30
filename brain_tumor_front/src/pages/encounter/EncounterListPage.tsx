@@ -3,8 +3,8 @@ import '@/assets/style/encounterListView.css';
 
 export default function EncounterListPage() {
   return (
-    <div className="page">
-      <div className="content">
+    <div className="page encounter-list">
+      {/* <div className="content"> */}
         <EncounterListWidget
           title=""
           size="full"
@@ -13,7 +13,7 @@ export default function EncounterListPage() {
           showCreateButton={true}
           sortable={true}
         />
-      </div>
+      {/* </div> */}
     </div>
   );
 }
