@@ -75,7 +75,7 @@
 }
 
 .card.summary .title {
-  font-size: 13px;
+  /* font-size: 13px; */
   color: var(--text-sub);
 }
 
@@ -201,13 +201,13 @@
 }
 
 .card-header h3 {
-  font-size: 15px;
+  /* font-size: 15px; */
   font-weight: 700;
   color: var(--text-main);
 }
 
 .card-header a {
-  font-size: 12px;
+  /* font-size: 12px; */
   color: var(--primary);
   text-decoration: none;
 }

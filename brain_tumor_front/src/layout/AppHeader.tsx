@@ -73,7 +73,7 @@ export default function AppHeader({ onToggleSidebar }: AppHeaderProps) {
 
     <div
       style={{
-        height: 4,
+        height: 10,
         background: theme.bg,
       }}
     />

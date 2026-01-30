@@ -428,7 +428,7 @@
 .table {
   width: 100%;
   border-collapse: collapse;
-  font-size: var(--text-sm);
+  /* font-size: var(--text-sm); */
 }
 
 .table th {
