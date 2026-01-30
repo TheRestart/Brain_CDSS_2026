@@ -386,7 +386,17 @@ export default function ExaminationTab({
                 SOAP 노트
               </h4>
               <div className="section-header-actions">
-                <div className="soap-sample-buttons">
+                <button
+                  className={`btn btn-sm ${soapSaved ? 'btn-success' : 'btn-primary'}`}
+                  onClick={handleSaveSOAP}
+                  disabled={savingSOAP || !encounterId}
+                >
+                  {savingSOAP ? '저장 중...' : soapSaved ? '저장됨 ✓' : '저장'}
+                </button>
+              </div>
+            </div>
+            <div>
+              <div className="soap-sample-buttons">
                   <span className="sample-label">샘플:</span>
                   {SOAP_SAMPLES.map((sample) => (
                     <button
@@ -409,14 +419,6 @@ export default function ExaminationTab({
                     </button>
                   ))}
                 </div>
-                <button
-                  className={`btn btn-sm ${soapSaved ? 'btn-success' : 'btn-primary'}`}
-                  onClick={handleSaveSOAP}
-                  disabled={savingSOAP || !encounterId}
-                >
-                  {savingSOAP ? '저장 중...' : soapSaved ? '저장됨 ✓' : '저장'}
-                </button>
-              </div>
             </div>
             {!encounterId ? (
               <div className="empty-message">진료 시작 후 작성 가능</div>
