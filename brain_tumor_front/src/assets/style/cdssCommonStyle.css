@@ -24,7 +24,7 @@ textarea {
 }
 
 .page {
-  padding: 24px;
+  /* padding: 24px; */
   background: var(--bg-main);
 }
 
