@@ -186,7 +186,7 @@
   overflow-y: auto;
   overflow-x: hidden;
   background: var(--bg-main);
-  padding: var(--space-6);
+  /* padding: var(--space-6); */
 }
 
 /* Custom scrollbar for content */
