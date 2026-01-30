@@ -1,27 +1,23 @@
 /*
- * 환자 등록 모달 스타일
+ * 환자 등록/수정 모달 스타일
  * 공통 스타일(버튼, 폼, 모달 등)은 common.css에서 상속
  * 이 파일은 환자 모달 전용 스타일만 포함
  */
 
-/* 진료 등록 모달 전용 스타일 - 75% */
-.encounter-modal-content {
-  width: 75vw;
-  max-width: 950px;
-  min-width: 450px;
-}
-
-/* Patient detail view styles */
+/* ============================================
+   1. 환자 상세 보기 스타일
+   ============================================ */
 .patient-detail-view {
   padding: 0.5rem 0;
 }
 
-/* 환자 모달 내 폼 그룹 간격 */
+/* ============================================
+   2. 환자 모달 (modal-large) 폼 스타일
+   ============================================ */
 .modal-large .form-group {
   margin-bottom: 0.875rem;
 }
 
-/* 환자 모달 input/textarea 일관된 스타일 */
 .modal-large .form-group input,
 .modal-large .form-group select,
 .modal-large .form-group textarea {
@@ -30,7 +26,7 @@
   box-sizing: border-box;
 }
 
-/* 모달 내 tag-input 스타일 일관성 */
+/* Tag Input 스타일 */
 .modal-large .tag-input {
   display: flex;
   gap: 0.5rem;
@@ -42,7 +38,9 @@
   min-width: 0;
 }
 
-/* 샘플 데이터 버튼 스타일 */
+/* ============================================
+   3. 샘플 데이터 버튼 스타일 (환자 모달용)
+   ============================================ */
 .sample-buttons {
   display: flex;
   align-items: center;
@@ -53,15 +51,15 @@
 
 .sample-label {
   font-size: 0.75rem;
-  color: var(--text-secondary);
+  color: var(--text-secondary, #6b7280);
   font-weight: 500;
 }
 
 .btn-sample {
   padding: 0.25rem 0.5rem;
   font-size: 0.7rem;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
+  background: var(--bg-secondary, #f3f4f6);
+  border: 1px solid var(--border-color, #d1d5db);
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -69,7 +67,7 @@
 }
 
 .btn-sample:hover {
-  background: var(--primary-color);
+  background: var(--primary, #2563eb);
   color: white;
-  border-color: var(--primary-color);
+  border-color: var(--primary, #2563eb);
 }

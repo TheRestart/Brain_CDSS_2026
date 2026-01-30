@@ -4,8 +4,7 @@ import { getPatients } from '@/services/patient.api';
 import { api } from '@/services/api';
 import type { EncounterCreateData, EncounterType, EncounterStatus, Department } from '@/types/encounter';
 import { ENCOUNTER_SAMPLES } from '@/constants/sampleData';
-import '@/pages/patient/PatientCreateModal.css';
-import './EncounterCreateModal.css';
+import './EncounterModal.css';
 
 type Props = {
   isOpen: boolean;

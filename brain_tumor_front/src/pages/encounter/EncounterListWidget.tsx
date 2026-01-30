@@ -152,7 +152,7 @@ export default function EncounterListWidget({
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     setPage(1);
-    fetchEncounters();
+    // fetchEncounters()는 useEffect가 page 변경 감지하여 자동 호출
   };
 
   // Handle create
