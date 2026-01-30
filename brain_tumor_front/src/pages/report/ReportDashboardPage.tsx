@@ -103,10 +103,10 @@ export default function ReportDashboardPage() {
   return (
     <div className="report-dashboard-page">
       {/* 헤더 */}
-      <header className="page-header">
+      {/* <header className="page-header">
         <h1>보고서 대시보드</h1>
         <p className="subtitle">모든 검사 결과와 AI 분석을 한눈에 확인하세요</p>
-      </header>
+      </header> */}
 
       {/* 필터 영역 */}
       <section className="filter-section">
@@ -164,6 +164,10 @@ export default function ReportDashboardPage() {
           총 <strong>{reports.length}</strong>건의 보고서
           {totalCount !== reports.length && ` (전체 ${totalCount}건)`}
         </div>
+      </section>
+
+      <section className='page-header'>
+        <span className="subtitle">모든 검사 결과와 AI 분석을 한눈에 확인하세요</span>
       </section>
 
       {/* 보고서 그리드 */}

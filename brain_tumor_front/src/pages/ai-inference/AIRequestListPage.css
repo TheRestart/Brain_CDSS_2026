@@ -4,7 +4,7 @@
   padding: 1.5rem;
 }
 
-.ai-request-list .page-header {
+/* .ai-request-list .page-header {
   margin-bottom: 1.5rem;
 }
 
@@ -13,13 +13,13 @@
   font-weight: 600;
   color: #1a1a1a;
   margin: 0;
-}
+} */
 
-.ai-request-list .page-header .subtitle {
+/* .ai-request-list .page-header .subtitle {
   color: #666;
   font-size: 0.875rem;
   margin-top: 0.25rem;
-}
+} */
 
 /* Filter Bar */
 .ai-request-list .filter-bar {
@@ -27,7 +27,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background: #f8f9fa;
+  background: #ffffff;
   border-radius: 8px;
   margin-bottom: 1rem;
   gap: 1rem;
@@ -48,8 +48,10 @@
 }
 
 .ai-request-list .request-count {
-  font-size: 0.875rem;
+  /* font-size: 0.875rem; */
   color: #333;
+  font-weight: 600;
+  font-size: medium;
 }
 
 .ai-request-list .request-count span {

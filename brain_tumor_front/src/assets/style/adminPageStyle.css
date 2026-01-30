@@ -61,7 +61,7 @@
 }
 
 .admin-card {
-  background: #fff;
+  background: #f4f6f9;
   border-radius: 8px;
   padding: 16px;
 }
@@ -76,6 +76,8 @@
   width: 100%;
   border-collapse: collapse;
   font-size: 14px;
+  background: #ffffff;
+
 }
 
 .admin-table th {

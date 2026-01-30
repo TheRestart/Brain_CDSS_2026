@@ -191,7 +191,8 @@ label {
 
 /* 역할 관리 리스트 css */
 .role-card {
-  background: #ffffff;
+  /* background: #ffffff; */
+  background: #f4f6f9;
   border-radius: 8px;
   padding: 16px;
 }
@@ -201,6 +202,7 @@ label {
   width: 100%;
   border-collapse: collapse;
   font-size: 14px;
+  background: #ffffff;
 }
 
 .role-table th {

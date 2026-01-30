@@ -122,27 +122,32 @@
   flex-wrap: wrap;
   gap: 24px;
   padding: 16px 20px;
-  background: #f8f9fa;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  /* background: #f8f9fa; */
   border-radius: 8px;
   margin-bottom: 20px;
 }
 
-.patient-info-bar .info-item {
+/* .patient-info-bar .info-item {
   display: flex;
   flex-direction: column;
   gap: 4px;
-}
+} */
 
 .patient-info-bar .info-item label {
-  font-size: 0.75rem;
+  /* font-size: 0.75rem; */
   color: #666;
   text-transform: uppercase;
 }
+.info-item label {
+  margin-right: 15px; /* label 오른쪽에 여백 추가 */
+}
 
 .patient-info-bar .info-item span {
-  font-size: 0.95rem;
+  /* font-size: 0.95rem; */
   color: #333;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 /* 탭 네비게이션 */
@@ -423,9 +428,11 @@
 }
 
 .btn-secondary {
-  background: #f5f5f5;
-  color: #333;
+  background: #212d63;
+  color: #ffffff;
   border: 1px solid #ddd;
+  font-size: large;
+  height: 50px;
 }
 
 .btn-secondary:hover:not(:disabled) {
@@ -715,9 +722,9 @@
 }
 
 /* DICOM Viewer 섹션 */
-.viewer-section {
+/* .viewer-section {
   margin-bottom: 20px;
-}
+} */
 
 /* DICOM 정보 섹션 스크롤 제거 */
 .dicom-info .info-grid {

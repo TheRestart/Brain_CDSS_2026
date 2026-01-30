@@ -156,10 +156,10 @@ export default function AIRequestListPage() {
   return (
     <div className="page ai-request-list">
       {/* 헤더 */}
-      <header className="page-header">
+      {/* <header className="page-header">
         <h2>AI 분석 요청 관리</h2>
         <span className="subtitle">AI 추론 요청을 조회하고 관리합니다</span>
-      </header>
+      </header> */}
 
       {/* 필터 영역 */}
       <section className="filter-bar">
@@ -203,6 +203,10 @@ export default function AIRequestListPage() {
             새로고침
           </button>
         </div>
+      </section>
+
+      <section className='page-header'>
+        <span className="subtitle">AI 추론 요청을 조회하고 관리합니다</span>
       </section>
 
       {/* 요청 목록 */}

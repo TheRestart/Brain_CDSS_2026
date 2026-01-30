@@ -1058,8 +1058,8 @@
 .info-grid .info-row label {
   min-width: 90px;
   font-weight: 500;
-  color: #666;
-  font-size: 0.85rem;
+  /* color: #666; */
+  /* font-size: 0.85rem; */
   flex-shrink: 0;
 }
 

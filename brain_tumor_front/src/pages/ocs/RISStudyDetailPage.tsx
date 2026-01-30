@@ -728,9 +728,9 @@ export default function RISStudyDetailPage() {
       {/* 헤더 */}
       <header className="detail-header">
         <div className="header-left">
-          <button className="btn btn-back" onClick={() => navigate(-1)}>
+          {/* <button className="btn btn-back" onClick={() => navigate(-1)}>
             &larr; 목록으로
-          </button>
+          </button> */}
           <h2>영상 판독 상세</h2>
           <span className={`status-badge status-${ocsDetail.ocs_status.toLowerCase()}`}>
             {OCS_STATUS_LABELS[ocsDetail.ocs_status]}

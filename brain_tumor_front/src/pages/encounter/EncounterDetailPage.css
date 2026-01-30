@@ -1,7 +1,7 @@
 /* Encounter Detail Page */
 .encounter-detail-page {
   padding: 1.5rem;
-  max-width: 1200px;
+  /* max-width: 1200px; */
   margin: 0 auto;
 }
 
@@ -112,16 +112,17 @@
   gap: 1rem;
 }
 
-.info-item {
+/* .info-item {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-}
+} */
 
 .info-item .label {
-  font-size: 0.75rem;
+  /* font-size: 0.75rem; */
   color: var(--text-tertiary);
   text-transform: uppercase;
+  margin-right: 10px;
 }
 
 .info-item .value {

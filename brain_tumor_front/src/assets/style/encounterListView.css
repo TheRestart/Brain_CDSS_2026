@@ -529,6 +529,7 @@
 .encounter-widget-content {
   flex: 1;
   overflow: auto;
+  background-color: #ffffff;
 }
 
 .encounter-widget-loading {
@@ -606,4 +607,56 @@
   .encounter-widget-filters select {
     width: 100%;
   }
+}
+
+/* 환자 content 영역 스타일 */
+.content {
+  background: var(--card-bg, #ffffff);
+  border-radius: var(--radius-md, 8px);
+  padding: 0;
+  box-shadow: var(--shadow-card, 0 4px 12px rgba(0,0,0,0.08));
+  overflow: visible;
+}
+
+.content table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.content thead th {
+  background: var(--bg-main, #f4f6f9);
+  color: var(--text-sub, #6b7280);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 12px;
+  text-align: center;
+}
+
+.content tbody td {
+  padding: 12px;
+  font-size: 14px;
+  color: var(--text-main, #1f2937);
+  /* border-top: 1px solid var(--border, #e5e7eb); */
+}
+
+.content tbody tr:hover {
+  background: var(--bg-main, #f4f6f9);
+  cursor: pointer;
+}
+
+.content tbody tr.selected {
+  background: rgba(91, 111, 214, 0.1);
+}
+
+.patient-count {
+  margin-right: 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-main, #1f2937);
+  white-space: nowrap;
+}
+
+.patient-count span {
+  color: var(--primary, #5b6fd6);
+  font-weight: 700;
 }

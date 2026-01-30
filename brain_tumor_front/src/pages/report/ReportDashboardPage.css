@@ -7,9 +7,9 @@
 }
 
 /* 헤더 */
-.report-dashboard-page .page-header {
+/* .report-dashboard-page .page-header {
   margin-bottom: 24px;
-}
+} */
 
 .report-dashboard-page .page-header h1 {
   font-size: 24px;
@@ -42,13 +42,15 @@
 
 .report-dashboard-page .filter-group {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
+  /* flex-direction: column; */
+  align-items: center; /* 세로 가운데 정렬 */
+  gap: 10px;           /* label과 select 사이 간격 */
+
 }
 
 .report-dashboard-page .filter-group label {
-  font-size: 12px;
-  font-weight: 500;
+  /* font-size: 12px; */
+  font-weight: 600;
   color: #6b7280;
 }
 
@@ -95,8 +97,8 @@
 
 .report-dashboard-page .result-count {
   margin-top: 16px;
-  font-size: 14px;
-  color: #6b7280;
+  font-size: medium;
+  /* color: #6b7280; */
 }
 
 .report-dashboard-page .result-count strong {

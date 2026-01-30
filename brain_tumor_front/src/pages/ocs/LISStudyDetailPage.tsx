@@ -840,9 +840,9 @@ export default function LISStudyDetailPage() {
     <div className="page lis-detail-page">
       {/* 헤더 */}
       <header className="detail-header">
-        <button className="btn-back" onClick={() => navigate(-1)}>
+        {/* <button className="btn-back" onClick={() => navigate(-1)}>
           &larr; 목록으로
-        </button>
+        </button> */}
         <div className="header-info">
           <h2>검사 상세 - {ocs.ocs_id}</h2>
           <span className={`status-badge status-${ocs.ocs_status.toLowerCase()}`}>
