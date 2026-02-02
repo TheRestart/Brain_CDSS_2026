@@ -7,7 +7,7 @@
  * - GENETIC/PROTEIN 검사 지원
  */
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../auth/AuthProvider';
 import { getOCS, startOCS, saveOCSResult, confirmOCS, uploadLISFile } from '@/services/ocs.api';
 import type { OCSDetail, GeneMutation, ProteinMarker } from '@/types/ocs';
@@ -78,7 +78,6 @@ const getFlagDisplay = (flag: string) => {
 
 export default function LISStudyDetailPage() {
   const { ocsId } = useParams<{ ocsId: string }>();
-  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const { user } = useAuth();
   const { requestInference } = useAIInference();
